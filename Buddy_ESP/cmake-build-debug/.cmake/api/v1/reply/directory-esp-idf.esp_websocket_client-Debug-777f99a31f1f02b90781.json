@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/esp_websocket_client",
+		"source" : "C:/Users/filip/Documents/Kulen/EE5/esp32/esp-idf/components/esp_websocket_client"
+	}
+}

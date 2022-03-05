@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/wear_levelling",
+		"source" : "C:/Users/filip/Documents/Kulen/EE5/esp32/esp-idf/components/wear_levelling"
+	}
+}
