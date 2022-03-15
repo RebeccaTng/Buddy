@@ -7,11 +7,15 @@
     android:background="#F3E9DC"
     tools:context=".Start">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/deco1_start"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_marginBottom="26dp"
+        android:fontFamily="@font/mulish_semibold"
+        android:text="© Ebert, Filip, Rebecca, Quinten"
+        android:textColor="#F3E9DC"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="184dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
