@@ -9,39 +9,44 @@
 
     <ImageView
         android:id="@+id/deco2"
-        android:layout_width="741.57dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="105dp"
+        android:layout_width="540dp"
+        android:layout_height="500dp"
+        android:layout_marginBottom="120dp"
         android:contentDescription="@string/descriptionDeco"
+        android:rotation="-5"
         app:layout_constraintBottom_toBottomOf="@+id/logoMain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/deco2" />
 
     <ImageView
         android:id="@+id/deco1"
         android:layout_width="493dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="350dp"
+        android:layout_height="320dp"
+        android:layout_marginBottom="185dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="0"
-        app:layout_constraintBottom_toBottomOf="@+id/logoMain"
+        app:layout_constraintBottom_toBottomOf="@+id/deco2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.67"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/deco1"
         tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/deco3"
-        android:layout_width="498.05dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="270dp"
         android:contentDescription="@string/descriptionDeco"
+        android:rotation="8"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.634"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBtn"
-        app:srcCompat="@drawable/deco3" />
+        app:layout_constraintTop_toTopOf="@+id/logoMain"
+        app:srcCompat="@drawable/deco3"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/credits"
@@ -61,7 +66,7 @@
         android:id="@+id/logoMain"
         android:layout_width="323dp"
         android:layout_height="323dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="160dp"
         android:contentDescription="@string/descriptionLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
