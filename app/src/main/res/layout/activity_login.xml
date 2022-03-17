@@ -41,6 +41,7 @@
         android:layout_marginTop="101dp"
         android:background="@drawable/main_btn_bg"
         android:fontFamily="@font/mulish_extrabold"
+        android:onClick="goHome"
         android:text="@string/login"
         android:textColor="#F3E9DC"
         android:textSize="18sp"
