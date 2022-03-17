@@ -4,6 +4,172 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/beige"
     tools:context=".Register">
+
+    <ImageView
+        android:id="@+id/deco2"
+        android:layout_width="540dp"
+        android:layout_height="500dp"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="@string/descriptionDeco"
+        android:rotation="-5"
+        app:layout_constraintBottom_toBottomOf="@+id/logoMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/deco2" />
+
+    <ImageView
+        android:id="@+id/deco3"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:contentDescription="@string/descriptionDeco"
+        android:rotation="8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoMain"
+        app:srcCompat="@drawable/deco3"
+        tools:ignore="ImageContrastCheck" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="43dp"
+        android:background="@drawable/main_btn_bg"
+        android:fontFamily="@font/mulish_extrabold"
+        android:text="@string/register"
+        android:textColor="#F3E9DC"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confPasswFill"
+        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <EditText
+        android:id="@+id/confPasswFill"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="27dp"
+        android:autofillHints="password"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/confPassw"
+        android:inputType="textPassword"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwFill"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/passwFill"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="27dp"
+        android:autofillHints="password"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/passw"
+        android:inputType="textPassword"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailFill"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/emailFill"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="27dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameFill"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/usernameFill"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoMain"
+        android:autofillHints="username" />
+
+    <ImageView
+        android:id="@+id/logoMain"
+        android:layout_width="323dp"
+        android:layout_height="323dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/descriptionLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_main" />
+
+    <TextView
+        android:id="@+id/registerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/register"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/logoMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/haveAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/mulish_light"
+        android:onClick="goLogin"
+        android:text="@string/haveAcc"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
