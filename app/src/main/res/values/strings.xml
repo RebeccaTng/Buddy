@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">Buddy</string>
-    <string name="credits">© Ebert, Filip, Rebecca, Quinten</string>
-    <string name="slogan">Plant your future.</string>
-    <string name="login">Log in</string>
-    <string name="register">Register</string>
+
+    <!-- Image Descriptions -->
     <string name="descriptionLogo">logo</string>
     <string name="descriptionDeco">deco</string>
+
+    <!-- Branding -->
+    <string name="credits">© Ebert, Filip, Rebecca, Quinten</string>
+    <string name="slogan">Plant your future.</string>
+
+    <!-- Account -->
+    <string name="login">Log in</string>
+    <string name="register">Register</string>
+    <string name="noAcc">Don’t have an account? Register.</string>
+    <string name="passw">Password</string>
+    <string name="email">Email</string>
+    <string name="forgotPassw">Forgot Password? Reset it.</string>
 </resources>
