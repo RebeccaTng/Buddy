@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".RequestReset"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
