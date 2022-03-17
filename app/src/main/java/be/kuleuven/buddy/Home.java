@@ -14,6 +14,12 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
     }
 
+    public void goInfo(View caller) {
+        Intent goToInfo = new Intent(this, Info.class);
+        startActivity(goToInfo);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
     public void goAccount(View caller) {
         Intent goToAccount = new Intent(this, Account.class);
         startActivity(goToAccount);

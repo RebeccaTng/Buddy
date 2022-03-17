@@ -19,6 +19,12 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    public void goInfo(View caller) {
+        Intent goToInfo = new Intent(this, Info.class);
+        startActivity(goToInfo);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
     public void goRegister(View caller) {
         Intent goToRegister = new Intent(this, Register.class);
         startActivity(goToRegister);

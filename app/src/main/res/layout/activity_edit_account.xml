@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beige"
-    tools:context=".Account">
+    tools:context=".EditAccount">
 
     <ImageView
         android:id="@+id/deco2"
         android:layout_width="540dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="130dp"
+        android:layout_marginBottom="30dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
         app:layout_constraintBottom_toTopOf="@+id/emailText"
@@ -39,13 +39,13 @@
         android:id="@+id/deco3"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="30dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountTitle"
+        app:layout_constraintTop_toBottomOf="@+id/changePasswText"
         app:srcCompat="@drawable/deco3"
         tools:ignore="ImageContrastCheck" />
 
@@ -63,35 +63,24 @@
         tools:ignore="TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/accountTitle"
+        android:id="@+id/editAccTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="140dp"
         android:fontFamily="@font/mulish_bold"
-        android:text="@string/account"
+        android:text="@string/editAcc"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountIcon" />
-
-    <ImageView
-        android:id="@+id/accountIcon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="202dp"
-        android:contentDescription="@string/descriptionIcon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_account" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/usernameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/mulish_light"
         android:text="@string/username"
         android:textAlignment="center"
@@ -99,29 +88,37 @@
         android:textColor="@color/orange"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountTitle"
+        app:layout_constraintTop_toBottomOf="@+id/editAccTitle"
         tools:ignore="TextContrastCheck" />
 
-    <TextView
-        android:id="@+id/username_toFill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+    <EditText
+        android:id="@+id/usernameFill"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="username"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
         android:fontFamily="@font/mulish_regular"
-        android:text="@string/username"
-        android:textAlignment="center"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameText" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameText"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/emailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/mulish_light"
         android:text="@string/email"
         android:textAlignment="center"
@@ -130,54 +127,124 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_toFill"
+        app:layout_constraintTop_toBottomOf="@+id/usernameFill"
         tools:ignore="TextContrastCheck" />
 
-    <TextView
-        android:id="@+id/email_toFill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/mulish_regular"
-        android:text="@string/email"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailText" />
-
-    <Button
-        android:id="@+id/editBtn"
+    <EditText
+        android:id="@+id/emailFill"
         android:layout_width="319dp"
         android:layout_height="52dp"
-        android:layout_marginTop="81dp"
-        android:background="@drawable/main_btn_bg"
-        android:fontFamily="@font/mulish_extrabold"
-        android:onClick="goEditAccount"
-        android:text="@string/edit"
-        android:textColor="@color/beige"
+        android:layout_marginTop="8dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_toFill"
+        app:layout_constraintTop_toBottomOf="@+id/emailText"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-    <Button
-        android:id="@+id/logoutBtn"
+    <TextView
+        android:id="@+id/changePasswText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/mulish_light"
+        android:text="@string/changePassw"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/orange"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailFill"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/currPasswFill"
         android:layout_width="319dp"
         android:layout_height="52dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="password"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/currPassw"
+        android:inputType="textPassword"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changePasswText"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/newPasswFill"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="17dp"
+        android:autofillHints="password"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/newPassw"
+        android:inputType="textPassword"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currPasswFill"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/confPasswFill"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="17dp"
+        android:autofillHints="password"
+        android:background="@drawable/fill_bg"
+        android:ems="10"
+        android:fontFamily="@font/mulish_regular"
+        android:hint="@string/confPassw"
+        android:inputType="textPassword"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newPasswFill"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="43dp"
         android:background="@drawable/main_btn_bg"
         android:fontFamily="@font/mulish_extrabold"
-        android:onClick="goStart"
-        android:text="@string/logout"
+        android:onClick="goAccount"
+        android:text="@string/save"
         android:textColor="@color/beige"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBtn"
+        app:layout_constraintTop_toBottomOf="@+id/confPasswFill"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

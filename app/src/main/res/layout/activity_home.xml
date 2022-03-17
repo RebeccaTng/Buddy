@@ -11,17 +11,24 @@
         android:id="@+id/logoSmall"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/descriptionIcon"
+        android:onClick="goInfo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_small"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <ImageView
         android:id="@+id/accIcon"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_marginEnd="25dp"
+        android:contentDescription="@string/descriptionIcon"
         android:onClick="goAccount"
         app:layout_constraintBottom_toBottomOf="@+id/logoSmall"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/icon_account"
-        tools:layout_editor_absoluteX="327dp" />
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

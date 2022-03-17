@@ -14,6 +14,12 @@ public class RequestReset extends AppCompatActivity {
         setContentView(R.layout.activity_request_reset);
     }
 
+    public void goInfo(View caller) {
+        Intent goToInfo = new Intent(this, Info.class);
+        startActivity(goToInfo);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
     public void goLogin(View caller) {
         //TODO check if mail is valid and registered mail
         Intent goToLogin = new Intent(this, Login.class);

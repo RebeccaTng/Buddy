@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
+            android:name=".Info"
+            android:exported="false" />
+        <activity
+            android:name=".EditAccount"
+            android:exported="false" />
+        <activity
             android:name=".Account"
             android:exported="false" />
         <activity

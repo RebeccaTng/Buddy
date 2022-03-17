@@ -9,23 +9,33 @@
     <!-- Branding -->
     <string name="credits">© Ebert, Filip, Rebecca, Quinten</string>
     <string name="slogan">Plant your future.</string>
+    <string name="team">2022\nEE5 - IoT3</string>
+    <string name="teamNames">Ebert Kiekens\nFilip Jakub Tomczyk\nRebecca Tang\nQuinten Martens</string>
 
     <!-- Account -->
     <string name="login">Log in</string>
+    <string name="haveAcc">Already have an account? Log in.</string>
+    <string name="backLogin">Back to log in.</string>
+    <string name="logout">Log out</string>
+
     <string name="register">Register</string>
     <string name="noAcc">Don’t have an account? Register.</string>
-    <string name="haveAcc">Already have an account? Log in.</string>
+
     <string name="passw">Password</string>
     <string name="confPassw">Confirm Password</string>
     <string name="newPassw">New Password</string>
-    <string name="email">Email</string>
-    <string name="username">Username</string>
+    <string name="currPassw">Current Password</string>
     <string name="forgotPassw">Forgot Password? Reset it.</string>
     <string name="request">Request Reset</string>
-    <string name="backLogin">Back to log in.</string>
     <string name="reset">Reset Password</string>
+    <string name="changePassw">Change Password</string>
 
+    <string name="email">Email</string>
+    <string name="username">Username</string>
     <string name="account">My Account</string>
+    <string name="editAcc">Edit Account</string>
     <string name="edit">Edit</string>
-    <string name="logout">Log out</string>
+
+    <!-- General -->
+    <string name="save">Save</string>
 </resources>
