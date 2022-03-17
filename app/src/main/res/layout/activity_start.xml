@@ -4,18 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3E9DC"
+    android:background="@color/beige"
     tools:context=".Start">
 
+    <ImageView
+        android:id="@+id/deco2"
+        android:layout_width="540dp"
+        android:layout_height="500dp"
+        android:layout_marginBottom="120dp"
+        android:contentDescription="@string/descriptionDeco"
+        android:rotation="-5"
+        app:layout_constraintBottom_toBottomOf="@+id/logoMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/deco2" />
+
+    <ImageView
+        android:id="@+id/deco1"
+        android:layout_width="493dp"
+        android:layout_height="320dp"
+        android:layout_marginBottom="185dp"
+        android:contentDescription="@string/descriptionDeco"
+        android:rotation="0"
+        app:layout_constraintBottom_toBottomOf="@+id/deco2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/deco1"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/deco3"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:contentDescription="@string/descriptionDeco"
+        android:rotation="8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logoMain"
+        app:srcCompat="@drawable/deco3"
+        tools:ignore="ImageContrastCheck" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/credits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="26dp"
         android:fontFamily="@font/mulish_semibold"
-        android:text="© Ebert, Filip, Rebecca, Quinten"
-        android:textColor="#F3E9DC"
-        android:textSize="14dp"
+        android:text="@string/credits"
+        android:textAlignment="center"
+        android:textColor="@color/beige"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="184dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/logoMain"
+        android:layout_width="323dp"
+        android:layout_height="323dp"
+        android:layout_marginTop="160dp"
+        android:contentDescription="@string/descriptionLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_main" />
+
+    <TextView
+        android:id="@+id/slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="62dp"
+        android:fontFamily="@font/mulish_semibold"
+        android:text="@string/slogan"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="@+id/logoMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/main_btn_bg"
+        android:fontFamily="@font/mulish_extrabold"
+        android:text="@string/login"
+        android:textColor="#F3E9DC"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoMain"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/main_btn_bg"
+        android:fontFamily="@font/mulish_extrabold"
+        android:text="@string/register"
+        android:textColor="#F3E9DC"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        tools:ignore="TextContrastCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
