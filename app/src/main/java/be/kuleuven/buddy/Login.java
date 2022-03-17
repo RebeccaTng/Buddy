@@ -30,9 +30,11 @@ public class Login extends AppCompatActivity {
     public void goRegister(View caller) {
         Intent goToRegister = new Intent(this, Register.class);
         startActivity(goToRegister);
+        this.overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
     }
 
     public void goHome(View caller){
+        this.overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
         email = (TextView) findViewById(R.id.emailFill);
         password = (TextView) findViewById(R.id.passwFill);
 

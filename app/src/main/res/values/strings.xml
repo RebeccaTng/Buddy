@@ -13,7 +13,7 @@
     <string name="login">Log in</string>
     <string name="register">Register</string>
     <string name="noAcc">Don’t have an account? Register.</string>
-    <string name="haveAcc">Already have an account? Log in.</string>
+    <string name="haveAcc">Already have an account?</string>
     <string name="passw">Password</string>
     <string name="confPassw">Confirm Password</string>
     <string name="email">Email</string>

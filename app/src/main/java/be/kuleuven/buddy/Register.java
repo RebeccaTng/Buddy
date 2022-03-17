@@ -17,5 +17,6 @@ public class Register extends AppCompatActivity {
     public void goLogin(View caller) {
         Intent goToLogin = new Intent(this, Login.class);
         startActivity(goToLogin);
+        this.overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
     }
 }

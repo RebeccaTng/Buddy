@@ -20,10 +20,12 @@ public class Start extends AppCompatActivity {
     public void goLogin(View caller) {
         Intent goToLogin = new Intent(this, Login.class);
         startActivity(goToLogin);
+        this.overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
     }
 
     public void goRegister(View caller) {
         Intent goToRegister = new Intent(this, Register.class);
         startActivity(goToRegister);
+        this.overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
     }
 }
