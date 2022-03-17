@@ -4,6 +4,7 @@
     <!-- Image Descriptions -->
     <string name="descriptionLogo">logo</string>
     <string name="descriptionDeco">deco</string>
+    <string name="descriptionIcon">icon</string>
 
     <!-- Branding -->
     <string name="credits">© Ebert, Filip, Rebecca, Quinten</string>
@@ -13,10 +14,18 @@
     <string name="login">Log in</string>
     <string name="register">Register</string>
     <string name="noAcc">Don’t have an account? Register.</string>
-    <string name="haveAcc">Already have an account?</string>
+    <string name="haveAcc">Already have an account? Log in.</string>
     <string name="passw">Password</string>
     <string name="confPassw">Confirm Password</string>
+    <string name="newPassw">New Password</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="forgotPassw">Forgot Password? Reset it.</string>
+    <string name="request">Request Reset</string>
+    <string name="backLogin">Back to log in.</string>
+    <string name="reset">Reset Password</string>
+
+    <string name="account">My Account</string>
+    <string name="edit">Edit</string>
+    <string name="logout">Log out</string>
 </resources>

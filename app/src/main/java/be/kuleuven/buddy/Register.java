@@ -17,6 +17,13 @@ public class Register extends AppCompatActivity {
     public void goLogin(View caller) {
         Intent goToLogin = new Intent(this, Login.class);
         startActivity(goToLogin);
-        this.overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    public void goHome(View caller) {
+        //TODO check if passwords match and if valid mail (not already used mail + existing)
+        Intent goToHome = new Intent(this, Home.class);
+        startActivity(goToHome);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }

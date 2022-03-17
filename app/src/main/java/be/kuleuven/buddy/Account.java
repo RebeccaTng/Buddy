@@ -6,20 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class RequestReset extends AppCompatActivity {
+public class Account extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_reset);
+        setContentView(R.layout.activity_account);
     }
 
-    public void goLogin(View caller) {
-        //TODO check if mail is valid and registered mail
-        Intent goToLogin = new Intent(this, Login.class);
-        startActivity(goToLogin);
+    public void goHome(View caller) {
+        Intent goToHome = new Intent(this, Home.class);
+        startActivity(goToHome);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
-
-    //TODO when click on request, send mail
 }
