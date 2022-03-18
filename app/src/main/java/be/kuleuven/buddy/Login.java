@@ -4,19 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 public class Login extends AppCompatActivity {
-    TextView email, password;
+    TextView email, password, errorMessage;
+    int login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
     }
 
     public void goInfo(View caller) {
@@ -38,9 +52,25 @@ public class Login extends AppCompatActivity {
     }
 
     public void goHome(View caller) {
+        System.out.println("going to Home!");
+        Intent goToHome = new Intent(this, Home.class);
+        startActivity(goToHome);
+
+    }
+
+    public void checkLogin(View caller){
+        //transistion
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+
+        //make json object from filled fields
         email = (TextView) findViewById(R.id.emailFill);
         password = (TextView) findViewById(R.id.passwFill);
+        errorMessage = (TextView) findViewById(R.id.incorrectPasw);
+
+        //error message when no field is filled in
+        if (email.getText().toString().equals("") || password.getText().toString().equals("")){
+            errorMessage.setVisibility(View.VISIBLE);
+        }
 
         //make the json object
         JSONObject user = new JSONObject();
@@ -51,10 +81,56 @@ public class Login extends AppCompatActivity {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println("test\n");
-        System.out.println(user);
+
+        //connect to database
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String URL = "https://a21iot03.studev.groept.be/public/login";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("VOLLEY", response);
+                System.out.println(response);
+                login = Integer.parseInt(response);
+
+                if (login == 1){
+                    System.out.println("logged in!");
+                    goHome(caller);
+                }
+                else{
+                    System.out.println("incorrect fields!");
+                    errorMessage.setVisibility(View.VISIBLE);
+                }
 
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("VOLLEY", error.toString());
+            }
+
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    // request body goes here
+                    String userString = user.toString();
+                    return userString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", user, "utf-8");
+                    return null;
+                }
+            }
+
+        };
+        Log.d("string", stringRequest.toString());
+        requestQueue.add(stringRequest);
 
     }
 }
