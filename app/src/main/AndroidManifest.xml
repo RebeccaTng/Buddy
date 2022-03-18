@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.kuleuven.buddy">
+
     <uses-permission android:name="aandroid.permission.INTERNET" />
 
     <application
@@ -13,17 +13,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
-            android:name=".Home"
+            android:name=".Info"
             android:exported="false" />
+        <activity
+            android:name=".EditAccount"
+            android:exported="false" />
+        <activity
+            android:name=".Account"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".RequestReset"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".Register"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".Login"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".Start"
             android:exported="true"

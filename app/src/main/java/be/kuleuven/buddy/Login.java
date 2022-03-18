@@ -7,16 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 public class Login extends AppCompatActivity {
     TextView email, password;
@@ -27,12 +19,26 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    public void goInfo(View caller) {
+        Intent goToInfo = new Intent(this, Info.class);
+        startActivity(goToInfo);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
     public void goRegister(View caller) {
         Intent goToRegister = new Intent(this, Register.class);
         startActivity(goToRegister);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
-    public void goHome(View caller){
+    public void goRequestReset(View caller) {
+        Intent goToRequestReset = new Intent(this, RequestReset.class);
+        startActivity(goToRequestReset);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    public void goHome(View caller) {
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         email = (TextView) findViewById(R.id.emailFill);
         password = (TextView) findViewById(R.id.passwFill);
 
