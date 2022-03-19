@@ -1,4 +1,4 @@
-package be.kuleuven.buddy;
+package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class RequestReset extends AppCompatActivity {
+import be.kuleuven.buddy.R;
+
+public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_reset);
+        setContentView(R.layout.activity_register);
     }
 
     public void goInfo(View caller) {
@@ -21,11 +23,15 @@ public class RequestReset extends AppCompatActivity {
     }
 
     public void goLogin(View caller) {
-        //TODO check if mail is valid and registered mail
         Intent goToLogin = new Intent(this, Login.class);
         startActivity(goToLogin);
-        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
-    //TODO when click on request, send mail
+    public void goHome(View caller) {
+        //TODO check if passwords match and if valid mail (not already used mail + existing)
+        Intent goToHome = new Intent(this, Home.class);
+        startActivity(goToHome);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
 }

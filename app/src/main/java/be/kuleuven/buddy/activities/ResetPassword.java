@@ -1,4 +1,4 @@
-package be.kuleuven.buddy;
+package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Home extends AppCompatActivity {
+import be.kuleuven.buddy.R;
+
+public class ResetPassword extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_reset_password);
     }
 
     public void goInfo(View caller) {
@@ -20,9 +22,10 @@ public class Home extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
-    public void goAccount(View caller) {
-        Intent goToAccount = new Intent(this, Account.class);
-        startActivity(goToAccount);
+    public void goLogin(View caller) {
+        //TODO authenticate if passwords match
+        Intent goToLogin = new Intent(this, Login.class);
+        startActivity(goToLogin);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }

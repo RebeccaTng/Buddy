@@ -1,4 +1,4 @@
-package be.kuleuven.buddy;
+package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import be.kuleuven.buddy.R;
 
 public class Login extends AppCompatActivity {
     TextView email, password;
@@ -39,7 +41,7 @@ public class Login extends AppCompatActivity {
 
     public void goHome(View caller) {
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-        email = (TextView) findViewById(R.id.emailFill);
+        email = (TextView) findViewById(R.id.dyn_emailFill);
         password = (TextView) findViewById(R.id.passwFill);
 
         //make the json object

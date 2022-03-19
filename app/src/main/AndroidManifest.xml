@@ -13,35 +13,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
-            android:name=".Info"
+            android:name=".activities.Info"
             android:exported="false" />
         <activity
-            android:name=".EditAccount"
+            android:name=".activities.EditAccount"
             android:exported="false" />
         <activity
-            android:name=".Account"
+            android:name=".activities.Account"
             android:exported="false" />
         <activity
-            android:name=".ResetPassword"
+            android:name=".activities.ResetPassword"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".activities.Home"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".RequestReset"
+            android:name=".activities.RequestReset"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Register"
+            android:name=".activities.Register"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Login"
+            android:name=".activities.Login"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Start"
+            android:name=".activities.Start"
             android:exported="true"
             android:screenOrientation="nosensor">
             <intent-filter>

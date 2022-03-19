@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beige"
-    tools:context=".Account">
+    tools:context=".activities.Account">
 
     <ImageView
         android:id="@+id/deco2"
@@ -104,8 +104,8 @@
         tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/username_toFill"
-        android:layout_width="wrap_content"
+        android:id="@+id/dyn_username"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/mulish_regular"
@@ -113,8 +113,8 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editBtn"
+        app:layout_constraintStart_toStartOf="@+id/editBtn"
         app:layout_constraintTop_toBottomOf="@+id/usernameText" />
 
     <TextView
@@ -130,12 +130,12 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_toFill"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_username"
         tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/email_toFill"
-        android:layout_width="wrap_content"
+        android:id="@+id/dyn_email"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/mulish_regular"
@@ -143,9 +143,8 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editBtn"
+        app:layout_constraintStart_toStartOf="@+id/editBtn"
         app:layout_constraintTop_toBottomOf="@+id/emailText" />
 
     <Button
@@ -161,7 +160,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_toFill"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_email"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <Button

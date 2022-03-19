@@ -1,10 +1,12 @@
-package be.kuleuven.buddy;
+package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import be.kuleuven.buddy.R;
 
 public class Account extends AppCompatActivity {
 

@@ -1,9 +1,11 @@
-package be.kuleuven.buddy;
+package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+
+import be.kuleuven.buddy.R;
 
 public class Info extends AppCompatActivity {
 
