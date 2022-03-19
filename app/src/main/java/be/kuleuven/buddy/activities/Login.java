@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void checkLogin(View caller){
-        //transistion
+        //transition
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
         //make json object from filled fields
