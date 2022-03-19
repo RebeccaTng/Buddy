@@ -23,7 +23,7 @@ public class ResetPassword extends AppCompatActivity {
     }
 
     public void goLogin(View caller) {
-        //TODO authenticate if passwords match
+        // TODO authenticate if passwords match
         Intent goToLogin = new Intent(this, Login.class);
         startActivity(goToLogin);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);

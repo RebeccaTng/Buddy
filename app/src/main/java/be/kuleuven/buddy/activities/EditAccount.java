@@ -22,7 +22,7 @@ public class EditAccount extends AppCompatActivity {
     }
 
     public void goAccount(View caller) {
-        //TODO back to account after updating everything + checking if passwords match
+        // TODO back to account after updating everything + checking if passwords match
         Intent goToAccountSave = new Intent(this, Account.class);
         startActivity(goToAccountSave);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

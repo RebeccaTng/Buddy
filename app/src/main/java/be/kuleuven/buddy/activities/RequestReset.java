@@ -23,7 +23,7 @@ public class RequestReset extends AppCompatActivity {
     }
 
     public void goLogin(View caller) {
-        //TODO check if mail is valid and registered mail
+        // TODO check if mail is valid and registered mail
         Intent goToLogin = new Intent(this, Login.class);
         startActivity(goToLogin);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
