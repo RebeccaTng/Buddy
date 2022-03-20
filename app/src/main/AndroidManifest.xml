@@ -13,21 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
+            android:name=".activities.PlantStatistics"
+            android:exported="false" />
+        <activity
             android:name=".activities.Info"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.EditAccount"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.Account"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.ResetPassword"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.Home"
             android:exported="false"

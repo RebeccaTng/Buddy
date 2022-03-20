@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="2dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/dyn_plantImage"
@@ -12,7 +11,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="5dp"
-        android:contentDescription="@string/descriptionPic"
+        android:contentDescription="@string/descriptionImage"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"

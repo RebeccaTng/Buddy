@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,10 +16,14 @@ import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.cards.HomeAdapter;
 import be.kuleuven.buddy.cards.HomeInfo;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements HomeAdapter.HomeListener {
 
     RecyclerView homeRecycler;
     RecyclerView.Adapter adapter;
+
+    // TODO link with information from database
+    // Array with information to be displayed
+    ArrayList<HomeInfo> homePlants = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +32,14 @@ public class Home extends AppCompatActivity {
 
         homeRecycler = findViewById(R.id.home_recycler);
         homeRecycler();
+
+        TextView numOfPlants = findViewById(R.id.dyn_numOfPlants);
+        numOfPlants.setText(String.valueOf(adapter.getItemCount()));
     }
 
     private void homeRecycler() {
         homeRecycler.setHasFixedSize(true);
         homeRecycler.setLayoutManager(new LinearLayoutManager(this)); // Vertical layout by default
-
-        // TODO link with information from database
-        // Array with information to be displayed
-        ArrayList<HomeInfo> homePlants = new ArrayList<>();
 
         // Dummy info
         homePlants.add(new HomeInfo(R.drawable.plant_image, "Planty", "Aloe Vera", "42 min", "Bedroom", "Please refill the tank!"));
@@ -45,7 +49,7 @@ public class Home extends AppCompatActivity {
         homePlants.add(new HomeInfo(R.drawable.plant_image, "Cool", "Snake Plant", "1 week, 1 day", "Bedroom 2", "Just growing, what about you?"));
         homePlants.add(new HomeInfo(R.drawable.plant_image, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH", "I don't know anything about plants dude", "Already dead", "Room under the stairs", "Yes everything is okay, this is pure for testing purposes."));
 
-        adapter = new HomeAdapter(homePlants);
+        adapter = new HomeAdapter(homePlants, this);
         homeRecycler.setAdapter(adapter);
     }
 
@@ -59,5 +63,12 @@ public class Home extends AppCompatActivity {
         Intent goToAccount = new Intent(this, Account.class);
         startActivity(goToAccount);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    @Override
+    public void onCardClick(int position) {
+        Intent goToPlantStatistics  = new Intent(this, PlantStatistics.class);
+        goToPlantStatistics.putExtra("plantName", homePlants.get(position));
+        startActivity(goToPlantStatistics);
     }
 }
