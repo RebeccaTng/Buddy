@@ -33,10 +33,10 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //define the variables
-        username = (TextView) findViewById(R.id.usernameFill);
-        email = (TextView) findViewById(R.id.emailFill);
-        password = (TextView) findViewById(R.id.passwFill);
-        confirmPassword = (TextView) findViewById(R.id.confPasswFill);
+        username = findViewById(R.id.usernameFill);
+        email = findViewById(R.id.emailFill);
+        password = findViewById(R.id.passwFill);
+        confirmPassword = findViewById(R.id.confPasswFill);
 
         //textwatcher password
         password.addTextChangedListener(new TextWatcher() {

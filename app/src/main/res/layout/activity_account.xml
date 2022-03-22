@@ -50,7 +50,7 @@
         tools:ignore="ImageContrastCheck" />
 
     <ImageView
-        android:id="@+id/backIcon"
+        android:id="@+id/backIcon_account"
         android:layout_width="21.9dp"
         android:layout_height="21.04dp"
         android:layout_marginStart="25dp"

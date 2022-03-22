@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +18,7 @@ import be.kuleuven.buddy.cards.HomeInfo;
 public class Home extends AppCompatActivity implements HomeAdapter.HomeListener {
 
     RecyclerView homeRecycler;
-    RecyclerView.Adapter adapter;
+    RecyclerView.Adapter homeAdapter;
 
     // TODO link with information from database
     // Array with information to be displayed
@@ -34,7 +33,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         homeRecycler();
 
         TextView numOfPlants = findViewById(R.id.dyn_numOfPlants);
-        numOfPlants.setText(String.valueOf(adapter.getItemCount()));
+        numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));
     }
 
     private void homeRecycler() {
@@ -49,8 +48,8 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         homePlants.add(new HomeInfo(5, R.drawable.plant_image, "Cool", "Snake Plant", "1 week, 1 day", "Bedroom 2", "Just growing, what about you?"));
         homePlants.add(new HomeInfo(6, R.drawable.dead, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH", "I don't know anything about plants dude", "Already dead", "Room under the stairs", "Yes everything is okay, this is pure for testing purposes."));
 
-        adapter = new HomeAdapter(homePlants, this);
-        homeRecycler.setAdapter(adapter);
+        homeAdapter = new HomeAdapter(homePlants, this);
+        homeRecycler.setAdapter(homeAdapter);
     }
 
     public void goInfo(View caller) {
@@ -62,6 +61,12 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     public void goAccount(View caller) {
         Intent goToAccount = new Intent(this, Account.class);
         startActivity(goToAccount);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    public void goAddPlant(View caller) {
+        Intent goToAddPlant = new Intent(this, AddPlant.class);
+        startActivity(goToAddPlant);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 

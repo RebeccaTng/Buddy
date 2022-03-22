@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beige"
-    tools:context=".activities.Info">
+    tools:context=".activities.AddPlant">
 
     <ImageView
         android:id="@+id/deco2"
         android:layout_width="540dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="350dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
-        app:layout_constraintBottom_toBottomOf="@+id/logoMain"
+        app:layout_constraintBottom_toTopOf="@+id/manualBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
         android:id="@+id/deco1"
         android:layout_width="493dp"
         android:layout_height="320dp"
-        android:layout_marginBottom="185dp"
+        android:layout_marginBottom="210dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="0"
         app:layout_constraintBottom_toBottomOf="@+id/deco2"
@@ -38,18 +38,18 @@
         android:id="@+id/deco3"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="150dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.634"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logoMain"
+        app:layout_constraintTop_toBottomOf="@+id/browseTitle"
         app:srcCompat="@drawable/deco3"
         tools:ignore="ImageContrastCheck" />
 
     <ImageView
-        android:id="@+id/backIcon_account"
+        android:id="@+id/backIcon_addPlant"
         android:layout_width="21.9dp"
         android:layout_height="21.04dp"
         android:layout_marginStart="25dp"
@@ -61,68 +61,83 @@
         app:srcCompat="@drawable/icon_back"
         tools:ignore="TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
-    <TextView
-        android:id="@+id/team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/mulish_semibold"
-        android:text="@string/team"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="21sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slogan" />
-
-    <TextView
-        android:id="@+id/teamNames"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:fontFamily="@font/mulish_semibold"
-        android:text="@string/teamNames"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="21sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line" />
-
-    <View
-        android:id="@+id/line"
-        android:layout_width="54dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="21dp"
-        android:background="@color/orange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/team" />
-
     <ImageView
-        android:id="@+id/logoMain"
-        android:layout_width="323dp"
-        android:layout_height="323dp"
-        android:layout_marginTop="145dp"
+        android:id="@+id/logoSmall_addPlant"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="74dp"
         android:contentDescription="@string/descriptionLogo"
-        android:transitionName="transitionmain"
+        android:onClick="goInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_main" />
+        app:srcCompat="@drawable/logo_small" />
 
     <TextView
-        android:id="@+id/slogan"
+        android:id="@+id/addTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
-        android:fontFamily="@font/mulish_semibold"
-        android:text="@string/slogan"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/addPlant"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toBottomOf="@+id/logoMain"
+        android:textColor="@color/beige"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoSmall_addPlant" />
+
+    <TextView
+        android:id="@+id/browseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="85dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/browseTitle"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTitle" />
+
+    <TextView
+        android:id="@+id/dyn_libNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/number"
+        android:textAlignment="viewStart"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/browseTitle"
+        app:layout_constraintStart_toEndOf="@+id/browseTitle"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addPlant_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/browseTitle" />
+
+    <Button
+        android:id="@+id/manualBtn"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="94dp"
+        android:background="@drawable/main_btn_bg"
+        android:fontFamily="@font/mulish_extrabold"
+        android:text="@string/edit"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPlant_recycler"
+        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

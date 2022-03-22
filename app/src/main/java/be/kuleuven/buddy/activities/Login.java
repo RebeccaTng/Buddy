@@ -99,14 +99,16 @@ public class Login extends AppCompatActivity {
             else if (login == 0){
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectPassw);
+                errorMessage.setVisibility(View.VISIBLE);
+                email.setBackgroundResource(R.drawable.fill_bg_red);
                 password.setBackgroundResource(R.drawable.fill_bg_red);
             }
             else if(login == -1){
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectEmail);
+                errorMessage.setVisibility(View.VISIBLE);
+                email.setBackgroundResource(R.drawable.fill_bg_red);
             }
-            errorMessage.setVisibility(View.VISIBLE);
-            email.setBackgroundResource(R.drawable.fill_bg_red);
 
         }, error -> Log.e("VOLLEY", error.toString())) {
             @Override

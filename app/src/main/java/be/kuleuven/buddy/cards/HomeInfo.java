@@ -5,10 +5,11 @@ import android.os.Parcelable;
 
 public class HomeInfo implements Parcelable {
 
-    int plantImage, plantId;
+    int plantId, plantImage;
     String plantName, plantSpecies, plantWater, plantPlace, plantStatus;
 
     public HomeInfo(int plantId, int plantImage, String plantName, String plantSpecies, String plantWater, String plantSpace, String plantStatus) {
+        this.plantId = plantId;
         this.plantImage = plantImage;
         this.plantName = plantName;
         this.plantSpecies = plantSpecies;
@@ -37,6 +38,8 @@ public class HomeInfo implements Parcelable {
             return new HomeInfo[size];
         }
     };
+
+    public int getPlantId() { return plantId; }
 
     public int getPlantImage() {
         return plantImage;

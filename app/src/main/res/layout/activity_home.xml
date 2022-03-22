@@ -79,7 +79,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/mulish_bold"
-        android:text="@string/numOfPlants"
+        android:text="@string/number"
         android:textAlignment="viewStart"
         android:textColor="@color/orange"
         android:textSize="24sp"
@@ -92,11 +92,12 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:contentDescription="@string/descriptionIcon"
+        android:onClick="goAddPlant"
         android:src="@drawable/icon_add"
         app:layout_constraintBottom_toBottomOf="@+id/plantTitle"
         app:layout_constraintEnd_toEndOf="@+id/dyn_username"
         app:layout_constraintTop_toTopOf="@+id/plantTitle"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recycler"

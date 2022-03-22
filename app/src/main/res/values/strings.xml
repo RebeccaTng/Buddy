@@ -44,11 +44,15 @@
     <string name="save">Save</string>
     <string name="welcome">Welcome,</string>
     <string name="myPlants">My Plants</string>
-    <string name="numOfPlants">1</string>
+    <string name="number">1</string>
 
     <string name="plantName">Planty</string>
     <string name="plantSpecies">Aloe Vera</string>
     <string name="plantWater">42 min</string>
     <string name="plantPlace">Bedroom</string>
     <string name="plantStatus">Please fill water tank!</string>
+
+    <string name="addPlant">Add Plant</string>
+    <string name="browseTitle">Browse Library</string>
+    <string name="manualAdd">Manually Add Plant</string>
 </resources>

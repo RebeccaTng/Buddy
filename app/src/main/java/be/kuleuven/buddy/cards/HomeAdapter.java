@@ -1,7 +1,5 @@
 package be.kuleuven.buddy.cards;
 
-import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import be.kuleuven.buddy.R;
-import be.kuleuven.buddy.activities.Home;
-import be.kuleuven.buddy.activities.PlantStatistics;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
@@ -31,7 +27,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Pass design to ViewHolder
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_home, parent, false);
         return new HomeViewHolder(view, homeListener);
     }
 
