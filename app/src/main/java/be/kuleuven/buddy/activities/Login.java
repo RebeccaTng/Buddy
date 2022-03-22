@@ -98,9 +98,16 @@ public class Login extends AppCompatActivity {
                     System.out.println("logged in!");
                     goHome(caller);
                 }
-                else{
+                else if (login == 0){
                     System.out.println("incorrect fields!");
+                    errorMessage.setText(R.string.incorrectPassw);
                     errorMessage.setVisibility(View.VISIBLE);
+                }
+                else if(login == -1){
+                    System.out.println("incorrect fields!");
+                    errorMessage.setText(R.string.incorrectEmail);
+                    errorMessage.setVisibility(View.VISIBLE);
+
                 }
 
 

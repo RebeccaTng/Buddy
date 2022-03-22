@@ -83,12 +83,12 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dyn_emailFill"
+        app:layout_constraintTop_toBottomOf="@+id/emailFill"
         tools:ignore="TextContrastCheck"
         android:autofillHints="password" />
 
     <EditText
-        android:id="@+id/dyn_emailFill"
+        android:id="@+id/emailFill"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="14dp"
@@ -128,7 +128,6 @@
         android:id="@+id/incorrectPasw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
         android:fontFamily="@font/mulish_light"
         android:onClick="goRequestReset"
         android:text="@string/incorrectPassw"
