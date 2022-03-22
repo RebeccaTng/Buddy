@@ -14,7 +14,7 @@
         android:layout_marginBottom="130dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
-        app:layout_constraintBottom_toTopOf="@+id/emailText"
+        app:layout_constraintBottom_toTopOf="@+id/emailText_acc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
         app:srcCompat="@drawable/icon_account" />
 
     <TextView
-        android:id="@+id/usernameText"
+        android:id="@+id/usernameText_acc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="59dp"
@@ -104,7 +104,7 @@
         tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/dyn_username"
+        android:id="@+id/dyn_username_acc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -115,10 +115,10 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/editBtn"
         app:layout_constraintStart_toStartOf="@+id/editBtn"
-        app:layout_constraintTop_toBottomOf="@+id/usernameText" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameText_acc" />
 
     <TextView
-        android:id="@+id/emailText"
+        android:id="@+id/emailText_acc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
@@ -130,11 +130,11 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dyn_username"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_username_acc"
         tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/dyn_email"
+        android:id="@+id/dyn_email_acc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -145,14 +145,14 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/editBtn"
         app:layout_constraintStart_toStartOf="@+id/editBtn"
-        app:layout_constraintTop_toBottomOf="@+id/emailText" />
+        app:layout_constraintTop_toBottomOf="@+id/emailText_acc" />
 
     <Button
         android:id="@+id/editBtn"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="81dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:onClick="goEditAccount"
         android:text="@string/edit"
@@ -160,7 +160,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dyn_email"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_email_acc"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <Button
@@ -168,7 +168,7 @@
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:onClick="goStart"
         android:text="@string/logout"

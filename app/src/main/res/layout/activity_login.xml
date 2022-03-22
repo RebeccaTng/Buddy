@@ -35,11 +35,11 @@
         tools:ignore="ImageContrastCheck" />
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/loginBtn_login"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="101dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:onClick="checkLogin"
         android:text="@string/login"
@@ -47,7 +47,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwFill"
+        app:layout_constraintTop_toBottomOf="@+id/passwFill_login"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
@@ -63,15 +63,15 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn_login"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/passwFill"
+        android:id="@+id/passwFill_login"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="27dp"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/passw"
@@ -83,17 +83,17 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailFill"
+        app:layout_constraintTop_toBottomOf="@+id/emailFill_login"
         tools:ignore="TextContrastCheck"
         android:autofillHints="password" />
 
     <EditText
-        android:id="@+id/emailFill"
+        android:id="@+id/emailFill_login"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="14dp"
         android:autofillHints="emailAddress"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/email"
@@ -121,7 +121,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwFill"
+        app:layout_constraintTop_toBottomOf="@+id/passwFill_login"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
@@ -137,7 +137,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/emailFill"
+        app:layout_constraintBottom_toTopOf="@+id/emailFill_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

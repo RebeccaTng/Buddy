@@ -8,11 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -64,8 +61,8 @@ public class Login extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
         //make json object from filled fields
-        email = findViewById(R.id.emailFill);
-        password = findViewById(R.id.passwFill);
+        email = findViewById(R.id.emailFill_login);
+        password = findViewById(R.id.passwFill_login);
         errorMessage = findViewById(R.id.incorrectPasw);
 
         //error message when no field is filled in
@@ -100,14 +97,14 @@ public class Login extends AppCompatActivity {
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectPassw);
                 errorMessage.setVisibility(View.VISIBLE);
-                email.setBackgroundResource(R.drawable.fill_bg_red);
-                password.setBackgroundResource(R.drawable.fill_bg_red);
+                email.setBackgroundResource(R.drawable.bg_fill_red);
+                password.setBackgroundResource(R.drawable.bg_fill_red);
             }
             else if(login == -1){
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectEmail);
                 errorMessage.setVisibility(View.VISIBLE);
-                email.setBackgroundResource(R.drawable.fill_bg_red);
+                email.setBackgroundResource(R.drawable.bg_fill_red);
             }
 
         }, error -> Log.e("VOLLEY", error.toString())) {

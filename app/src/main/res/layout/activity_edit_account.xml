@@ -14,7 +14,7 @@
         android:layout_marginBottom="30dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
-        app:layout_constraintBottom_toTopOf="@+id/emailText"
+        app:layout_constraintBottom_toTopOf="@+id/emailText_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/usernameText"
+        android:id="@+id/usernameText_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -94,12 +94,12 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/usernameFill"
+        android:id="@+id/usernameFill_edit"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="8dp"
         android:autofillHints="username"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/username"
@@ -111,11 +111,11 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameText"
+        app:layout_constraintTop_toBottomOf="@+id/usernameText_edit"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/emailText"
+        android:id="@+id/emailText_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -127,16 +127,16 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameFill"
+        app:layout_constraintTop_toBottomOf="@+id/usernameFill_edit"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/dyn_emailFill"
+        android:id="@+id/dyn_emailFill_edit"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="8dp"
         android:autofillHints="emailAddress"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/email"
@@ -148,7 +148,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailText"
+        app:layout_constraintTop_toBottomOf="@+id/emailText_edit"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
@@ -165,16 +165,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dyn_emailFill"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_emailFill_edit"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/currPasswFill"
+        android:id="@+id/currPasswFill_edit"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="8dp"
         android:autofillHints="password"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/currPassw"
@@ -190,12 +190,12 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/newPasswFill"
+        android:id="@+id/newPasswFill_edit"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="17dp"
         android:autofillHints="password"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/newPassw"
@@ -207,16 +207,16 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currPasswFill"
+        app:layout_constraintTop_toBottomOf="@+id/currPasswFill_edit"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/confPasswFill"
+        android:id="@+id/confPasswFill_edit"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="17dp"
         android:autofillHints="password"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/confPassw"
@@ -228,15 +228,15 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPasswFill"
+        app:layout_constraintTop_toBottomOf="@+id/newPasswFill_edit"
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/saveBtn"
+        android:id="@+id/saveBtn_edit"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="43dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:onClick="goAccount"
         android:text="@string/save"
@@ -244,7 +244,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confPasswFill"
+        app:layout_constraintTop_toBottomOf="@+id/confPasswFill_edit"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

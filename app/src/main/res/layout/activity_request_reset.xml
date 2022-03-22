@@ -39,14 +39,14 @@
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="51dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:text="@string/request"
         android:textColor="@color/beige"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailFill"
+        app:layout_constraintTop_toBottomOf="@+id/emailFill_request"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
@@ -66,12 +66,12 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/emailFill"
+        android:id="@+id/emailFill_request"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="14dp"
         android:autofillHints="emailAddress"
-        android:background="@drawable/fill_bg"
+        android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/email"

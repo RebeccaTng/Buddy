@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +17,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import be.kuleuven.buddy.R;
 
@@ -33,10 +31,10 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //define the variables
-        username = findViewById(R.id.usernameFill);
-        email = findViewById(R.id.emailFill);
-        password = findViewById(R.id.passwFill);
-        confirmPassword = findViewById(R.id.confPasswFill);
+        username = findViewById(R.id.usernameFill_register);
+        email = findViewById(R.id.emailFill_register);
+        password = findViewById(R.id.passwFill_register);
+        confirmPassword = findViewById(R.id.confPasswFill_register);
 
         //textwatcher password
         password.addTextChangedListener(new TextWatcher() {

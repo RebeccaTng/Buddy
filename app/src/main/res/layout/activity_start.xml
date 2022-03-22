@@ -90,11 +90,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/loginBtn_start"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:onClick="goLogin"
         android:text="@string/login"
@@ -106,11 +106,11 @@
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/registerBtn"
+        android:id="@+id/registerBtn_start"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="27dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:onClick="goRegister"
         android:text="@string/register"
@@ -118,7 +118,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn_start"
         tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

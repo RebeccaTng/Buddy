@@ -48,11 +48,27 @@
 
     <string name="plantName">Planty</string>
     <string name="plantSpecies">Aloe Vera</string>
-    <string name="plantWater">42 min</string>
+    <string name="plantWater">1 hour, 3 min</string>
     <string name="plantPlace">Bedroom</string>
     <string name="plantStatus">Please fill water tank!</string>
+    <string name="plantAge">1 year &amp; 5 months</string>
+    <string name="number1">46</string>
+    <string name="number2">78</string>
+    <string name="number3">24</string>
+    <string name="place">Place</string>
+    <string name="watering">Next Watering</string>
+    <string name="waterTank">Water Tank</string>
+    <string name="moisture">Moisture</string>
+    <string name="light">Light</string>
+    <string name="temp">Temp.</string>
+    <string name="percentage">%</string>
+    <string name="degree">°C</string>
+    
 
     <string name="addPlant">Add Plant</string>
     <string name="browseTitle">Browse Library</string>
     <string name="manualAdd">Manually Add Plant</string>
+    <string name="manualWater">Press to water manually</string>
+    <string name="statistics">Statistics</string>
+    <string name="settings">Settings</string>
 </resources>

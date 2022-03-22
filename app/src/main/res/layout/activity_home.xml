@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/accIcon" />
 
     <TextView
-        android:id="@+id/dyn_username"
+        android:id="@+id/dyn_username_home"
         android:layout_width="335dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/mulish_bold"
@@ -70,7 +70,7 @@
         android:textColor="@color/black"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="@+id/logoSmall"
-        app:layout_constraintTop_toBottomOf="@+id/dyn_username" />
+        app:layout_constraintTop_toBottomOf="@+id/dyn_username_home" />
 
     <TextView
         android:id="@+id/dyn_numOfPlants"
@@ -95,7 +95,7 @@
         android:onClick="goAddPlant"
         android:src="@drawable/icon_add"
         app:layout_constraintBottom_toBottomOf="@+id/plantTitle"
-        app:layout_constraintEnd_toEndOf="@+id/dyn_username"
+        app:layout_constraintEnd_toEndOf="@+id/dyn_username_home"
         app:layout_constraintTop_toTopOf="@+id/plantTitle"
         tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
 

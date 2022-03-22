@@ -4,29 +4,425 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige"
+    android:background="@color/green"
     tools:context=".activities.PlantStatistics">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:text="@string/plantName"
-        android:textColor="@color/black"
+    <View
+        android:id="@+id/card_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_beige_card"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tank"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/backIcon_edit"
+        android:layout_width="21.9dp"
+        android:layout_height="21.04dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/descriptionIcon"
+        android:onClick="goBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_back"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/dyn_plantName_stat"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="87dp"
+        android:fontFamily="@font/mulish_extrabold"
+        android:lineSpacingExtra="-11dp"
+        android:text="@string/plantName"
+        android:textAlignment="viewStart"
+        android:textColor="@color/beige"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/dyn_plantImage_stat"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="196dp"
+        android:id="@+id/dyn_plantImage_stat"
+        android:layout_width="170dp"
         android:layout_height="269dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="-30dp"
         android:contentDescription="@string/descriptionImage"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/card_bg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/plant_image" />
+        app:srcCompat="@drawable/plant_image"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/dyn_plantSpecies_stat"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-3dp"
+        android:fontFamily="@font/mulish_regular"
+        android:lineSpacingExtra="-4dp"
+        android:text="@string/plantSpecies"
+        android:textAlignment="viewStart"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dyn_plantName_stat"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_plantName_stat" />
+
+    <TextView
+        android:id="@+id/dyn_plantAge_stat"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mulish_regular"
+        android:lineSpacingExtra="-4dp"
+        android:text="@string/plantAge"
+        android:textAlignment="viewStart"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dyn_plantSpecies_stat"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_plantSpecies_stat" />
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="105dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/orange"
+        app:layout_constraintStart_toStartOf="@+id/dyn_plantAge_stat"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_plantAge_stat" />
+
+    <TextView
+        android:id="@+id/dyn_plantPlace_stat"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/mulish_bold"
+        android:lineSpacingExtra="-11dp"
+        android:text="@string/plantPlace"
+        android:textAlignment="viewStart"
+        android:textColor="@color/beige"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/line4"
+        app:layout_constraintTop_toBottomOf="@+id/line4" />
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-3dp"
+        android:fontFamily="@font/mulish_regular"
+        android:text="@string/place"
+        android:textAlignment="viewStart"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dyn_plantPlace_stat"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_plantPlace_stat" />
+
+    <TextView
+        android:id="@+id/dyn_plantWater_stat"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/mulish_bold"
+        android:lineSpacingExtra="-11dp"
+        android:text="@string/plantWater"
+        android:textAlignment="viewStart"
+        android:textColor="@color/beige"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/place"
+        app:layout_constraintTop_toBottomOf="@+id/place" />
+
+    <TextView
+        android:id="@+id/watering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-3dp"
+        android:fontFamily="@font/mulish_regular"
+        android:text="@string/watering"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dyn_plantWater_stat"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_plantWater_stat" />
+
+    <TextView
+        android:id="@+id/dyn_tank_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/number1"
+        android:textAlignment="viewStart"
+        android:textColor="@color/beige"
+        android:textSize="27sp"
+        app:layout_constraintStart_toEndOf="@+id/meter_bg"
+        app:layout_constraintTop_toBottomOf="@+id/watering" />
+
+    <View
+        android:id="@+id/meter_bg"
+        android:layout_width="8dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_grey"
+        app:layout_constraintBottom_toBottomOf="@+id/tank"
+        app:layout_constraintStart_toStartOf="@+id/dyn_plantWater_stat"
+        app:layout_constraintTop_toTopOf="@+id/dyn_tank_stat" />
+
+    <View
+        android:id="@+id/meter"
+        android:layout_width="8dp"
+        android:layout_height="29dp"
+        android:background="@drawable/bg_orange"
+        app:layout_constraintBottom_toBottomOf="@+id/meter_bg"
+        app:layout_constraintStart_toStartOf="@+id/meter_bg" />
+
+    <TextView
+        android:id="@+id/percentage_tank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/percentage"
+        android:textColor="@color/beige"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/dyn_tank_stat"
+        app:layout_constraintTop_toTopOf="@+id/dyn_tank_stat" />
+
+    <TextView
+        android:id="@+id/tank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mulish_regular"
+        android:text="@string/waterTank"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dyn_tank_stat"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_tank_stat" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/statBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/card_bg"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_plantImage_stat">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/dyn_plantStatus_stat"
+                    android:layout_width="325dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/plantStatus"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@+id/line5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/line5"
+                    android:layout_width="3dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="25dp"
+                    android:background="@color/orange"
+                    app:layout_constraintBottom_toBottomOf="@+id/dyn_plantStatus_stat"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/dyn_plantStatus_stat"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/dyn_plantMoisture_stat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/mulish_extrabold"
+                    android:text="@string/number1"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantStatus_stat" />
+
+                <TextView
+                    android:id="@+id/percentage1_stat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:fontFamily="@font/mulish_extrabold"
+                    android:text="@string/percentage"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toEndOf="@+id/dyn_plantMoisture_stat"
+                    app:layout_constraintTop_toTopOf="@+id/dyn_plantMoisture_stat" />
+
+                <TextView
+                    android:id="@+id/moisture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-3dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/moisture"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/percentage1_stat"
+                    app:layout_constraintStart_toStartOf="@+id/dyn_plantMoisture_stat"
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantMoisture_stat" />
+
+                <TextView
+                    android:id="@+id/dyn_plantLight_stat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-15dp"
+                    android:fontFamily="@font/mulish_extrabold"
+                    android:text="@string/number2"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toStartOf="@+id/dyn_plantTemp_stat"
+                    app:layout_constraintStart_toEndOf="@+id/percentage1_stat"
+                    app:layout_constraintTop_toTopOf="@+id/dyn_plantMoisture_stat" />
+
+                <TextView
+                    android:id="@+id/percentage2_stat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:fontFamily="@font/mulish_extrabold"
+                    android:text="@string/percentage"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toEndOf="@+id/dyn_plantLight_stat"
+                    app:layout_constraintTop_toTopOf="@+id/dyn_plantLight_stat" />
+
+                <TextView
+                    android:id="@+id/light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-3dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/light"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/percentage2_stat"
+                    app:layout_constraintStart_toStartOf="@+id/dyn_plantLight_stat"
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantLight_stat" />
+
+                <TextView
+                    android:id="@+id/dyn_plantTemp_stat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="@font/mulish_extrabold"
+                    android:text="@string/number3"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toStartOf="@+id/percentage3_stat"
+                    app:layout_constraintTop_toTopOf="@+id/percentage3_stat" />
+
+                <TextView
+                    android:id="@+id/percentage3_stat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="35dp"
+                    android:fontFamily="@font/mulish_extrabold"
+                    android:text="@string/percentage"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/percentage2_stat" />
+
+                <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-3dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/temp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/percentage3_stat"
+                    app:layout_constraintStart_toStartOf="@+id/dyn_plantTemp_stat"
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantTemp_stat" />
+
+                <Button
+                    android:id="@+id/manualWaterBtn"
+                    android:layout_width="335dp"
+                    android:layout_height="41dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/bg_btn_second"
+                    android:fontFamily="@font/mulish_bold"
+                    android:text="@string/manualWater"
+                    android:textAlignment="center"
+                    android:textColor="@color/beige"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/light"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/statBtn"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:background="@drawable/bg_btn_green"
+        app:layout_constraintBottom_toBottomOf="@+id/card_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/statText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mulish_extrabold"
+        android:text="@string/statistics"
+        android:textAllCaps="true"
+        android:textColor="@color/beige"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/statBtn"
+        app:layout_constraintStart_toStartOf="@+id/statBtn"
+        app:layout_constraintTop_toTopOf="@+id/statBtn" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mulish_semibold"
+        android:text="@string/settings"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/statText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/statBtn"
+        app:layout_constraintTop_toTopOf="@+id/statText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         android:id="@+id/deco2"
         android:layout_width="540dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="350dp"
+        android:layout_marginBottom="340dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
         app:layout_constraintBottom_toTopOf="@+id/manualBtn"
@@ -71,7 +71,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_small" />
+        app:srcCompat="@drawable/logo_small"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/addTitle"
@@ -85,7 +86,8 @@
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoSmall_addPlant" />
+        app:layout_constraintTop_toBottomOf="@+id/logoSmall_addPlant"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/browseTitle"
@@ -130,9 +132,9 @@
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="94dp"
-        android:background="@drawable/main_btn_bg"
+        android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
-        android:text="@string/edit"
+        android:text="@string/manualAdd"
         android:textColor="@color/beige"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
