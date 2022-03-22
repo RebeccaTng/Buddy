@@ -93,7 +93,7 @@ public class Login extends AppCompatActivity {
                 Log.i("VOLLEY", response);
                 System.out.println(response);
                 login = Integer.parseInt(response);
-
+                errorMessage.setText(" ");
                 if (login == 1){
                     System.out.println("logged in!");
                     goHome(caller);
@@ -106,7 +106,7 @@ public class Login extends AppCompatActivity {
                 else if(login == -1){
                     System.out.println("incorrect fields!");
                     errorMessage.setText(R.string.incorrectEmail);
-                    
+
                 }
                 errorMessage.setVisibility(View.VISIBLE);
 
