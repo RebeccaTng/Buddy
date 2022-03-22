@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import be.kuleuven.buddy.R;
 
 public class Register extends AppCompatActivity {
+    TextView username, email, password, confirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +35,15 @@ public class Register extends AppCompatActivity {
         Intent goToHome = new Intent(this, Home.class);
         startActivity(goToHome);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    public void checkRegister(View caller){
+        username = (TextView) findViewById(R.id.mqidjf);
+        email = (TextView) findViewById(R.id.emailFill);
+        password = (TextView) findViewById(R.id.passwFill);
+        
+
+
+
     }
 }
