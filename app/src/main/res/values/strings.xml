@@ -30,8 +30,8 @@
     <string name="request">Request Reset</string>
     <string name="reset">Reset Password</string>
     <string name="changePassw">Change Password</string>
-    <string name="incorrectPassw">Password or email might be incorrect!</string>
-    <string name="incorrectEmail">Account does not exist yet, register now!</string>
+    <string name="incorrectPassw">Password or email is incorrect!</string>
+    <string name="incorrectEmail">Account does not exist yet, register first!</string>
 
     <string name="email">Email</string>
     <string name="username">Username</string>

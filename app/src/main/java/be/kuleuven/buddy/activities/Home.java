@@ -42,12 +42,12 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         homeRecycler.setLayoutManager(new LinearLayoutManager(this)); // Vertical layout by default
 
         // Dummy info
-        homePlants.add(new HomeInfo(R.drawable.plant_image, "Planty", "Aloe Vera", "42 min", "Bedroom", "Please refill the tank!"));
-        homePlants.add(new HomeInfo(R.drawable.plant_image2, "This", "Cactus", "Being watered now", "Bedroom", "I'm so happy!"));
-        homePlants.add(new HomeInfo(R.drawable.plant_image, "Is", "Peperomia", "1 hour, 3 min", "Kitchen", "It's too warm here!"));
-        homePlants.add(new HomeInfo(R.drawable.plant_image2, "Very", "Aloe Vera", "2 weeks, 5 days", "Living Room", "I'm freezing!"));
-        homePlants.add(new HomeInfo(R.drawable.plant_image, "Cool", "Snake Plant", "1 week, 1 day", "Bedroom 2", "Just growing, what about you?"));
-        homePlants.add(new HomeInfo(R.drawable.dead, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH", "I don't know anything about plants dude", "Already dead", "Room under the stairs", "Yes everything is okay, this is pure for testing purposes."));
+        homePlants.add(new HomeInfo(1, R.drawable.plant_image, "Planty", "Aloe Vera", "42 min", "Bedroom", "Please refill the tank!"));
+        homePlants.add(new HomeInfo(2, R.drawable.plant_image2, "This", "Cactus", "Being watered now", "Bedroom", "I'm so happy!"));
+        homePlants.add(new HomeInfo(3, R.drawable.plant_image, "Is", "Peperomia", "1 hour, 3 min", "Kitchen", "It's too warm here!"));
+        homePlants.add(new HomeInfo(4, R.drawable.plant_image2, "Very", "Aloe Vera", "2 weeks, 5 days", "Living Room", "I'm freezing!"));
+        homePlants.add(new HomeInfo(5, R.drawable.plant_image, "Cool", "Snake Plant", "1 week, 1 day", "Bedroom 2", "Just growing, what about you?"));
+        homePlants.add(new HomeInfo(6, R.drawable.dead, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH", "I don't know anything about plants dude", "Already dead", "Room under the stairs", "Yes everything is okay, this is pure for testing purposes."));
 
         adapter = new HomeAdapter(homePlants, this);
         homeRecycler.setAdapter(adapter);
