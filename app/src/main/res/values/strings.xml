@@ -40,6 +40,7 @@
     <string name="edit">Edit</string>
 
     <!-- General -->
+    <string name="nothing"> </string>
     <string name="save">Save</string>
     <string name="welcome">Welcome,</string>
     <string name="myPlants">My Plants</string>
