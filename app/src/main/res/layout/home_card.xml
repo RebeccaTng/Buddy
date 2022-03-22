@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/dyn_plantImage"
+        android:layout_width="126dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="@string/descriptionImage"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:srcCompat="@drawable/plant_image" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="343dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:contentPadding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dyn_plantName"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="130dp"
+                android:fontFamily="@font/mulish_bold"
+                android:lineSpacingExtra="-11dp"
+                android:text="@string/plantName"
+                android:textAlignment="viewStart"
+                android:textColor="@color/beige"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dyn_plantSpecies"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-3dp"
+                android:fontFamily="@font/mulish_regular"
+                android:lineSpacingExtra="-4dp"
+                android:text="@string/plantSpecies"
+                android:textAlignment="viewStart"
+                android:textColor="@color/beige"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/dyn_plantName"
+                app:layout_constraintTop_toBottomOf="@+id/dyn_plantName"
+                tools:ignore="TextContrastCheck" />
+
+            <ImageView
+                android:id="@+id/waterIcon"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/descriptionIcon"
+                app:layout_constraintStart_toStartOf="@+id/dyn_plantSpecies"
+                app:layout_constraintTop_toBottomOf="@+id/dyn_plantSpecies"
+                app:srcCompat="@drawable/icon_water" />
+
+            <TextView
+                android:id="@+id/dyn_plantWater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/mulish_regular"
+                android:text="@string/plantWater"
+                android:textAlignment="viewStart"
+                android:textColor="@color/beige"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/waterIcon"
+                app:layout_constraintStart_toEndOf="@+id/waterIcon"
+                app:layout_constraintTop_toTopOf="@+id/waterIcon"
+                tools:ignore="TextContrastCheck" />
+
+            <ImageView
+                android:id="@+id/placeIcon"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/descriptionIcon"
+                app:layout_constraintStart_toStartOf="@+id/waterIcon"
+                app:layout_constraintTop_toBottomOf="@+id/waterIcon"
+                app:srcCompat="@drawable/icon_place" />
+
+            <TextView
+                android:id="@+id/dyn_plantPlace"
+                android:layout_width="167dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/mulish_regular"
+                android:lineSpacingExtra="-4dp"
+                android:text="@string/plantPlace"
+                android:textAlignment="viewStart"
+                android:textColor="@color/beige"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/placeIcon"
+                app:layout_constraintStart_toEndOf="@+id/placeIcon"
+                app:layout_constraintTop_toBottomOf="@+id/dyn_plantWater"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/dyn_plantStatus"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/mulish_regular"
+                android:lineSpacingExtra="-4dp"
+                android:text="@string/plantStatus"
+                android:textAlignment="viewStart"
+                android:textColor="@color/beige"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/line2"
+                app:layout_constraintTop_toBottomOf="@+id/dyn_plantPlace"
+                tools:ignore="TextContrastCheck" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:background="@color/orange"
+                app:layout_constraintBottom_toBottomOf="@+id/dyn_plantStatus"
+                app:layout_constraintStart_toStartOf="@+id/placeIcon"
+                app:layout_constraintTop_toTopOf="@+id/dyn_plantStatus" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@
     <string name="descriptionLogo">logo</string>
     <string name="descriptionDeco">deco</string>
     <string name="descriptionIcon">icon</string>
+    <string name="descriptionImage">image</string>
 
     <!-- Branding -->
     <string name="credits">© Ebert, Filip, Rebecca, Quinten</string>
@@ -39,4 +40,13 @@
 
     <!-- General -->
     <string name="save">Save</string>
+    <string name="welcome">Welcome,</string>
+    <string name="myPlants">My Plants</string>
+    <string name="numOfPlants">1</string>
+
+    <string name="plantName">Planty</string>
+    <string name="plantSpecies">Aloe Vera</string>
+    <string name="plantWater">42 min</string>
+    <string name="plantPlace">Bedroom</string>
+    <string name="plantStatus">Please fill water tank!</string>
 </resources>

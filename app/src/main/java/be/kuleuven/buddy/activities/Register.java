@@ -1,10 +1,12 @@
-package be.kuleuven.buddy;
+package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import be.kuleuven.buddy.R;
 
 public class Register extends AppCompatActivity {
 
@@ -27,7 +29,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void goHome(View caller) {
-        //TODO check if passwords match and if valid mail (not already used mail + existing)
+        // TODO check if passwords match and if valid mail (not already used mail + existing)
         Intent goToHome = new Intent(this, Home.class);
         startActivity(goToHome);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);

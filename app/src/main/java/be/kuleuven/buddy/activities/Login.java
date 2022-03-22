@@ -1,4 +1,4 @@
-package be.kuleuven.buddy;
+package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+
+import be.kuleuven.buddy.R;
 
 public class Login extends AppCompatActivity {
     TextView email, password, errorMessage;
@@ -58,7 +60,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void checkLogin(View caller){
-        //transistion
+        //transition
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
         //make json object from filled fields
