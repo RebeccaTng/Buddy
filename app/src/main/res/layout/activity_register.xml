@@ -110,11 +110,11 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameFill"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_usernameFill"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/usernameFill"
+        android:id="@+id/dyn_usernameFill"
         android:layout_width="319dp"
         android:layout_height="52dp"
         android:layout_marginTop="14dp"
