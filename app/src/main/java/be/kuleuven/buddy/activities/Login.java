@@ -64,9 +64,9 @@ public class Login extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
         //make json object from filled fields
-        email = (TextView) findViewById(R.id.emailFill);
-        password = (TextView) findViewById(R.id.passwFill);
-        errorMessage = (TextView) findViewById(R.id.incorrectPasw);
+        email = findViewById(R.id.emailFill);
+        password = findViewById(R.id.passwFill);
+        errorMessage = findViewById(R.id.incorrectPasw);
 
         //error message when no field is filled in
         if (email.getText().toString().equals("") || password.getText().toString().equals("")){
@@ -87,45 +87,33 @@ public class Login extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String URL = "https://a21iot03.studev.groept.be/public/login";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i("VOLLEY", response);
-                System.out.println(response);
-                login = Integer.parseInt(response);
-                errorMessage.setText(" ");
-                if (login == 1){
-                    System.out.println("logged in!");
-                    goHome(caller);
-                }
-                else if (login == 0){
-                    System.out.println("incorrect fields!");
-                    errorMessage.setText(R.string.incorrectPassw);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
+            Log.i("VOLLEY", response);
+            System.out.println(response);
+            login = Integer.parseInt(response);
 
-                }
-                else if(login == -1){
-                    System.out.println("incorrect fields!");
-                    errorMessage.setText(R.string.incorrectEmail);
-
-                }
-                errorMessage.setVisibility(View.VISIBLE);
-
-
+            if (login == 1){
+                System.out.println("logged in!");
+                goHome(caller);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("VOLLEY", error.toString());
+            else if (login == 0){
+                System.out.println("incorrect fields!");
+                errorMessage.setText(R.string.incorrectPassw);
             }
+            else if(login == -1){
+                System.out.println("incorrect fields!");
+                errorMessage.setText(R.string.incorrectEmail);
+            }
+            errorMessage.setVisibility(View.VISIBLE);
 
-        }) {
+        }, error -> Log.e("VOLLEY", error.toString())) {
             @Override
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
             }
 
             @Override
-            public byte[] getBody() throws AuthFailureError {
+            public byte[] getBody() {
                 try {
                     // request body goes here
                     String userString = user.toString();
