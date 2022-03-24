@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,16 +14,23 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 import be.kuleuven.buddy.R;
 
 public class Register extends AppCompatActivity {
     TextView username, email, password, confirmPassword;
-    boolean correctPassword, validEmail;
+    boolean correctPassword, correctConfirmPassword, validEmail;
 
 
     @Override
@@ -47,6 +55,7 @@ public class Register extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (email.length() == 0){
                     //display that you need to fill in a password
+                    correctPassword = false;
                     System.out.println("You need to fill in a password!\n");
                 }
             }
@@ -57,31 +66,48 @@ public class Register extends AppCompatActivity {
                 //if longer than 8, contains a number and upper case
                 if (currentPassword.length() >= 8 && currentPassword.matches("(.*[0-9].*)") && currentPassword.matches("(.*[A-Z].*)") ){
                     //display that the password is correct format
+                    correctPassword = true;
                     System.out.println("Password is the correct format!\n");
                 }
                 else{
+                    correctPassword = false;
                     System.out.println("Password is not the correct format\n");
                 }
             }
         });
 
         //textwatcher confirmPassword
-        confirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        confirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (confirmPassword.getText().toString().equals(password.getText().toString())){
-                    System.out.println("your password is correct\n");
+                    System.out.println("your password is the same, good job \n");
+                    correctConfirmPassword = true;
                 }
                 else {
-                    System.out.println("Password is incorrect!\n");
+                    System.out.println("Password is not the same, try a new one\n");
+                    correctConfirmPassword = false;
+
                 }
             }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
+
 
         //textwatcher email. It checks if email is already in database
         email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                if (email.toString().isEmpty() == false)
                 checkValidEmail();
             }
         });
@@ -101,12 +127,67 @@ public class Register extends AppCompatActivity {
 
     public void goHome(View caller) {
         // TODO check if passwords match and if valid mail (not already used mail + existing)
-        Intent goToHome = new Intent(this, Home.class);
-        startActivity(goToHome);
-        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        System.out.println(correctConfirmPassword);
+        System.out.println(correctPassword);
+        System.out.println(validEmail);
+        if (correctConfirmPassword && correctPassword && validEmail && !username.getText().toString().isEmpty()){
+            System.out.println("Everything is filled in correctly, ready to register");
+
+            register();
+            Intent goToHome = new Intent(this, Home.class);
+            startActivity(goToHome);
+            this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        }
     }
 
-    public void checkRegister(View caller){
+    public void register(){
+        //make the json object
+        JSONObject user = new JSONObject();
+        try {
+            user.put("username", username.getText().toString());
+            user.put("email", email.getText().toString());
+            user.put("password", password.getText().toString());
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        //connect to database
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String URL = "https://a21iot03.studev.groept.be/public/user";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
+            Log.i("VOLLEY", response);
+            System.out.println(response);
+
+        }, error -> Log.e("VOLLEY", error.toString())) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() {
+                try {
+                    // request body goes here
+                    String userString = user.toString();
+                    return userString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", user, "utf-8");
+                    return null;
+                }
+            }
+
+        };
+        Log.d("string", stringRequest.toString());
+        requestQueue.add(stringRequest);
+
+
+
+
+
+
+
 
     }
 
@@ -117,28 +198,28 @@ public class Register extends AppCompatActivity {
         URL = URL + email.getText().toString();
         System.out.println(URL);
 
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, URL, null,
 
-                new Response.Listener<JSONArray>()
-                {
-                    @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        //String valid = response.getJSONObject(0).getBoolean("valid");
-                        System.out.println(response);
-                    }
-                },
-
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        System.out.println("onresponse is fout");
-                    }
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+                if (Integer.parseInt(response) == 1){
+                    //email may be used since it is unique
+                    validEmail = true;
                 }
-        );
-        requestQueue.add(submitRequest);
+                else{
+                    //email can't be used since it is already in database
+                    validEmail = false;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+
+        Log.d("string", stringRequest.toString());
+        requestQueue.add(stringRequest);
 
     }
 }

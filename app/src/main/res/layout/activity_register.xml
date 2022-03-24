@@ -41,7 +41,7 @@
         android:layout_marginTop="43dp"
         android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
-        android:onClick="checkValidEmail"
+        android:onClick="goHome"
         android:text="@string/register"
         android:textColor="@color/beige"
         android:textSize="18sp"
