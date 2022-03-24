@@ -19,17 +19,15 @@ public class EditAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        account = getIntent().getExtras().getParcelable("account");
-
-        //email.findViewById(R.id.dyn_email_edit);
-        //username.findViewById(R.id.dyn_emailFill_edit);
-
-        //email.setText(account.getEmail());
-        //username.setHint(account.getUsername());
-
         setContentView(R.layout.activity_edit_account);
 
+        account = getIntent().getExtras().getParcelable("account");
+        
+        email = findViewById(R.id.dyn_email_edit);
+        username = findViewById(R.id.dyn_emailFill_edit);
+
+        email.setText(account.getEmail());
+        username.setHint(account.getUsername());
     }
 
     public void goBack(View caller) {
