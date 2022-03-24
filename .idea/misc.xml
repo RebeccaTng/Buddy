@@ -6,11 +6,16 @@
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_beige_card.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_btn_green.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_btn_main.xml" value="0.22863247863247863" />
+        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_btn_red.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_btn_second.xml" value="0.22863247863247863" />
+        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_fill.xml" value="0.22863247863247863" />
+        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_fill_second.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_grey.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/bg_orange.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/fill_bg.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/main_btn_bg.xml" value="0.22863247863247863" />
+        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/switch_thumb.xml" value="0.22863247863247863" />
+        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/drawable/switch_track.xml" value="0.22863247863247863" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_account.xml" value="0.264" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_add_library.xml" value="0.2153846153846154" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_add_plant.xml" value="0.2" />
@@ -18,7 +23,8 @@
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_info.xml" value="0.2153846153846154" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_login.xml" value="0.2153846153846154" />
-        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_plant_statistics.xml" value="0.4" />
+        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_plant_settings.xml" value="0.4" />
+        <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_plant_statistics.xml" value="0.264" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_register.xml" value="0.2153846153846154" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_request_reset.xml" value="0.264" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/activity_reset_password.xml" value="0.2" />

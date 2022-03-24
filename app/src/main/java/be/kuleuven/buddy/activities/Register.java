@@ -52,8 +52,7 @@ public class Register extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -63,10 +62,12 @@ public class Register extends AppCompatActivity {
                     //display that the password is correct format
                     correctPassword = true;
                     System.out.println("Password is the correct format!\n");
+                    password.setBackgroundResource(R.drawable.bg_fill_green);
                 }
                 else{
                     correctPassword = false;
                     System.out.println("Password is not the correct format\n");
+                    password.setBackgroundResource(R.drawable.bg_fill_red);
                 }
             }
         });
@@ -82,10 +83,12 @@ public class Register extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (confirmPassword.getText().toString().equals(password.getText().toString())){
                     System.out.println("your password is the same, good job \n");
+                    password.setBackgroundResource(R.drawable.bg_fill_green);
                     correctConfirmPassword = true;
                 }
                 else {
                     System.out.println("Password is not the same, try a new one\n");
+                    password.setBackgroundResource(R.drawable.bg_fill_red);
                     correctConfirmPassword = false;
 
                 }
