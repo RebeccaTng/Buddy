@@ -11,10 +11,10 @@
         android:id="@+id/deco2"
         android:layout_width="540dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
-        app:layout_constraintBottom_toTopOf="@+id/emailText_edit"
+        app:layout_constraintBottom_toTopOf="@+id/usernameText_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,44 +77,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/usernameText_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/mulish_light"
-        android:text="@string/username"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/orange"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editAccTitle"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/usernameFill_edit"
-        android:layout_width="319dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:autofillHints="username"
-        android:background="@drawable/bg_fill"
-        android:ems="10"
-        android:fontFamily="@font/mulish_regular"
-        android:hint="@string/username"
-        android:inputType="textPersonName"
-        android:paddingStart="21dp"
-        android:paddingEnd="21dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/dark_gray"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameText_edit"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <TextView
         android:id="@+id/emailText_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -126,8 +88,39 @@
         android:textColor="@color/orange"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameFill_edit"
+        app:layout_constraintTop_toBottomOf="@+id/editAccTitle"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/dyn_email_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/mulish_regular"
+        android:text="@string/email"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailText_edit" />
+
+    <TextView
+        android:id="@+id/usernameText_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/mulish_light"
+        android:text="@string/username"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/orange"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dyn_email_edit"
         tools:ignore="TextContrastCheck" />
 
     <EditText
@@ -139,7 +132,7 @@
         android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
-        android:hint="@string/email"
+        android:hint="@string/username"
         android:inputType="textEmailAddress"
         android:paddingStart="21dp"
         android:paddingEnd="21dp"
@@ -148,7 +141,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailText_edit"
+        app:layout_constraintTop_toBottomOf="@+id/usernameText_edit"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView

@@ -2,13 +2,18 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:bottom="2.56dp"
-        android:top="2.56dp"
-        android:left="2.56dp"
-        android:right="2.56dp">
+        android:bottom="50dp"
+        android:top="50dp"
+        android:left="50dp"
+        android:right="50dp">
         <shape android:shape="oval">
             <solid android:color="@color/beige" />
             <size android:width="17.89dp" android:height="17.89dp" />
+
+            <!-- results in the track looking smaller than the thumb -->
+            <stroke
+                android:width="3dp"
+                android:color="#00ffffff"/>
         </shape>
     </item>
 

@@ -606,15 +606,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/alertText" />
 
-                <androidx.appcompat.widget.SwitchCompat
+                <Switch
                     android:id="@+id/moistSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
                     android:layout_marginEnd="40dp"
+                    android:switchMinWidth="51.11dp"
                     android:text="@null"
                     android:thumb="@drawable/switch_thumb"
-                    app:track="@drawable/switch_track"
+                    android:track="@drawable/switch_track"
                     app:layout_constraintBottom_toBottomOf="@+id/moistAlert"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/moistAlert" />
