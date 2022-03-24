@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.HomeAdapter;
 import be.kuleuven.buddy.cards.HomeInfo;
 
@@ -19,6 +20,8 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
     RecyclerView homeRecycler;
     RecyclerView.Adapter homeAdapter;
+    TextView username;
+
 
     // TODO link with information from database
     // Array with information to be displayed
@@ -34,6 +37,11 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
         TextView numOfPlants = findViewById(R.id.dyn_numOfPlants);
         numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));
+
+        username = findViewById(R.id.dyn_username_home);
+        AccountInfo account = getIntent().getExtras().getParcelable("account");
+        username.setText(account.getUsername());
+
     }
 
     private void homeRecycler() {

@@ -20,10 +20,12 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 
 public class Login extends AppCompatActivity {
     TextView email, password, errorMessage;
-    int login;
+    String username;
+    String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void goHome(View caller) {
-        System.out.println("going to Home!");
         Intent goToHome = new Intent(this, Home.class);
+
+        AccountInfo accountInfo = new AccountInfo(username, email.getText().toString());
+        System.out.println(accountInfo);
+        goToHome.putExtra("account", accountInfo);
         startActivity(goToHome);
 
     }
@@ -87,25 +92,27 @@ public class Login extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
             Log.i("VOLLEY", response);
             System.out.println(response);
-            login = Integer.parseInt(response);
+            login = response;
 
-            if (login == 1){
-                System.out.println("logged in!");
-                goHome(caller);
-            }
-            else if (login == 0){
+            if (login == "0"){
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectPassw);
                 errorMessage.setVisibility(View.VISIBLE);
                 email.setBackgroundResource(R.drawable.bg_fill_red);
                 password.setBackgroundResource(R.drawable.bg_fill_red);
             }
-            else if(login == -1){
+            else if(login == "-1"){
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectEmail);
                 errorMessage.setVisibility(View.VISIBLE);
                 email.setBackgroundResource(R.drawable.bg_fill_red);
                 password.setBackgroundResource((R.drawable.bg_fill));
+            }
+            else if (login != ""){
+                System.out.println("logged in!");
+                System.out.println(login);
+                username = login;
+                goHome(caller);
             }
 
         }, error -> Log.e("VOLLEY", error.toString())) {
