@@ -53,11 +53,6 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (email.length() == 0){
-                    //display that you need to fill in a password
-                    correctPassword = false;
-                    System.out.println("You need to fill in a password!\n");
-                }
             }
 
             @Override
