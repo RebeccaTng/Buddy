@@ -5,15 +5,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 
 public class EditAccount extends AppCompatActivity {
+    AccountInfo account;
+    TextView email;
+    EditText username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        account = getIntent().getExtras().getParcelable("account");
+
+        //email.findViewById(R.id.dyn_email_edit);
+        //username.findViewById(R.id.dyn_emailFill_edit);
+
+        //email.setText(account.getEmail());
+        //username.setHint(account.getUsername());
+
         setContentView(R.layout.activity_edit_account);
+
     }
 
     public void goBack(View caller) {
