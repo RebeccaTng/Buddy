@@ -5,15 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 
 public class Account extends AppCompatActivity {
+    AccountInfo account;
+    TextView username, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        account = getIntent().getExtras().getParcelable("account");
+
+        username = findViewById(R.id.dyn_username_acc);
+        email = findViewById(R.id.dyn_email_acc);
+
+        username.setText(account.getUsername());
+        email.setText(account.getEmail());
+
     }
 
     public void goBack(View caller) {

@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 
 public class Register extends AppCompatActivity {
     TextView username, email, password, confirmPassword;
@@ -37,6 +38,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+
 
         //define the variables
         username = findViewById(R.id.usernameFill_register);
@@ -83,12 +86,12 @@ public class Register extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (confirmPassword.getText().toString().equals(password.getText().toString())){
                     System.out.println("your password is the same, good job \n");
-                    password.setBackgroundResource(R.drawable.bg_fill_green);
+                    confirmPassword.setBackgroundResource(R.drawable.bg_fill_green);
                     correctConfirmPassword = true;
                 }
                 else {
                     System.out.println("Password is not the same, try a new one\n");
-                    password.setBackgroundResource(R.drawable.bg_fill_red);
+                    confirmPassword.setBackgroundResource(R.drawable.bg_fill_red);
                     correctConfirmPassword = false;
 
                 }
@@ -133,6 +136,10 @@ public class Register extends AppCompatActivity {
 
             register();
             Intent goToHome = new Intent(this, Home.class);
+
+            AccountInfo accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString());
+            goToHome.putExtra("account", accountInfo);
+
             startActivity(goToHome);
             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         }

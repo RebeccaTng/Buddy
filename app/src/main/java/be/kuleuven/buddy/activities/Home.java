@@ -21,7 +21,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     RecyclerView homeRecycler;
     RecyclerView.Adapter homeAdapter;
     TextView username;
-
+    AccountInfo account;
 
     // TODO link with information from database
     // Array with information to be displayed
@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));
 
         username = findViewById(R.id.dyn_username_home);
-        AccountInfo account = getIntent().getExtras().getParcelable("account");
+        account = getIntent().getExtras().getParcelable("account");
         username.setText(account.getUsername());
 
     }
@@ -68,6 +68,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
     public void goAccount(View caller) {
         Intent goToAccount = new Intent(this, Account.class);
+        goToAccount.putExtra("account", account);
         startActivity(goToAccount);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }

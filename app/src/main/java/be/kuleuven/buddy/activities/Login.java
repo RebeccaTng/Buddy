@@ -55,8 +55,8 @@ public class Login extends AppCompatActivity {
         Intent goToHome = new Intent(this, Home.class);
 
         AccountInfo accountInfo = new AccountInfo(username, email.getText().toString());
-        System.out.println(accountInfo);
         goToHome.putExtra("account", accountInfo);
+
         startActivity(goToHome);
 
     }
