@@ -27,6 +27,8 @@
     <string name="newPassw">New Password</string>
     <string name="currPassw">Current Password</string>
     <string name="forgotPassw">Forgot Password? Reset it.</string>
+    <string name="passwReqText">Password Requirements</string>
+    <string name="passwRequire">At least 8 characters,\n a number and an uppercase.</string>
     <string name="request">Request Reset</string>
     <string name="reset">Reset Password</string>
     <string name="changePassw">Change Password</string>
@@ -47,6 +49,7 @@
     <string name="number">1</string>
 
     <string name="plantName">Planty</string>
+    <string name="plantNameText">Plant name</string>
     <string name="plantSpecies">Aloe Vera</string>
     <string name="plantWater">1 hour, 3 min</string>
     <string name="plantPlace">Bedroom</string>

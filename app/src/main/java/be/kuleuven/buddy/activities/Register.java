@@ -2,12 +2,17 @@ package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -28,18 +33,25 @@ import java.io.UnsupportedEncodingException;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
+import be.kuleuven.buddy.fragments.PasswInfoFragment;
 
 public class Register extends AppCompatActivity {
     TextView username, email, password, confirmPassword;
     boolean correctPassword, correctConfirmPassword, validEmail;
-
+    ImageView infoBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_register);
 
+        infoBtn = findViewById(R.id.infoIcon);
 
+        infoBtn.setOnClickListener(view -> {
+            PasswInfoFragment passwInfo = new PasswInfoFragment();
+            passwInfo.show(getSupportFragmentManager(), "passwFragment");
+        });
 
         //define the variables
         username = findViewById(R.id.usernameFill_register);
@@ -50,9 +62,7 @@ public class Register extends AppCompatActivity {
         //textwatcher password
         password.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -78,9 +88,7 @@ public class Register extends AppCompatActivity {
         //textwatcher confirmPassword
         confirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -93,24 +101,18 @@ public class Register extends AppCompatActivity {
                     System.out.println("Password is not the same, try a new one\n");
                     confirmPassword.setBackgroundResource(R.drawable.bg_fill_red);
                     correctConfirmPassword = false;
-
                 }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
 
-
         //textwatcher email. It checks if email is already in database
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (email.toString().isEmpty() == false)
-                checkValidEmail();
-            }
+        email.setOnFocusChangeListener((view, b) -> {
+            if (!email.toString().isEmpty())
+            checkValidEmail();
         });
     }
 
@@ -186,14 +188,6 @@ public class Register extends AppCompatActivity {
         };
         Log.d("string", stringRequest.toString());
         requestQueue.add(stringRequest);
-
-
-
-
-
-
-
-
     }
 
 
@@ -203,28 +197,20 @@ public class Register extends AppCompatActivity {
         URL = URL + email.getText().toString();
         System.out.println(URL);
 
-
-        StringRequest stringRequest=new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-                if (Integer.parseInt(response) == 1){
-                    //email may be used since it is unique
-                    validEmail = true;
-                }
-                else{
-                    //email can't be used since it is already in database
-                    validEmail = false;
-                }
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, URL, response -> {
+            System.out.println(response);
+            if (Integer.parseInt(response) == 1){
+                //email may be used since it is unique
+                validEmail = true;
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            else{
+                //email can't be used since it is already in database
+                validEmail = false;
             }
-        });
+        }, error -> {}
+        );
 
         Log.d("string", stringRequest.toString());
         requestQueue.add(stringRequest);
-
     }
 }

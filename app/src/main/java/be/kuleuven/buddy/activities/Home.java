@@ -30,6 +30,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_home);
 
         homeRecycler = findViewById(R.id.home_recycler);
@@ -85,6 +86,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     public void onCardClick(int position) {
         Intent goToPlantStatistics  = new Intent(this, PlantStatistics.class);
         goToPlantStatistics.putExtra("plantName", homePlants.get(position));
+        goToPlantStatistics.putExtra("account", account);
         startActivity(goToPlantStatistics);
     }
 }

@@ -14,10 +14,12 @@
         android:theme="@style/Theme.Buddy">
         <activity
             android:name=".activities.PlantSettings"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor"/>
         <activity
             android:name=".activities.AddLibrary"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor"/>
         <activity
             android:name=".activities.AddPlant"
             android:exported="false"
