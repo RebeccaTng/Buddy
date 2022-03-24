@@ -105,6 +105,7 @@ public class Login extends AppCompatActivity {
                 errorMessage.setText(R.string.incorrectEmail);
                 errorMessage.setVisibility(View.VISIBLE);
                 email.setBackgroundResource(R.drawable.bg_fill_red);
+                password.setBackgroundResource((R.drawable.bg_fill));
             }
 
         }, error -> Log.e("VOLLEY", error.toString())) {

@@ -2,6 +2,7 @@ package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,5 +38,11 @@ public class PlantStatistics extends AppCompatActivity {
     public void goBack(View caller) {
         onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+    }
+
+    public void goPlantSettings(View caller) {
+        Intent goToPlantSettings = new Intent(this, PlantSettings.class);
+        startActivity(goToPlantSettings);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }

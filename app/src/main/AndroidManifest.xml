@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
+            android:name=".activities.PlantSettings"
+            android:exported="false" />
+        <activity
             android:name=".activities.AddLibrary"
             android:exported="false" />
         <activity

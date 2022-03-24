@@ -8,7 +8,7 @@
     tools:context=".activities.PlantStatistics">
 
     <View
-        android:id="@+id/card_bg"
+        android:id="@+id/card_bg_stat"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -34,16 +34,18 @@
 
     <TextView
         android:id="@+id/dyn_plantName_stat"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="87dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/mulish_extrabold"
         android:lineSpacingExtra="-11dp"
         android:text="@string/plantName"
         android:textAlignment="viewStart"
         android:textColor="@color/beige"
         android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dyn_plantImage_stat"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
@@ -52,43 +54,47 @@
         android:id="@+id/dyn_plantImage_stat"
         android:layout_width="170dp"
         android:layout_height="269dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="-30dp"
         android:contentDescription="@string/descriptionImage"
-        app:layout_constraintBottom_toTopOf="@+id/card_bg"
+        app:layout_constraintBottom_toTopOf="@+id/card_bg_stat"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/plant_image"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/dyn_plantSpecies_stat"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="-3dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/mulish_regular"
         android:lineSpacingExtra="-4dp"
         android:text="@string/plantSpecies"
         android:textAlignment="viewStart"
         android:textColor="@color/beige"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/dyn_plantName_stat"
         app:layout_constraintTop_toBottomOf="@+id/dyn_plantName_stat" />
 
     <TextView
         android:id="@+id/dyn_plantAge_stat"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/mulish_regular"
         android:lineSpacingExtra="-4dp"
         android:text="@string/plantAge"
         android:textAlignment="viewStart"
         android:textColor="@color/beige"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/dyn_plantSpecies_stat"
         app:layout_constraintTop_toBottomOf="@+id/dyn_plantSpecies_stat" />
 
     <View
-        android:id="@+id/line4"
+        android:id="@+id/line6"
         android:layout_width="105dp"
         android:layout_height="5dp"
         android:layout_marginTop="10dp"
@@ -98,17 +104,19 @@
 
     <TextView
         android:id="@+id/dyn_plantPlace_stat"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/mulish_bold"
         android:lineSpacingExtra="-11dp"
         android:text="@string/plantPlace"
         android:textAlignment="viewStart"
         android:textColor="@color/beige"
         android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@+id/line4"
-        app:layout_constraintTop_toBottomOf="@+id/line4" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/line6"
+        app:layout_constraintTop_toBottomOf="@+id/line6" />
 
     <TextView
         android:id="@+id/place"
@@ -125,15 +133,17 @@
 
     <TextView
         android:id="@+id/dyn_plantWater_stat"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/mulish_bold"
         android:lineSpacingExtra="-11dp"
         android:text="@string/plantWater"
         android:textAlignment="viewStart"
         android:textColor="@color/beige"
         android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/place"
         app:layout_constraintTop_toBottomOf="@+id/place" />
 
@@ -210,7 +220,7 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/statBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/card_bg"
+        app:layout_constraintStart_toStartOf="@+id/card_bg_stat"
         app:layout_constraintTop_toBottomOf="@+id/dyn_plantImage_stat">
 
         <LinearLayout
@@ -224,14 +234,16 @@
 
                 <TextView
                     android:id="@+id/dyn_plantStatus_stat"
-                    android:layout_width="325dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="25dp"
                     android:fontFamily="@font/mulish_regular"
                     android:text="@string/plantStatus"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/line5"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -365,9 +377,9 @@
                     app:layout_constraintStart_toStartOf="@+id/dyn_plantTemp_stat"
                     app:layout_constraintTop_toBottomOf="@+id/dyn_plantTemp_stat" />
 
-                <Button
+                <android.widget.Button
                     android:id="@+id/manualWaterBtn"
-                    android:layout_width="335dp"
+                    android:layout_width="295dp"
                     android:layout_height="41dp"
                     android:layout_marginTop="40dp"
                     android:layout_marginBottom="15dp"
@@ -392,7 +404,7 @@
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:background="@drawable/bg_btn_green"
-        app:layout_constraintBottom_toBottomOf="@+id/card_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/card_bg_stat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.5" />
@@ -412,10 +424,11 @@
         app:layout_constraintTop_toTopOf="@+id/statBtn" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/settingsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/mulish_semibold"
+        android:onClick="goPlantSettings"
         android:text="@string/settings"
         android:textAllCaps="true"
         android:textColor="@color/black"
@@ -423,6 +436,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/statText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/statBtn"
-        app:layout_constraintTop_toTopOf="@+id/statText" />
+        app:layout_constraintTop_toTopOf="@+id/statText"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
