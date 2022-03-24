@@ -22,7 +22,7 @@ public class EditAccount extends AppCompatActivity {
         setContentView(R.layout.activity_edit_account);
 
         account = getIntent().getExtras().getParcelable("account");
-        
+
         email = findViewById(R.id.dyn_email_edit);
         username = findViewById(R.id.dyn_emailFill_edit);
 

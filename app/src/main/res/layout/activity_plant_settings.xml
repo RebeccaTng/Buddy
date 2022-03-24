@@ -619,6 +619,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/moistAlert" />
 
+                <TextView
+                    android:id="@+id/lightAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/moisture"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/moistAlert"
+                    app:layout_constraintTop_toBottomOf="@id/moistAlert" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

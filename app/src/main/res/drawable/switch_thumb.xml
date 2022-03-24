@@ -8,11 +8,11 @@
         android:right="50dp">
         <shape android:shape="oval">
             <solid android:color="@color/beige" />
-            <size android:width="17.89dp" android:height="17.89dp" />
+            <size android:width="25dp" android:height="17.89dp" />
 
             <!-- results in the track looking smaller than the thumb -->
             <stroke
-                android:width="3dp"
+                android:width="8dp"
                 android:color="#00ffffff"/>
         </shape>
     </item>
