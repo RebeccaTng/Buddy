@@ -18,8 +18,6 @@ public class PlantStatistics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_statistics);
 
-        HomeInfo plantName = getIntent().getExtras().getParcelable("plantName");
-
         ImageView image = findViewById(R.id.dyn_plantImage_stat);
         TextView name = findViewById(R.id.dyn_plantName_stat);
         TextView species = findViewById(R.id.dyn_plantSpecies_stat);
@@ -27,16 +25,20 @@ public class PlantStatistics extends AppCompatActivity {
         TextView place = findViewById(R.id.dyn_plantPlace_stat);
         TextView status = findViewById(R.id.dyn_plantStatus_stat);
 
-        image.setImageResource(plantName.getPlantImage());
-        name.setText(plantName.getPlantName());
-        species.setText(plantName.getPlantSpecies());
-        water.setText(plantName.getPlantWater());
-        place.setText(plantName.getPlantPlace());
-        status.setText(plantName.getPlantStatus());
+        if(getIntent().hasExtra("plantName")) {
+            HomeInfo plantName = getIntent().getExtras().getParcelable("plantName");
+            image.setImageResource(plantName.getPlantImage());
+            name.setText(plantName.getPlantName());
+            species.setText(plantName.getPlantSpecies());
+            water.setText(plantName.getPlantWater());
+            place.setText(plantName.getPlantPlace());
+            status.setText(plantName.getPlantStatus());
+        }
     }
 
     public void goBack(View caller) {
-        onBackPressed();
+        Intent goToHome = new Intent(this, Home.class);
+        startActivity(goToHome);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 

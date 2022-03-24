@@ -61,6 +61,7 @@
     <string name="moisture">Moisture</string>
     <string name="light">Light</string>
     <string name="temp">Temp.</string>
+    <string name="temperature">Temperature</string>
     <string name="percentage">%</string>
     <string name="degrees">°C</string>
 

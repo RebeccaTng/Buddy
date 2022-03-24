@@ -279,7 +279,7 @@
                         android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/lightRange_settings"
-                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <TextView
                         android:id="@+id/percentage3_settings"
@@ -326,7 +326,7 @@
                         android:textSize="15sp"
                         app:layout_constraintStart_toEndOf="@+id/stripe2"
                         app:layout_constraintTop_toBottomOf="@+id/lightRange_settings"
-                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <TextView
                         android:id="@+id/percentage4_settings"
@@ -372,7 +372,7 @@
                         android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tempRange_settings"
-                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <TextView
                         android:id="@+id/degrees1_settings"
@@ -617,7 +617,8 @@
                     android:track="@drawable/switch_track"
                     app:layout_constraintBottom_toBottomOf="@+id/moistAlert"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/moistAlert" />
+                    app:layout_constraintTop_toTopOf="@+id/moistAlert"
+                    tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                 <TextView
                     android:id="@+id/lightAlert"
@@ -625,12 +626,164 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/mulish_regular"
-                    android:text="@string/moisture"
+                    android:text="@string/light"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/moistAlert"
                     app:layout_constraintTop_toBottomOf="@id/moistAlert" />
 
+                <Switch
+                    android:id="@+id/lightSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:switchMinWidth="51.11dp"
+                    android:text="@null"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
+                    app:layout_constraintBottom_toBottomOf="@+id/lightAlert"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lightAlert"
+                    tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/tempAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/temperature"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/lightAlert"
+                    app:layout_constraintTop_toBottomOf="@id/lightAlert" />
+
+                <Switch
+                    android:id="@+id/tempSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:switchMinWidth="51.11dp"
+                    android:text="@null"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
+                    app:layout_constraintBottom_toBottomOf="@+id/tempAlert"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tempAlert"
+                    tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/displayText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/mulish_semibold"
+                    android:text="@string/display"
+                    android:textColor="@color/black"
+                    android:textSize="26sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tempSwitch" />
+
+                <TextView
+                    android:id="@+id/powerDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/power"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/displayText" />
+
+                <Switch
+                    android:id="@+id/powerSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:switchMinWidth="51.11dp"
+                    android:text="@null"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
+                    app:layout_constraintBottom_toBottomOf="@+id/powerDisplay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/powerDisplay"
+                    tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                <TextView
+                    android:id="@+id/customDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/customDisp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/powerDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/powerDisplay" />
+
+                <Switch
+                    android:id="@+id/dispSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:switchMinWidth="51.11dp"
+                    android:text="@null"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
+                    app:layout_constraintBottom_toBottomOf="@+id/customDisplay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/customDisplay"
+                    tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                <ImageView
+                    android:id="@+id/selectIcon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="15dp"
+                    android:contentDescription="@string/descriptionIcon"
+                    app:layout_constraintStart_toStartOf="@+id/customDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/customDisplay"
+                    app:srcCompat="@drawable/icon_select" />
+
+                <TextView
+                    android:id="@+id/customTextDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:fontFamily="@font/mulish_regular"
+                    android:text="@string/customText"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/selectIcon"
+                    app:layout_constraintStart_toEndOf="@+id/selectIcon"
+                    app:layout_constraintTop_toTopOf="@+id/selectIcon" />
+
+                <EditText
+                    android:id="@+id/customTextFill"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/bg_fill_second"
+                    android:ems="10"
+                    android:fontFamily="@font/mulish_regular"
+                    android:hint="@string/text"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark_gray"
+                    android:textSize="15sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/customTextDisplay"
+                    app:layout_constraintStart_toStartOf="@+id/selectIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/customTextDisplay"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
@@ -652,6 +805,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/mulish_semibold"
+        android:onClick="goPlantStatistics"
         android:text="@string/statistics"
         android:textAllCaps="true"
         android:textColor="@color/black"

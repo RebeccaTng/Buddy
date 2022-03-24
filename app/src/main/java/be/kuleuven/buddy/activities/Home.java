@@ -39,9 +39,11 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));
 
         username = findViewById(R.id.dyn_username_home);
-        account = getIntent().getExtras().getParcelable("account");
-        username.setText(account.getUsername());
 
+        if(getIntent().hasExtra("account")) {
+            account = getIntent().getExtras().getParcelable("account");
+            username.setText(account.getUsername());
+        }
     }
 
     private void homeRecycler() {
