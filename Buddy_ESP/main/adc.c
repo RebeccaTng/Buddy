@@ -37,6 +37,6 @@ _Noreturn void* adc_result(void* _) {
                 ESP_LOGI(tags[i], "ADC Result: %d mV", voltage[i]);
             }
         }
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelay(pdMS_TO_TICKS(4000));
     }
 }

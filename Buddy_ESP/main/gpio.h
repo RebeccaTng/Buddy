@@ -1,9 +1,9 @@
 #include <sys/cdefs.h>
 #include "config.h"
 
-#define GPIO_OUTPUT_13      13  //Sound
+#define GPIO_OUTPUT_13      13  //Bluetooth
 #define GPIO_OUTPUT_12      12  //Display
-#define GPIO_OUTPUT_27      27  //LED1
+#define GPIO_OUTPUT_27      27
 #define GPIO_OUTPUT_33      33
 #define GPIO_OUTPUT_15      15  //Pump
 #define GPIO_OUTPUT_14      14
