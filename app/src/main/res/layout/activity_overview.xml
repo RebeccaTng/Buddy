@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    tools:context=".activities.Overview">
+
+    <ImageView
+        android:id="@+id/deco2"
+        android:layout_width="540dp"
+        android:layout_height="500dp"
+        android:layout_marginBottom="-10dp"
+        android:contentDescription="@string/descriptionDeco"
+        android:rotation="-5"
+        app:layout_constraintBottom_toTopOf="@+id/scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/deco2" />
+
+    <ImageView
+        android:id="@+id/backIcon_edit"
+        android:layout_width="21.9dp"
+        android:layout_height="21.04dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/descriptionIcon"
+        android:onClick="goBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_back"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/overviewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/overview"
+        android:textColor="@color/beige"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/overviewBg"
+        android:layout_width="342dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bg_darkgreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewTitle" />
+
+    <View
+        android:id="@+id/overviewBtn_day"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/bg_beige_second"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toStartOf="@+id/overviewBg"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
+
+    <View
+        android:id="@+id/overviewBtn_week"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/bg_beige_second"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toEndOf="@+id/overviewBtn_day"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
+
+    <View
+        android:id="@+id/overviewBtn_month"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/bg_beige_second"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toEndOf="@+id/overviewBtn_week"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
+
+    <View
+        android:id="@+id/overviewBtn_year"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/bg_beige_second"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toEndOf="@+id/overviewBtn_month"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
+
+    <TextView
+        android:id="@+id/overviewDay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/mulish_semibold"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/day"
+        android:textColor="@color/dark_green"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_day"
+        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_day"
+        app:layout_constraintStart_toStartOf="@+id/overviewBtn_day"
+        app:layout_constraintTop_toTopOf="@+id/overviewBtn_day" />
+
+    <TextView
+        android:id="@+id/overviewWeek"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/mulish_semibold"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/week"
+        android:textColor="@color/beige"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_week"
+        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_week"
+        app:layout_constraintStart_toStartOf="@+id/overviewBtn_week"
+        app:layout_constraintTop_toTopOf="@+id/overviewBtn_week" />
+
+    <TextView
+        android:id="@+id/overviewMonth"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/mulish_semibold"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/month"
+        android:textColor="@color/beige"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_month"
+        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_month"
+        app:layout_constraintStart_toStartOf="@+id/overviewBtn_month"
+        app:layout_constraintTop_toTopOf="@+id/overviewBtn_month" />
+
+    <TextView
+        android:id="@+id/overviewYear"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/mulish_semibold"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/year"
+        android:textColor="@color/beige"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_year"
+        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_year"
+        app:layout_constraintStart_toStartOf="@+id/overviewBtn_year"
+        app:layout_constraintTop_toTopOf="@+id/overviewBtn_year" />
+
+    <TextView
+        android:id="@+id/overviewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/mulish_semibold"
+        android:text="@string/date"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewBg" />
+
+    <ImageView
+        android:id="@+id/arrowIconLeft"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:contentDescription="@string/descriptionIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewDate"
+        app:layout_constraintStart_toStartOf="@+id/overviewBg"
+        app:layout_constraintTop_toTopOf="@+id/overviewDate"
+        app:srcCompat="@drawable/icon_arrow" />
+
+    <ImageView
+        android:id="@+id/arrowIconRight"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:contentDescription="@string/descriptionIcon"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewDate"
+        app:layout_constraintEnd_toEndOf="@+id/overviewBg"
+        app:layout_constraintTop_toTopOf="@+id/overviewDate"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/icon_arrow" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewDate"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/moistCard_overview"
+                    android:layout_width="347dp"
+                    android:layout_height="213dp"
+                    android:backgroundTint="@color/beige"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:contentPadding="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/moistTitle_overview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/mulish_semibold"
+                            android:text="@string/moisture"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/moistLine"
+                            android:layout_width="315dp"
+                            android:layout_height="1dp"
+                            android:backgroundTint="@color/dark_beige"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/moistTitle_overview" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/lightCard_overview"
+                    android:layout_width="347dp"
+                    android:layout_height="213dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/beige"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:contentPadding="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/moistCard_overview">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/lightTitle_overview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/mulish_semibold"
+                            android:text="@string/light"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/lightLine"
+                            android:layout_width="315dp"
+                            android:layout_height="1dp"
+                            android:backgroundTint="@color/dark_beige"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/lightTitle_overview" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/tempCard_overview"
+                    android:layout_width="347dp"
+                    android:layout_height="213dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:backgroundTint="@color/beige"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:contentPadding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lightCard_overview">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tempTitle_overview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/mulish_semibold"
+                            android:text="@string/temperature"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/tempLine"
+                            android:layout_width="315dp"
+                            android:layout_height="1dp"
+                            android:backgroundTint="@color/dark_beige"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tempTitle_overview" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

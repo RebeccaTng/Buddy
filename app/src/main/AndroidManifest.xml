@@ -13,13 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
+            android:name=".activities.AddManual"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Overview"
+            android:exported="false" />
+        <activity
             android:name=".activities.PlantSettings"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.AddLibrary"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.AddPlant"
             android:exported="false"
@@ -27,7 +34,8 @@
         <activity
             android:name=".activities.PlantStatistics"
             android:exported="false"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.Info"
             android:exported="false"

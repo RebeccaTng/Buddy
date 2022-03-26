@@ -19,7 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/deleteBtn_settings" />
 
     <ImageView
-        android:id="@+id/backIcon_edit"
+        android:id="@+id/backIcon_settings"
         android:layout_width="21.9dp"
         android:layout_height="21.04dp"
         android:layout_marginStart="25dp"
@@ -219,7 +219,7 @@
                         app:layout_constraintTop_toTopOf="@+id/moistMin_settings" />
 
                     <TextView
-                        android:id="@+id/stripe1"
+                        android:id="@+id/stripe1_settings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -248,7 +248,7 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/dark_gray"
                         android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/stripe1"
+                        app:layout_constraintStart_toEndOf="@+id/stripe1_settings"
                         app:layout_constraintTop_toBottomOf="@+id/moistRange_settings"
                         tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
@@ -312,7 +312,7 @@
                         app:layout_constraintTop_toTopOf="@+id/lightMin_settings" />
 
                     <TextView
-                        android:id="@+id/stripe2"
+                        android:id="@+id/stripe2_settings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -341,7 +341,7 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/dark_gray"
                         android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/stripe2"
+                        app:layout_constraintStart_toEndOf="@+id/stripe2_settings"
                         app:layout_constraintTop_toBottomOf="@+id/lightRange_settings"
                         tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
@@ -405,7 +405,7 @@
                         app:layout_constraintTop_toTopOf="@+id/tempMin_settings" />
 
                     <TextView
-                        android:id="@+id/stripe3"
+                        android:id="@+id/stripe3_settings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -434,7 +434,7 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/dark_gray"
                         android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/stripe3"
+                        app:layout_constraintStart_toEndOf="@+id/stripe3_settings"
                         app:layout_constraintTop_toBottomOf="@+id/tempRange_settings"
                         tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
@@ -493,6 +493,19 @@
                         app:layout_constraintStart_toEndOf="@+id/waterLvl_settings"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/percentage5_settings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/percentage"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/waterMin_settings"
+                        app:layout_constraintStart_toEndOf="@+id/waterMin_settings"
+                        app:layout_constraintTop_toTopOf="@+id/waterMin_settings" />
 
                     <TextView
                         android:id="@+id/age_settings"

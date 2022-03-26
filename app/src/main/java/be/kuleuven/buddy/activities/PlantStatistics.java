@@ -57,4 +57,10 @@ public class PlantStatistics extends AppCompatActivity {
         startActivity(goToPlantSettings);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
+
+    public void goOverview(View caller) {
+        Intent goToOverview = new Intent(this, Overview.class);
+        startActivity(goToOverview);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
 }

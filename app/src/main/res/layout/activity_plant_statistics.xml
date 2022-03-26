@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/backIcon_edit"
+        android:id="@+id/backIcon_stat"
         android:layout_width="21.9dp"
         android:layout_height="21.04dp"
         android:layout_marginStart="25dp"
@@ -265,12 +265,14 @@
                     android:layout_marginStart="35dp"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/mulish_extrabold"
+                    android:onClick="goOverview"
                     android:text="@string/number1"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantStatus_stat" />
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantStatus_stat"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                 <TextView
                     android:id="@+id/percentage1_stat"
@@ -278,11 +280,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:fontFamily="@font/mulish_extrabold"
+                    android:onClick="goOverview"
                     android:text="@string/percentage"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     app:layout_constraintStart_toEndOf="@+id/dyn_plantMoisture_stat"
-                    app:layout_constraintTop_toTopOf="@+id/dyn_plantMoisture_stat" />
+                    app:layout_constraintTop_toTopOf="@+id/dyn_plantMoisture_stat"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                 <TextView
                     android:id="@+id/moisture"
@@ -290,12 +294,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-3dp"
                     android:fontFamily="@font/mulish_regular"
+                    android:onClick="goOverview"
                     android:text="@string/moisture"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/percentage1_stat"
                     app:layout_constraintStart_toStartOf="@+id/dyn_plantMoisture_stat"
-                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantMoisture_stat" />
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantMoisture_stat"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/dyn_plantLight_stat"
@@ -303,13 +309,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="-15dp"
                     android:fontFamily="@font/mulish_extrabold"
+                    android:onClick="goOverview"
                     android:text="@string/number2"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toStartOf="@+id/dyn_plantTemp_stat"
                     app:layout_constraintStart_toEndOf="@+id/percentage1_stat"
-                    app:layout_constraintTop_toTopOf="@+id/dyn_plantMoisture_stat" />
+                    app:layout_constraintTop_toTopOf="@+id/dyn_plantMoisture_stat"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/percentage2_stat"
@@ -317,12 +325,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:fontFamily="@font/mulish_extrabold"
+                    android:onClick="goOverview"
                     android:text="@string/percentage"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     app:layout_constraintStart_toEndOf="@+id/dyn_plantLight_stat"
-                    app:layout_constraintTop_toTopOf="@+id/dyn_plantLight_stat" />
+                    app:layout_constraintTop_toTopOf="@+id/dyn_plantLight_stat"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/light"
@@ -330,13 +340,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-3dp"
                     android:fontFamily="@font/mulish_regular"
+                    android:onClick="goOverview"
                     android:text="@string/light"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/percentage2_stat"
                     app:layout_constraintStart_toStartOf="@+id/dyn_plantLight_stat"
-                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantLight_stat" />
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantLight_stat"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/dyn_plantTemp_stat"
@@ -344,12 +356,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/mulish_extrabold"
+                    android:onClick="goOverview"
                     android:text="@string/number3"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toStartOf="@+id/percentage3_stat"
-                    app:layout_constraintTop_toTopOf="@+id/percentage3_stat" />
+                    app:layout_constraintTop_toTopOf="@+id/percentage3_stat"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/percentage3_stat"
@@ -357,11 +371,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="35dp"
                     android:fontFamily="@font/mulish_extrabold"
+                    android:onClick="goOverview"
                     android:text="@string/percentage"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/percentage2_stat" />
+                    app:layout_constraintTop_toTopOf="@+id/percentage2_stat"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/temp"
@@ -369,13 +385,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-3dp"
                     android:fontFamily="@font/mulish_regular"
+                    android:onClick="goOverview"
                     android:text="@string/temp"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/percentage3_stat"
                     app:layout_constraintStart_toStartOf="@+id/dyn_plantTemp_stat"
-                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantTemp_stat" />
+                    app:layout_constraintTop_toBottomOf="@+id/dyn_plantTemp_stat"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <android.widget.Button
                     android:id="@+id/manualWaterBtn"

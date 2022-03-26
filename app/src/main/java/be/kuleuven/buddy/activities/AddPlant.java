@@ -61,9 +61,16 @@ public class AddPlant extends AppCompatActivity implements LibraryAdapter.Librar
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
+    public void goAddManual(View caller) {
+        Intent goToAddManual = new Intent(this, AddManual.class);
+        startActivity(goToAddManual);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
     @Override
     public void onCardClick(int position) {
         Intent goToAddLibrary = new Intent(this, AddLibrary.class);
+        goToAddLibrary.putExtra("libPlant", libPlants.get(position));
         startActivity(goToAddLibrary);
     }
 }

@@ -4,6 +4,615 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/green"
     tools:context=".activities.AddLibrary">
+
+    <ImageView
+        android:id="@+id/backIcon_settings"
+        android:layout_width="21.9dp"
+        android:layout_height="21.04dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/descriptionIcon"
+        android:onClick="goBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_back"
+        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+    <View
+        android:id="@+id/card_bg_addLib"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/bg_beige_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/plantImage_addLib"
+        android:layout_width="136dp"
+        android:layout_height="186dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/descriptionImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/plant_image" />
+
+    <TextView
+        android:id="@+id/plantSpecies_addLib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/mulish_bold"
+        android:lineSpacingExtra="-11dp"
+        android:text="@string/plantSpecies"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plantImage_addLib" />
+
+    <View
+        android:id="@+id/line_addLib"
+        android:layout_width="71dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plantSpecies_addLib" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delete_addLib"
+        android:layout_width="287dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_red"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/deleteLib"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_addLib"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/standardSettings_addLib"
+        android:layout_width="287dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_second"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/standardSettings"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_addLib"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+    <Button
+        android:id="@+id/addPlantBtn_addLib"
+        android:layout_width="319dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_btn_main"
+        android:fontFamily="@font/mulish_extrabold"
+        android:text="@string/addPlant"
+        android:textColor="@color/beige"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/addPlantBtn_addLib"
+        app:layout_constraintEnd_toEndOf="@+id/card_bg_addLib"
+        app:layout_constraintStart_toStartOf="@+id/card_bg_addLib"
+        app:layout_constraintTop_toBottomOf="@+id/standardSettings_addLib">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/set1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/moistRange_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/moistureRange"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/moistMin_addLib"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/min"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/moistRange_addLib"
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <TextView
+                        android:id="@+id/percentage1_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/percentage"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/moistMin_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/moistMin_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/moistMin_addLib" />
+
+                    <TextView
+                        android:id="@+id/stripe1_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/stripe"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/percentage1_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/percentage1_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/percentage1_addLib" />
+
+                    <EditText
+                        android:id="@+id/moistMax_addLib"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/max"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/stripe1_addLib"
+                        app:layout_constraintTop_toBottomOf="@+id/moistRange_addLib"
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <TextView
+                        android:id="@+id/percentage2_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/percentage"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/moistMax_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/moistMax_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/moistMax_addLib" />
+
+                    <TextView
+                        android:id="@+id/lightRange_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/lightRange"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/moistMin_addLib" />
+
+                    <EditText
+                        android:id="@+id/lightMin_addLib"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/min"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lightRange_addLib"
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <TextView
+                        android:id="@+id/percentage3_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/percentage"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/lightMin_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/lightMin_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/lightMin_addLib" />
+
+                    <TextView
+                        android:id="@+id/stripe2_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/stripe"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/percentage3_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/percentage3_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/percentage3_addLib" />
+
+                    <EditText
+                        android:id="@+id/lightMax_addLib"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/max"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/stripe2_addLib"
+                        app:layout_constraintTop_toBottomOf="@+id/lightRange_addLib"
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <TextView
+                        android:id="@+id/percentage4_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/percentage"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/lightMax_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/lightMax_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/lightMax_addLib" />
+
+                    <TextView
+                        android:id="@+id/tempRange_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/tempRange"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lightMin_addLib" />
+
+                    <EditText
+                        android:id="@+id/tempMin_addLib"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/min"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tempRange_addLib"
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <TextView
+                        android:id="@+id/degrees1_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/degrees"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tempMin_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/tempMin_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/tempMin_addLib" />
+
+                    <TextView
+                        android:id="@+id/stripe3_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/stripe"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/degrees1_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/degrees1_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/degrees1_addLib" />
+
+                    <EditText
+                        android:id="@+id/tempMax_addLib"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/max"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/stripe3_addLib"
+                        app:layout_constraintTop_toBottomOf="@+id/tempRange_addLib"
+                        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                    <TextView
+                        android:id="@+id/degrees2_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/degrees"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tempMax_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/tempMax_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/tempMax_addLib" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/set2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/set1">
+
+                    <TextView
+                        android:id="@+id/waterLvl_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/waterlvl"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/waterMin_addLib"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/waterMin_addLib" />
+
+                    <EditText
+                        android:id="@+id/waterMin_addLib"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="13dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/min"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/waterLvl_addLib"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/percentage5_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/percentage"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/waterMin_addLib"
+                        app:layout_constraintStart_toEndOf="@+id/waterMin_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/waterMin_addLib" />
+
+                    <TextView
+                        android:id="@+id/age_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/age"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/ageYear_addLib"
+                        app:layout_constraintEnd_toEndOf="@+id/waterLvl_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/ageYear_addLib" />
+
+                    <EditText
+                        android:id="@+id/ageYear_addLib"
+                        android:layout_width="90dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/years"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@id/age_addLib"
+                        app:layout_constraintTop_toBottomOf="@id/waterMin_addLib"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/and_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/and"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/ageYear_addLib"
+                        app:layout_constraintStart_toEndOf="@id/ageYear_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/ageYear_addLib" />
+
+                    <EditText
+                        android:id="@+id/ageMonth_addLib"
+                        android:layout_width="90dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/months"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@id/and_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/ageYear_addLib"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/place_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/place"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/placeName_addLib"
+                        app:layout_constraintEnd_toEndOf="@+id/age_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/placeName_addLib" />
+
+                    <EditText
+                        android:id="@+id/placeName_addLib"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/roomName"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/place_addLib"
+                        app:layout_constraintTop_toBottomOf="@id/ageYear_addLib"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/name_addLib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/mulish_regular"
+                        android:text="@string/name"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/nameName_addLib"
+                        app:layout_constraintEnd_toEndOf="@+id/place_addLib"
+                        app:layout_constraintTop_toTopOf="@+id/nameName_addLib" />
+
+                    <EditText
+                        android:id="@+id/nameName_addLib"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bg_fill_second"
+                        android:ems="10"
+                        android:fontFamily="@font/mulish_regular"
+                        android:hint="@string/plantNameText"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/name_addLib"
+                        app:layout_constraintTop_toBottomOf="@id/place_addLib"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
