@@ -12,6 +12,14 @@ public class AccountInfo implements Parcelable {
         this.email = email;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     protected AccountInfo(Parcel in) {
         username = in.readString();
         email = in.readString();
