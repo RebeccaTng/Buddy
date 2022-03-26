@@ -94,14 +94,14 @@ public class Login extends AppCompatActivity {
             System.out.println(response);
             login = response;
 
-            if (login == "0"){
+            if (login.equals("false")){
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectPassw);
                 errorMessage.setVisibility(View.VISIBLE);
                 email.setBackgroundResource(R.drawable.bg_fill_red);
                 password.setBackgroundResource(R.drawable.bg_fill_red);
             }
-            else if(login == "-1"){
+            else if(login.equals("incorrect")){
                 System.out.println("incorrect fields!");
                 errorMessage.setText(R.string.incorrectEmail);
                 errorMessage.setVisibility(View.VISIBLE);
