@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/deco2" />
+        app:srcCompat="@drawable/deco2"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/deco3"
@@ -83,7 +84,7 @@
         android:hint="@string/passw"
         android:inputType="textPassword"
         android:paddingStart="21dp"
-        android:paddingEnd="21dp"
+        android:paddingEnd="50dp"
         android:textColor="@color/black"
         android:textColorHint="@color/dark_gray"
         android:textSize="18sp"
@@ -143,7 +144,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_main" />
+        app:srcCompat="@drawable/logo_main"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/registerTitle"
@@ -175,6 +177,18 @@
         app:layout_constraintTop_toBottomOf="@+id/registerBtn_register"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
+    <ImageView
+        android:id="@+id/infoIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="15dp"
+        android:contentDescription="@string/descriptionIcon"
+        android:onClick="goLogin"
+        app:layout_constraintBottom_toBottomOf="@+id/passwFill_register"
+        app:layout_constraintEnd_toEndOf="@+id/passwFill_register"
+        app:layout_constraintTop_toTopOf="@+id/passwFill_register"
+        app:srcCompat="@drawable/icon_info"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

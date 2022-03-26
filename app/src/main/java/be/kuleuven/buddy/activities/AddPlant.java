@@ -27,6 +27,7 @@ public class AddPlant extends AppCompatActivity implements LibraryAdapter.Librar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_add_plant);
 
         libraryRecycler = findViewById(R.id.addPlant_recycler);
