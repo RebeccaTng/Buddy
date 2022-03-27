@@ -119,14 +119,28 @@ public class Register extends AppCompatActivity {
         });
 
         // Textwatcher email. It checks if email is already in database
-        email.setOnFocusChangeListener((view, b) -> {
-            if (!(email.getText().toString().isEmpty()))
-                checkValidEmail();
-            else {
-                errorMessage.setVisibility(View.INVISIBLE);
-                email.setBackgroundResource(R.drawable.bg_fill);
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!(email.getText().toString().isEmpty()))
+                    checkValidEmail();
+                else {
+                    errorMessage.setVisibility(View.INVISIBLE);
+                    email.setBackgroundResource(R.drawable.bg_fill);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
+
     }
 
     public void goInfo(View caller) {
