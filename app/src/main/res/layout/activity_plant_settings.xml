@@ -52,7 +52,7 @@
         android:fontFamily="@font/mulish_extrabold"
         android:hint="@string/plantNameText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine|textPersonName"
         android:lineSpacingExtra="-11dp"
         android:text="@string/plantName"
         android:textAlignment="viewStart"
@@ -60,14 +60,13 @@
         android:textColorHint="@color/light_grey"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dyn_plantImage_stat"
+        app:layout_constraintStart_toEndOf="@+id/dyn_plantImage_settings"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
 
-
     <ImageView
-        android:id="@+id/dyn_plantImage_stat"
+        android:id="@+id/dyn_plantImage_settings"
         android:layout_width="170dp"
         android:layout_height="250dp"
         android:layout_marginStart="15dp"
@@ -151,6 +150,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:scrollbarThumbVertical="@drawable/bg_btn_second"
         app:layout_constraintBottom_toTopOf="@+id/statBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,11 +161,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbarThumbVertical="@drawable/bg_btn_second">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/set1"

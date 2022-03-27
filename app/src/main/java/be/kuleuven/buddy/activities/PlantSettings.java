@@ -2,11 +2,12 @@ package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -14,10 +15,12 @@ import android.widget.TextView;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
+import be.kuleuven.buddy.cards.HomeInfo;
 
 public class PlantSettings extends AppCompatActivity {
 
     AccountInfo account;
+    HomeInfo plant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +28,32 @@ public class PlantSettings extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_plant_settings);
 
+        Switch dispSwitch = findViewById(R.id.dispSwitch);
         ImageView selectIcon = findViewById(R.id.selectIcon);
         EditText customTextFill = findViewById(R.id.customTextFill);
+        ImageView editIcon = findViewById(R.id.editIcon);
+        EditText name = findViewById(R.id.dyn_plantName_settings);
+        ImageView image = findViewById(R.id.dyn_plantImage_settings);
+        TextView species = findViewById(R.id.dyn_plantSpecies_settings);
 
         if(getIntent().hasExtra("account")) {
             account = getIntent().getExtras().getParcelable("account");
         }
 
-        Switch dispSwitch = findViewById(R.id.dispSwitch);
+        if(getIntent().hasExtra("plant")) {
+            plant = getIntent().getExtras().getParcelable("plant");
+            image.setImageResource(plant.getPlantImage());
+            name.setText(plant.getPlantName());
+            species.setText(plant.getPlantSpecies());
+        }
+
+        editIcon.setOnClickListener(view -> {
+            name.requestFocus();
+            name.setSelection(name.getText().length());
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT);
+        });
+
         dispSwitch.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if(isChecked) {
                 selectIcon.setRotation(90);
@@ -66,6 +87,7 @@ public class PlantSettings extends AppCompatActivity {
     public void goPlantStatistics(View caller) {
         Intent goToPlantStatistics = new Intent(this, PlantStatistics.class);
         goToPlantStatistics.putExtra("account", account);
+        goToPlantStatistics.putExtra("plant", plant);
         startActivity(goToPlantStatistics);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }

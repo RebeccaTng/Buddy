@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -36,9 +37,10 @@ import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.fragments.PasswInfoFragment;
 
 public class Register extends AppCompatActivity {
-    TextView username, email, password, confirmPassword;
+    TextView username, email, password, confirmPassword, errorMessage;
     boolean correctPassword, correctConfirmPassword, validEmail;
     ImageView infoBtn;
+    ProgressBar loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +48,21 @@ public class Register extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_register);
 
+        username = findViewById(R.id.usernameFill_register);
+        email = findViewById(R.id.emailFill_register);
+        password = findViewById(R.id.passwFill_register);
+        confirmPassword = findViewById(R.id.confPasswFill_register);
         infoBtn = findViewById(R.id.infoIcon);
+        errorMessage = findViewById(R.id.errorMessage_register);
+        loading = findViewById(R.id.loading_register);
 
+        // Display password requirements
         infoBtn.setOnClickListener(view -> {
             PasswInfoFragment passwInfo = new PasswInfoFragment();
             passwInfo.show(getSupportFragmentManager(), "passwFragment");
         });
 
-        //define the variables
-        username = findViewById(R.id.usernameFill_register);
-        email = findViewById(R.id.emailFill_register);
-        password = findViewById(R.id.passwFill_register);
-        confirmPassword = findViewById(R.id.confPasswFill_register);
-
-        //textwatcher password
+        // Textwatcher password
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -70,14 +73,17 @@ public class Register extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 String currentPassword = password.getText().toString();
-                //if longer than 8, contains a number and upper case
-                if (currentPassword.length() >= 8 && currentPassword.matches("(.*[0-9].*)") && currentPassword.matches("(.*[A-Z].*)") ){
-                    //display that the password is correct format
+                // If longer than 8, contains a number and upper case
+                if (currentPassword.length() == 0) {
+                    password.setBackgroundResource(R.drawable.bg_fill);
+
+                } else if (currentPassword.length() >= 8 && currentPassword.matches("(.*[0-9].*)") && currentPassword.matches("(.*[A-Z].*)") ){
+                    // Display that the password is correct format
                     correctPassword = true;
                     System.out.println("Password is the correct format!\n");
                     password.setBackgroundResource(R.drawable.bg_fill_green);
-                }
-                else{
+
+                } else {
                     correctPassword = false;
                     System.out.println("Password is not the correct format\n");
                     password.setBackgroundResource(R.drawable.bg_fill_red);
@@ -85,19 +91,22 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        //textwatcher confirmPassword
+        // Textwatcher confirmPassword
         confirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (confirmPassword.getText().toString().equals(password.getText().toString())){
+                if (confirmPassword.length() == 0) {
+                    confirmPassword.setBackgroundResource(R.drawable.bg_fill);
+
+                } else if (confirmPassword.getText().toString().equals(password.getText().toString())){
                     System.out.println("your password is the same, good job \n");
                     confirmPassword.setBackgroundResource(R.drawable.bg_fill_green);
                     correctConfirmPassword = true;
-                }
-                else {
+
+                } else {
                     System.out.println("Password is not the same, try a new one\n");
                     confirmPassword.setBackgroundResource(R.drawable.bg_fill_red);
                     correctConfirmPassword = false;
@@ -109,10 +118,14 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        //textwatcher email. It checks if email is already in database
+        // Textwatcher email. It checks if email is already in database
         email.setOnFocusChangeListener((view, b) -> {
-            if (!email.toString().isEmpty())
-            checkValidEmail();
+            if (!(email.getText().toString().isEmpty()))
+                checkValidEmail();
+            else {
+                errorMessage.setVisibility(View.INVISIBLE);
+                email.setBackgroundResource(R.drawable.bg_fill);
+            }
         });
     }
 
@@ -129,14 +142,21 @@ public class Register extends AppCompatActivity {
     }
 
     public void goHome(View caller) {
-        // TODO check if passwords match and if valid mail (not already used mail + existing)
-        System.out.println(correctConfirmPassword);
-        System.out.println(correctPassword);
-        System.out.println(validEmail);
-        if (correctConfirmPassword && correctPassword && validEmail && !username.getText().toString().isEmpty()){
-            System.out.println("Everything is filled in correctly, ready to register");
+        // Error message when some fields are not filled in
+        if (username.getText().toString().isEmpty() || email.getText().toString().isEmpty() ||
+                password.getText().toString().isEmpty() || confirmPassword.getText().toString().isEmpty()){
+            errorMessage.setText(R.string.fillFields);
+            errorMessage.setVisibility(View.VISIBLE);
+            email.setBackgroundResource(R.drawable.bg_fill);
 
+        } else if (correctConfirmPassword && correctPassword && validEmail && !username.getText().toString().isEmpty()) {
+            System.out.println("Everything is filled in correctly, ready to register");
             register();
+
+            email.setBackgroundResource(R.drawable.bg_fill);
+            errorMessage.setVisibility(View.INVISIBLE);
+            loading.setVisibility(View.VISIBLE);
+
             Intent goToHome = new Intent(this, Home.class);
 
             AccountInfo accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString());
@@ -144,11 +164,12 @@ public class Register extends AppCompatActivity {
 
             startActivity(goToHome);
             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+
         }
     }
 
     public void register(){
-        //make the json object
+        // Make the json object
         JSONObject user = new JSONObject();
         try {
             user.put("username", username.getText().toString());
@@ -159,7 +180,7 @@ public class Register extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //connect to database
+        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String URL = "https://a21iot03.studev.groept.be/public/user";
 
@@ -184,7 +205,6 @@ public class Register extends AppCompatActivity {
                     return null;
                 }
             }
-
         };
         Log.d("string", stringRequest.toString());
         requestQueue.add(stringRequest);
@@ -200,12 +220,17 @@ public class Register extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.GET, URL, response -> {
             System.out.println(response);
             if (Integer.parseInt(response) == 1){
-                //email may be used since it is unique
+                // Email may be used since it is unique
                 validEmail = true;
+                email.setBackgroundResource(R.drawable.bg_fill);
+                errorMessage.setVisibility(View.INVISIBLE);
             }
             else{
-                //email can't be used since it is already in database
+                // Email can't be used since it is already in database
                 validEmail = false;
+                email.setBackgroundResource(R.drawable.bg_fill_red);
+                errorMessage.setText(R.string.emailused);
+                errorMessage.setVisibility(View.VISIBLE);
             }
         }, error -> {}
         );

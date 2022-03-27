@@ -15,6 +15,7 @@ import be.kuleuven.buddy.cards.HomeInfo;
 public class PlantStatistics extends AppCompatActivity {
 
     AccountInfo account;
+    HomeInfo plant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +34,14 @@ public class PlantStatistics extends AppCompatActivity {
             account = getIntent().getExtras().getParcelable("account");
         }
 
-        if(getIntent().hasExtra("plantName")) {
-            HomeInfo plantName = getIntent().getExtras().getParcelable("plantName");
-            image.setImageResource(plantName.getPlantImage());
-            name.setText(plantName.getPlantName());
-            species.setText(plantName.getPlantSpecies());
-            water.setText(plantName.getPlantWater());
-            place.setText(plantName.getPlantPlace());
-            status.setText(plantName.getPlantStatus());
+        if(getIntent().hasExtra("plant")) {
+            plant = getIntent().getExtras().getParcelable("plant");
+            image.setImageResource(plant.getPlantImage());
+            name.setText(plant.getPlantName());
+            species.setText(plant.getPlantSpecies());
+            water.setText(plant.getPlantWater());
+            place.setText(plant.getPlantPlace());
+            status.setText(plant.getPlantStatus());
         }
     }
 
@@ -54,6 +55,7 @@ public class PlantStatistics extends AppCompatActivity {
     public void goPlantSettings(View caller) {
         Intent goToPlantSettings = new Intent(this, PlantSettings.class);
         goToPlantSettings.putExtra("account", account);
+        goToPlantSettings.putExtra("plant", plant);
         startActivity(goToPlantSettings);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }

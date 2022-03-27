@@ -57,7 +57,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         homePlants.add(new HomeInfo(3, R.drawable.plant_image, "Is", "Peperomia", "1 hour, 3 min", "Kitchen", "It's too warm here!"));
         homePlants.add(new HomeInfo(4, R.drawable.plant_image2, "Very", "Aloe Vera", "2 weeks, 5 days", "Living Room", "I'm freezing!"));
         homePlants.add(new HomeInfo(5, R.drawable.plant_image, "Cool", "Snake Plant", "1 week, 1 day", "Bedroom 2", "Just growing, what about you?"));
-        homePlants.add(new HomeInfo(6, R.drawable.dead, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH", "I don't know anything about plants dude", "Already dead", "Room under the stairs", "Yes everything is okay, this is pure for testing purposes."));
+        homePlants.add(new HomeInfo(6, R.drawable.dead, "Just a dead plant", "I don't know anything about plants dude", "Already dead", "Room under the stairs", "Very dead plant."));
 
         homeAdapter = new HomeAdapter(homePlants, this);
         homeRecycler.setAdapter(homeAdapter);
@@ -85,7 +85,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     @Override
     public void onCardClick(int position) {
         Intent goToPlantStatistics  = new Intent(this, PlantStatistics.class);
-        goToPlantStatistics.putExtra("plantName", homePlants.get(position));
+        goToPlantStatistics.putExtra("plant", homePlants.get(position));
         goToPlantStatistics.putExtra("account", account);
         startActivity(goToPlantStatistics);
     }

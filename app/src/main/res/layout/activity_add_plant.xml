@@ -124,6 +124,10 @@
         android:layout_height="300dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
+        android:scrollbarDefaultDelayBeforeFade="300"
+        android:scrollbarFadeDuration="400"
+        android:scrollbarThumbHorizontal="@drawable/bg_btn_second"
+        android:scrollbars="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/browseTitle" />
 

@@ -18,6 +18,8 @@
     <string name="haveAcc">Already have an account? Log in.</string>
     <string name="backLogin">Back to log in.</string>
     <string name="logout">Log out</string>
+    <string name="fillFields">Please fill in all fields.</string>
+    <string name="emailused">Email already in use.</string>
 
     <string name="register">Register</string>
     <string name="noAcc">Don’t have an account? Register.</string>

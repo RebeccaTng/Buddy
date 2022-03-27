@@ -11,7 +11,7 @@
         android:id="@+id/deco2"
         android:layout_width="540dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
         app:layout_constraintBottom_toBottomOf="@+id/logoMain"
@@ -25,7 +25,7 @@
         android:id="@+id/deco3"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="160dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,11 +134,28 @@
         app:layout_constraintTop_toBottomOf="@+id/logoMain"
         android:autofillHints="username" />
 
+    <TextView
+        android:id="@+id/errorMessage_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/mulish_light"
+        android:text="@null"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/usernameFill_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
     <ImageView
         android:id="@+id/logoMain"
         android:layout_width="323dp"
         android:layout_height="323dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/descriptionLogo"
         android:onClick="goInfo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -189,6 +206,18 @@
         app:layout_constraintTop_toTopOf="@+id/passwFill_register"
         app:srcCompat="@drawable/icon_info"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <ProgressBar
+        android:id="@+id/loading_register"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:indeterminateTint="@color/beige"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

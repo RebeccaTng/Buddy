@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/deco2" />
+        app:srcCompat="@drawable/deco2"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/backIcon_edit"
@@ -195,6 +196,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:scrollbarThumbVertical="@drawable/bg_darkgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
