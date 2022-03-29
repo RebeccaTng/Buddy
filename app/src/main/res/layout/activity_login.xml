@@ -91,7 +91,7 @@
         android:id="@+id/emailFill_login"
         android:layout_width="319dp"
         android:layout_height="52dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="4dp"
         android:autofillHints="emailAddress"
         android:background="@drawable/bg_fill"
         android:ems="10"

@@ -118,12 +118,14 @@
         android:id="@+id/usernameFill_register"
         android:layout_width="319dp"
         android:layout_height="52dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="4dp"
+        android:autofillHints="username"
         android:background="@drawable/bg_fill"
         android:ems="10"
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/username"
         android:inputType="textPersonName"
+        android:maxLength="15"
         android:paddingStart="21dp"
         android:paddingEnd="21dp"
         android:textColor="@color/black"
@@ -131,8 +133,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoMain"
-        android:autofillHints="username" />
+        app:layout_constraintTop_toBottomOf="@+id/logoMain" />
 
     <TextView
         android:id="@+id/errorMessage_register"
