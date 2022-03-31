@@ -138,7 +138,6 @@ public class EditAccount extends AppCompatActivity {
         //check if username is changed
         if (username.getText().toString().equals("")){
             username.setText(account.getUsername());
-
         }
 
         System.out.println(username.getText().toString());
