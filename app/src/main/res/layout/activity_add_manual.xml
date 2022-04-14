@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/deco2" />
+        app:srcCompat="@drawable/deco2"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/deco1"
@@ -72,7 +73,8 @@
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/set1"
@@ -594,7 +596,7 @@
         android:id="@+id/addPicBtn"
         android:layout_width="287dp"
         android:layout_height="41dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/bg_btn_green_second"
         android:fontFamily="@font/mulish_bold"
         android:text="@string/addPic"
@@ -605,32 +607,31 @@
         app:layout_constraintTop_toBottomOf="@+id/set2"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:buttonTint="@color/green"
-        android:fontFamily="@font/mulish_bold"
-        android:text="@string/addSpecies"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPicBtn" />
-
     <Button
         android:id="@+id/addNewPlantBtn"
         android:layout_width="319dp"
         android:layout_height="52dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
         android:text="@string/addNewPlant"
         android:textColor="@color/beige"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <ImageView
+        android:id="@+id/picturePreview"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/descriptionImage"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPicBtn"
+        app:srcCompat="@drawable/plant_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
