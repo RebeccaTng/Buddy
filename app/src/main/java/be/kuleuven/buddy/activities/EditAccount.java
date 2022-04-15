@@ -44,87 +44,70 @@ public class EditAccount extends AppCompatActivity {
         //link the variables
         email = findViewById(R.id.dyn_email_edit);
         username = findViewById(R.id.dyn_emailFill_edit);
-
         current_password = findViewById(R.id.currPasswFill_edit);
         new_password = findViewById(R.id.newPasswFill_edit);
         confirm_password = findViewById(R.id.confPasswFill_edit);
 
+        //initial values
         email.setText(accountInfo.getEmail());
         username.setHint(accountInfo.getUsername());
 
         //new password textwatcher
         new_password.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String currentPassword = new_password.getText().toString();
+                String newPassword = new_password.getText().toString();
                 //if longer than 8, contains a number and upper case
-                if (currentPassword.length() >= 8 && currentPassword.matches("(.*[0-9].*)") && currentPassword.matches("(.*[A-Z].*)") ){
-                    //display that the password is correct format
+                if (newPassword.length() >= 8 && newPassword.matches("(.*[0-9].*)") && newPassword.matches("(.*[A-Z].*)") ){
                     correctNewPassword = true;
-                    System.out.println("Password is the correct format!\n");
                     new_password.setBackgroundResource(R.drawable.bg_fill_green);
                 }
                 else{
                     correctNewPassword = false;
-                    System.out.println("Password is not the correct format\n");
                     new_password.setBackgroundResource(R.drawable.bg_fill_red);
                 }
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
 
         //confirm password textwatcher
         confirm_password.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (confirm_password.getText().toString().equals(new_password.getText().toString())){
-                    System.out.println("your password is the same, good job \n");
-                    confirm_password.setBackgroundResource(R.drawable.bg_fill_green);
                     correctConfirmPassword = true;
+                    confirm_password.setBackgroundResource(R.drawable.bg_fill_green);
                 }
                 else {
-                    System.out.println("Password is not the same, try a new one\n");
-                    confirm_password.setBackgroundResource(R.drawable.bg_fill_red);
                     correctConfirmPassword = false;
+                    confirm_password.setBackgroundResource(R.drawable.bg_fill_red);
                 }
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
 
-
+        //current password textwatcher
         current_password.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                checkPassword();
+
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
     }
 
@@ -140,121 +123,11 @@ public class EditAccount extends AppCompatActivity {
             username.setText(accountInfo.getUsername());
         }
 
-        System.out.println(username.getText().toString());
-        accountInfo.setUsername(username.getText().toString());
-
         //check if everything is filled correctly
         if (correctConfirmPassword && correctNewPassword && correctPassword){
-            System.out.println("helemaal mooi");
-            changePassword();
-            Intent goToAccountSave = new Intent(this, Home.class);
-            goToAccountSave.putExtra("accountInfo", accountInfo);
-
-            startActivity(goToAccountSave);
-            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+            //accountInfo.setUsername(username.getText().toString());
         }
-        else{
-            current_password.setBackgroundResource(R.drawable.bg_fill_red);
-        }
-
-
+        else{ }
     }
 
-    public void checkPassword(){
-        // Make the json object
-        JSONObject user = new JSONObject();
-        try {
-            user.put("email", accountInfo.getEmail());
-            user.put("password", current_password.getText().toString());
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        // Connect to database
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String URL = "https://a21iot03.studev.groept.be/public/login";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
-            Log.i("VOLLEY", response);
-            System.out.println(response);
-
-            if (response.equals("false")) {
-                System.out.println("incorrect fields!");
-                correctPassword = false;
-
-            } else if (response.equals("incorrect")) {
-                System.out.println("incorrect fields!");
-                correctPassword = false;
-
-            } else if (!response.equals("")) {
-                System.out.println("password is correct!");
-                correctPassword = true;
-
-            }
-
-        }, error -> Log.e("VOLLEY", error.toString())) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-
-            @Override
-            public byte[] getBody() {
-                try {
-                    // request body goes here
-                    String userString = user.toString();
-                    return userString.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", user, "utf-8");
-                    return null;
-                }
-            }
-        };
-        Log.d("string", stringRequest.toString());
-        requestQueue.add(stringRequest);
-    }
-
-
-    void changePassword(){
-        // Make the json object
-        JSONObject user = new JSONObject();
-        try {
-            user.put("email", accountInfo.getEmail());
-            user.put("password", new_password.getText().toString());
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        System.out.println(user);
-
-        // Connect to database
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String URL = "https://a21iot03.studev.groept.be/public/editPassword";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
-            Log.i("VOLLEY", response);
-            System.out.println(response);
-
-        }, error -> Log.e("VOLLEY", error.toString())) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-
-            @Override
-            public byte[] getBody() {
-                try {
-                    // request body goes here
-                    String userString = user.toString();
-                    return userString.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", user, "utf-8");
-                    return null;
-                }
-            }
-        };
-        Log.d("string", stringRequest.toString());
-        requestQueue.add(stringRequest);
-    }
 }

@@ -112,6 +112,13 @@ public class Login extends AppCompatActivity {
                                 accountInfo.printAccount();
                                 goHome(caller);
                             }
+                            else {
+                                errorMessage.setText(R.string.incorrectEmail);
+                                errorMessage.setVisibility(View.VISIBLE);
+                                email.setBackgroundResource(R.drawable.bg_fill_red);
+                                password.setBackgroundResource((R.drawable.bg_fill));
+                            }
+
                         } catch (JSONException e){ e.printStackTrace();}},
 
                     error -> {

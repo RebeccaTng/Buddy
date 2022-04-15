@@ -18,7 +18,7 @@
     <string name="haveAcc">Already have an account? Log in.</string>
     <string name="backLogin">Back to log in.</string>
     <string name="logout">Log out</string>
-    <string name="fillFields">Please fill in all fields.</string>
+    <string name="fillFields">Please fill in all fields correctlys.</string>
     <string name="emailused">Email already in use.</string>
 
     <string name="register">Register</string>
@@ -36,6 +36,7 @@
     <string name="changePassw">Change Password</string>
     <string name="incorrectPassw">Password or email is incorrect!</string>
     <string name="incorrectEmail">Incorrect credentials!</string>
+    <string name="emailAlreadyUsed">Email is already in use, try a different email!</string>
 
     <string name="email">Email</string>
     <string name="username">Username</string>
