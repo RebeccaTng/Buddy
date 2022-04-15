@@ -21,7 +21,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     RecyclerView homeRecycler;
     RecyclerView.Adapter homeAdapter;
     TextView username;
-    AccountInfo account;
+    AccountInfo accountInfo;
 
     // TODO link with information from database
     // Array with information to be displayed
@@ -41,9 +41,9 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
         username = findViewById(R.id.dyn_username_home);
 
-        if(getIntent().hasExtra("account")) {
-            account = getIntent().getExtras().getParcelable("account");
-            username.setText(account.getUsername());
+        if(getIntent().hasExtra("accountInfo")) {
+            accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+            username.setText(accountInfo.getUsername());
         }
     }
 
@@ -71,7 +71,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
     public void goAccount(View caller) {
         Intent goToAccount = new Intent(this, Account.class);
-        goToAccount.putExtra("account", account);
+        goToAccount.putExtra("accountInfo", accountInfo);
         startActivity(goToAccount);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
@@ -86,7 +86,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     public void onCardClick(int position) {
         Intent goToPlantStatistics  = new Intent(this, PlantStatistics.class);
         goToPlantStatistics.putExtra("plant", homePlants.get(position));
-        goToPlantStatistics.putExtra("account", account);
+        goToPlantStatistics.putExtra("accountInfo", accountInfo);
         startActivity(goToPlantStatistics);
     }
 }

@@ -3,26 +3,22 @@ package be.kuleuven.buddy.account;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class AccountInfo implements Parcelable {
+    String username, email, token;
 
-    String username, email;
-
-    public AccountInfo(String username, String email) {
+    public AccountInfo(String username, String email, String token) {
         this.username = username;
         this.email = email;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        this.token = token;
     }
 
     protected AccountInfo(Parcel in) {
         username = in.readString();
         email = in.readString();
+        token = in.readString();
     }
 
     public static final Creator<AccountInfo> CREATOR = new Creator<AccountInfo>() {
@@ -41,8 +37,33 @@ public class AccountInfo implements Parcelable {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setMail(String email) {
+        this.email = email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void printAccount(){
+        System.out.println("****************INFO*********************");
+        System.out.println("username:\t" + username);
+        System.out.println("email:\t\t" + email);
+        System.out.println("token:\t\t" + token);
+        System.out.println("******************************************");
+
     }
 
     @Override
@@ -54,5 +75,6 @@ public class AccountInfo implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(username);
         parcel.writeString(email);
+        parcel.writeString(token);
     }
 }

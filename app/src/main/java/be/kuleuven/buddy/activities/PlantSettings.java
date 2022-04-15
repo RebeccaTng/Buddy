@@ -18,8 +18,6 @@ import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.HomeInfo;
 
 public class PlantSettings extends AppCompatActivity {
-
-    AccountInfo account;
     HomeInfo plant;
 
     @Override
@@ -35,10 +33,6 @@ public class PlantSettings extends AppCompatActivity {
         EditText name = findViewById(R.id.dyn_plantName_settings);
         ImageView image = findViewById(R.id.dyn_plantImage_settings);
         TextView species = findViewById(R.id.dyn_plantSpecies_settings);
-
-        if(getIntent().hasExtra("account")) {
-            account = getIntent().getExtras().getParcelable("account");
-        }
 
         if(getIntent().hasExtra("plant")) {
             plant = getIntent().getExtras().getParcelable("plant");
@@ -79,14 +73,12 @@ public class PlantSettings extends AppCompatActivity {
 
     public void goBack(View caller) {
         Intent goToHome = new Intent(this, Home.class);
-        goToHome.putExtra("account", account);
         startActivity(goToHome);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
     public void goPlantStatistics(View caller) {
         Intent goToPlantStatistics = new Intent(this, PlantStatistics.class);
-        goToPlantStatistics.putExtra("account", account);
         goToPlantStatistics.putExtra("plant", plant);
         startActivity(goToPlantStatistics);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

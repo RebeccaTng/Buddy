@@ -27,7 +27,7 @@ import be.kuleuven.buddy.account.AccountInfo;
 
 public class EditAccount extends AppCompatActivity {
     //declare variables
-    AccountInfo account;
+    AccountInfo accountInfo;
     TextView email;
     EditText username, current_password, new_password, confirm_password;
 
@@ -39,7 +39,7 @@ public class EditAccount extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_edit_account);
 
-        account = getIntent().getExtras().getParcelable("account");
+        accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
         //link the variables
         email = findViewById(R.id.dyn_email_edit);
@@ -49,8 +49,8 @@ public class EditAccount extends AppCompatActivity {
         new_password = findViewById(R.id.newPasswFill_edit);
         confirm_password = findViewById(R.id.confPasswFill_edit);
 
-        email.setText(account.getEmail());
-        username.setHint(account.getUsername());
+        email.setText(accountInfo.getEmail());
+        username.setHint(accountInfo.getUsername());
 
         //new password textwatcher
         new_password.addTextChangedListener(new TextWatcher() {
@@ -137,18 +137,18 @@ public class EditAccount extends AppCompatActivity {
         // TODO back to account after updating everything + checking if passwords match
         //check if username is changed
         if (username.getText().toString().equals("")){
-            username.setText(account.getUsername());
+            username.setText(accountInfo.getUsername());
         }
 
         System.out.println(username.getText().toString());
-        account.setUsername(username.getText().toString());
+        accountInfo.setUsername(username.getText().toString());
 
         //check if everything is filled correctly
         if (correctConfirmPassword && correctNewPassword && correctPassword){
             System.out.println("helemaal mooi");
             changePassword();
             Intent goToAccountSave = new Intent(this, Home.class);
-            goToAccountSave.putExtra("account", account);
+            goToAccountSave.putExtra("accountInfo", accountInfo);
 
             startActivity(goToAccountSave);
             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
@@ -164,7 +164,7 @@ public class EditAccount extends AppCompatActivity {
         // Make the json object
         JSONObject user = new JSONObject();
         try {
-            user.put("email", account.getEmail());
+            user.put("email", accountInfo.getEmail());
             user.put("password", current_password.getText().toString());
         } catch (JSONException e) {
             // TODO Auto-generated catch block
@@ -220,7 +220,7 @@ public class EditAccount extends AppCompatActivity {
         // Make the json object
         JSONObject user = new JSONObject();
         try {
-            user.put("email", account.getEmail());
+            user.put("email", accountInfo.getEmail());
             user.put("password", new_password.getText().toString());
         } catch (JSONException e) {
             // TODO Auto-generated catch block

@@ -173,8 +173,8 @@ public class Register extends AppCompatActivity {
 
             Intent goToHome = new Intent(this, Home.class);
 
-            AccountInfo accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString());
-            goToHome.putExtra("account", accountInfo);
+            //AccountInfo accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString());
+            //goToHome.putExtra("account", accountInfo);
 
             startActivity(goToHome);
             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);

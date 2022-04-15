@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -12,22 +12,23 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 
 public class Login extends AppCompatActivity {
+    //instantiate variables
     TextView email, password, errorMessage;
-    String username;
-    String login;
     ProgressBar loading;
+    AccountInfo accountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class Login extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_login);
 
+        //declare variables
         email = findViewById(R.id.emailFill_login);
         password = findViewById(R.id.passwFill_login);
         errorMessage = findViewById(R.id.errorMessage_login);
@@ -61,13 +63,13 @@ public class Login extends AppCompatActivity {
 
     public void goHome(View caller) {
         Intent goToHome = new Intent(this, Home.class);
-
-        AccountInfo accountInfo = new AccountInfo(username, email.getText().toString());
-        goToHome.putExtra("account", accountInfo);
-
+        goToHome.putExtra("accountInfo", accountInfo);
         startActivity(goToHome);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         finish();
+    }
+    public AccountInfo getAccount(){
+        return accountInfo;
     }
 
     public void checkLogin(View caller){
@@ -79,49 +81,47 @@ public class Login extends AppCompatActivity {
             password.setBackgroundResource(R.drawable.bg_fill);
 
         } else {
-            // Make the json object
-            JSONObject user = new JSONObject();
+            // Make the json object for the body of the post request
+            JSONObject login = new JSONObject();
             try {
-                user.put("email", email.getText().toString());
-                user.put("password", password.getText().toString());
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                login.put("type", "UsersInfo");
+                login.put("email", email.getText().toString());
+                login.put("password", password.getText().toString());
+            } catch (JSONException e) { e.printStackTrace();}
 
             // Connect to database
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            String URL = "https://a21iot03.studev.groept.be/public/login";
+            String url = "https://a21iot03.studev.groept.be/public/api/login";
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.POST, url, null,
+                    response -> {
+                    //process the response
+                        System.out.println("response: " + response);
+                        try {
+                            String Rmessage = response.getString("message");
+                            String Rusername = response.getJSONObject("data").getString("username");
+                            String Rmail = response.getJSONObject("data").getString("email");
+                            String Rtoken = response.getJSONObject("data").getString("token");
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
-                Log.i("VOLLEY", response);
-                System.out.println(response);
-                login = response;
+                            //check if login is valid
+                            if (Rmessage.equals("LoginSuccess")){
+                                errorMessage.setVisibility(View.INVISIBLE);
+                                email.setBackgroundResource(R.drawable.bg_fill);
+                                password.setBackgroundResource(R.drawable.bg_fill);
+                                loading.setVisibility(View.VISIBLE);
+                                accountInfo = new AccountInfo(Rusername, Rmail, Rtoken);
+                                accountInfo.printAccount();
+                                goHome(caller);
+                            }
+                        } catch (JSONException e){ e.printStackTrace();}},
 
-                if (login.equals("false")) {
-                    System.out.println("incorrect fields!");
-                    errorMessage.setText(R.string.incorrectPassw);
-                    errorMessage.setVisibility(View.VISIBLE);
-                    email.setBackgroundResource(R.drawable.bg_fill_red);
-                    password.setBackgroundResource(R.drawable.bg_fill_red);
-                } else if (login.equals("incorrect")) {
-                    System.out.println("incorrect fields!");
-                    errorMessage.setText(R.string.incorrectEmail);
-                    errorMessage.setVisibility(View.VISIBLE);
-                    email.setBackgroundResource(R.drawable.bg_fill_red);
-                    password.setBackgroundResource((R.drawable.bg_fill));
-                } else if (!login.equals("")) {
-                    System.out.println("logged in!");
-                    errorMessage.setVisibility(View.INVISIBLE);
-                    email.setBackgroundResource(R.drawable.bg_fill);
-                    password.setBackgroundResource(R.drawable.bg_fill);
-                    loading.setVisibility(View.VISIBLE);
-                    System.out.println(login);
-                    username = login;
-                    goHome(caller);
-                }
-
-            }, error -> Log.e("VOLLEY", error.toString())) {
+                    error -> {
+                    //process an error
+                        errorMessage.setText(R.string.incorrectEmail);
+                        errorMessage.setVisibility(View.VISIBLE);
+                        email.setBackgroundResource(R.drawable.bg_fill_red);
+                        password.setBackgroundResource((R.drawable.bg_fill));
+                    })
+            {
                 @Override
                 public String getBodyContentType() {
                     return "application/json; charset=utf-8";
@@ -131,16 +131,14 @@ public class Login extends AppCompatActivity {
                 public byte[] getBody() {
                     try {
                         // request body goes here
-                        String userString = user.toString();
-                        return userString.getBytes("utf-8");
+                        return login.toString().getBytes("utf-8");
                     } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", user, "utf-8");
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", login, "utf-8");
                         return null;
                     }
                 }
             };
-            Log.d("string", stringRequest.toString());
-            requestQueue.add(stringRequest);
+            requestQueue.add(jsonObjectRequest);
         }
     }
 }

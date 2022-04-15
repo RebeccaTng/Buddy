@@ -14,7 +14,7 @@ import be.kuleuven.buddy.cards.HomeInfo;
 
 public class PlantStatistics extends AppCompatActivity {
 
-    AccountInfo account;
+    AccountInfo accountInfo;
     HomeInfo plant;
 
     @Override
@@ -30,8 +30,8 @@ public class PlantStatistics extends AppCompatActivity {
         TextView place = findViewById(R.id.dyn_plantPlace_stat);
         TextView status = findViewById(R.id.dyn_plantStatus_stat);
 
-        if(getIntent().hasExtra("account")) {
-            account = getIntent().getExtras().getParcelable("account");
+        if(getIntent().hasExtra("accountInfo")) {
+            accountInfo = getIntent().getExtras().getParcelable("accountInfo");
         }
 
         if(getIntent().hasExtra("plant")) {
@@ -47,14 +47,14 @@ public class PlantStatistics extends AppCompatActivity {
 
     public void goBack(View caller) {
         Intent goToHome = new Intent(this, Home.class);
-        goToHome.putExtra("account", account);
+        goToHome.putExtra("accountInfo", accountInfo);
         startActivity(goToHome);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
     public void goPlantSettings(View caller) {
         Intent goToPlantSettings = new Intent(this, PlantSettings.class);
-        goToPlantSettings.putExtra("account", account);
+        goToPlantSettings.putExtra("accountInfo", accountInfo);
         goToPlantSettings.putExtra("plant", plant);
         startActivity(goToPlantSettings);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);

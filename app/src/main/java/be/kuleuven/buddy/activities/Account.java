@@ -11,7 +11,7 @@ import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 
 public class Account extends AppCompatActivity {
-    AccountInfo account;
+    AccountInfo accountInfo;
     TextView username, email;
 
     @Override
@@ -23,10 +23,10 @@ public class Account extends AppCompatActivity {
         username = findViewById(R.id.dyn_username_acc);
         email = findViewById(R.id.dyn_email_acc);
 
-        if(getIntent().hasExtra("account")) {
-            account = getIntent().getExtras().getParcelable("account");
-            username.setText(account.getUsername());
-            email.setText(account.getEmail());
+        if(getIntent().hasExtra("accountInfo")) {
+            accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+            username.setText(accountInfo.getUsername());
+            email.setText(accountInfo.getEmail());
         }
 
     }
@@ -38,7 +38,7 @@ public class Account extends AppCompatActivity {
 
     public void goEditAccount(View caller) {
         Intent goToEditAccount = new Intent(this, EditAccount.class);
-        goToEditAccount.putExtra("account", account);
+        goToEditAccount.putExtra("accountInfo", accountInfo);
         startActivity(goToEditAccount);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
