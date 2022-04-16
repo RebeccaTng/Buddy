@@ -20,6 +20,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
@@ -86,7 +89,15 @@ public class Login extends AppCompatActivity {
             try {
                 login.put("type", "UsersInfo");
                 login.put("email", email.getText().toString());
-                login.put("password", password.getText().toString());
+
+                //hash password
+                try {
+                    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                    byte[] encodedhash = digest.digest(password.getText().toString().getBytes(StandardCharsets.UTF_8));
+                    login.put("password", bytesToHex(encodedhash));
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
             } catch (JSONException e) { e.printStackTrace();}
 
             // Connect to database
@@ -147,5 +158,17 @@ public class Login extends AppCompatActivity {
             };
             requestQueue.add(jsonObjectRequest);
         }
+    }
+
+    private static String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 }

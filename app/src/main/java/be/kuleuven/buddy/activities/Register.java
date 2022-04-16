@@ -31,6 +31,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
@@ -84,6 +87,7 @@ public class Register extends AppCompatActivity {
                 confirmPassword.getText().toString().isEmpty() || username.getText().toString().isEmpty()){
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
+            drawBorder();
 
         } else if (correctPassword && correctConfirmPassword){
             register();
@@ -100,7 +104,14 @@ public class Register extends AppCompatActivity {
         try {
             login.put("email", email.getText().toString());
             login.put("username", username.getText().toString());
-            login.put("password", password.getText().toString());
+            //hash password
+            try {
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] encodedhash = digest.digest(password.getText().toString().getBytes(StandardCharsets.UTF_8));
+                login.put("password", bytesToHex(encodedhash));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         } catch (JSONException e) { e.printStackTrace();}
 
         // Connect to database
@@ -121,20 +132,15 @@ public class Register extends AppCompatActivity {
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                         }
                         else {
-                            errorMessage.setText(R.string.emailAlreadyUsed);
-                            errorMessage.setVisibility(View.VISIBLE);
+
                         }
 
                     } catch (Exception e){ e.printStackTrace();}},
 
                 error -> {
                     //process an error
-                    errorMessage.setText(R.string.incorrectEmail);
-                    errorMessage.setVisibility(View.VISIBLE);
-                    username.setBackgroundResource(R.drawable.bg_fill_red);
-                    email.setBackgroundResource(R.drawable.bg_fill_red);
-                    password.setBackgroundResource(R.drawable.bg_fill_red);
-                    confirmPassword.setBackgroundResource(R.drawable.bg_fill_red);
+                    errorMessage.setText(R.string.emailAlreadyUsed);
+                    drawBorder();
                 })
         {
             @Override
@@ -168,9 +174,7 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                errorMessage.setVisibility(View.INVISIBLE);
-                username.setBackgroundResource(R.drawable.bg_fill);
-
+                clearBorders();
             }
 
             @Override
@@ -188,9 +192,7 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                errorMessage.setVisibility(View.INVISIBLE);
-                email.setBackgroundResource(R.drawable.bg_fill);
-
+                clearBorders();
             }
 
             @Override
@@ -209,8 +211,7 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                errorMessage.setVisibility(View.INVISIBLE);
-                password.setBackgroundResource(R.drawable.bg_fill);
+                clearBorders();
                 String currentPassword = password.getText().toString();
                 if (currentPassword.length() >= 8 && currentPassword.matches("(.*[0-9].*)") && currentPassword.matches("(.*[A-Z].*)") ){
                     correctPassword = true;
@@ -229,8 +230,7 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                errorMessage.setVisibility(View.INVISIBLE);
-                confirmPassword.setBackgroundResource(R.drawable.bg_fill);
+                clearBorders();
                 if (confirmPassword.getText().toString().equals(password.getText().toString())){
                     correctConfirmPassword = true;
                     confirmPassword.setBackgroundResource(R.drawable.bg_fill_green);
@@ -247,4 +247,32 @@ public class Register extends AppCompatActivity {
 
     }
 
+    private static String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
+    public void clearBorders(){
+        errorMessage.setVisibility(View.INVISIBLE);
+        username.setBackgroundResource(R.drawable.bg_fill);
+        email.setBackgroundResource(R.drawable.bg_fill);
+        password.setBackgroundResource(R.drawable.bg_fill);
+        confirmPassword.setBackgroundResource(R.drawable.bg_fill);
+
+    }
+
+    public void drawBorder(){
+        errorMessage.setVisibility(View.VISIBLE);
+        username.setBackgroundResource(R.drawable.bg_fill_red);
+        email.setBackgroundResource(R.drawable.bg_fill_red);
+        password.setBackgroundResource(R.drawable.bg_fill_red);
+        confirmPassword.setBackgroundResource(R.drawable.bg_fill_red);
+    }
 }
