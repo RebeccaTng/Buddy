@@ -213,6 +213,7 @@ public class Register extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 clearBorders();
                 String currentPassword = password.getText().toString();
+                correctConfirmPassword = false;
                 if (currentPassword.length() >= 8 && currentPassword.matches("(.*[0-9].*)") && currentPassword.matches("(.*[A-Z].*)") ){
                     correctPassword = true;
                     password.setBackgroundResource(R.drawable.bg_fill_green);
