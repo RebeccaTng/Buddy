@@ -45,10 +45,15 @@ public class PlantStatistics extends AppCompatActivity {
         }
     }
 
-    public void goBack(View caller) {
+    @Override
+    public void onBackPressed() {
         Intent goToHome = new Intent(this, Home.class);
         goToHome.putExtra("accountInfo", accountInfo);
         startActivity(goToHome);
+    }
+
+    public void goBack(View caller) {
+        onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 

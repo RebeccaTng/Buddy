@@ -79,9 +79,9 @@ public class EditAccount extends AppCompatActivity {
     }
 
     public void goAccount(View caller) {
-        Intent goToHome = new Intent(this, Home.class);
-        goToHome.putExtra("accountInfo", accountInfo);
-        startActivity(goToHome);
+        Intent goToAccount = new Intent(this, Account.class);
+        goToAccount.putExtra("accountInfo", accountInfo);
+        startActivity(goToAccount);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         finish();
     }
