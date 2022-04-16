@@ -11,7 +11,7 @@
         android:id="@+id/deco2"
         android:layout_width="540dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
         app:layout_constraintBottom_toTopOf="@+id/usernameText_edit"
@@ -75,11 +75,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/errorMessage_editAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/mulish_light"
         android:text="@null"
         android:textAlignment="center"
@@ -96,7 +97,7 @@
         android:id="@+id/emailText_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/mulish_light"
         android:text="@string/email"
         android:textAlignment="center"
@@ -218,6 +219,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currPasswFill_edit"
         tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/infoIcon_edit"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="15dp"
+        android:contentDescription="@string/descriptionIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/newPasswFill_edit"
+        app:layout_constraintEnd_toEndOf="@+id/newPasswFill_edit"
+        app:layout_constraintTop_toTopOf="@+id/newPasswFill_edit"
+        app:srcCompat="@drawable/icon_info"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/confPasswFill_edit"
