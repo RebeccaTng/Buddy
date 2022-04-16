@@ -36,4 +36,6 @@ public class AddLibrary extends AppCompatActivity {
         onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
+
+    // TODO go to addPlant after delete btn
 }

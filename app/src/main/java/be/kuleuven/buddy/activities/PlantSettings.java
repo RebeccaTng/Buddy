@@ -83,4 +83,7 @@ public class PlantSettings extends AppCompatActivity {
         startActivity(goToPlantStatistics);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
+
+    // TODO goToPlantStatistics after clicking on save
+    // TODO goToHome after clicking delete
 }

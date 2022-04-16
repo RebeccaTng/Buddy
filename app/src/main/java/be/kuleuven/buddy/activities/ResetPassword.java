@@ -11,8 +11,6 @@ import be.kuleuven.buddy.R;
 
 public class ResetPassword extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

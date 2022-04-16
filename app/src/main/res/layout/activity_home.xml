@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/mulish_bold"
         android:lineSpacingExtra="-12dp"
+        android:onClick="goAccount"
         android:text="@string/username"
         android:textAlignment="viewEnd"
         android:textColor="@color/black"
