@@ -20,6 +20,7 @@
     <string name="logout">Log out</string>
     <string name="fillFields">Please fill in all fields correctly.</string>
     <string name="emailused">Email already in use.</string>
+    <string name="wrongPassword">Your current password is not correct.</string>
 
     <string name="register">Register</string>
     <string name="noAcc">Don’t have an account? Register.</string>

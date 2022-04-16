@@ -41,6 +41,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
         username = findViewById(R.id.dyn_username_home);
 
+
         if(getIntent().hasExtra("accountInfo")) {
             accountInfo = getIntent().getExtras().getParcelable("accountInfo");
             username.setText(accountInfo.getUsername());

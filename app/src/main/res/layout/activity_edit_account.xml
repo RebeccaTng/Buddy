@@ -75,6 +75,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/errorMessage_editAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/mulish_light"
+        android:text="@null"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/emailText_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/emailText_edit"
@@ -231,7 +247,7 @@
         android:layout_marginTop="43dp"
         android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
-        android:onClick="goAccount"
+        android:onClick="processChanges"
         android:text="@string/save"
         android:textColor="@color/beige"
         android:textSize="18sp"

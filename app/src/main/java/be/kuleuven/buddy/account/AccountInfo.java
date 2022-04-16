@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 public class AccountInfo implements Parcelable {
     String username, email, token;
-
     public AccountInfo(String username, String email, String token) {
         this.username = username;
         this.email = email;

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,6 +46,8 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.passwFill_login);
         errorMessage = findViewById(R.id.errorMessage_login);
         loading = findViewById(R.id.loading_login);
+
+        textWatchers();
     }
 
     public void goInfo(View caller) {
@@ -168,5 +172,48 @@ public class Login extends AppCompatActivity {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    public void clearBorders(){
+        errorMessage.setVisibility(View.INVISIBLE);
+        email.setBackgroundResource(R.drawable.bg_fill);
+        password.setBackgroundResource(R.drawable.bg_fill);
+    }
+
+
+    public void textWatchers(){
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                clearBorders();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                clearBorders();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 }

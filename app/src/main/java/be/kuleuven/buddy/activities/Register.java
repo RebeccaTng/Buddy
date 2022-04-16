@@ -140,6 +140,7 @@ public class Register extends AppCompatActivity {
 
                 error -> {
                     // Process an error
+                    clearBorders();
                     errorMessage.setText(R.string.emailAlreadyUsed);
                     errorMessage.setVisibility(View.VISIBLE);
                     email.setBackgroundResource(R.drawable.bg_fill_red);
