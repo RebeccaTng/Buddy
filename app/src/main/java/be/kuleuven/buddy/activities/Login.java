@@ -71,6 +71,7 @@ public class Login extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         finish();
     }
+
     public AccountInfo getAccount(){
         return accountInfo;
     }
@@ -95,10 +96,9 @@ public class Login extends AppCompatActivity {
                     MessageDigest digest = MessageDigest.getInstance("SHA-256");
                     byte[] encodedhash = digest.digest(password.getText().toString().getBytes(StandardCharsets.UTF_8));
                     login.put("password", bytesToHex(encodedhash));
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-            } catch (JSONException e) { e.printStackTrace();}
+                } catch (NoSuchAlgorithmException e) { e.printStackTrace(); }
+
+            } catch (JSONException e) { e.printStackTrace(); }
 
             // Connect to database
             RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -122,22 +122,22 @@ public class Login extends AppCompatActivity {
                                 accountInfo = new AccountInfo(Rusername, Rmail, Rtoken);
                                 accountInfo.printAccount();
                                 goHome(caller);
-                            }
-                            else {
+
+                            } else {
                                 errorMessage.setText(R.string.incorrectEmail);
                                 errorMessage.setVisibility(View.VISIBLE);
                                 email.setBackgroundResource(R.drawable.bg_fill_red);
-                                password.setBackgroundResource((R.drawable.bg_fill));
+                                password.setBackgroundResource((R.drawable.bg_fill_red));
                             }
 
-                        } catch (JSONException e){ e.printStackTrace();}},
+                        } catch (JSONException e){ e.printStackTrace(); }},
 
                     error -> {
                     //process an error
                         errorMessage.setText(R.string.incorrectEmail);
                         errorMessage.setVisibility(View.VISIBLE);
                         email.setBackgroundResource(R.drawable.bg_fill_red);
-                        password.setBackgroundResource((R.drawable.bg_fill));
+                        password.setBackgroundResource((R.drawable.bg_fill_red));
                     })
             {
                 @Override
@@ -162,11 +162,9 @@ public class Login extends AppCompatActivity {
 
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
-                hexString.append('0');
-            }
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) hexString.append('0');
             hexString.append(hex);
         }
         return hexString.toString();

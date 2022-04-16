@@ -87,12 +87,11 @@ public class Register extends AppCompatActivity {
                 confirmPassword.getText().toString().isEmpty() || username.getText().toString().isEmpty()){
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
-            drawBorder();
 
         } else if (correctPassword && correctConfirmPassword){
             register();
-        }
-        else{
+
+        } else{
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
         }
@@ -109,9 +108,8 @@ public class Register extends AppCompatActivity {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] encodedhash = digest.digest(password.getText().toString().getBytes(StandardCharsets.UTF_8));
                 login.put("password", bytesToHex(encodedhash));
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
+            } catch (NoSuchAlgorithmException e) { e.printStackTrace(); }
+
         } catch (JSONException e) { e.printStackTrace();}
 
         // Connect to database
@@ -121,7 +119,7 @@ public class Register extends AppCompatActivity {
                 response -> {
                     try {
                         String Rmessage = response.getString("message");
-                        //check if login is valid
+                        // Check if login is valid
                         if (Rmessage.equals("UserRegisterSuccess")){
                             accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString(), null);
                             accountInfo.printAccount();
@@ -130,17 +128,21 @@ public class Register extends AppCompatActivity {
                             goToHome.putExtra("accountInfo", accountInfo);
                             startActivity(goToHome);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-                        }
-                        else {
+                            finish();
 
+                        } else {
+                            errorMessage.setText(R.string.emailAlreadyUsed);
+                            errorMessage.setVisibility(View.VISIBLE);
+                            email.setBackgroundResource(R.drawable.bg_fill_red);
                         }
 
                     } catch (Exception e){ e.printStackTrace();}},
 
                 error -> {
-                    //process an error
+                    // Process an error
                     errorMessage.setText(R.string.emailAlreadyUsed);
-                    drawBorder();
+                    errorMessage.setVisibility(View.VISIBLE);
+                    email.setBackgroundResource(R.drawable.bg_fill_red);
                 })
         {
             @Override
@@ -151,7 +153,7 @@ public class Register extends AppCompatActivity {
             @Override
             public byte[] getBody() {
                 try {
-                    // request body goes here
+                    // Request body goes here
                     return login.toString().getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
                     VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", login, "utf-8");
@@ -165,12 +167,10 @@ public class Register extends AppCompatActivity {
 
 
     public void textWatchers(){
-        //textwatcher username
+        // Textwatcher username
         username.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -178,17 +178,13 @@ public class Register extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
 
-        //textwatcher email
+        // Textwatcher email
         email.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -196,9 +192,7 @@ public class Register extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
 
         // Textwatcher password
@@ -217,6 +211,7 @@ public class Register extends AppCompatActivity {
                 if (currentPassword.length() >= 8 && currentPassword.matches("(.*[0-9].*)") && currentPassword.matches("(.*[A-Z].*)") ){
                     correctPassword = true;
                     password.setBackgroundResource(R.drawable.bg_fill_green);
+
                 } else {
                     correctPassword = false;
                     password.setBackgroundResource(R.drawable.bg_fill_red);
@@ -250,11 +245,9 @@ public class Register extends AppCompatActivity {
 
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
-                hexString.append('0');
-            }
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) hexString.append('0');
             hexString.append(hex);
         }
         return hexString.toString();
@@ -266,14 +259,5 @@ public class Register extends AppCompatActivity {
         email.setBackgroundResource(R.drawable.bg_fill);
         password.setBackgroundResource(R.drawable.bg_fill);
         confirmPassword.setBackgroundResource(R.drawable.bg_fill);
-
-    }
-
-    public void drawBorder(){
-        errorMessage.setVisibility(View.VISIBLE);
-        username.setBackgroundResource(R.drawable.bg_fill_red);
-        email.setBackgroundResource(R.drawable.bg_fill_red);
-        password.setBackgroundResource(R.drawable.bg_fill_red);
-        confirmPassword.setBackgroundResource(R.drawable.bg_fill_red);
     }
 }

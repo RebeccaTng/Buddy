@@ -20,6 +20,12 @@ public class Start extends AppCompatActivity {
         setContentView(R.layout.activity_start);
     }
 
+    @Override
+    public void onBackPressed() {
+        // Prevent going back after logout
+        moveTaskToBack(true);
+    }
+
     public void goLogin(View caller) {
         Intent goToLogin = new Intent(this, Login.class);
         startActivity(goToLogin);
