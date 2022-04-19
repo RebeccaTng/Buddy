@@ -234,7 +234,7 @@ public class EditAccount extends AppCompatActivity {
                             setName();
                             goAccount(caller);
                         }
-                        else if (Rmessage.equals("PasswordMatchFailed")){
+                        else if (Rmessage.equals("PasswordMatchFailed") && current_password.getText().length()  != 0){
                             errorMessage.setText(R.string.wrongPassword);
                             errorMessage.setVisibility(View.VISIBLE);
                             current_password.setBackgroundResource(R.drawable.bg_fill_red);
