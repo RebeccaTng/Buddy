@@ -162,7 +162,7 @@ public class EditAccount extends AppCompatActivity {
                     correctConfirmPassword = true;
                     confirm_password.setBackgroundResource(R.drawable.bg_fill_green);
                 }
-                else if (confirm_password.getText().equals("")){
+                else if (confirm_password.getText().toString().equals("")){
                     new_password.setBackgroundResource(R.drawable.bg_fill);
                 }
                 else {
