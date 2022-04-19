@@ -201,7 +201,6 @@
         android:layout_height="25dp"
         android:layout_marginEnd="15dp"
         android:contentDescription="@string/descriptionIcon"
-        android:onClick="goLogin"
         app:layout_constraintBottom_toBottomOf="@+id/passwFill_register"
         app:layout_constraintEnd_toEndOf="@+id/passwFill_register"
         app:layout_constraintTop_toTopOf="@+id/passwFill_register"

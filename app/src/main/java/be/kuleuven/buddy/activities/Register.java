@@ -165,8 +165,6 @@ public class Register extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-
-
     public void textWatchers(){
         // Textwatcher username
         username.addTextChangedListener(new TextWatcher() {
