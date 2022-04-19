@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -111,8 +112,10 @@ public class Overview extends AppCompatActivity {
         chart.getDescription().setEnabled(false);
         chart.getLegend().setEnabled(false);
         chart.setTouchEnabled(true);
-        chart.setScaleEnabled(false);
+        chart.setPinchZoom(true);
+        chart.setDoubleTapToZoomEnabled(false);
         chart.getAxisRight().setEnabled(false);
+        chart.animateX(1000, Easing.Linear);
 
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setTypeface(tf);
@@ -128,7 +131,7 @@ public class Overview extends AppCompatActivity {
         xAxis.setTypeface(tf);
         xAxis.setAxisMinimum(0f);
         xAxis.setAxisMaximum(24f);
-        xAxis.setLabelCount(13, true);
+        xAxis.setGranularity(1f);
         xAxis.setTextColor(brown);
         xAxis.setDrawGridLines(false);
 
@@ -165,13 +168,31 @@ public class Overview extends AppCompatActivity {
     private List<Entry> getMoistDataSet() {
         // TODO insert values from database
         List<Entry> moistEntries = new ArrayList<>();
+        moistEntries.add(new Entry(0, 12));
+        moistEntries.add(new Entry(1, 21));
+        moistEntries.add(new Entry(2, 28));
+        moistEntries.add(new Entry(3, 35));
         moistEntries.add(new Entry(4, 42));
+        moistEntries.add(new Entry(5, 94));
         moistEntries.add(new Entry(6, 90));
+        moistEntries.add(new Entry(7, 88));
         moistEntries.add(new Entry(8, 78));
+        moistEntries.add(new Entry(9, 71));
         moistEntries.add(new Entry(10, 67));
+        moistEntries.add(new Entry(11, 61));
         moistEntries.add(new Entry(12, 56));
+        moistEntries.add(new Entry(13, 52));
+        moistEntries.add(new Entry(14, 40));
+        moistEntries.add(new Entry(15, 36));
         moistEntries.add(new Entry(16, 22));
+        moistEntries.add(new Entry(17, 4));
         moistEntries.add(new Entry(18, 84));
+        moistEntries.add(new Entry(19, 83));
+        moistEntries.add(new Entry(20, 78));
+        moistEntries.add(new Entry(21, 70));
+        moistEntries.add(new Entry(22, 65));
+        moistEntries.add(new Entry(23, 60));
+        moistEntries.add(new Entry(24, 52));
         return moistEntries;
     }
 
