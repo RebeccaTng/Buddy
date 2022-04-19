@@ -11,7 +11,7 @@
         android:id="@+id/deco2"
         android:layout_width="540dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="-10dp"
+        android:layout_marginBottom="-20dp"
         android:contentDescription="@string/descriptionDeco"
         android:rotation="-5"
         app:layout_constraintBottom_toTopOf="@+id/scroll"
@@ -51,7 +51,7 @@
         android:id="@+id/overviewBg"
         android:layout_width="342dp"
         android:layout_height="31dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/bg_darkgreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +195,7 @@
         android:id="@+id/scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:scrollbarThumbVertical="@drawable/bg_darkgreen"
@@ -216,8 +216,10 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/moistCard_overview"
-                    android:layout_width="347dp"
-                    android:layout_height="213dp"
+                    android:layout_width="0dp"
+                    android:layout_height="270dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/beige"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="8dp"
@@ -234,12 +236,12 @@
                             android:id="@+id/moistTitle_overview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/mulish_semibold"
                             android:text="@string/moisture"
                             android:textColor="@color/black"
                             android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -247,19 +249,32 @@
                             android:id="@+id/moistLine"
                             android:layout_width="315dp"
                             android:layout_height="1dp"
-                            android:backgroundTint="@color/dark_beige"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/dark_beige"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/moistTitle_overview" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/moistChart"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/moistLine" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/lightCard_overview"
-                    android:layout_width="347dp"
-                    android:layout_height="213dp"
+                    android:layout_width="0dp"
+                    android:layout_height="270dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/beige"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="8dp"
@@ -276,12 +291,12 @@
                             android:id="@+id/lightTitle_overview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/mulish_semibold"
                             android:text="@string/light"
                             android:textColor="@color/black"
                             android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -289,19 +304,32 @@
                             android:id="@+id/lightLine"
                             android:layout_width="315dp"
                             android:layout_height="1dp"
-                            android:backgroundTint="@color/dark_beige"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/dark_beige"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/lightTitle_overview" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/lightChart"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/lightLine" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/tempCard_overview"
-                    android:layout_width="347dp"
-                    android:layout_height="213dp"
+                    android:layout_width="0dp"
+                    android:layout_height="270dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="40dp"
                     android:backgroundTint="@color/beige"
                     app:cardCornerRadius="20dp"
@@ -320,12 +348,12 @@
                             android:id="@+id/tempTitle_overview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/mulish_semibold"
                             android:text="@string/temperature"
                             android:textColor="@color/black"
                             android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -333,10 +361,21 @@
                             android:id="@+id/tempLine"
                             android:layout_width="315dp"
                             android:layout_height="1dp"
-                            android:backgroundTint="@color/dark_beige"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/dark_beige"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tempTitle_overview" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/tempChart"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tempLine" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
