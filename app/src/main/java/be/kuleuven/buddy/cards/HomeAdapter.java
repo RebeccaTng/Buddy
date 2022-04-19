@@ -50,7 +50,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     }
 
     // Design
-    public class HomeViewHolder extends RecyclerView.ViewHolder {
+    public static class HomeViewHolder extends RecyclerView.ViewHolder {
 
         ImageView plantImage;
         TextView plantName, plantSpecies, plantWater, plantPlace, plantStatus;

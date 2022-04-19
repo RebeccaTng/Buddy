@@ -44,7 +44,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
     public int getItemCount() { return libPlants.size(); }
 
     // Design
-    public class LibraryViewHolder extends RecyclerView.ViewHolder {
+    public static class LibraryViewHolder extends RecyclerView.ViewHolder {
 
         ImageView libImage;
         TextView libSpecies;

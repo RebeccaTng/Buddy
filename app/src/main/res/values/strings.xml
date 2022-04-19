@@ -114,4 +114,5 @@
     <string name="speciesName">Species Name</string>
     <string name="addPic">Add Picture</string>
     <string name="addSpecies">Add species to library</string>
+    <string name="registerSucces">Register successful</string>
 </resources>

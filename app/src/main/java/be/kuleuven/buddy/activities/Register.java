@@ -2,35 +2,24 @@ package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -124,11 +113,15 @@ public class Register extends AppCompatActivity {
                             accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString(), null);
                             accountInfo.printAccount();
                             loading.setVisibility(View.VISIBLE);
-                            Intent goToHome = new Intent(this, Home.class);
-                            goToHome.putExtra("accountInfo", accountInfo);
-                            startActivity(goToHome);
+
+                            // Toast
+                            Toast toast = Toast.makeText(getApplicationContext(), R.string.registerSucces, Toast.LENGTH_LONG);
+                            toast.show();
+
+                            // Intent
+                            Intent goToLogin = new Intent(this, Login.class);
+                            startActivity(goToLogin);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-                            finish();
 
                         } else {
                             errorMessage.setText(R.string.emailAlreadyUsed);
@@ -153,13 +146,8 @@ public class Register extends AppCompatActivity {
 
             @Override
             public byte[] getBody() {
-                try {
-                    // Request body goes here
-                    return login.toString().getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", login, "utf-8");
-                    return null;
-                }
+                // Request body goes here
+                return login.toString().getBytes(StandardCharsets.UTF_8);
             }
         };
         requestQueue.add(jsonObjectRequest);

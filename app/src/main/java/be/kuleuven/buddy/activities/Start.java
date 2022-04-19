@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import be.kuleuven.buddy.R;
-import be.kuleuven.buddy.activities.Info;
-import be.kuleuven.buddy.activities.Login;
-import be.kuleuven.buddy.activities.Register;
 
 public class Start extends AppCompatActivity {
 
