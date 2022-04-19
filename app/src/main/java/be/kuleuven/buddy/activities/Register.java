@@ -225,7 +225,6 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                clearBorders();
                 if (confirmPassword.getText().toString().equals(password.getText().toString())){
                     correctConfirmPassword = true;
                     confirmPassword.setBackgroundResource(R.drawable.bg_fill_green);
