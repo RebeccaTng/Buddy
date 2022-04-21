@@ -117,6 +117,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/esp-idf/ulp/cmake_install.cmake")
   include("C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/esp-idf/wifi_provisioning/cmake_install.cmake")
   include("C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/esp-idf/main/cmake_install.cmake")
+  include("C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/esp-idf/protocol_examples_common/cmake_install.cmake")
 
 endif()
 

@@ -437,6 +437,9 @@ __idf_perfmon_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;
 __idf_protobuf-c_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_lwip;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;
 
 //Dependencies for the target
+__idf_protocol_examples_common_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_lwip;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;
+
+//Dependencies for the target
 __idf_protocomm_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_lwip;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;
 
 //Dependencies for the target
@@ -618,7 +621,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=89
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=90
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -664,7 +667,7 @@ C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS:INTERNAL=1
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[C:/Program Files/Git/cmd/git.exe][v2.35.1.windows.2()]
 //Details about finding Python3
-FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[C:/Espressif/python_env/idf5.0_py3.10_env/Scripts/python.exe][cfound components: Interpreter ][v3.10.3()]
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[C:/Users/filip/AppData/Local/Programs/Python/Python310/python.exe][cfound components: Interpreter ][v3.10.4()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //Have include stddef.h
@@ -678,8 +681,8 @@ HAVE_TIME_T_SIZE:INTERNAL=TRUE
 //CHECK_TYPE_SIZE: sizeof(time_t)
 TIME_T_SIZE:INTERNAL=4
 //Path to a program.
-_Python3_EXECUTABLE:INTERNAL=C:/Espressif/python_env/idf5.0_py3.10_env/Scripts/python.exe
+_Python3_EXECUTABLE:INTERNAL=C:/Users/filip/AppData/Local/Programs/Python/Python310/python.exe
 //Python3 Properties
-_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;3;32;;;C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.1008.0_x64__qbz5n2kfra8p0\Lib;C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.1008.0_x64__qbz5n2kfra8p0\Lib;C:\Espressif\python_env\idf5.0_py3.10_env\Lib\site-packages;C:\Espressif\python_env\idf5.0_py3.10_env\Lib\site-packages
-_Python3_INTERPRETER_SIGNATURE:INTERNAL=7f9622551f8b43f393960af41b10b16f
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;4;32;;;C:\Users\filip\AppData\Local\Programs\Python\Python310\Lib;C:\Users\filip\AppData\Local\Programs\Python\Python310\Lib;C:\Users\filip\AppData\Local\Programs\Python\Python310\Lib\site-packages;C:\Users\filip\AppData\Local\Programs\Python\Python310\Lib\site-packages
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=8950574441f023eefa3f93f2d17ddb36
 

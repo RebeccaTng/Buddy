@@ -1,7 +1,8 @@
 #include <sys/cdefs.h>
 #include "adc.h"
+pthread_mutex_t lock;
 
- bool adc_calibration_init(void)
+bool adc_calibration_init(void)
 {
     static const char *TAG = "ADC SINGLE";
     esp_err_t ret;
@@ -21,14 +22,8 @@
     return cali_enable;
 }
 
-void adc_init() {
-    cali_enable = adc_calibration_init();
-    ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
-    for (int i = 0; i < MAX_CHANNELS; i++)
-        ESP_ERROR_CHECK(adc1_config_channel_atten(channels[i], ADC_ATTENUATE));
-}
-
 _Noreturn void* adc_result(void* _) {
+    int counter = 0;
     while(1) {
         for(int i = 0; i < MAX_CHANNELS; i++) {
             adc_raw[i] = adc1_get_raw(channels[i]);
@@ -37,6 +32,24 @@ _Noreturn void* adc_result(void* _) {
                 ESP_LOGI(tags[i], "ADC Result: %d mV", voltage[i]);
             }
         }
-        vTaskDelay(pdMS_TO_TICKS(4000));
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        if(counter++ == 3) {
+            pthread_mutex_lock(&lock);
+            send_data(NULL);
+            pthread_mutex_unlock(&lock);
+            counter = 0;
+        }
     }
+}
+
+void adc_init() {
+    if (pthread_mutex_init(&lock, NULL) != 0)
+    {
+        printf("\n mutex init failed\n");
+    }
+    cali_enable = adc_calibration_init();
+    ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
+    for (int i = 0; i < MAX_CHANNELS; i++)
+        ESP_ERROR_CHECK(adc1_config_channel_atten(channels[i], ADC_ATTENUATE));
+    https_init();
 }

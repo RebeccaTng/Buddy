@@ -1,3 +1,4 @@
+#include <sys/queue.h>
 #include <sys/cdefs.h>
 #include "config.h"
 #include "adc.h"
@@ -6,9 +7,9 @@
 #include "audio.h"
 #include "wifi.h"
 
-void app_main(void)
+_Noreturn void app_main(void)
 {
-    char bda_str[18] = {0};
+    /*char bda_str[18] = {0};
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
@@ -67,20 +68,22 @@ void app_main(void)
     ESP_LOGI(SPP_TAG, "Own address:[%s]", bda2str((uint8_t *) esp_bt_dev_get_address(), bda_str, sizeof(bda_str)));
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    vTaskDelay(1000);
+    vTaskDelay(1000);*/
 
-    adc_init();
+    //adc_init();
     gpio_init();
-    wifi_init();
-    audio_init();
+    //wifi_init();
+    //vTaskDelay(5000 / portTICK_PERIOD_MS);
+    //while(1);
+    //audio_init();
 
     pthread_t adc_thread, audio_thread, gpio_thread;
 
-    pthread_create(&adc_thread, NULL, adc_result, "ADC Started");
-    pthread_create(&audio_thread, NULL, audio_init, "AUDIO Started");
+    //pthread_create(&adc_thread, NULL, adc_result, "ADC Started");
+    //pthread_create(&audio_thread, NULL, audio_init, "AUDIO Started");
     pthread_create(&gpio_thread, NULL, gpio_toggle, "GPIO Started");
 
-    pthread_join(adc_thread, NULL);
-    pthread_join(audio_thread, NULL);
+    //pthread_join(adc_thread, NULL);
+    //pthread_join(audio_thread, NULL);
     pthread_join(gpio_thread, NULL);
 }

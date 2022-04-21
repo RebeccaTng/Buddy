@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/protocol_examples_common",
+		"source" : "C:/Users/filip/Documents/Kulen/EE5/esp32/esp-idf/examples/common_components/protocol_examples_common"
+	}
+}
