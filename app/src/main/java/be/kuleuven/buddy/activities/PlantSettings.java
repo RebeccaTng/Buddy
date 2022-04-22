@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -15,11 +16,13 @@ import android.widget.TextView;
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.HomeInfo;
+import be.kuleuven.buddy.other.InputFilterMinMax;
 
 public class PlantSettings extends AppCompatActivity {
 
     AccountInfo accountInfo;
     HomeInfo plant;
+    EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageMonths;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,24 @@ public class PlantSettings extends AppCompatActivity {
         EditText name = findViewById(R.id.dyn_plantName_settings);
         ImageView image = findViewById(R.id.dyn_plantImage_settings);
         TextView species = findViewById(R.id.dyn_plantSpecies_settings);
+        moistMin = findViewById(R.id.moistMin_settings);
+        moistMax = findViewById(R.id.moistMax_settings);
+        lightMin = findViewById(R.id.lightMin_settings);
+        lightMax = findViewById(R.id.lightMax_settings);
+        tempMin = findViewById(R.id.tempMin_settings);
+        tempMax = findViewById(R.id.tempMax_settings);
+        waterlvl = findViewById(R.id.waterMin_settings);
+        ageMonths = findViewById(R.id.ageMonth_settings);
+
+        // Set minimum and maximum value
+        moistMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        moistMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        lightMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        lightMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        tempMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        tempMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        waterlvl.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        ageMonths.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "12")});
 
         if(getIntent().hasExtra("accountInfo")) {
             accountInfo = getIntent().getExtras().getParcelable("accountInfo");

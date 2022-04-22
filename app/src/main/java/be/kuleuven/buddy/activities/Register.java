@@ -26,7 +26,7 @@ import java.security.NoSuchAlgorithmException;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
-import be.kuleuven.buddy.fragments.PasswInfoFragment;
+import be.kuleuven.buddy.other.InfoFragment;
 
 public class Register extends AppCompatActivity {
     TextView username, email, password, confirmPassword, errorMessage;
@@ -51,7 +51,9 @@ public class Register extends AppCompatActivity {
 
         // Display password requirements
         infoBtn.setOnClickListener(view -> {
-            PasswInfoFragment passwInfo = new PasswInfoFragment();
+            String title = getResources().getString(R.string.passwRequire);
+            String body = getResources().getString(R.string.passwReqText);
+            InfoFragment passwInfo = InfoFragment.newInstance(title, body);
             passwInfo.show(getSupportFragmentManager(), "passwFragment");
         });
 

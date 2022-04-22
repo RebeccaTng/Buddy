@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -26,12 +27,14 @@ import java.util.Map;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
+import be.kuleuven.buddy.other.InfoFragment;
 
 public class EditAccount extends AppCompatActivity {
-    //declare variables
+
     AccountInfo accountInfo;
     TextView email, errorMessage;
     EditText username, current_password, new_password, confirm_password;
+    ImageView infoBtn;
 
     boolean correctNewPassword, correctConfirmPassword;
 
@@ -43,20 +46,27 @@ public class EditAccount extends AppCompatActivity {
 
         accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
-        //link the variables
         email = findViewById(R.id.dyn_email_edit);
         username = findViewById(R.id.dyn_emailFill_edit);
         current_password = findViewById(R.id.currPasswFill_edit);
         new_password = findViewById(R.id.newPasswFill_edit);
         confirm_password = findViewById(R.id.confPasswFill_edit);
         errorMessage = findViewById(R.id.errorMessage_editAccount);
+        infoBtn = findViewById(R.id.infoIcon_edit);
 
-        //initial values
+        // Initial values
         email.setText(accountInfo.getEmail());
         username.setHint(accountInfo.getUsername());
 
-        textWatchers();
+        // Display password requirements
+        infoBtn.setOnClickListener(view -> {
+            String title = getResources().getString(R.string.passwRequire);
+            String body = getResources().getString(R.string.passwReqText);
+            InfoFragment passwInfo = InfoFragment.newInstance(title, body);
+            passwInfo.show(getSupportFragmentManager(), "passwFragment");
+        });
 
+        textWatchers();
     }
 
     public void goBack(View caller) {

@@ -47,6 +47,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/infoIconOverview"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/descriptionIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewTitle"
+        app:layout_constraintStart_toEndOf="@+id/overviewTitle"
+        app:layout_constraintTop_toTopOf="@+id/overviewTitle"
+        app:srcCompat="@drawable/icon_info_beige"
+        tools:ignore="TouchTargetSizeCheck" />
+
     <View
         android:id="@+id/overviewBg"
         android:layout_width="342dp"
@@ -57,104 +70,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/overviewTitle" />
 
-    <View
-        android:id="@+id/overviewBtn_day"
-        android:layout_width="83dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="2dp"
-        android:background="@drawable/bg_beige_second"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
-        app:layout_constraintStart_toStartOf="@+id/overviewBg"
-        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
-
-    <View
-        android:id="@+id/overviewBtn_week"
-        android:layout_width="83dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="2dp"
-        android:background="@drawable/bg_beige_second"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
-        app:layout_constraintStart_toEndOf="@+id/overviewBtn_day"
-        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
-
-    <View
-        android:id="@+id/overviewBtn_month"
-        android:layout_width="83dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="2dp"
-        android:background="@drawable/bg_beige_second"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
-        app:layout_constraintStart_toEndOf="@+id/overviewBtn_week"
-        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
-
-    <View
-        android:id="@+id/overviewBtn_year"
-        android:layout_width="83dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="2dp"
-        android:background="@drawable/bg_beige_second"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
-        app:layout_constraintStart_toEndOf="@+id/overviewBtn_month"
-        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
-
     <TextView
         android:id="@+id/overviewDay"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/bg_beige_second"
         android:fontFamily="@font/mulish_semibold"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/day"
         android:textColor="@color/dark_green"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_day"
-        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_day"
-        app:layout_constraintStart_toStartOf="@+id/overviewBtn_day"
-        app:layout_constraintTop_toTopOf="@+id/overviewBtn_day" />
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toStartOf="@+id/overviewBg"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
 
     <TextView
         android:id="@+id/overviewWeek"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
         android:fontFamily="@font/mulish_semibold"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/week"
         android:textColor="@color/beige"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_week"
-        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_week"
-        app:layout_constraintStart_toStartOf="@+id/overviewBtn_week"
-        app:layout_constraintTop_toTopOf="@+id/overviewBtn_week" />
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toEndOf="@+id/overviewDay"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
 
     <TextView
         android:id="@+id/overviewMonth"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
         android:fontFamily="@font/mulish_semibold"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/month"
         android:textColor="@color/beige"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_month"
-        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_month"
-        app:layout_constraintStart_toStartOf="@+id/overviewBtn_month"
-        app:layout_constraintTop_toTopOf="@+id/overviewBtn_month" />
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toEndOf="@+id/overviewWeek"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
 
     <TextView
         android:id="@+id/overviewYear"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="83dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="2dp"
         android:fontFamily="@font/mulish_semibold"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/year"
         android:textColor="@color/beige"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/overviewBtn_year"
-        app:layout_constraintEnd_toEndOf="@+id/overviewBtn_year"
-        app:layout_constraintStart_toStartOf="@+id/overviewBtn_year"
-        app:layout_constraintTop_toTopOf="@+id/overviewBtn_year" />
+        app:layout_constraintBottom_toBottomOf="@+id/overviewBg"
+        app:layout_constraintStart_toEndOf="@+id/overviewMonth"
+        app:layout_constraintTop_toTopOf="@+id/overviewBg" />
 
     <TextView
         android:id="@+id/overviewDate"
@@ -185,6 +156,7 @@
         android:layout_height="25dp"
         android:contentDescription="@string/descriptionIcon"
         android:rotation="180"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/overviewDate"
         app:layout_constraintEnd_toEndOf="@+id/overviewBg"
         app:layout_constraintTop_toTopOf="@+id/overviewDate"

@@ -30,8 +30,8 @@
     <string name="newPassw">New Password</string>
     <string name="currPassw">Current Password</string>
     <string name="forgotPassw">Forgot Password? Reset it.</string>
-    <string name="passwReqText">Password Requirements</string>
-    <string name="passwRequire">At least 8 characters,\n a number and an uppercase.</string>
+    <string name="passwRequire">Password Requirements</string>
+    <string name="passwReqText">At least 8 characters,\n a number and an uppercase.</string>
     <string name="request">Request Reset</string>
     <string name="reset">Reset Password</string>
     <string name="changePassw">Change Password</string>
@@ -115,4 +115,7 @@
     <string name="addPic">Add Picture</string>
     <string name="addSpecies">Add species to library</string>
     <string name="registerSucces">Register successful</string>
+
+    <string name="howTo">How to use the charts</string>
+    <string name="graphUse">Tap on the chart to highlight a datapoint, tap again to remove.\n-\nDouble tap to see the values of all data points, double tap again to remove them.\n-\nPinch to zoom.</string>
 </resources>
