@@ -35,6 +35,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
         homeRecycler = findViewById(R.id.home_recycler);
         homeRecycler();
+        homeRecycler.setVisibility(View.INVISIBLE);
 
         TextView numOfPlants = findViewById(R.id.dyn_numOfPlants);
         numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));
@@ -64,9 +65,9 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         homeRecycler.setAdapter(homeAdapter);
     }
 
-    public void goInfo(View caller) {
-        Intent goToInfo = new Intent(this, Info.class);
-        startActivity(goToInfo);
+    public void goBluetooth(View caller) {
+        Intent goToBluetooth = new Intent(this, Bluetooth.class);
+        startActivity(goToBluetooth);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 

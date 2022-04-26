@@ -46,11 +46,13 @@
     <string name="edit">Edit</string>
 
     <!-- General -->
+    <string name="bluetooth">Please connect to the device first by clicking on the bluetooth icon on the upper left.</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="welcome">Welcome,</string>
     <string name="myPlants">My Plants</string>
     <string name="number">1</string>
+    <string name="noPlants">You don\'t have any plants yet. Click on the plus sign on the upper right to add your first plant!</string>
 
     <string name="plantName">Planty</string>
     <string name="plantNameText">Plant name</string>
@@ -71,7 +73,6 @@
     <string name="temperature">Temperature</string>
     <string name="percentage">%</string>
     <string name="degrees">°C</string>
-
 
     <string name="addPlant">Add Plant</string>
     <string name="browseTitle">Browse Library</string>

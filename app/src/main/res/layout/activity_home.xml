@@ -8,26 +8,26 @@
     tools:context=".activities.Home">
 
     <ImageView
-        android:id="@+id/logoSmall"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:id="@+id/logoBluetooth"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="60dp"
         android:contentDescription="@string/descriptionIcon"
-        android:onClick="goInfo"
+        android:onClick="goBluetooth"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_small"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        app:srcCompat="@drawable/icon_bluetooth"
+        tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/accIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="25dp"
         android:contentDescription="@string/descriptionIcon"
         android:onClick="goAccount"
-        app:layout_constraintBottom_toBottomOf="@+id/logoSmall"
+        app:layout_constraintBottom_toBottomOf="@+id/logoBluetooth"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/icon_account"
         tools:ignore="TouchTargetSizeCheck" />
@@ -58,7 +58,8 @@
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/welcome"
         app:layout_constraintStart_toStartOf="@+id/plantTitle"
-        app:layout_constraintTop_toBottomOf="@+id/welcome" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/plantTitle"
@@ -70,7 +71,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="@+id/logoSmall"
+        app:layout_constraintStart_toStartOf="@+id/logoBluetooth"
         app:layout_constraintTop_toBottomOf="@+id/dyn_username_home" />
 
     <TextView
@@ -114,6 +115,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/plantTitle"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/userMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/bluetooth"
+        android:textAlignment="center"
+        android:textColor="@color/dark_green"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plantTitle"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

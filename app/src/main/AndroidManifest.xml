@@ -13,14 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buddy">
         <activity
+            android:name=".activities.Bluetooth"
+            android:exported="false" />
+        <activity
             android:name=".activities.AddManual"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.Overview"
             android:exported="false"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.PlantSettings"
             android:exported="false"
