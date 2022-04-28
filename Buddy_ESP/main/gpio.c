@@ -1,4 +1,5 @@
 #include <sys/cdefs.h>
+#include "wifi.h"
 #include "gpio.h"
 
 static QueueHandle_t gpio_evt_queue = NULL;
@@ -9,17 +10,29 @@ static void IRAM_ATTR gpio_isr_handler(void* arg)
     xQueueSendFromISR(gpio_evt_queue, &gpio_num, NULL);
 }
 
-static void gpio_task_example(void* arg)
+_Noreturn void* blufi_btn(void* _)
 {
-    uint32_t io_num;
-    for(;;) {
-        if(xQueueReceive(gpio_evt_queue, &io_num, portMAX_DELAY)) {
-            printf("GPIO[%d] intr, val: %d\n", io_num, gpio_get_level(io_num));
+    char btn_pressed = 0;
+    while(1) {
+        if (gpio_get_level(BT_IN) == 0 && btn_pressed == 0) {
+            ESP_LOGW("BLUFI", "Button pressed");
+            btn_pressed = 1;
+            blufi_init();
         }
     }
 }
 
-void gpio_init() {
+_Noreturn TaskFunction_t gpio_pump(void) {
+    while(1) {
+        ESP_LOGW("PUMP:", "Working...");
+        gpio_set_level(PUMP_OUT, 1);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        gpio_set_level(PUMP_OUT, 0);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+void gpio_init(void) {
     gpio_config_t io_conf = {};
     io_conf.intr_type = GPIO_INTR_DISABLE;
     io_conf.mode = GPIO_MODE_OUTPUT;
@@ -33,28 +46,4 @@ void gpio_init() {
     io_conf.mode = GPIO_MODE_INPUT;
     io_conf.pull_up_en = 1;
     gpio_config(&io_conf);
-
-    //change gpio interrupt type for one pin
-    gpio_set_intr_type(BT_IN, GPIO_INTR_ANYEDGE);
-
-    //create a queue to handle gpio event from isr
-    gpio_evt_queue = xQueueCreate(10, sizeof(uint32_t));
-    //start gpio task
-    xTaskCreate(gpio_task_example, "gpio_task_example", 2048, NULL, 10, NULL);
-    //install gpio isr service
-    gpio_install_isr_service(0);
-    //hook isr handler for specific gpio pin
-    gpio_isr_handler_add(BT_IN, gpio_isr_handler, (void*) BT_IN);
-
-}
-
-_Noreturn void* gpio_toggle(void* _) {
-    while(1) {
-        gpio_set_level(DISP_OUT, 1);
-        gpio_set_level(PUMP_OUT, 1);
-        vTaskDelay(1 / portTICK_PERIOD_MS);
-        gpio_set_level(DISP_OUT, 0);
-        gpio_set_level(PUMP_OUT, 0);
-        vTaskDelay(1 / portTICK_PERIOD_MS);
-    }
 }

@@ -9,8 +9,6 @@ Requirement files:
  - C:\Users\filip\Documents\Kulen\EE5\esp32\esp-idf\tools\requirements\requirements.core.txt
 Python being checked: C:\Espressif\python_env\idf5.0_py3.10_env\Scripts\python.exe
 -- Project sdkconfig file C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/sdkconfig
-C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/sdkconfig:575 CONFIG_ESP32_ULP_COPROC_RESERVE_MEM was replaced with CONFIG_ULP_COPROC_RESERVE_MEM
-C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/sdkconfig:587 CONFIG_ESP32_TIME_SYSCALL_USE_RTC_FRC1 was replaced with CONFIG_ESP32_TIME_SYSCALL_USE_RTC_HRT
 -- App "Buddy_IoT3" version: 1
 -- Adding linker script C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/esp-idf/esp_system/ld/memory.ld
 -- Adding linker script C:/Users/filip/Documents/Kulen/EE5/esp32/esp-idf/components/esp_system/ld/esp32/sections.ld.in

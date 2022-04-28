@@ -24,16 +24,21 @@
 
 //ESP Includes///////////////////////////////////////
 #include "esp_adc_cal.h"
+#include "esp_blufi.h"
+#include "esp_blufi_api.h"
 #include "esp_bt.h"
 #include "esp_bt_main.h"
 #include "esp_bt_device.h"
+#include "esp_crc.h"
 #include "esp_crt_bundle.h"
 #include "esp_event.h"
+#include "esp_event_base.h"
 #include "esp_gap_bt_api.h"
 #include "esp_log.h"
 #include "esp_netif.h"
 #include "esp_spp_api.h"
 #include "esp_system.h"
+#include "esp_timer.h"
 #include "esp_wifi.h"
 
 //Lwip Includes////////////////////////////////////////
@@ -41,6 +46,9 @@
 #include "lwip/sockets.h"
 
 //Mbeds Includes///////////////////////////////////////
+#include "mbedtls/aes.h"
+#include "mbedtls/dhm.h"
+#include "mbedtls/md5.h"
 #include "mbedtls/net_sockets.h"
 #include "mbedtls/ssl.h"
 #include "mbedtls/entropy.h"

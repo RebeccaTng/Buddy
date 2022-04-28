@@ -12,4 +12,4 @@ static const char *REQUEST = "GET " WEB_URL " HTTP/1.0\r\n"
                              "\r\n";
 
 void send_data(void *pvParameters);
-void https_init(void);
+char https_init(void);

@@ -161,4 +161,4 @@ static int ms_counter = 0;
 static int raw_val[1];
 static int g_index = 0;
 
-void audio_init(void);
+_Noreturn TaskFunction_t audio_init(void);

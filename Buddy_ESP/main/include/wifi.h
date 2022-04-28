@@ -1,13 +1,31 @@
+#pragma once
 #include "config.h"
 
-#define EXAMPLE_ESP_WIFI_SSID      "BuddyLaptop"
-#define EXAMPLE_ESP_WIFI_PASS      "buddy123"
-#define EXAMPLE_ESP_MAXIMUM_RETRY  3
-#define WIFI_CONNECTED_BIT BIT0
-#define WIFI_FAIL_BIT      BIT1
+#define WIFI_LIST_NUM   10
+#define BLUFI_EXAMPLE_TAG "Buddy"
+#define BLUFI_INFO(fmt, ...)   ESP_LOGI(BLUFI_EXAMPLE_TAG, fmt, ##__VA_ARGS__)
+#define BLUFI_ERROR(fmt, ...)  ESP_LOGE(BLUFI_EXAMPLE_TAG, fmt, ##__VA_ARGS__)
 
-static EventGroupHandle_t s_wifi_event_group;
-static const char *wifi_tag = "wifi station";
-static int s_retry_num = 0;
+static void event_callback(esp_blufi_cb_event_t event, esp_blufi_cb_param_t *param);
+static wifi_config_t sta_config;
+static wifi_config_t ap_config;
+static EventGroupHandle_t wifi_event_group;
 
-void wifi_init();
+static bool gl_sta_connected = false;
+static bool ble_is_connected = false;
+static uint8_t gl_sta_bssid[6];
+static uint8_t gl_sta_ssid[32];
+static int gl_sta_ssid_len;
+
+void blufi_dh_negotiate_data_handler(uint8_t *data, int len, uint8_t **output_data, int *output_len, bool *need_free);
+int blufi_aes_encrypt(uint8_t iv8, uint8_t *crypt_data, int crypt_len);
+int blufi_aes_decrypt(uint8_t iv8, uint8_t *crypt_data, int crypt_len);
+uint16_t blufi_crc_checksum(uint8_t iv8, uint8_t *data, int len);
+
+int blufi_security_init(void);
+void blufi_security_deinit(void);
+int esp_blufi_gap_register_callback(void);
+esp_err_t esp_blufi_host_init(void);
+esp_err_t esp_blufi_host_and_cb_init(esp_blufi_callbacks_t *callbacks);
+
+void blufi_init();

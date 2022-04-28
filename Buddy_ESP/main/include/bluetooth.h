@@ -15,8 +15,4 @@ static long data_num = 0;
 static const esp_spp_sec_t sec_mask = ESP_SPP_SEC_AUTHENTICATE;
 static const esp_spp_role_t role_slave = ESP_SPP_ROLE_SLAVE;
 
-char *bda2str(uint8_t * bda, char *str, size_t size);
-void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param);
-
-void ble_init();
-void esp_bt_gap_cb();
+char ble_init();

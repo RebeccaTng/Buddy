@@ -1,6 +1,6 @@
 #include "https.h"
 
-void send_data(void *pvParameters)
+char https_init(void)
 {
     char buf[512];
     int ret, flags, len;
@@ -24,7 +24,7 @@ void send_data(void *pvParameters)
                                     NULL, 0)) != 0)
     {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ctr_drbg_seed returned %d", ret);
-        abort();
+        return 0;
     }
 
     ESP_LOGI(HTTPS_TAG, "Attaching the certificate bundle...");
@@ -34,7 +34,7 @@ void send_data(void *pvParameters)
     if(ret < 0)
     {
         ESP_LOGE(HTTPS_TAG, "esp_crt_bundle_attach returned -0x%x\n\n", -ret);
-        abort();
+        return 0;
     }
 
     ESP_LOGI(HTTPS_TAG, "Setting hostname for TLS session...");
@@ -43,7 +43,7 @@ void send_data(void *pvParameters)
     if((ret = mbedtls_ssl_set_hostname(&ssl, WEB_SERVER)) != 0)
     {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_set_hostname returned -0x%x", -ret);
-        abort();
+        return 0;
     }
 
     ESP_LOGI(HTTPS_TAG, "Setting up the SSL/TLS structure...");
@@ -54,36 +54,26 @@ void send_data(void *pvParameters)
                                           MBEDTLS_SSL_PRESET_DEFAULT)) != 0)
     {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_config_defaults returned %d", ret);
-        goto exit;
+        return 0;
     }
 
-    /* MBEDTLS_SSL_VERIFY_OPTIONAL is bad for security, in this example it will print
-       a warning if CA verification fails but it will continue to connect.
-
-       You should consider using MBEDTLS_SSL_VERIFY_REQUIRED in your own code.
-    */
     mbedtls_ssl_conf_authmode(&conf, MBEDTLS_SSL_VERIFY_OPTIONAL);
     mbedtls_ssl_conf_ca_chain(&conf, &cacert, NULL);
     mbedtls_ssl_conf_rng(&conf, mbedtls_ctr_drbg_random, &ctr_drbg);
-#ifdef CONFIG_MBEDTLS_DEBUG
-    mbedtls_esp_enable_debug_log(&conf, CONFIG_MBEDTLS_DEBUG_LEVEL);
-#endif
 
     if ((ret = mbedtls_ssl_setup(&ssl, &conf)) != 0)
     {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_setup returned -0x%x\n\n", -ret);
-        goto exit;
+        return 0;
     }
 
     mbedtls_net_init(&server_fd);
-
     ESP_LOGI(HTTPS_TAG, "Connecting to %s:%s...", WEB_SERVER, WEB_PORT);
 
-    if ((ret = mbedtls_net_connect(&server_fd, WEB_SERVER,
-                                   WEB_PORT, MBEDTLS_NET_PROTO_TCP)) != 0)
+    if ((ret = mbedtls_net_connect(&server_fd, WEB_SERVER,WEB_PORT, MBEDTLS_NET_PROTO_TCP)) != 0)
     {
         ESP_LOGE(HTTPS_TAG, "mbedtls_net_connect returned -%x", -ret);
-        goto exit;
+        return 0;
     }
 
     ESP_LOGI(HTTPS_TAG, "Connected.");
@@ -97,7 +87,7 @@ void send_data(void *pvParameters)
         if (ret != MBEDTLS_ERR_SSL_WANT_READ && ret != MBEDTLS_ERR_SSL_WANT_WRITE)
         {
             ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_handshake returned -0x%x", -ret);
-            goto exit;
+            return 0;
         }
     }
 
@@ -129,7 +119,7 @@ void send_data(void *pvParameters)
             written_bytes += ret;
         } else if (ret != MBEDTLS_ERR_SSL_WANT_WRITE && ret != MBEDTLS_ERR_SSL_WANT_READ) {
             ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_write returned -0x%x", -ret);
-            goto exit;
+            return 0;
         }
     } while(written_bytes < strlen(REQUEST));
 
@@ -171,12 +161,7 @@ void send_data(void *pvParameters)
 
     mbedtls_ssl_close_notify(&ssl);
 
-    exit:
-    mbedtls_ssl_session_reset(&ssl);
-    mbedtls_net_free(&server_fd);
-
-    if(ret != 0)
-    {
+    if(ret != 0) {
         mbedtls_strerror(ret, buf, 100);
         ESP_LOGE(HTTPS_TAG, "Error: -0x%x - %s", -ret, buf);
     }
@@ -184,12 +169,13 @@ void send_data(void *pvParameters)
     static int request_count;
     ESP_LOGI(HTTPS_TAG, "Completed %d requests", ++request_count);
     printf("Minimum free heap size: %d bytes\n", esp_get_minimum_free_heap_size());
+    return 1;
 }
 
-void https_init(void)
+/*void https_init(void)
 {
-    ESP_ERROR_CHECK( nvs_flash_init() );
+    ESP_ERROR_CHECK(nvs_flash_init() );
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     ESP_ERROR_CHECK(example_connect());
-}
+}*/

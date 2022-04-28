@@ -1,2 +1,2 @@
-idf_component_register(SRCS "gpio.c" "https.c" "adc.c" "buddy_main.c" "bluetooth.c" "audio.c" "wifi.c"
+idf_component_register(SRCS "adc.c" "audio.c" "blufi.c" "gpio.c" "https.c" "buddy_main.c" "wifi.c"
             INCLUDE_DIRS "." "include")

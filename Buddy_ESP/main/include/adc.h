@@ -28,6 +28,5 @@ static esp_adc_cal_characteristics_t adc1_chars;
 static int adc_raw[MAX_CHANNELS];
 static uint32_t voltage[MAX_CHANNELS];
 
-void adc_init();
-
-_Noreturn void* adc_result(void* _);
+void adc_init(void);
+_Noreturn void adc_result(void);
