@@ -106,7 +106,6 @@ public class Login extends AppCompatActivity {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.POST, url, null,
                     response -> {
                     //process the response
-                        System.out.println("response: " + response);
                         try {
                             String Rmessage = response.getString("message");
                             String Rusername = response.getJSONObject("data").getString("username");
@@ -134,7 +133,7 @@ public class Login extends AppCompatActivity {
 
                     error -> {
                     //process an error
-                        errorMessage.setText(R.string.incorrectEmail);
+                        errorMessage.setText(R.string.error);
                         errorMessage.setVisibility(View.VISIBLE);
                         email.setBackgroundResource(R.drawable.bg_fill_red);
                         password.setBackgroundResource((R.drawable.bg_fill_red));

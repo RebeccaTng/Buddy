@@ -90,15 +90,15 @@ public class Register extends AppCompatActivity {
 
     public void register(){
         // Make the json object for the body of the post request
-        JSONObject login = new JSONObject();
+        JSONObject register = new JSONObject();
         try {
-            login.put("email", email.getText().toString());
-            login.put("username", username.getText().toString());
+            register.put("email", email.getText().toString());
+            register.put("username", username.getText().toString());
             //hash password
             try {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] encodedhash = digest.digest(password.getText().toString().getBytes(StandardCharsets.UTF_8));
-                login.put("password", bytesToHex(encodedhash));
+                register.put("password", bytesToHex(encodedhash));
             } catch (NoSuchAlgorithmException e) { e.printStackTrace(); }
 
         } catch (JSONException e) { e.printStackTrace();}
@@ -110,6 +110,8 @@ public class Register extends AppCompatActivity {
                 response -> {
                     try {
                         String Rmessage = response.getString("message");
+                        String Rcomment = response.getString("comment");
+
                         // Check if login is valid
                         if (Rmessage.equals("UserRegisterSuccess")){
                             accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString(), null);
@@ -117,7 +119,7 @@ public class Register extends AppCompatActivity {
                             loading.setVisibility(View.VISIBLE);
 
                             // Toast
-                            Toast toast = Toast.makeText(getApplicationContext(), R.string.registerSucces, Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
                             toast.show();
 
                             // Intent
@@ -136,7 +138,7 @@ public class Register extends AppCompatActivity {
                 error -> {
                     // Process an error
                     clearBorders();
-                    errorMessage.setText(R.string.emailAlreadyUsed);
+                    errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
                     email.setBackgroundResource(R.drawable.bg_fill_red);
                 })
@@ -149,7 +151,7 @@ public class Register extends AppCompatActivity {
             @Override
             public byte[] getBody() {
                 // Request body goes here
-                return login.toString().getBytes(StandardCharsets.UTF_8);
+                return register.toString().getBytes(StandardCharsets.UTF_8);
             }
         };
         requestQueue.add(jsonObjectRequest);

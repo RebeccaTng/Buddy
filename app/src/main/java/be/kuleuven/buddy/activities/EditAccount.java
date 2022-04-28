@@ -44,7 +44,7 @@ public class EditAccount extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_edit_account);
 
-        accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+        if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
         email = findViewById(R.id.dyn_email_edit);
         username = findViewById(R.id.dyn_emailFill_edit);
@@ -231,7 +231,6 @@ public class EditAccount extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
                 response -> {
                     //process the response
-                    System.out.println("response: " + response);
                     try {
                         String Rmessage = response.getString("message");
 
@@ -245,15 +244,15 @@ public class EditAccount extends AppCompatActivity {
                             current_password.setBackgroundResource(R.drawable.bg_fill_red);
                         }
                         else{
-                            errorMessage.setText(R.string.fillFields);
+                            errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
 
                     } catch (Exception e){ e.printStackTrace(); }},
 
                 error -> {
-                    //TODO: handel the error
-
+                    errorMessage.setText(R.string.error);
+                    errorMessage.setVisibility(View.VISIBLE);
                 })
         {
             @Override

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.LibraryAdapter;
 import be.kuleuven.buddy.cards.LibraryInfo;
 
@@ -19,6 +20,7 @@ public class AddPlant extends AppCompatActivity implements LibraryAdapter.Librar
 
     RecyclerView libraryRecycler;
     RecyclerView.Adapter libraryAdapter;
+    AccountInfo accountInfo;
 
     // TODO link with information from database
     // Array with information to be displayed
@@ -35,6 +37,8 @@ public class AddPlant extends AppCompatActivity implements LibraryAdapter.Librar
 
         TextView libNumber = findViewById(R.id.dyn_libNumber);
         libNumber.setText(String.valueOf(libraryAdapter.getItemCount()));
+
+        if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
     }
 
     private void libraryRecycler() {
@@ -63,6 +67,7 @@ public class AddPlant extends AppCompatActivity implements LibraryAdapter.Librar
 
     public void goAddManual(View caller) {
         Intent goToAddManual = new Intent(this, AddManual.class);
+        goToAddManual.putExtra("accountInfo", accountInfo);
         startActivity(goToAddManual);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }

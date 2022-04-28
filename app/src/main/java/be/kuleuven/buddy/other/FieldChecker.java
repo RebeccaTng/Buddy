@@ -10,10 +10,10 @@ import be.kuleuven.buddy.R;
 public class FieldChecker {
 
     EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, species;
-    TextView error;
+    TextView errorMessage;
     int fields;
 
-    public FieldChecker(EditText moistMin, EditText moistMax, EditText lightMin, EditText lightMax, EditText tempMin, EditText tempMax, EditText waterlvl, EditText ageYears, EditText ageMonths, EditText place, EditText name, EditText species, TextView error) {
+    public FieldChecker(EditText moistMin, EditText moistMax, EditText lightMin, EditText lightMax, EditText tempMin, EditText tempMax, EditText waterlvl, EditText ageYears, EditText ageMonths, EditText place, EditText name, EditText species, TextView errorMessage) {
         this.moistMin = moistMin;
         this.moistMax = moistMax;
         this.lightMin = lightMin;
@@ -26,7 +26,7 @@ public class FieldChecker {
         this.place = place;
         this.name = name;
         this.species = species;
-        this.error = error;
+        this.errorMessage = errorMessage;
         fields = 2;
     }
 
@@ -46,11 +46,11 @@ public class FieldChecker {
 
         // Check all fields are filled in
         if(checkEmpty()) {
-            error.setText(R.string.notAllFilled);
-            error.setVisibility(View.VISIBLE);
+            errorMessage.setText(R.string.notAllFilled);
+            errorMessage.setVisibility(View.VISIBLE);
 
         } else if(checkMinMaxError(moistMin, moistMax) & checkMinMaxError(lightMin,lightMax) & checkMinMaxError(tempMin, tempMax)){
-            error.setVisibility(View.GONE);
+            errorMessage.setVisibility(View.GONE);
             return true;
         }
         return false;
@@ -58,8 +58,8 @@ public class FieldChecker {
 
     public Boolean checkMinMaxError(EditText min, EditText max) {
         if(Integer.parseInt(min.getText().toString()) >= Integer.parseInt(max.getText().toString())) {
-            error.setText(R.string.minMaxError);
-            error.setVisibility(View.VISIBLE);
+            errorMessage.setText(R.string.minMaxError);
+            errorMessage.setVisibility(View.VISIBLE);
             min.setBackgroundResource(R.drawable.bg_fill_red);
             max.setBackgroundResource(R.drawable.bg_fill_red);
             return false; // min is not smaller than max
