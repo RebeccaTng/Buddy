@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,14 +21,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -192,7 +189,7 @@ public class AddManual extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat plantDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         calendar.add(Calendar.MONTH, -Integer.parseInt(ageMonths.getText().toString()));
-        calendar.add(calendar.YEAR, -Integer.parseInt((ageYears.getText().toString())));
+        calendar.add(Calendar.YEAR, -Integer.parseInt((ageYears.getText().toString())));
         return plantDate.format(calendar.getTime());
     }
 }
