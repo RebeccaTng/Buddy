@@ -47,7 +47,7 @@ public class AddLibrary extends AppCompatActivity {
 
         if(getIntent().hasExtra("libPlant")) {
             plant = getIntent().getExtras().getParcelable("libPlant");
-            plantImage.setImageResource(plant.getLibImage());
+            plantImage.setImageBitmap(plant.getLibImage());
             plantSpecies.setText(plant.getLibSpecies());
         }
     }

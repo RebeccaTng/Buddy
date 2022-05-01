@@ -89,12 +89,14 @@ public class AddManual extends AppCompatActivity {
         });
     }
 
-    public void goBack(View caller) {
-        onBackPressed();
+    public void goLibrary(View caller) {
+        Intent goToLibrary = new Intent(this, Library.class);
+        goToLibrary.putExtra("accountInfo", accountInfo);
+        startActivity(goToLibrary);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    public void sendDatabase() {
+    private void sendDatabase() {
         // Image to bitmap
         BitmapDrawable image = (BitmapDrawable) picPreview.getDrawable();
         Bitmap bitmap = image.getBitmap();
@@ -143,7 +145,7 @@ public class AddManual extends AppCompatActivity {
                             toast.show();
 
                             // Go to back to library
-                            Intent goToAddPlant = new Intent(this, AddPlant.class);
+                            Intent goToAddPlant = new Intent(this, Library.class);
                             goToAddPlant.putExtra("accountInfo", accountInfo);
                             startActivity(goToAddPlant);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -155,7 +157,6 @@ public class AddManual extends AppCompatActivity {
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
-
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
@@ -185,7 +186,7 @@ public class AddManual extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public String calculatePlantDate(){
+    private String calculatePlantDate(){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat plantDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         calendar.add(Calendar.MONTH, -Integer.parseInt(ageMonths.getText().toString()));

@@ -82,7 +82,6 @@ public class EditAccount extends AppCompatActivity {
         finish();
     }
 
-
     public void processChanges(View caller){
         String name = username.getText().toString();
         String currentPassword = current_password.getText().toString();
@@ -94,8 +93,8 @@ public class EditAccount extends AppCompatActivity {
         //if only name is changed
         if (currentPassword.length() == 0 && newPassword.length() == 0 && confirmPassword.length() == 0){
             updateDatabase(caller, name, "", "");
-
         }
+
         //if password is changed
         else if (correctConfirmPassword && correctNewPassword){
             try {
@@ -108,27 +107,23 @@ public class EditAccount extends AppCompatActivity {
 
             updateDatabase(caller, name, currentPassword, newPassword);
         }
+
         //give an error message
         else{
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
         }
-
-
-
     }
 
-    public void setName(){
+    private void setName(){
         //check if username is changed
         if (username.getText().toString().equals("")){
             username.setText(accountInfo.getUsername());
         }
-
         accountInfo.setUsername(username.getText().toString());
     }
 
-
-    public void textWatchers(){
+    private void textWatchers(){
         //new password textwatcher
         new_password.addTextChangedListener(new TextWatcher() {
             @Override
@@ -181,9 +176,7 @@ public class EditAccount extends AppCompatActivity {
 
         username.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -191,15 +184,12 @@ public class EditAccount extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
+
         current_password.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -208,13 +198,11 @@ public class EditAccount extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
     }
 
-    public void updateDatabase(View caller, String username, String oldPassword, String newPassword){
+    private void updateDatabase(View caller, String username, String oldPassword, String newPassword){
         // Make the json object for the body of the post request
         JSONObject login = new JSONObject();
         try {
@@ -275,10 +263,9 @@ public class EditAccount extends AppCompatActivity {
         };
 
         requestQueue.add(jsonObjectRequest);
-
     }
 
-    public void clearBorders(){
+    private void clearBorders(){
         errorMessage.setVisibility(View.INVISIBLE);
         username.setBackgroundResource(R.drawable.bg_fill);
         new_password.setBackgroundResource(R.drawable.bg_fill);

@@ -72,9 +72,7 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    public AccountInfo getAccount(){
-        return accountInfo;
-    }
+    public AccountInfo getAccount(){ return accountInfo; }
 
     public void checkLogin(View caller){
         // Error message when some fields are not filled in
@@ -164,19 +162,16 @@ public class Login extends AppCompatActivity {
         return hexString.toString();
     }
 
-    public void clearBorders(){
+    private void clearBorders(){
         errorMessage.setVisibility(View.INVISIBLE);
         email.setBackgroundResource(R.drawable.bg_fill);
         password.setBackgroundResource(R.drawable.bg_fill);
     }
 
-
-    public void textWatchers(){
+    private void textWatchers(){
         email.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -184,16 +179,12 @@ public class Login extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
 
         password.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -201,9 +192,7 @@ public class Login extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
     }
 }

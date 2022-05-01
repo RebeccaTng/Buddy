@@ -77,10 +77,10 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
-    public void goAddPlant(View caller) {
-        Intent goToAddPlant = new Intent(this, AddPlant.class);
-        goToAddPlant.putExtra("accountInfo", accountInfo);
-        startActivity(goToAddPlant);
+    public void goLibrary(View caller) {
+        Intent goToLibrary = new Intent(this, Library.class);
+        goToLibrary.putExtra("accountInfo", accountInfo);
+        startActivity(goToLibrary);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 

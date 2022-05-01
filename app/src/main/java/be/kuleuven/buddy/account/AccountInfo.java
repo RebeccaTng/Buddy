@@ -62,7 +62,6 @@ public class AccountInfo implements Parcelable {
         System.out.println("email:\t\t" + email);
         System.out.println("token:\t\t" + token);
         System.out.println("******************************************");
-
     }
 
     @Override

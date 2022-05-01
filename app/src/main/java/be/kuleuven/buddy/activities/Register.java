@@ -88,7 +88,7 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    public void register(){
+    private void register(){
         // Make the json object for the body of the post request
         JSONObject register = new JSONObject();
         try {
@@ -157,7 +157,7 @@ public class Register extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void textWatchers(){
+    private void textWatchers(){
         // Textwatcher username
         username.addTextChangedListener(new TextWatcher() {
             @Override
@@ -243,7 +243,7 @@ public class Register extends AppCompatActivity {
         return hexString.toString();
     }
 
-    public void clearBorders(){
+    private void clearBorders(){
         errorMessage.setVisibility(View.INVISIBLE);
         username.setBackgroundResource(R.drawable.bg_fill);
         email.setBackgroundResource(R.drawable.bg_fill);

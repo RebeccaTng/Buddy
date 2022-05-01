@@ -50,7 +50,7 @@
     <string name="notAllFilled">Please fill in all fields.</string>
     <string name="minMaxError">Please make sure minimum values are lower than maximum values.</string>
     <string name="bluetooth">Please connect to the device first by clicking on the bluetooth icon on the upper left.</string>
-    <string name="speciesExists">This species already exist.</string>
+    <string name="speciesExists">This species already exists.</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="welcome">Welcome,</string>
@@ -78,6 +78,7 @@
     <string name="percentage">%</string>
     <string name="degrees">°C</string>
 
+    <string name="noLibPlants">There are no plants in your library yet.\nClick below to manually add your first plant!</string>
     <string name="addPlant">Add Plant</string>
     <string name="browseTitle">Browse Library</string>
     <string name="manualAdd">Manually Add Plant</string>
