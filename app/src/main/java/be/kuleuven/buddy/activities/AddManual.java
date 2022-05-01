@@ -53,6 +53,8 @@ public class AddManual extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_add_manual);
 
+        if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+
         addPic = findViewById(R.id.addPicBtn);
         picPreview = findViewById(R.id.picturePreview);
         addPlant = findViewById(R.id.addNewPlantBtn);
@@ -69,8 +71,6 @@ public class AddManual extends AppCompatActivity {
         name = findViewById(R.id.nameName_addManual);
         species = findViewById(R.id.speciesName_addManual);
         errorMessage = findViewById(R.id.error_addManual);
-
-        if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
         // Set minimum and maximum value
         FieldChecker fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place , name, species, errorMessage);
@@ -89,10 +89,15 @@ public class AddManual extends AppCompatActivity {
         });
     }
 
-    public void goLibrary(View caller) {
+    @Override
+    public void onBackPressed() {
         Intent goToLibrary = new Intent(this, Library.class);
         goToLibrary.putExtra("accountInfo", accountInfo);
         startActivity(goToLibrary);
+    }
+
+    public void goBack(View caller) {
+        onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 

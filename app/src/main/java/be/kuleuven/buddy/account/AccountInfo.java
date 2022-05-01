@@ -3,9 +3,6 @@ package be.kuleuven.buddy.account;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class AccountInfo implements Parcelable {
     String username, email, token;
     public AccountInfo(String username, String email, String token) {
@@ -44,16 +41,8 @@ public class AccountInfo implements Parcelable {
         return email;
     }
 
-    public void setMail(String email) {
-        this.email = email;
-    }
-
     public String getToken() {
         return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public void printAccount(){

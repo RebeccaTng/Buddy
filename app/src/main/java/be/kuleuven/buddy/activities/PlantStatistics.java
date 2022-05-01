@@ -30,9 +30,7 @@ public class PlantStatistics extends AppCompatActivity {
         TextView place = findViewById(R.id.dyn_plantPlace_stat);
         TextView status = findViewById(R.id.dyn_plantStatus_stat);
 
-        if(getIntent().hasExtra("accountInfo")) {
-            accountInfo = getIntent().getExtras().getParcelable("accountInfo");
-        }
+        if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
 
         if(getIntent().hasExtra("plant")) {
             plant = getIntent().getExtras().getParcelable("plant");
@@ -67,6 +65,7 @@ public class PlantStatistics extends AppCompatActivity {
 
     public void goOverview(View caller) {
         Intent goToOverview = new Intent(this, Overview.class);
+        goToOverview.putExtra("accountInfo", accountInfo);
         startActivity(goToOverview);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }

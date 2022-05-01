@@ -64,10 +64,15 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
         libraryRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Vertical layout by default
     }
 
-    public void goHome(View caller) {
+    @Override
+    public void onBackPressed() {
         Intent goToHome = new Intent(this, Home.class);
         goToHome.putExtra("accountInfo", accountInfo);
         startActivity(goToHome);
+    }
+
+    public void goBack(View caller) {
+        onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
@@ -88,6 +93,7 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
     public void onCardClick(int position) {
         Intent goToAddLibrary = new Intent(this, AddLibrary.class);
         goToAddLibrary.putExtra("libPlant", libPlants.get(position));
+        goToAddLibrary.putExtra("accountInfo", accountInfo);
         startActivity(goToAddLibrary);
     }
 

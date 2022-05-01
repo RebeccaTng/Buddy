@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.InfoFragment;
 
 public class Overview extends AppCompatActivity {
@@ -44,6 +46,7 @@ public class Overview extends AppCompatActivity {
     SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, yearFormat;
     String dayNow, date, dayToday, weekNowBegin, weekNowEnd, weekBegin, weekEnd, monthNow, yearNow;
     ImageView previous, next, infoBtn;
+    AccountInfo accountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class Overview extends AppCompatActivity {
         month = findViewById(R.id.overviewMonth);
         year = findViewById(R.id.overviewYear);
         infoBtn = findViewById(R.id.infoIconOverview);
+
+        if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
 
         infoBtn.setOnClickListener(view -> {
             String title = getResources().getString(R.string.howTo);
@@ -170,6 +175,13 @@ public class Overview extends AppCompatActivity {
         });
 
         next.setOnClickListener(view -> changeDate(1, green));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent goToPlantSettings = new Intent(this, PlantSettings.class);
+        goToPlantSettings.putExtra("accountInfo", accountInfo);
+        startActivity(goToPlantSettings);
     }
 
     public void goBack(View caller) {

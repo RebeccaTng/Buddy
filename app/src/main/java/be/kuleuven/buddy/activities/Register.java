@@ -230,7 +230,6 @@ public class Register extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-
     }
 
     private static String bytesToHex(byte[] hash) {

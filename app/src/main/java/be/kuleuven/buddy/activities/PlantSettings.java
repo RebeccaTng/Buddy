@@ -46,6 +46,15 @@ public class PlantSettings extends AppCompatActivity {
         waterlvl = findViewById(R.id.waterMin_settings);
         ageMonths = findViewById(R.id.ageMonth_settings);
 
+        if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
+
+        if(getIntent().hasExtra("plant")) {
+            plant = getIntent().getExtras().getParcelable("plant");
+            image.setImageResource(plant.getPlantImage());
+            name.setText(plant.getPlantName());
+            species.setText(plant.getPlantSpecies());
+        }
+
         // Set minimum and maximum value
         moistMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         moistMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
@@ -55,17 +64,6 @@ public class PlantSettings extends AppCompatActivity {
         tempMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         waterlvl.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         ageMonths.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "12")});
-
-        if(getIntent().hasExtra("accountInfo")) {
-            accountInfo = getIntent().getExtras().getParcelable("accountInfo");
-        }
-
-        if(getIntent().hasExtra("plant")) {
-            plant = getIntent().getExtras().getParcelable("plant");
-            image.setImageResource(plant.getPlantImage());
-            name.setText(plant.getPlantName());
-            species.setText(plant.getPlantSpecies());
-        }
 
         editIcon.setOnClickListener(view -> {
             name.requestFocus();

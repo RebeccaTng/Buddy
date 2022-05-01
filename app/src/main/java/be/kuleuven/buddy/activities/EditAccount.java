@@ -69,17 +69,16 @@ public class EditAccount extends AppCompatActivity {
         textWatchers();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent goToAccount = new Intent(this, Account.class);
+        goToAccount.putExtra("accountInfo", accountInfo);
+        startActivity(goToAccount);
+    }
+
     public void goBack(View caller) {
         onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-    }
-
-    public void goAccount(View caller) {
-        Intent goToHome = new Intent(this, Home.class);
-        goToHome.putExtra("accountInfo", accountInfo);
-        startActivity(goToHome);
-        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-        finish();
     }
 
     public void processChanges(View caller){
@@ -224,7 +223,7 @@ public class EditAccount extends AppCompatActivity {
 
                         if (Rmessage.equals("UserUpdateSuccess")){
                             setName();
-                            goAccount(caller);
+                            goBack(caller);
                         }
                         else if (Rmessage.equals("PasswordMatchFailed")){
                             errorMessage.setText(R.string.wrongPassword);
