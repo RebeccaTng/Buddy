@@ -13,6 +13,7 @@ static EventGroupHandle_t wifi_event_group;
 
 static bool gl_sta_connected = false;
 static bool ble_is_connected = false;
+bool wifi_connected;
 static uint8_t gl_sta_bssid[6];
 static uint8_t gl_sta_ssid[32];
 static int gl_sta_ssid_len;

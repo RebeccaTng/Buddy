@@ -1,16 +1,14 @@
-#define TASK_TAG "xTASK"
-
 #include <sys/cdefs.h>
 #include "config.h"
-#include "adc.h"
-#include "gpio.h"
 #include "audio.h"
+#include "gpio.h"
+#include "https.h"
 
 ESP_EVENT_DECLARE_BASE(TASK_EVENTS);
 
 void start_tasks(void) {
 
-    ESP_LOGI("MAIN", "Setting up tasks...");
+    ESP_LOGW("MAIN", "Setting up tasks...");
 
     adc_init();
     gpio_init();
@@ -21,32 +19,20 @@ void start_tasks(void) {
 
     esp_event_loop_handle_t loop;
     ESP_ERROR_CHECK(esp_event_loop_create(&loop_args, &loop));
-    ESP_ERROR_CHECK(esp_event_loop_create(&loop_args, &loop));
-    ESP_ERROR_CHECK(esp_event_loop_create(&loop_args, &loop));
-    ESP_ERROR_CHECK(esp_event_loop_create(&loop_args, &loop));
 
-    ESP_LOGI(TASK_TAG, "Starting adc");
+    ESP_LOGW("ADC", "Starting adc");
     xTaskCreate((TaskFunction_t) adc_result,
                 "adc",
-                4096,
+                2048,
                 NULL,
                 uxTaskPriorityGet(NULL),
                 NULL
     );
 
-    /*ESP_LOGI(TASK_TAG, "Starting audio");
-    xTaskCreate((TaskFunction_t) gpio_motor(),
-                "audio",
-                4096,
-                NULL,
-                uxTaskPriorityGet(NULL),
-                NULL
-    );*/
-
-    ESP_LOGI(TASK_TAG, "Starting pump");
+    ESP_LOGW("PUMP", "Starting pump");
     xTaskCreate((TaskFunction_t) gpio_pump,
                 "pump",
-                4096,
+                2048,
                 NULL,
                 uxTaskPriorityGet(NULL),
                 NULL
@@ -55,12 +41,15 @@ void start_tasks(void) {
 
 _Noreturn void app_main(void)
 {
-    ESP_LOGI("MAIN", "Initialising 'Buddy'");
+    ESP_LOGW("MAIN", "Initialising 'Buddy'.");
+    ESP_LOGW("BLUFI", "Press the button to connect to Blufi.");
+
+    blufi_btn();
     start_tasks();
 
-    pthread_t blufi_thread;
-    pthread_create(&blufi_thread, NULL, blufi_btn, NULL);
-    pthread_join(blufi_thread, NULL);
+    ESP_LOGW("HTTPS", "Starting...");
+    https_ready = false;
+    https_init();
 
     while(1);
 }

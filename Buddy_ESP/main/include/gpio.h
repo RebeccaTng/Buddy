@@ -11,5 +11,5 @@
 #define GPIO_INPUT_PIN_SEL  (1ULL<<BT_IN)
 
 void gpio_init(void);
-_Noreturn void* blufi_btn(void* _);
-_Noreturn TaskFunction_t gpio_pump(void);
+void blufi_btn(void);
+_Noreturn void gpio_pump(void);

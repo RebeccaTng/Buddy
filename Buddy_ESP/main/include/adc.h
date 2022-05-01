@@ -1,6 +1,5 @@
 #include <sys/cdefs.h>
 #include "config.h"
-#include "https.h"
 
 #define ADC_ATTENUATE   ADC_ATTEN_DB_11
 #define ADC_CALIBRATE   ESP_ADC_CAL_VAL_EFUSE_VREF
@@ -21,6 +20,12 @@ static const char *tags[16] = {
         "Dist. (ch. 32)",
         "LDR-3 (ch. 33)"
 };
+
+bool https_ready;
+int temperature;
+int moisture;
+int distance;
+int light;
 
 static bool cali_enable;
 static esp_adc_cal_characteristics_t adc1_chars;

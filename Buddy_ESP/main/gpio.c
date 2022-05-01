@@ -10,19 +10,24 @@ static void IRAM_ATTR gpio_isr_handler(void* arg)
     xQueueSendFromISR(gpio_evt_queue, &gpio_num, NULL);
 }
 
-_Noreturn void* blufi_btn(void* _)
+void blufi_btn(void)
 {
-    char btn_pressed = 0;
+    bool btn_pressed = false;
+    wifi_connected = false;
     while(1) {
-        if (gpio_get_level(BT_IN) == 0 && btn_pressed == 0) {
+        if (gpio_get_level(BT_IN) == false && btn_pressed == false) {
             ESP_LOGW("BLUFI", "Button pressed");
-            btn_pressed = 1;
+            btn_pressed = true;
             blufi_init();
+        }
+        if (wifi_connected == true) {
+            ESP_LOGW("WIFI", "Connected!");
+            break;
         }
     }
 }
 
-_Noreturn TaskFunction_t gpio_pump(void) {
+_Noreturn void gpio_pump(void) {
     while(1) {
         ESP_LOGW("PUMP:", "Working...");
         gpio_set_level(PUMP_OUT, 1);

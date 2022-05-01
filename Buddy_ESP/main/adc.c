@@ -31,8 +31,12 @@ _Noreturn void adc_result(void) {
             }
         }
         vTaskDelay(2000 / portTICK_PERIOD_MS);
-        if(counter++ == 3) {
-            //https_init();
+        if(counter++ == 3 && https_ready == false) {
+            temperature = 3222;
+            moisture = 1234;
+            distance = 1234;
+            light = 1000;
+            https_ready = true;
             counter = 0;
         }
     }

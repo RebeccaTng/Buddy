@@ -167,12 +167,10 @@ static void event_callback(esp_blufi_cb_event_t event, esp_blufi_cb_param_t *par
             ESP_ERROR_CHECK( esp_wifi_set_mode(param->wifi_mode.op_mode) );
             break;
         case ESP_BLUFI_EVENT_REQ_CONNECT_TO_AP:
-            BLUFI_INFO("BLUFI requset wifi connect to AP\n");
-            /* there is no wifi callback when the device has already connected to this wifi
-            so disconnect wifi before connection.
-            */
+            BLUFI_INFO("BLUFI request wifi connect to AP\n");
             esp_wifi_disconnect();
             esp_wifi_connect();
+            wifi_connected = true;
             break;
         case ESP_BLUFI_EVENT_REQ_DISCONNECT_FROM_AP:
             BLUFI_INFO("BLUFI requset wifi disconnect from AP\n");
