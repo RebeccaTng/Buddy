@@ -6,13 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".activities.Bluetooth">
 
+    <Button
+        android:id="@+id/BT_turn_on"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Turn On"
+        app:layout_constraintEnd_toEndOf="@+id/BT_turn_off"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/BT_turn_off"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/BT_turn_off"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Turn Off"
+        app:layout_constraintEnd_toEndOf="@+id/BT_discoverable"
+        app:layout_constraintStart_toStartOf="@+id/BT_discoverable"
+        app:layout_constraintTop_toBottomOf="@+id/BT_turn_on" />
+
+    <Button
+        android:id="@+id/BT_discoverable"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Discoverable"
+        app:layout_constraintEnd_toEndOf="@+id/BT_paired_devices"
+        app:layout_constraintStart_toStartOf="@+id/BT_paired_devices"
+        app:layout_constraintTop_toBottomOf="@+id/BT_turn_off" />
+
+    <Button
+        android:id="@+id/BT_paired_devices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get paired devices"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BT_discoverable" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bluetooth jeeej"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="100dp"
+        android:text="Bluetooth"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/BT_devices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BT_paired_devices" />
+
+    <TextView
+        android:id="@+id/BT_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BT_devices" />
 </androidx.constraintlayout.widget.ConstraintLayout>
