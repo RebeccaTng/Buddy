@@ -50,8 +50,8 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
         getData();
 
-        userMessage = findViewById(R.id.userMessage_library);
         loading = findViewById(R.id.loading_library);
+        userMessage = findViewById(R.id.userMessage_library);
         libNumber = findViewById(R.id.dyn_libNumber);
         libraryRecycler = findViewById(R.id.Library_recycler);
 
@@ -115,7 +115,7 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
                         JSONArray data = response.getJSONArray("data");
 
                         //check if login is valid
-                        if(Rmessage.equals("Libraryloaded")){
+                        if(Rmessage.equals("LibraryLoaded")){
                             JSONObject dataObject;
                             Integer speciesId;
                             String species;

@@ -50,7 +50,7 @@ public class PlantSettings extends AppCompatActivity {
 
         if(getIntent().hasExtra("plant")) {
             plant = getIntent().getExtras().getParcelable("plant");
-            image.setImageResource(plant.getPlantImage());
+            image.setImageBitmap(plant.getPlantImage());
             name.setText(plant.getPlantName());
             species.setText(plant.getPlantSpecies());
         }
