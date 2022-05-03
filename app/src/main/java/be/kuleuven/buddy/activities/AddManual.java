@@ -135,7 +135,7 @@ public class AddManual extends AppCompatActivity {
 
         // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "https://a21iot03.studev.groept.be/public/api/library/addPlantManual";
+        String url = "https://a21iot03.studev.groept.be/public/api/library/addManual";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
                 response -> {
                     //process the response

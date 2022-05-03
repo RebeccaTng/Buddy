@@ -40,7 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/plant_image" />
+        app:srcCompat="@drawable/plant_image"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/plantSpecies_addLib"
@@ -55,7 +56,8 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantImage_addLib" />
+        app:layout_constraintTop_toBottomOf="@+id/plantImage_addLib"
+        tools:visibility="invisible" />
 
     <View
         android:id="@+id/line_addLib"
@@ -111,6 +113,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextContrastCheck" />
+
+    <ProgressBar
+        android:id="@+id/loading_addLib"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:indeterminateTint="@color/beige"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/plantImage_addLib" />
 
     <ScrollView
         android:layout_width="0dp"

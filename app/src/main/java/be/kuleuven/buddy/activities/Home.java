@@ -5,10 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -116,27 +113,20 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                         //check if login is valid
                         if(Rmessage.equals("HomeLoaded")){
                             JSONObject dataObject;
-                            Integer plantId, personalized;
-                            String name, species, last_watered, place, status, plantDate;
-                            byte[] decodedImage;
-                            Bitmap image;
+                            Integer plantId;
+                            String name, species, last_watered, place, status, image;
 
                             for(int i = 0; i < data.length(); i++) {
                                 dataObject = data.getJSONObject(i);
                                 plantId = dataObject.getInt("plantId");
+                                image = dataObject.getString("image");
                                 name = dataObject.getString("name");
                                 species = dataObject.getString("species");
                                 last_watered = dataObject.getString("lastWatered");
                                 place = dataObject.getString("place");
                                 status = dataObject.getString("status");
-                                plantDate = dataObject.getString("plantDate");
-                                personalized = dataObject.getInt("personalized");
 
-                                // decode image
-                                decodedImage = Base64.decode(dataObject.getString("image"), Base64.DEFAULT);
-                                image = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
-
-                                homePlants.add(new HomeInfo(plantId, image, name, species, last_watered, place, status, plantDate, personalized));
+                                homePlants.add(new HomeInfo(plantId, image, name, species, last_watered, place, status));
                             }
                             loadHomeRecycler();
 

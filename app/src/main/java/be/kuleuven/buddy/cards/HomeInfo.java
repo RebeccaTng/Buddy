@@ -1,8 +1,10 @@
 package be.kuleuven.buddy.cards;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Base64;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,44 +14,35 @@ import java.util.Objects;
 
 public class HomeInfo implements Parcelable {
 
-    int plantId, personlized;
+    int plantId;
     Bitmap plantImage;
-    String plantName, plantSpecies, plantWater, plantPlace, plantStatus, plantDate;
+    String plantName, plantSpecies, plantWater, plantPlace, plantStatus;
 
-    public HomeInfo(int plantId, Bitmap plantImage, String plantName, String plantSpecies, String plantWater, String plantPlace, String plantStatus, String plantDate, int personalized) {
+    public HomeInfo(int plantId, String plantImage, String plantName, String plantSpecies, String plantWater, String plantPlace, String plantStatus) {
 
         SimpleDateFormat oldDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String lastWatered, date;
-        Calendar calendar1, calendar2;
-        calendar1 = Calendar.getInstance();
-        calendar2 = Calendar.getInstance();
+        String lastWatered;
+        Calendar calendar = Calendar.getInstance();
 
         if(!plantWater.equals("null")) {
             try {
-                calendar1.setTime(Objects.requireNonNull(oldDateFormat.parse(plantWater)));
+                calendar.setTime(Objects.requireNonNull(oldDateFormat.parse(plantWater)));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            lastWatered = newDateFormat.format(calendar1.getTime());
+            lastWatered = newDateFormat.format(calendar.getTime());
         } else lastWatered = "-";
 
-        try {
-            calendar2.setTime(Objects.requireNonNull(oldDateFormat.parse(plantDate)));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        date = newDateFormat.format(calendar1.getTime());
-
+        // decode image
+        byte[] decodedImage = Base64.decode(plantImage, Base64.DEFAULT);
+        this.plantImage = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
         this.plantId = plantId;
-        this.plantImage = plantImage;
         this.plantName = plantName;
         this.plantSpecies = plantSpecies;
         this.plantWater = lastWatered;
         this.plantPlace = plantPlace;
         this.plantStatus = plantStatus;
-        this.plantDate = date;
-        this.personlized = personalized;
     }
 
     protected HomeInfo(Parcel in) {
@@ -99,10 +92,6 @@ public class HomeInfo implements Parcelable {
         return plantStatus;
     }
 
-    public String getPlantDate() { return plantDate; }
-
-    public int getPersonlized() { return personlized; }
-
     @Override
     public int describeContents() {
         return 0;
@@ -116,7 +105,5 @@ public class HomeInfo implements Parcelable {
         dest.writeString(plantWater);
         dest.writeString(plantPlace);
         dest.writeString(plantStatus);
-        dest.writeString(plantDate);
-        dest.writeInt(personlized);
     }
 }
