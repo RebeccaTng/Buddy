@@ -2,6 +2,7 @@ package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.LibraryInfo;
 import be.kuleuven.buddy.other.InputFilterMinMax;
 
@@ -17,12 +19,15 @@ public class AddLibrary extends AppCompatActivity {
 
     LibraryInfo plant;
     EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageMonths;
+    AccountInfo accountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_add_library);
+
+        if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
         ImageView plantImage = findViewById(R.id.plantImage_addLib);
         TextView plantSpecies = findViewById(R.id.plantSpecies_addLib);
@@ -35,6 +40,12 @@ public class AddLibrary extends AppCompatActivity {
         waterlvl = findViewById(R.id.waterMin_addLib);
         ageMonths = findViewById(R.id.ageMonth_addLib);
 
+        if(getIntent().hasExtra("libPlant")) {
+            plant = getIntent().getExtras().getParcelable("libPlant");
+            plantImage.setImageBitmap(plant.getLibImage());
+            plantSpecies.setText(plant.getLibSpecies());
+        }
+
         // Set minimum and maximum value
         moistMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         moistMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
@@ -44,12 +55,13 @@ public class AddLibrary extends AppCompatActivity {
         tempMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         waterlvl.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         ageMonths.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "12")});
+    }
 
-        if(getIntent().hasExtra("libPlant")) {
-            plant = getIntent().getExtras().getParcelable("libPlant");
-            plantImage.setImageResource(plant.getLibImage());
-            plantSpecies.setText(plant.getLibSpecies());
-        }
+    @Override
+    public void onBackPressed() {
+        Intent goToLibrary = new Intent(this, Library.class);
+        goToLibrary.putExtra("accountInfo", accountInfo);
+        startActivity(goToLibrary);
     }
 
     public void goBack(View caller) {

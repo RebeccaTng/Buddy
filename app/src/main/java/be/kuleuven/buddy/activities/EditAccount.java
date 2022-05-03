@@ -44,7 +44,7 @@ public class EditAccount extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_edit_account);
 
-        accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+        if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
         email = findViewById(R.id.dyn_email_edit);
         username = findViewById(R.id.dyn_emailFill_edit);
@@ -69,19 +69,17 @@ public class EditAccount extends AppCompatActivity {
         textWatchers();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent goToAccount = new Intent(this, Account.class);
+        goToAccount.putExtra("accountInfo", accountInfo);
+        startActivity(goToAccount);
+    }
+
     public void goBack(View caller) {
         onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
-
-    public void goAccount(View caller) {
-        Intent goToHome = new Intent(this, Home.class);
-        goToHome.putExtra("accountInfo", accountInfo);
-        startActivity(goToHome);
-        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-        finish();
-    }
-
 
     public void processChanges(View caller){
         String name = username.getText().toString();
@@ -94,8 +92,8 @@ public class EditAccount extends AppCompatActivity {
         //if only name is changed
         if (currentPassword.length() == 0 && newPassword.length() == 0 && confirmPassword.length() == 0){
             updateDatabase(caller, name, "", "");
-
         }
+
         //if password is changed
         else if (correctConfirmPassword && correctNewPassword){
             try {
@@ -108,27 +106,23 @@ public class EditAccount extends AppCompatActivity {
 
             updateDatabase(caller, name, currentPassword, newPassword);
         }
+
         //give an error message
         else{
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
         }
-
-
-
     }
 
-    public void setName(){
+    private void setName(){
         //check if username is changed
         if (username.getText().toString().equals("")){
             username.setText(accountInfo.getUsername());
         }
-
         accountInfo.setUsername(username.getText().toString());
     }
 
-
-    public void textWatchers(){
+    private void textWatchers(){
         //new password textwatcher
         new_password.addTextChangedListener(new TextWatcher() {
             @Override
@@ -181,9 +175,7 @@ public class EditAccount extends AppCompatActivity {
 
         username.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -191,15 +183,12 @@ public class EditAccount extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
+
         current_password.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -208,13 +197,11 @@ public class EditAccount extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
     }
 
-    public void updateDatabase(View caller, String username, String oldPassword, String newPassword){
+    private void updateDatabase(View caller, String username, String oldPassword, String newPassword){
         // Make the json object for the body of the post request
         JSONObject login = new JSONObject();
         try {
@@ -231,13 +218,12 @@ public class EditAccount extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
                 response -> {
                     //process the response
-                    System.out.println("response: " + response);
                     try {
                         String Rmessage = response.getString("message");
 
                         if (Rmessage.equals("UserUpdateSuccess")){
                             setName();
-                            goAccount(caller);
+                            goBack(caller);
                         }
                         else if (Rmessage.equals("PasswordMatchFailed")){
                             errorMessage.setText(R.string.wrongPassword);
@@ -245,15 +231,15 @@ public class EditAccount extends AppCompatActivity {
                             current_password.setBackgroundResource(R.drawable.bg_fill_red);
                         }
                         else{
-                            errorMessage.setText(R.string.fillFields);
+                            errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
 
                     } catch (Exception e){ e.printStackTrace(); }},
 
                 error -> {
-                    //TODO: handel the error
-
+                    errorMessage.setText(R.string.error);
+                    errorMessage.setVisibility(View.VISIBLE);
                 })
         {
             @Override
@@ -276,10 +262,9 @@ public class EditAccount extends AppCompatActivity {
         };
 
         requestQueue.add(jsonObjectRequest);
-
     }
 
-    public void clearBorders(){
+    private void clearBorders(){
         errorMessage.setVisibility(View.INVISIBLE);
         username.setBackgroundResource(R.drawable.bg_fill);
         new_password.setBackgroundResource(R.drawable.bg_fill);

@@ -46,9 +46,11 @@
     <string name="edit">Edit</string>
 
     <!-- General -->
+    <string name="error">An error occurred, please try again.</string>
     <string name="notAllFilled">Please fill in all fields.</string>
     <string name="minMaxError">Please make sure minimum values are lower than maximum values.</string>
     <string name="bluetooth">Please connect to the device first by clicking on the bluetooth icon on the upper left.</string>
+    <string name="speciesExists">This species already exists.</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="welcome">Welcome,</string>
@@ -76,6 +78,7 @@
     <string name="percentage">%</string>
     <string name="degrees">°C</string>
 
+    <string name="noLibPlants">There are no plants in your library yet.\nClick below to manually add your first plant!</string>
     <string name="addPlant">Add Plant</string>
     <string name="browseTitle">Browse Library</string>
     <string name="manualAdd">Manually Add Plant</string>
@@ -117,7 +120,6 @@
     <string name="speciesName">Species Name</string>
     <string name="addPic">Add Picture</string>
     <string name="addSpecies">Add species to library</string>
-    <string name="registerSucces">Register successful</string>
 
     <string name="howTo">How to use the charts</string>
     <string name="graphUse">Tap on the chart to highlight a datapoint, tap again to remove.\n-\nDouble tap to see the values of all data points, double tap again to remove them.\n-\nPinch to zoom.</string>

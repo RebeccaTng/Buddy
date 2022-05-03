@@ -78,7 +78,7 @@
         android:id="@+id/dyn_numOfPlants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="5dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/mulish_bold"
         android:text="@string/number"
@@ -94,7 +94,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:contentDescription="@string/descriptionIcon"
-        android:onClick="goAddPlant"
+        android:onClick="goLibrary"
         android:src="@drawable/icon_add"
         app:layout_constraintBottom_toBottomOf="@+id/plantTitle"
         app:layout_constraintEnd_toEndOf="@+id/dyn_username_home"
@@ -116,10 +116,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantTitle"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/userMessage"
+        android:id="@+id/userMessage_home"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"

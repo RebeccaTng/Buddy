@@ -19,7 +19,8 @@
         android:theme="@style/Theme.Buddy">
         <activity
             android:name=".activities.Bluetooth"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.AddManual"
             android:exported="false"
@@ -39,7 +40,7 @@
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.AddPlant"
+            android:name=".activities.Library"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity

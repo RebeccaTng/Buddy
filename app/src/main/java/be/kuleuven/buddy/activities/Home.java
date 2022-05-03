@@ -48,6 +48,34 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         }
     }
 
+    public void goBluetooth(View caller) {
+        Intent goToBluetooth = new Intent(this, Bluetooth.class);
+        startActivity(goToBluetooth);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    public void goAccount(View caller) {
+        Intent goToAccount = new Intent(this, Account.class);
+        goToAccount.putExtra("accountInfo", accountInfo);
+        startActivity(goToAccount);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    public void goLibrary(View caller) {
+        Intent goToLibrary = new Intent(this, Library.class);
+        goToLibrary.putExtra("accountInfo", accountInfo);
+        startActivity(goToLibrary);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    @Override
+    public void onCardClick(int position) {
+        Intent goToPlantStatistics  = new Intent(this, PlantStatistics.class);
+        goToPlantStatistics.putExtra("plant", homePlants.get(position));
+        goToPlantStatistics.putExtra("accountInfo", accountInfo);
+        startActivity(goToPlantStatistics);
+    }
+
     private void homeRecycler() {
         homeRecycler.setHasFixedSize(true);
         homeRecycler.setLayoutManager(new LinearLayoutManager(this)); // Vertical layout by default
@@ -62,32 +90,5 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
         homeAdapter = new HomeAdapter(homePlants, this);
         homeRecycler.setAdapter(homeAdapter);
-    }
-
-    public void goBluetooth(View caller) {
-        Intent goToBluetooth = new Intent(this, Bluetooth.class);
-        startActivity(goToBluetooth);
-        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-    }
-
-    public void goAccount(View caller) {
-        Intent goToAccount = new Intent(this, Account.class);
-        goToAccount.putExtra("accountInfo", accountInfo);
-        startActivity(goToAccount);
-        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-    }
-
-    public void goAddPlant(View caller) {
-        Intent goToAddPlant = new Intent(this, AddPlant.class);
-        startActivity(goToAddPlant);
-        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-    }
-
-    @Override
-    public void onCardClick(int position) {
-        Intent goToPlantStatistics  = new Intent(this, PlantStatistics.class);
-        goToPlantStatistics.putExtra("plant", homePlants.get(position));
-        goToPlantStatistics.putExtra("accountInfo", accountInfo);
-        startActivity(goToPlantStatistics);
     }
 }

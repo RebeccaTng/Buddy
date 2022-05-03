@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
@@ -31,8 +31,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import be.kuleuven.buddy.R;
+import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.InfoFragment;
 
 public class Overview extends AppCompatActivity {
@@ -44,6 +46,7 @@ public class Overview extends AppCompatActivity {
     SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, yearFormat;
     String dayNow, date, dayToday, weekNowBegin, weekNowEnd, weekBegin, weekEnd, monthNow, yearNow;
     ImageView previous, next, infoBtn;
+    AccountInfo accountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class Overview extends AppCompatActivity {
         month = findViewById(R.id.overviewMonth);
         year = findViewById(R.id.overviewYear);
         infoBtn = findViewById(R.id.infoIconOverview);
+
+        if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
 
         infoBtn.setOnClickListener(view -> {
             String title = getResources().getString(R.string.howTo);
@@ -172,19 +177,26 @@ public class Overview extends AppCompatActivity {
         next.setOnClickListener(view -> changeDate(1, green));
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent goToPlantSettings = new Intent(this, PlantSettings.class);
+        goToPlantSettings.putExtra("accountInfo", accountInfo);
+        startActivity(goToPlantSettings);
+    }
+
     public void goBack(View caller) {
         onBackPressed();
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    public void changeDate(int sign, int green) {
+    private void changeDate(int sign, int green) {
         String currentDate = dateView.getText().toString();
         try {
             if(week.getCurrentTextColor() == green) {
                 String[] parts = currentDate.split(" - ");
-                calendar.setTime(weekFormatEnd.parse(parts[1]));
+                calendar.setTime(Objects.requireNonNull(weekFormatEnd.parse(parts[1])));
             }
-            else calendar.setTime(dayFormat.parse(currentDate));
+            else calendar.setTime(Objects.requireNonNull(dayFormat.parse(currentDate)));
         } catch (ParseException e) { e.printStackTrace(); }
 
         if(day.getCurrentTextColor() == green) {
@@ -221,7 +233,7 @@ public class Overview extends AppCompatActivity {
         dateView.setText(date);
     }
 
-    public void dataSetSettings(LineDataSet dataSet) {
+    private void dataSetSettings(LineDataSet dataSet) {
 
         int green = ContextCompat.getColor(this, R.color.green);
         int beige = ContextCompat.getColor(this, R.color.beige);
@@ -243,7 +255,7 @@ public class Overview extends AppCompatActivity {
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER); // Smooth line
     }
 
-    public void chartSettings(LineChart chart, LineDataSet dataSet) {
+    private void chartSettings(LineChart chart, LineDataSet dataSet) {
 
         Typeface tf = ResourcesCompat.getFont(this, R.font.mulish_regular);
         int dark_beige = ContextCompat.getColor(this, R.color.dark_beige);
@@ -310,7 +322,7 @@ public class Overview extends AppCompatActivity {
         chart.invalidate();
     }
 
-    public void axisSettings(String type, LineChart chart, LineDataSet dataSet) {
+    private void axisSettings(String type, LineChart chart, LineDataSet dataSet) {
         XAxis xAxis = chart.getXAxis();
 
         switch(type) {
@@ -382,7 +394,7 @@ public class Overview extends AppCompatActivity {
         chart.invalidate();
     }
 
-    public void updateChart(String type){
+    private void updateChart(String type){
 
         // Create new dataSet from values
         moistDataSet = new LineDataSet(getMoistDataSet(type), "moisture");

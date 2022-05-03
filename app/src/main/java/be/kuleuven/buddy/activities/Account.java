@@ -28,7 +28,6 @@ public class Account extends AppCompatActivity {
             username.setText(accountInfo.getUsername());
             email.setText(accountInfo.getEmail());
         }
-
     }
 
     @Override

@@ -1,14 +1,16 @@
 package be.kuleuven.buddy.cards;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class LibraryInfo implements Parcelable {
 
-    int libId, libImage;
+    int libId;
+    Bitmap libImage;
     String libSpecies;
 
-    public LibraryInfo(int libId, int libImage, String libSpecies) {
+    public LibraryInfo(int libId, Bitmap libImage, String libSpecies) {
         this.libImage = libImage;
         this.libId = libId;
         this.libSpecies = libSpecies;
@@ -16,7 +18,7 @@ public class LibraryInfo implements Parcelable {
 
     protected LibraryInfo(Parcel in) {
         libId = in.readInt();
-        libImage = in.readInt();
+        libImage = in.readParcelable(Bitmap.class.getClassLoader());
         libSpecies = in.readString();
     }
 
@@ -36,7 +38,7 @@ public class LibraryInfo implements Parcelable {
         return libId;
     }
 
-    public int getLibImage() {
+    public Bitmap getLibImage() {
         return libImage;
     }
 
@@ -52,7 +54,7 @@ public class LibraryInfo implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(libId);
-        parcel.writeInt(libImage);
+        parcel.writeValue(libImage);
         parcel.writeString(libSpecies);
     }
 }

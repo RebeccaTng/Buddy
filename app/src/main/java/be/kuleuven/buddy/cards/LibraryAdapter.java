@@ -36,7 +36,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         // Bind information
         LibraryInfo libraryInfo = libPlants.get(position);
 
-        holder.libImage.setImageResource(libraryInfo.getLibImage());
+        holder.libImage.setImageBitmap(libraryInfo.getLibImage());
         holder.libSpecies.setText(libraryInfo.getLibSpecies());
     }
 
@@ -61,7 +61,5 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         }
     }
 
-    public interface LibraryListener {
-        void onCardClick(int position);
-    }
+    public interface LibraryListener { void onCardClick(int position); }
 }
