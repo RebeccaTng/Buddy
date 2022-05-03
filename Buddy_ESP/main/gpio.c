@@ -1,14 +1,7 @@
 #include <sys/cdefs.h>
 #include "wifi.h"
 #include "gpio.h"
-
-static QueueHandle_t gpio_evt_queue = NULL;
-
-static void IRAM_ATTR gpio_isr_handler(void* arg)
-{
-    uint32_t gpio_num = (uint32_t) arg;
-    xQueueSendFromISR(gpio_evt_queue, &gpio_num, NULL);
-}
+#include "i2c.h"
 
 void blufi_btn(void)
 {
@@ -17,11 +10,21 @@ void blufi_btn(void)
     while(1) {
         if (gpio_get_level(BT_IN) == false && btn_pressed == false) {
             ESP_LOGW("BLUFI", "Button pressed");
+            ssd1306_display_text(&dev, 0, "Button Pressed! ", 16, false);
+            ssd1306_display_text(&dev, 1, "                ", 16, false);
+            ssd1306_display_text(&dev, 2, "Now go to App   ", 16, false);
+            ssd1306_display_text(&dev, 3, "Open Esp BluFi  ", 16, false);
+            ssd1306_display_text(&dev, 4, "Tap:BLUFI_DEVICE", 16, false);
+            ssd1306_display_text(&dev, 5, "Press Connect   ", 16, false);
+            ssd1306_display_text(&dev, 6, "Configure WiFi  ", 16, false);
+
             btn_pressed = true;
             blufi_init();
         }
         if (wifi_connected == true) {
             ESP_LOGW("WIFI", "Connected!");
+            ssd1306_clear_screen(&dev, false);
+            ssd1306_display_text(&dev, 0, "   Connected!   ", 16, false);
             break;
         }
     }

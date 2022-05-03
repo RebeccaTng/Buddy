@@ -3,6 +3,7 @@
 #include "audio.h"
 #include "gpio.h"
 #include "https.h"
+#include "i2c.h"
 
 ESP_EVENT_DECLARE_BASE(TASK_EVENTS);
 
@@ -41,13 +42,33 @@ void start_tasks(void) {
 
 _Noreturn void app_main(void)
 {
-    ESP_LOGW("MAIN", "Initialising 'Buddy'.");
-    ESP_LOGW("BLUFI", "Press the button to connect to Blufi.");
+    ESP_LOGI("MAIN", "Initialising 'Buddy'.");
+    i2c_master_init(CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 
+    ESP_LOGI("SCREEN", "Configured!");
+    ssd1306_display_text(&dev, 0, "       *        ", 16, false);
+    ssd1306_display_text(&dev, 1, "     *   *      ", 16, false);
+    ssd1306_display_text(&dev, 2, "   *       *    ", 16, false);
+    ssd1306_display_text(&dev, 3, " -   Buddy   -  ", 16, false);
+    ssd1306_display_text(&dev, 4, "   *       *    ", 16, false);
+    ssd1306_display_text(&dev, 5, "     *   *      ", 16, false);
+    ssd1306_display_text(&dev, 6, "       *        ", 16, false);
+
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
+    ESP_LOGI("BLUFI", "Starting Blufi.");
+    ssd1306_display_text(&dev, 0, " How to Start?  ", 16, false);
+    ssd1306_display_text(&dev, 1, "                ", 16, false);
+    ssd1306_display_text(&dev, 2, "Start Bluetooth ", 16, false);
+    ssd1306_display_text(&dev, 3, "on your Android ", 16, false);
+    ssd1306_display_text(&dev, 4, "                ", 16, false);
+    ssd1306_display_text(&dev, 5, "Press Bluetooth ", 16, false);
+    ssd1306_display_text(&dev, 6, "button on Buddy ", 16, false);
     blufi_btn();
+
+    ESP_LOGI("TASKS", "Starting tasks...");
     start_tasks();
 
-    ESP_LOGW("HTTPS", "Starting...");
+    ESP_LOGI("HTTPS", "Sending HTTPS...");
     https_ready = false;
     https_init();
 

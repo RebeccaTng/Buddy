@@ -1,5 +1,6 @@
 #include <sys/cdefs.h>
 #include "adc.h"
+#include "i2c.h"
 
 bool adc_calibration_init(void)
 {
@@ -22,23 +23,36 @@ bool adc_calibration_init(void)
 
 _Noreturn void adc_result(void) {
     int counter = 0;
+    bool new = true;
     while(1) {
         for(int i = 0; i < MAX_CHANNELS; i++) {
             adc_raw[i] = adc1_get_raw(channels[i]);
             if (cali_enable) {
                 voltage[i] = esp_adc_cal_raw_to_voltage(adc_raw[i], &adc1_chars);
                 ESP_LOGI(tags[i], "ADC: %d mV", voltage[i]);
+                if(new == true) {
+                    char screen_text[16];
+                    sprintf(screen_text, "%s: %dmV", tags[i], voltage[i]);
+                    ssd1306_display_text(&dev, i + 2, screen_text, 16, false);
+                }
             }
         }
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+        temperature = voltage[0] - voltage[1];
+        moisture = voltage[2];
+        distance = voltage[3];
+        light = voltage[4];
+
         if(counter++ == 3 && https_ready == false) {
-            temperature = 3222;
-            moisture = 1234;
-            distance = 1234;
-            light = 1000;
-            https_ready = true;
             counter = 0;
+            https_ready = true;
+            new = false;
+            ssd1306_clear_screen(&dev, false);
+            ssd1306_display_text(&dev, 0, " Plant's Status ", 16, false);
+            ssd1306_display_text(&dev, 4, "       :D       ", 16, false);
         }
+
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
 }
 

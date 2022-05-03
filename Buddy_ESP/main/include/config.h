@@ -16,11 +16,12 @@
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
 
-//I/O Includes///////////////////////////////////////
+//Driver Includes////////////////////////////////////
 #include "driver/adc.h"
 #include "driver/dac.h"
 #include "driver/gpio.h"
 #include "driver/gptimer.h"
+#include "driver/i2c.h"
 
 //ESP Includes///////////////////////////////////////
 #include "esp_adc_cal.h"

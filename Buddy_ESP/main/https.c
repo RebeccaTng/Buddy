@@ -70,23 +70,21 @@ _Noreturn void https_init(void) {
                 ESP_LOGE(HTTPS_TAG, "mbedtls_net_connect returned -%x", -ret);
 
             }
-
             ESP_LOGI(HTTPS_TAG, "Connected.");
-
             mbedtls_ssl_set_bio(&ssl, &server_fd, mbedtls_net_send, mbedtls_net_recv, NULL);
 
             ESP_LOGI(HTTPS_TAG, "Performing the SSL/TLS handshake...");
-
-            while ((ret = mbedtls_ssl_handshake(&ssl)) != 0) {
-                if (ret != MBEDTLS_ERR_SSL_WANT_READ && ret != MBEDTLS_ERR_SSL_WANT_WRITE) {
-                    ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_handshake returned -0x%x", -ret);
-                }
+            ret = mbedtls_ssl_handshake(&ssl);
+            if (ret != 0 && ret != MBEDTLS_ERR_SSL_WANT_READ && ret != MBEDTLS_ERR_SSL_WANT_WRITE) {
+                ESP_LOGE(HTTPS_TAG, "Mbed TLS Error!");
+                ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_handshake returned -0x%x", -ret);
+                https_ready = false;
+                continue;
             }
 
             ESP_LOGI(HTTPS_TAG, "Verifying peer X.509 certificate...");
 
             if ((flags = mbedtls_ssl_get_verify_result(&ssl)) != 0) {
-                /* In real life, we probably want to close connection if ret != 0 */
                 ESP_LOGW(HTTPS_TAG, "Failed to verify peer certificate!");
                 bzero(buf, sizeof(buf));
                 mbedtls_x509_crt_verify_info(buf, sizeof(buf), "  ! ", flags);

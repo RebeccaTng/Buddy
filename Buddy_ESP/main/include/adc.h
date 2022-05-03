@@ -14,11 +14,11 @@ static const adc1_channel_t channels[MAX_CHANNELS] = {
 };
 
 static const char *tags[16] = {
-        "Temp+ (ch. A2)",
-        "Temp- (ch. A3)",
-        "Moist (ch. A4)",
-        "Dist. (ch. 32)",
-        "LDR-3 (ch. 33)"
+        "Temp+",
+        "Temp-",
+        "Moist",
+        "Dist.",
+        "LDR-3"
 };
 
 bool https_ready;
