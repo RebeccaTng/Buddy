@@ -46,6 +46,7 @@ public class AddManual extends AppCompatActivity {
     EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, species;
     TextView errorMessage;
     AccountInfo accountInfo;
+    FieldChecker fieldChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class AddManual extends AppCompatActivity {
         errorMessage = findViewById(R.id.error_addManual);
 
         // Set minimum and maximum value
-        FieldChecker fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place , name, species, errorMessage);
+        fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place , name, species, errorMessage, 2);
         fieldChecker.setFilters();
 
         // Get image from library and set in preview
@@ -84,9 +85,7 @@ public class AddManual extends AppCompatActivity {
 
         addPic.setOnClickListener(view -> getImage.launch("image/*"));
 
-        addPlant.setOnClickListener(view -> {
-            if(fieldChecker.addPlant()) sendDatabase();
-        });
+        addPlant.setOnClickListener(view -> { if(fieldChecker.addPlant()) sendDatabase(); });
     }
 
     @Override
@@ -120,7 +119,7 @@ public class AddManual extends AppCompatActivity {
             data.put("minTemp", tempMin.getText().toString());
             data.put("maxTemp", tempMax.getText().toString());
             data.put("waterlvl", waterlvl.getText().toString());
-            data.put("plantDate", calculatePlantDate());
+            data.put("plantDate", fieldChecker.calculatePlantDate());
             data.put("place", place.getText().toString());
             data.put("name", name.getText().toString());
             data.put("species", species.getText().toString());
@@ -150,9 +149,9 @@ public class AddManual extends AppCompatActivity {
                             toast.show();
 
                             // Go to back to library
-                            Intent goToAddPlant = new Intent(this, Library.class);
-                            goToAddPlant.putExtra("accountInfo", accountInfo);
-                            startActivity(goToAddPlant);
+                            Intent goToHome = new Intent(this, Home.class);
+                            goToHome.putExtra("accountInfo", accountInfo);
+                            startActivity(goToHome);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
                         } else if(Rmessage.equals("AddSpeciesFailed")) {
@@ -189,13 +188,5 @@ public class AddManual extends AppCompatActivity {
             }
         };
         requestQueue.add(jsonObjectRequest);
-    }
-
-    private String calculatePlantDate(){
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat plantDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        calendar.add(Calendar.MONTH, -Integer.parseInt(ageMonths.getText().toString()));
-        calendar.add(Calendar.YEAR, -Integer.parseInt((ageYears.getText().toString())));
-        return plantDate.format(calendar.getTime());
     }
 }

@@ -1,18 +1,19 @@
 package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,16 +29,19 @@ import java.util.Map;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
-import be.kuleuven.buddy.other.InputFilterMinMax;
+import be.kuleuven.buddy.other.FieldChecker;
 
 public class AddLibrary extends AppCompatActivity {
 
-    EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageMonths;
-    int moistMinDB, moistMaxDB, lightMinDB, lightMaxDB, tempMinDB, tempMaxDB;
+    EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name;
+    int moistMinDB, moistMaxDB, lightMinDB, lightMaxDB, tempMinDB, tempMaxDB, speciesId;
     ImageView image;
-    TextView species;
+    TextView species, errorMessage;
     AccountInfo accountInfo;
     ProgressBar loading;
+    AppCompatButton useStandard, delete;
+    Button addPlant;
+    FieldChecker fieldChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,10 @@ public class AddLibrary extends AppCompatActivity {
         setContentView(R.layout.activity_add_library);
 
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
-        if(getIntent().hasExtra("libId")) getSpeciesData(getIntent().getExtras().getInt("libId"));
+        if(getIntent().hasExtra("libId")) {
+            speciesId = getIntent().getExtras().getInt("libId");
+            getSpeciesData(speciesId);
+        }
 
         image = findViewById(R.id.plantImage_addLib);
         species = findViewById(R.id.plantSpecies_addLib);
@@ -57,22 +64,33 @@ public class AddLibrary extends AppCompatActivity {
         tempMin = findViewById(R.id.tempMin_addLib);
         tempMax = findViewById(R.id.tempMax_addLib);
         waterlvl = findViewById(R.id.waterMin_addLib);
+        ageYears = findViewById(R.id.ageYear_addLib);
         ageMonths = findViewById(R.id.ageMonth_addLib);
+        place = findViewById(R.id.placeName_addLib);
+        name = findViewById(R.id.nameName_addLib);
+        errorMessage = findViewById(R.id.error_addLib);
         loading = findViewById(R.id.loading_addLib);
+        useStandard = findViewById(R.id.standardSettings_addLib);
+        delete = findViewById(R.id.delete_addLib);
+        addPlant = findViewById(R.id.addPlantBtn_addLib);
 
         loading.setVisibility(View.VISIBLE);
         image.setVisibility(View.INVISIBLE);
         species.setVisibility(View.INVISIBLE);
 
-        // Set minimum and maximum value
-        moistMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        moistMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        lightMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        lightMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        tempMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        tempMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        waterlvl.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        ageMonths.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "12")});
+        fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, 1);
+        fieldChecker.setFilters();
+
+        useStandard.setOnClickListener(view -> {
+            moistMin.setText(String.valueOf(moistMinDB));
+            moistMax.setText(String.valueOf(moistMaxDB));
+            lightMin.setText(String.valueOf(lightMinDB));
+            lightMax.setText(String.valueOf(lightMaxDB));
+            tempMin.setText(String.valueOf(tempMinDB));
+            tempMax.setText(String.valueOf(tempMaxDB));
+        });
+
+        addPlant.setOnClickListener(view -> { if(fieldChecker.addPlant()) sendData(checkStandardOrPersonalized()); });
     }
 
     @Override
@@ -88,23 +106,14 @@ public class AddLibrary extends AppCompatActivity {
     }
 
     private void getSpeciesData(int id) {
-        // Make the json object for the body of the get request
-        JSONObject loadSpecies = new JSONObject();
-        try {
-            loadSpecies.put("type", "UsersInfo");
-            loadSpecies.put("speciesId", id);
-        } catch (JSONException e) { e.printStackTrace(); }
-        System.out.println(loadSpecies);
-
         // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "https://a21iot03.studev.groept.be/public/api/library/getSpecies";
+        String url = "https://a21iot03.studev.groept.be/public/api/library/getSpecies/" + id;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
                     //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        System.out.println(response);
                         JSONObject data = response.getJSONObject("data");
 
                         //check if login is valid
@@ -119,27 +128,104 @@ public class AddLibrary extends AppCompatActivity {
                             lightMaxDB = data.getInt("maxLight");
                             tempMinDB = data.getInt("minTemp");
                             tempMaxDB = data.getInt("maxTemp");
-                            System.out.println(tempMaxDB);
 
                             loading.setVisibility(View.INVISIBLE);
                             image.setVisibility(View.VISIBLE);
+                            species.setVisibility(View.VISIBLE);
+                            useStandard.setClickable(true);
+                            delete.setClickable(true);
+                            addPlant.setClickable(true);
 
                         } else{
-                            loading.setVisibility(View.INVISIBLE);
-                            species.setText(R.string.error);
-                            species.setTextSize(20);
-                            species.setTextColor(ContextCompat.getColor(this, R.color.red));
+                            errorMessage.setText(R.string.error);
+                            errorMessage.setVisibility(View.VISIBLE);
                         }
-                        species.setVisibility(View.VISIBLE);
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
                     //process an error
                     loading.setVisibility(View.INVISIBLE);
-                    species.setText(R.string.error);
-                    species.setTextSize(20);
-                    species.setTextColor(ContextCompat.getColor(this, R.color.red));
-                    species.setVisibility(View.VISIBLE);
+                    errorMessage.setText(R.string.error);
+                    errorMessage.setVisibility(View.VISIBLE);
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accountInfo.getToken());
+                return headers;
+            }
+        };
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private Boolean checkStandardOrPersonalized() {
+        return !moistMin.getText().toString().equals(String.valueOf(moistMinDB)) || !moistMax.getText().toString().equals(String.valueOf(moistMaxDB))
+                || !lightMin.getText().toString().equals(String.valueOf(lightMinDB)) || !lightMax.getText().toString().equals(String.valueOf(lightMaxDB))
+                || !tempMin.getText().toString().equals(String.valueOf(tempMinDB)) || !tempMax.getText().toString().equals(String.valueOf(tempMaxDB));
+    }
+
+    private void sendData(Boolean personalized) {
+        // Make the json object for the body of the put request
+        JSONObject data = new JSONObject();
+        try {
+            data.put("speciesId", speciesId);
+            data.put("name", name.getText().toString());
+            data.put("plantDate", fieldChecker.calculatePlantDate());
+            data.put("place", place.getText().toString());
+            data.put("waterlvl", waterlvl.getText().toString());
+            if(personalized) {
+                data.put("personalized", 1);
+                data.put("minMoist", moistMin.getText().toString());
+                data.put("maxMoist", moistMax.getText().toString());
+                data.put("minLight", lightMin.getText().toString());
+                data.put("maxLight", lightMax.getText().toString());
+                data.put("minTemp", tempMin.getText().toString());
+                data.put("maxTemp", tempMax.getText().toString());
+            } else data.put("personalized", 0);
+        } catch (JSONException e) { e.printStackTrace(); }
+
+        JSONObject addPlantLibrary = new JSONObject();
+        try {
+            addPlantLibrary.put("type", "UsersInfo");
+            addPlantLibrary.put("data", data);
+        } catch (JSONException e) { e.printStackTrace(); }
+
+        // Connect to database
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String url = "https://a21iot03.studev.groept.be/public/api/library/addLibrary";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
+                response -> {
+                    //process the response
+                    try {
+                        String Rmessage = response.getString("message");
+                        String Rcomment = response.getString("comment");
+
+                        //check if login is valid
+                        if(Rmessage.equals("PlantLibraryAddSucces")){
+                            // Toast
+                            Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
+                            toast.show();
+                            System.out.println("PLANT LIBRARY ADD SUCCES");
+                            // Go to back to library
+                            Intent goToHome = new Intent(this, Home.class);
+                            goToHome.putExtra("accountInfo", accountInfo);
+                            startActivity(goToHome);
+                            this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+
+                        } else if(Rmessage.equals("AddPlantFailed")) {
+                            errorMessage.setText(R.string.plantExists);
+                            errorMessage.setVisibility(View.VISIBLE);
+                        } else{
+                            errorMessage.setText(R.string.error);
+                            errorMessage.setVisibility(View.VISIBLE);
+                        }
+                    } catch (JSONException e){ e.printStackTrace(); }},
+
+                error -> {
+                    //process an error
+                    errorMessage.setText(R.string.error);
+                    errorMessage.setVisibility(View.VISIBLE);
                 })
         {
             @Override
@@ -150,7 +236,7 @@ public class AddLibrary extends AppCompatActivity {
             @Override
             public byte[] getBody() {
                 // Request body goes here
-                return loadSpecies.toString().getBytes(StandardCharsets.UTF_8);
+                return addPlantLibrary.toString().getBytes(StandardCharsets.UTF_8);
             }
 
             @Override

@@ -5,6 +5,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import be.kuleuven.buddy.R;
 
 public class FieldChecker {
@@ -13,7 +17,7 @@ public class FieldChecker {
     TextView errorMessage;
     int fields;
 
-    public FieldChecker(EditText moistMin, EditText moistMax, EditText lightMin, EditText lightMax, EditText tempMin, EditText tempMax, EditText waterlvl, EditText ageYears, EditText ageMonths, EditText place, EditText name, EditText species, TextView errorMessage) {
+    public FieldChecker(EditText moistMin, EditText moistMax, EditText lightMin, EditText lightMax, EditText tempMin, EditText tempMax, EditText waterlvl, EditText ageYears, EditText ageMonths, EditText place, EditText name, EditText species, TextView errorMessage, int fields) {
         this.moistMin = moistMin;
         this.moistMax = moistMax;
         this.lightMin = lightMin;
@@ -27,7 +31,7 @@ public class FieldChecker {
         this.name = name;
         this.species = species;
         this.errorMessage = errorMessage;
-        fields = 2;
+        this.fields = fields;
     }
 
     public void setFilters(){
@@ -83,12 +87,16 @@ public class FieldChecker {
                 waterlvl.getText().toString().isEmpty() || ageYears.getText().toString().isEmpty() ||
                 ageMonths.getText().toString().isEmpty() || place.getText().toString().isEmpty();
 
-        if(fields == 1) {
-            empty = empty || name.getText().toString().isEmpty();
-
-        } else if(fields == 2 ) {
-            empty = empty || name.getText().toString().isEmpty() || species.getText().toString().isEmpty();
-        }
+        if(fields == 1) empty = empty || name.getText().toString().isEmpty();
+        else if(fields == 2 ) empty = empty || name.getText().toString().isEmpty() || species.getText().toString().isEmpty();
         return empty;
+    }
+
+    public String calculatePlantDate(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat plantDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        calendar.add(Calendar.MONTH, -Integer.parseInt(ageMonths.getText().toString()));
+        calendar.add(Calendar.YEAR, -Integer.parseInt((ageYears.getText().toString())));
+        return plantDate.format(calendar.getTime());
     }
 }
