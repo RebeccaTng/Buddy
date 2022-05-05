@@ -6,11 +6,12 @@
 #define DAC_CHAN        0
 
 /////SONG LENGTHS//////////////////////////////////////
-#define DOREMI_LENGTH   8
+#define AUDIO_LENGTH    8
 
 #define QUARTER_DUR     1000
-#define EIGHT_DUR       500
+#define QUAVER_DUR      500
 #define SEMIQUAVER_DUR  250
+#define SKIP_DUR        1
 
 #define    PAUSE_NOTE   1
 #define    C0_NOTE      16.35
@@ -156,9 +157,12 @@
 #define    Dh8_NOTE     4978.03
 #define    Eb8_NOTE     4978.03
 
+static bool sound_finished;
+static gptimer_handle_t gptimer;
 static int us_counter = 0;
 static int ms_counter = 0;
+static int song_id;
 static int raw_val[1];
 static int g_index = 0;
 
-_Noreturn TaskFunction_t audio_init(void);
+void audio_init(int song_id_);

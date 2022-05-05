@@ -1,4 +1,3 @@
-#include <sys/cdefs.h>
 #include "adc.h"
 #include "i2c.h"
 
@@ -21,39 +20,71 @@ bool adc_calibration_init(void)
     return cali_enable;
 }
 
-_Noreturn void adc_result(void) {
-    int counter = 0;
-    bool new = true;
-    while(1) {
+unsigned int getTemperature() {
+    return temperature;
+}
+
+unsigned int getMoisture() {
+    return moisture;
+}
+
+unsigned int getDistance() {
+    return distance;
+}
+
+unsigned int getLight() {
+    return light;
+}
+
+static void collect_data() {
+    temperature = 0;
+    moisture = 0;
+    distance = 0;
+    light = 0;
+
+    for(int j = 0; j < SAMPLES; j++) {
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
         for(int i = 0; i < MAX_CHANNELS; i++) {
             adc_raw[i] = adc1_get_raw(channels[i]);
             if (cali_enable) {
                 voltage[i] = esp_adc_cal_raw_to_voltage(adc_raw[i], &adc1_chars);
                 ESP_LOGI(tags[i], "ADC: %d mV", voltage[i]);
-                if(new == true) {
-                    char screen_text[16];
-                    sprintf(screen_text, "%s: %dmV", tags[i], voltage[i]);
-                    ssd1306_display_text(&dev, i + 2, screen_text, 16, false);
-                }
+                char screen_text[16];
+                sprintf(screen_text, "%s: %dmV", tags[i], voltage[i]);
+                ssd1306_display_text(&dev, i + 2, screen_text, 16, false);
             }
         }
-
-        temperature = voltage[0] - voltage[1];
-        moisture = voltage[2];
-        distance = voltage[3];
-        light = voltage[4];
-
-        if(counter++ == 3 && https_ready == false) {
-            counter = 0;
-            https_ready = true;
-            new = false;
-            ssd1306_clear_screen(&dev, false);
-            ssd1306_display_text(&dev, 0, " Plant's Status ", 16, false);
-            ssd1306_display_text(&dev, 4, "       :D       ", 16, false);
-        }
-
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        temperature += voltage[0] - voltage[1];
+        moisture += voltage[2];
+        distance += voltage[3];
+        light += voltage[4];
     }
+    temperature /= SAMPLES;
+    moisture /= SAMPLES;
+    distance /= SAMPLES;
+    light /= SAMPLES;
+}
+
+void adc_result(void) {
+    collect_data();
+    ssd1306_clear_screen(&dev, false);
+    ssd1306_display_text(&dev, 0, " Plant's Status ", 16, false);
+    if      (
+            temperature > 2000 && temperature < 2500
+            && moisture > 2000 && moisture < 2500
+            && distance > 2000 && distance < 2500
+            && light > 2000 && light < 2500
+            )
+        ssd1306_display_text(&dev, 4, "       :D       ", 16, false);
+    else if (
+            temperature > 1500 && temperature < 3000
+            && moisture > 1500 && moisture < 3000
+            && distance > 1500 && distance < 3000
+            && light > 1500 && light < 3000
+            )
+        ssd1306_display_text(&dev, 4, "       :)       ", 16, false);
+    else
+        ssd1306_display_text(&dev, 4, "       :(       ", 16, false);
 }
 
 void adc_init(void) {
