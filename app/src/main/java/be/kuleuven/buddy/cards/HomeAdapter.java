@@ -9,7 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Objects;
 
 import be.kuleuven.buddy.R;
 
@@ -36,7 +41,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         // Bind information
         HomeInfo homeInfo = homePlants.get(position);
 
-        holder.plantImage.setImageResource(homeInfo.getPlantImage());
+        holder.plantImage.setImageBitmap(homeInfo.getPlantImage());
         holder.plantName.setText(homeInfo.getPlantName());
         holder.plantSpecies.setText(homeInfo.getPlantSpecies());
         holder.plantWater.setText(homeInfo.getPlantWater());

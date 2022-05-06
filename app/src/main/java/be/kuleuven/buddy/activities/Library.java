@@ -5,10 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,8 +47,8 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
         getData();
 
-        userMessage = findViewById(R.id.userMessage_library);
         loading = findViewById(R.id.loading_library);
+        userMessage = findViewById(R.id.userMessage_library);
         libNumber = findViewById(R.id.dyn_libNumber);
         libraryRecycler = findViewById(R.id.Library_recycler);
 
@@ -92,13 +89,13 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
     @Override
     public void onCardClick(int position) {
         Intent goToAddLibrary = new Intent(this, AddLibrary.class);
-        goToAddLibrary.putExtra("libPlant", libPlants.get(position));
+        goToAddLibrary.putExtra("libId", libPlants.get(position).getLibId());
         goToAddLibrary.putExtra("accountInfo", accountInfo);
         startActivity(goToAddLibrary);
     }
 
     private void getData() {
-        // Make the json object for the body of the put request
+        // Make the json object for the body of the get request
         JSONObject library = new JSONObject();
         try {
             library.put("type", "UsersInfo");
@@ -115,21 +112,16 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
                         JSONArray data = response.getJSONArray("data");
 
                         //check if login is valid
-                        if(Rmessage.equals("Libraryloaded")){
+                        if(Rmessage.equals("LibraryLoaded")){
                             JSONObject dataObject;
-                            Integer speciesId;
-                            String species;
-                            byte[] decodedImage;
-                            Bitmap image;
+                            int speciesId;
+                            String species, image;
 
                             for(int i = 0; i < data.length(); i++) {
                                 dataObject = data.getJSONObject(i);
                                 speciesId = dataObject.getInt("speciesId");
+                                image = dataObject.getString("image");
                                 species = dataObject.getString("species");
-
-                                // decode image
-                                decodedImage = Base64.decode(dataObject.getString("image"), Base64.DEFAULT);
-                                image = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
 
                                 libPlants.add(new LibraryInfo(speciesId, image, species));
                             }

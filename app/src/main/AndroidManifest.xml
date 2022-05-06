@@ -37,7 +37,8 @@
         <activity
             android:name=".activities.AddLibrary"
             android:exported="false"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.Library"
             android:exported="false"

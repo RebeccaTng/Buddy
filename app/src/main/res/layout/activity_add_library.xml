@@ -40,13 +40,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/plant_image" />
+        app:srcCompat="@drawable/plant_image"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/plantSpecies_addLib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:fontFamily="@font/mulish_bold"
         android:lineSpacingExtra="-11dp"
         android:text="@string/plantSpecies"
@@ -55,13 +56,14 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantImage_addLib" />
+        app:layout_constraintTop_toBottomOf="@+id/plantImage_addLib"
+        tools:visibility="invisible" />
 
     <View
         android:id="@+id/line_addLib"
         android:layout_width="71dp"
         android:layout_height="3dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/bg_orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,8 +73,9 @@
         android:id="@+id/delete_addLib"
         android:layout_width="287dp"
         android:layout_height="41dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/bg_btn_red"
+        android:clickable="false"
         android:fontFamily="@font/mulish_bold"
         android:text="@string/deleteLib"
         android:textColor="@color/beige"
@@ -88,6 +91,7 @@
         android:layout_height="41dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_btn_second"
+        android:clickable="false"
         android:fontFamily="@font/mulish_bold"
         android:text="@string/standardSettings"
         android:textColor="@color/beige"
@@ -101,8 +105,9 @@
         android:id="@+id/addPlantBtn_addLib"
         android:layout_width="319dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/bg_btn_main"
+        android:clickable="false"
         android:fontFamily="@font/mulish_extrabold"
         android:text="@string/addPlant"
         android:textColor="@color/beige"
@@ -112,11 +117,39 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextContrastCheck" />
 
+    <ProgressBar
+        android:id="@+id/loading_addLib"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:indeterminateTint="@color/beige"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/plantImage_addLib" />
+
+    <TextView
+        android:id="@+id/error_addLib"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@null"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/addPlantBtn_addLib"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:scrollbarThumbVertical="@drawable/bg_btn_second"
@@ -595,7 +628,7 @@
                         android:layout_height="30dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="14dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="50dp"
                         android:background="@drawable/bg_fill_second"
                         android:ems="10"
                         android:fontFamily="@font/mulish_regular"

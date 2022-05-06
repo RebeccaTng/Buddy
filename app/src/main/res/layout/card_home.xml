@@ -27,7 +27,10 @@
         app:cardBackgroundColor="@color/green"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
-        app:contentPadding="10dp"
+        app:contentPaddingBottom="10dp"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp"
+        app:contentPaddingTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -38,9 +41,9 @@
 
             <TextView
                 android:id="@+id/dyn_plantName"
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="130dp"
+                android:layout_marginStart="140dp"
                 android:fontFamily="@font/mulish_bold"
                 android:lineSpacingExtra="-11dp"
                 android:text="@string/plantName"
@@ -52,7 +55,7 @@
 
             <TextView
                 android:id="@+id/dyn_plantSpecies"
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-3dp"
                 android:fontFamily="@font/mulish_regular"
@@ -102,7 +105,7 @@
 
             <TextView
                 android:id="@+id/dyn_plantPlace"
-                android:layout_width="167dp"
+                android:layout_width="157dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
@@ -119,7 +122,7 @@
 
             <TextView
                 android:id="@+id/dyn_plantStatus"
-                android:layout_width="179dp"
+                android:layout_width="169dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"

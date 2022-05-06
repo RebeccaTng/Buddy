@@ -51,6 +51,7 @@
     <string name="minMaxError">Please make sure minimum values are lower than maximum values.</string>
     <string name="bluetooth">Please connect to the device first by clicking on the bluetooth icon on the upper left.</string>
     <string name="speciesExists">This species already exists.</string>
+    <string name="plantExists">A plant with this name and species already exists.</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="welcome">Welcome,</string>
