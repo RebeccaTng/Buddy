@@ -16,6 +16,8 @@ import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.HomeAdapter;
 import be.kuleuven.buddy.cards.HomeInfo;
 
+import be.kuleuven.buddy.bluetooth.ui.MainActivity;
+
 public class Home extends AppCompatActivity implements HomeAdapter.HomeListener {
 
     RecyclerView homeRecycler;
@@ -49,7 +51,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     }
 
     public void goBluetooth(View caller) {
-        Intent goToBluetooth = new Intent(this, Bluetooth.class);
+        Intent goToBluetooth = new Intent(this, MainActivity.class);
         startActivity(goToBluetooth);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }

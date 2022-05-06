@@ -4,45 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Bluetooth">
-
-    <Button
-        android:id="@+id/BT_turn_on"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Turn On"
-        app:layout_constraintEnd_toEndOf="@+id/BT_turn_off"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/BT_turn_off"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/BT_turn_off"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Turn Off"
-        app:layout_constraintEnd_toEndOf="@+id/BT_discoverable"
-        app:layout_constraintStart_toStartOf="@+id/BT_discoverable"
-        app:layout_constraintTop_toBottomOf="@+id/BT_turn_on" />
-
-    <Button
-        android:id="@+id/BT_discoverable"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Discoverable"
-        app:layout_constraintEnd_toEndOf="@+id/BT_paired_devices"
-        app:layout_constraintStart_toStartOf="@+id/BT_paired_devices"
-        app:layout_constraintTop_toBottomOf="@+id/BT_turn_off" />
-
-    <Button
-        android:id="@+id/BT_paired_devices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get paired devices"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BT_discoverable" />
+    tools:context=".bluetooth.ui.Bluetooth">
 
     <TextView
         android:id="@+id/textView"
@@ -55,23 +17,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/BT_devices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BT_paired_devices" />
-
-    <TextView
-        android:id="@+id/BT_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="413dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BT_devices" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Available Bluetooth connections"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -43,12 +43,26 @@
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/card_library.xml" value="0.2153846153846154" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/fragment_passw.xml" value="0.44727272727272727" />
         <entry key="..\:/Users/2001r/Documents/School/Bachelor 3/Semester 2/EE5/buddy/app/src/main/res/layout/popup_passw.xml" value="0.2153846153846154" />
-        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_bluetooth.xml" value="0.4" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_bluetooth.xml" value="0.264" />
         <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_edit_account.xml" value="0.4" />
         <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_home.xml" value="0.4" />
         <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_info.xml" value="0.3625" />
         <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/activity_reset_password.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/blufi_activity.xml" value="0.264" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/blufi_content.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/blufi_custom_data_dialog.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/blufi_message_item.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/configure_option_activity.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/configure_option_content.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/configure_option_select_form.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/configure_option_softap_form.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/configure_option_station_form.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/main_activity.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/main_ble_item.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/main_content.xml" value="0.25" />
+        <entry key="..\:/Users/ebert/Documents/EE5_android_app/a21iot03/app/src/main/res/layout/names_connections.xml" value="0.25" />
       </map>
     </option>
   </component>
