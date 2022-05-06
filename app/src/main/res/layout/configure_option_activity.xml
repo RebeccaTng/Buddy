@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/beige"
     tools:context=".bluetooth.ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,5 +21,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/configure_option_content" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/configure_option_content" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
