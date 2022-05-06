@@ -81,7 +81,7 @@
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".bluetooth.ui.BlufiActivity"
+            android:name=".bluetooth.ui.BlufiConnect"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
@@ -89,7 +89,7 @@
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".bluetooth.ui.MainActivity"
+            android:name=".bluetooth.ui.BlufiMain"
             android:exported="false"
             android:screenOrientation="nosensor" />
 

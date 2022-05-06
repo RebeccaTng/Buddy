@@ -29,7 +29,7 @@ import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.HomeAdapter;
 import be.kuleuven.buddy.cards.HomeInfo;
 
-import be.kuleuven.buddy.bluetooth.ui.MainActivity;
+import be.kuleuven.buddy.bluetooth.ui.BlufiMain;
 
 public class Home extends AppCompatActivity implements HomeAdapter.HomeListener {
 
@@ -68,7 +68,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     }
 
     public void goBluetooth(View caller) {
-        Intent goToBluetooth = new Intent(this, MainActivity.class);
+        Intent goToBluetooth = new Intent(this, BlufiMain.class);
         startActivity(goToBluetooth);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }

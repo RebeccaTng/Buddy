@@ -58,12 +58,6 @@ public class Login extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
-    public void goRequestReset(View caller) {
-        Intent goToRequestReset = new Intent(this, RequestReset.class);
-        startActivity(goToRequestReset);
-        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-    }
-
     public void goHome(View caller) {
         Intent goToHome = new Intent(this, Home.class);
         goToHome.putExtra("accountInfo", accountInfo);

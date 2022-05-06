@@ -18,15 +18,29 @@
     </style>
 
     <!-- Bluetooth -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:fontFamily">@font/mulish_extrabold</item>
+        <item name="android:textColor">@color/beige</item>
+        <item name="android:textSize">26sp</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" >
+        <item name="android:fontFamily">@font/mulish_extrabold</item>
+        <item name="android:textColor">@color/beige</item>
+        <item name="android:textSize">26sp</item>
+    </style>
 
     <style name="BlufiActivityButtonBarButton">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">4dp</item>
-        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_marginStart">35dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:background">@drawable/bg_btn_main</item>
+        <item name="android:fontFamily">@font/mulish_extrabold</item>
+        <item name="android:textColor">@color/beige</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

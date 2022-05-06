@@ -9,6 +9,7 @@ import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.location.LocationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -44,7 +49,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 @SuppressLint("MissingPermission")
-public class MainActivity extends AppCompatActivity {
+public class BlufiMain extends AppCompatActivity {
     private static final long TIMEOUT_SCAN = 4000L;
 
     private static final int REQUEST_PERMISSION = 0x01;
@@ -67,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -222,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gotoDevice(BluetoothDevice device) {
-        Intent intent = new Intent(MainActivity.this, BlufiActivity.class);
+        Intent intent = new Intent(BlufiMain.this, BlufiConnect.class);
         intent.putExtra(BlufiConstants.KEY_BLE_DEVICE, device);
         startActivityForResult(intent, REQUEST_BLUFI);
 
@@ -292,13 +299,18 @@ public class MainActivity extends AppCompatActivity {
 
             BluetoothDevice device = scanResult.getDevice();
             String name = device.getName() == null ? getString(R.string.string_unknown) : device.getName();
+            holder.text1.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.dark_green));
+            holder.text1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            holder.text1.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.mulish_extrabold));
             holder.text1.setText(name);
 
             SpannableStringBuilder info = new SpannableStringBuilder();
             info.append("Mac:").append(device.getAddress())
                     .append(" RSSI:").append(String.valueOf(scanResult.getRssi()));
-            info.setSpan(new ForegroundColorSpan(0xFF9E9E9E), 0, 21, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-            info.setSpan(new ForegroundColorSpan(0xFF8D6E63), 21, info.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            info.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getApplicationContext(), R.color.black)), 0, 21, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            info.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getApplicationContext(),R.color.orange)), 21, info.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            holder.text2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            holder.text2.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.mulish_regular));
             holder.text2.setText(info);
         }
 

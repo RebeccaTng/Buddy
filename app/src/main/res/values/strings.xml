@@ -29,7 +29,6 @@
     <string name="confPassw">Confirm Password</string>
     <string name="newPassw">New Password</string>
     <string name="currPassw">Current Password</string>
-    <string name="forgotPassw">Forgot Password? Reset it.</string>
     <string name="passwRequire">Password Requirements</string>
     <string name="passwReqText">At least 8 characters,\n a number and an uppercase.</string>
     <string name="request">Request Reset</string>
