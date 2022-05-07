@@ -632,7 +632,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addPicBtn"
-        app:srcCompat="@drawable/plant_image" />
+        app:srcCompat="@drawable/logo_small" />
 
     <TextView
         android:id="@+id/error_addManual"

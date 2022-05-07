@@ -10,8 +10,6 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -209,10 +207,7 @@ public class BlufiConnect extends BaseActivity {
     }
 
     private void onGattServiceCharacteristicDiscovered() {
-        runOnUiThread(() -> {
-            mBlufiConfigureBtn.setEnabled(true);
-
-        });
+        runOnUiThread(() -> mBlufiConfigureBtn.setEnabled(true));
     }
 
     private void onGattDisconnected() {

@@ -17,6 +17,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CustomAlert" >
+        <item name="android:background">@color/beige</item>
+        <item name="android:fontFamily">@font/mulish_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <!-- Bluetooth -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="android:fontFamily">@font/mulish_extrabold</item>

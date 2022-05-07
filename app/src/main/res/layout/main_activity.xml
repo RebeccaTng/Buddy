@@ -18,7 +18,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/infoIconBlufiConnect"
+                android:id="@+id/infoIconBlufiMain"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="20dp"

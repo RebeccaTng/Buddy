@@ -3,10 +3,12 @@ package be.kuleuven.buddy.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +42,6 @@ public class AddLibrary extends AppCompatActivity {
     AccountInfo accountInfo;
     ProgressBar loading;
     AppCompatButton useStandard, delete;
-    Button addPlant;
     FieldChecker fieldChecker;
 
     @Override
@@ -52,7 +53,7 @@ public class AddLibrary extends AppCompatActivity {
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
         if(getIntent().hasExtra("libId")) {
             speciesId = getIntent().getExtras().getInt("libId");
-            getSpeciesData(speciesId);
+            getSpeciesData();
         }
 
         image = findViewById(R.id.plantImage_addLib);
@@ -72,11 +73,13 @@ public class AddLibrary extends AppCompatActivity {
         loading = findViewById(R.id.loading_addLib);
         useStandard = findViewById(R.id.standardSettings_addLib);
         delete = findViewById(R.id.delete_addLib);
-        addPlant = findViewById(R.id.addPlantBtn_addLib);
+        Button addPlant = findViewById(R.id.addPlantBtn_addLib);
 
         loading.setVisibility(View.VISIBLE);
         image.setVisibility(View.INVISIBLE);
         species.setVisibility(View.INVISIBLE);
+        useStandard.setEnabled(false);
+        delete.setEnabled(false);
 
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, 1);
         fieldChecker.setFilters();
@@ -91,6 +94,14 @@ public class AddLibrary extends AppCompatActivity {
         });
 
         addPlant.setOnClickListener(view -> { if(fieldChecker.addPlant()) sendData(checkStandardOrPersonalized()); });
+
+        delete.setOnClickListener(view -> {
+            AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomAlert));
+            deleteBuilder.setMessage("Are you sure you want to delete the species \"" + species.getText().toString() + "\" from the library and all plant instances of this species?")
+                    .setPositiveButton("Yes", (dialogInterface, i) -> deleteFromDatabase())
+                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel())
+                    .show();
+        });
     }
 
     @Override
@@ -105,10 +116,10 @@ public class AddLibrary extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    private void getSpeciesData(int id) {
+    private void getSpeciesData() {
         // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "https://a21iot03.studev.groept.be/public/api/library/getSpecies/" + id;
+        String url = "https://a21iot03.studev.groept.be/public/api/library/addLibrary/getSpecies/" + speciesId;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
                     //process the response
@@ -132,9 +143,8 @@ public class AddLibrary extends AppCompatActivity {
                             loading.setVisibility(View.INVISIBLE);
                             image.setVisibility(View.VISIBLE);
                             species.setVisibility(View.VISIBLE);
-                            useStandard.setClickable(true);
-                            delete.setClickable(true);
-                            addPlant.setClickable(true);
+                            useStandard.setEnabled(true);
+                            delete.setEnabled(true);
 
                         } else{
                             errorMessage.setText(R.string.error);
@@ -206,7 +216,6 @@ public class AddLibrary extends AppCompatActivity {
                             // Toast
                             Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
                             toast.show();
-                            System.out.println("PLANT LIBRARY ADD SUCCES");
                             // Go to back to library
                             Intent goToHome = new Intent(this, Home.class);
                             goToHome.putExtra("accountInfo", accountInfo);
@@ -249,5 +258,40 @@ public class AddLibrary extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    // TODO go to addPlant after delete btn
+    private void deleteFromDatabase() {
+        // Connect to database
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String url = "https://a21iot03.studev.groept.be/public/api/library/addLibrary/deleteSpecies/" + speciesId;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.DELETE, url, null,
+                response -> {
+                    //process the response
+                    try {
+                        String Rmessage = response.getString("message");
+
+                        //check if login is valid
+                        if(Rmessage.equals("SpeciesDeleted")){
+                            // Toast
+                            String comment = "Species \"" + species.getText().toString() + "\" and all of its instances successfully deleted";
+                            Toast toast = Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_LONG);
+                            toast.show();
+                            // Go to back to library
+                            Intent goToLibrary = new Intent(this, Library.class);
+                            goToLibrary.putExtra("accountInfo", accountInfo);
+                            startActivity(goToLibrary);
+                            this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                            finish();
+
+                        } else{
+                            errorMessage.setText(R.string.error);
+                            errorMessage.setVisibility(View.VISIBLE);
+                        }
+                    } catch (JSONException e){ e.printStackTrace(); }},
+
+                error -> {
+                    //process an error
+                    errorMessage.setText(R.string.error);
+                    errorMessage.setVisibility(View.VISIBLE);
+                });
+        requestQueue.add(jsonObjectRequest);
+    }
 }

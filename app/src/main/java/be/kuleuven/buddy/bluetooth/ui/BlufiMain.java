@@ -9,7 +9,6 @@ import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;

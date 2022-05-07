@@ -51,7 +51,6 @@
     <string name="error">An error occurred, please try again.</string>
     <string name="notAllFilled">Please fill in all fields.</string>
     <string name="minMaxError">Please make sure minimum values are lower than maximum values.</string>
-    <string name="bluetooth">Please connect to the device first by clicking on the bluetooth icon on the upper left.</string>
     <string name="speciesExists">This species already exists.</string>
     <string name="plantExists">A plant with this name and species already exists.</string>
     <string name="save">Save</string>
