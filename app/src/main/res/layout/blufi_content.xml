@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".bluetooth.ui.BlufiActivity"
+    tools:context=".bluetooth.ui.BlufiConnect"
     tools:showIn="@layout/blufi_activity">
 
     <androidx.gridlayout.widget.GridLayout
@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        app:columnCount="4"
-        app:rowCount="2">
+        app:columnCount="1"
+        app:rowCount="3">
         <!-- First Line -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/blufi_connect"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="5dp"
@@ -10,12 +11,16 @@
         android:id="@+id/device_mode_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/configure_sel_device_mode" />
+        android:fontFamily="@font/mulish_regular"
+        android:text="@string/configure_sel_device_mode"
+        android:textColor="@color/dark_green"
+        tools:ignore="TextContrastCheck" />
 
     <Spinner
         android:id="@+id/device_mode_sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/device_mode_text"
-        android:entries="@array/esp_blufi_configure_device_modes" />
+        android:entries="@array/esp_blufi_configure_device_modes"
+        tools:ignore="TouchTargetSizeCheck" />
 </RelativeLayout>

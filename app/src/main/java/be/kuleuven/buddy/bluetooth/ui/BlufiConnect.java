@@ -12,18 +12,19 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import be.kuleuven.buddy.R;
@@ -44,7 +45,7 @@ import blufi.espressif.response.BlufiStatusResponse;
 import blufi.espressif.response.BlufiVersionResponse;
 
 @SuppressLint("MissingPermission")
-public class BlufiActivity extends BaseActivity {
+public class BlufiConnect extends BaseActivity {
     private static final int REQUEST_CONFIGURE = 0x20;
 
     private final BlufiLog mLog = new BlufiLog(getClass());
@@ -64,6 +65,8 @@ public class BlufiActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.blufi_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -168,7 +171,7 @@ public class BlufiActivity extends BaseActivity {
      * Go to configure options
      */
     private void configureOptions() {
-        Intent intent = new Intent(BlufiActivity.this, ConfigureOptionsActivity.class);
+        Intent intent = new Intent(BlufiConnect.this, ConfigureOptionsActivity.class);
         startActivityForResult(intent, REQUEST_CONFIGURE);
     }
 
@@ -426,7 +429,7 @@ public class BlufiActivity extends BaseActivity {
                 msgRes = R.string.blufi_function_configure_msg;
             }
 
-            mToast = Toast.makeText(BlufiActivity.this, msgRes, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(BlufiConnect.this, msgRes, Toast.LENGTH_SHORT);
             mToast.show();
 
             return true;
@@ -456,7 +459,9 @@ public class BlufiActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull MsgHolder holder, int position) {
             Message msg = mMsgList.get(position);
             holder.text1.setText(msg.text);
-            holder.text1.setTextColor(msg.isNotification ? Color.RED : Color.BLACK);
+            holder.text1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            holder.text1.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.mulish_regular));
+            holder.text1.setTextColor(msg.isNotification ? ContextCompat.getColor(getApplicationContext(), R.color.red) : ContextCompat.getColor(getApplicationContext(), R.color.black));
         }
 
         @Override
