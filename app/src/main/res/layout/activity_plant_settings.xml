@@ -7,6 +7,18 @@
     android:background="@color/green"
     tools:context=".activities.PlantSettings">
 
+    <ProgressBar
+        android:id="@+id/loading_settings"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:indeterminateTint="@color/beige"
+        app:layout_constraintEnd_toEndOf="@+id/dyn_plantImage_settings"
+        app:layout_constraintStart_toStartOf="@+id/dyn_plantImage_settings"
+        app:layout_constraintTop_toTopOf="@+id/dyn_plantImage_settings" />
+
+
     <View
         android:id="@+id/card_bg_settings"
         android:layout_width="0dp"
@@ -54,7 +66,7 @@
         android:importantForAutofill="no"
         android:inputType="textMultiLine|textPersonName"
         android:lineSpacingExtra="-11dp"
-        android:text="@string/plantName"
+        android:text="@null"
         android:textAlignment="viewStart"
         android:textColor="@color/beige"
         android:textColorHint="@color/light_grey"
@@ -74,7 +86,7 @@
         android:contentDescription="@string/descriptionImage"
         app:layout_constraintBottom_toTopOf="@+id/card_bg_settings"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/plant_image"
+        app:srcCompat="@null"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
@@ -85,7 +97,7 @@
         android:layout_marginEnd="15dp"
         android:fontFamily="@font/mulish_regular"
         android:lineSpacingExtra="-4dp"
-        android:text="@string/plantSpecies"
+        android:text="@null"
         android:textAlignment="viewStart"
         android:textColor="@color/beige"
         android:textSize="18sp"

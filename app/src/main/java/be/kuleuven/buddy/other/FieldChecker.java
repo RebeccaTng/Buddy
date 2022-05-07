@@ -15,9 +15,9 @@ public class FieldChecker {
 
     EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, species;
     TextView errorMessage;
-    int fields;
+    Boolean fields;
 
-    public FieldChecker(EditText moistMin, EditText moistMax, EditText lightMin, EditText lightMax, EditText tempMin, EditText tempMax, EditText waterlvl, EditText ageYears, EditText ageMonths, EditText place, EditText name, EditText species, TextView errorMessage, int fields) {
+    public FieldChecker(EditText moistMin, EditText moistMax, EditText lightMin, EditText lightMax, EditText tempMin, EditText tempMax, EditText waterlvl, EditText ageYears, EditText ageMonths, EditText place, EditText name, EditText species, TextView errorMessage, Boolean fields) {
         this.moistMin = moistMin;
         this.moistMax = moistMax;
         this.lightMin = lightMin;
@@ -85,10 +85,9 @@ public class FieldChecker {
                 lightMin.getText().toString().isEmpty() || lightMax.getText().toString().isEmpty() ||
                 tempMin.getText().toString().isEmpty() || tempMin.getText().toString().isEmpty() ||
                 waterlvl.getText().toString().isEmpty() || ageYears.getText().toString().isEmpty() ||
-                ageMonths.getText().toString().isEmpty() || place.getText().toString().isEmpty();
-
-        if(fields == 1) empty = empty || name.getText().toString().isEmpty();
-        else if(fields == 2 ) empty = empty || name.getText().toString().isEmpty() || species.getText().toString().isEmpty();
+                ageMonths.getText().toString().isEmpty() || place.getText().toString().isEmpty() ||
+                name.getText().toString().isEmpty();
+        if(fields == true ) empty = empty || name.getText().toString().isEmpty() || species.getText().toString().isEmpty();
         return empty;
     }
 

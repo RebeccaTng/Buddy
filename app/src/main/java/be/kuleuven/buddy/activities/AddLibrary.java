@@ -76,12 +76,10 @@ public class AddLibrary extends AppCompatActivity {
         Button addPlant = findViewById(R.id.addPlantBtn_addLib);
 
         loading.setVisibility(View.VISIBLE);
-        image.setVisibility(View.INVISIBLE);
-        species.setVisibility(View.INVISIBLE);
         useStandard.setEnabled(false);
         delete.setEnabled(false);
 
-        fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, 1);
+        fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);
         fieldChecker.setFilters();
 
         useStandard.setOnClickListener(view -> {
@@ -141,12 +139,11 @@ public class AddLibrary extends AppCompatActivity {
                             tempMaxDB = data.getInt("maxTemp");
 
                             loading.setVisibility(View.INVISIBLE);
-                            image.setVisibility(View.VISIBLE);
-                            species.setVisibility(View.VISIBLE);
                             useStandard.setEnabled(true);
                             delete.setEnabled(true);
 
                         } else{
+                            loading.setVisibility(View.INVISIBLE);
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }

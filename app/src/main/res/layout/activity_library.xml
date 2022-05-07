@@ -110,14 +110,13 @@
         android:layout_marginStart="5dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/mulish_bold"
-        android:text="@string/number"
+        android:text="@null"
         android:textAlignment="viewStart"
         android:textColor="@color/orange"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/browseTitle"
         app:layout_constraintStart_toEndOf="@+id/browseTitle"
-        tools:ignore="TextContrastCheck"
-        tools:visibility="invisible" />
+        tools:ignore="TextContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Library_recycler"
@@ -157,14 +156,14 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/mulish_bold"
-        android:text="@string/noLibPlants"
+        android:text="@null"
         android:textAlignment="center"
         android:textColor="@color/dark_green"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/browseTitle"
-        tools:visibility="invisible" />
+        tools:visibility="+" />
 
     <ProgressBar
         android:id="@+id/loading_library"

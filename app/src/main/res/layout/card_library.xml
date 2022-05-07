@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="@+id/cardView2"
         app:layout_constraintStart_toStartOf="@+id/cardView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/plant_image" />
+        app:srcCompat="@null" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="11dp"
                 android:fontFamily="@font/mulish_bold"
-                android:text="@string/plantSpecies"
+                android:text="@null"
                 android:textColor="@color/beige"
                 android:textSize="21sp"
                 app:layout_constraintBottom_toBottomOf="parent"

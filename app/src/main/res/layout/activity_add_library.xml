@@ -40,8 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/plant_image"
-        tools:visibility="invisible" />
+        app:srcCompat="@null" />
 
     <TextView
         android:id="@+id/plantSpecies_addLib"
@@ -50,14 +49,13 @@
         android:layout_marginTop="3dp"
         android:fontFamily="@font/mulish_bold"
         android:lineSpacingExtra="-11dp"
-        android:text="@string/plantSpecies"
+        android:text="@null"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantImage_addLib"
-        tools:visibility="invisible" />
+        app:layout_constraintTop_toBottomOf="@+id/plantImage_addLib" />
 
     <View
         android:id="@+id/line_addLib"

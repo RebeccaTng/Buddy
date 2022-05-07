@@ -12,13 +12,13 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
-public class HomeInfo implements Parcelable {
+public class HomeInfo {
 
-    int plantId;
+    int plantId, connected;
     Bitmap plantImage;
     String plantName, plantSpecies, plantWater, plantPlace, plantStatus;
 
-    public HomeInfo(int plantId, String plantImage, String plantName, String plantSpecies, String plantWater, String plantPlace, String plantStatus) {
+    public HomeInfo(int plantId, String plantImage, String plantName, String plantSpecies, String plantWater, String plantPlace, String plantStatus, int connected) {
 
         SimpleDateFormat oldDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -43,28 +43,8 @@ public class HomeInfo implements Parcelable {
         this.plantWater = lastWatered;
         this.plantPlace = plantPlace;
         this.plantStatus = plantStatus;
+        this.connected = connected;
     }
-
-    protected HomeInfo(Parcel in) {
-        plantImage = in.readParcelable(Bitmap.class.getClassLoader());
-        plantName = in.readString();
-        plantSpecies = in.readString();
-        plantWater = in.readString();
-        plantPlace = in.readString();
-        plantStatus = in.readString();
-    }
-
-    public static final Creator<HomeInfo> CREATOR = new Creator<HomeInfo>() {
-        @Override
-        public HomeInfo createFromParcel(Parcel in) {
-            return new HomeInfo(in);
-        }
-
-        @Override
-        public HomeInfo[] newArray(int size) {
-            return new HomeInfo[size];
-        }
-    };
 
     public int getPlantId() { return plantId; }
 
@@ -92,18 +72,5 @@ public class HomeInfo implements Parcelable {
         return plantStatus;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(plantImage);
-        dest.writeString(plantName);
-        dest.writeString(plantSpecies);
-        dest.writeString(plantWater);
-        dest.writeString(plantPlace);
-        dest.writeString(plantStatus);
-    }
+    public int getConnected() { return connected; }
 }

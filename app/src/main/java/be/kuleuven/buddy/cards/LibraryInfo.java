@@ -6,7 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Base64;
 
-public class LibraryInfo implements Parcelable {
+public class LibraryInfo {
 
     int libId;
     String libSpecies;
@@ -21,24 +21,6 @@ public class LibraryInfo implements Parcelable {
         this.libSpecies = libSpecies;
     }
 
-    protected LibraryInfo(Parcel in) {
-        libId = in.readInt();
-        libImage = in.readParcelable(Bitmap.class.getClassLoader());
-        libSpecies = in.readString();
-    }
-
-    public static final Creator<LibraryInfo> CREATOR = new Creator<LibraryInfo>() {
-        @Override
-        public LibraryInfo createFromParcel(Parcel in) {
-            return new LibraryInfo(in);
-        }
-
-        @Override
-        public LibraryInfo[] newArray(int size) {
-            return new LibraryInfo[size];
-        }
-    };
-
     public int getLibId() {
         return libId;
     }
@@ -49,17 +31,5 @@ public class LibraryInfo implements Parcelable {
 
     public String getLibSpecies() {
         return libSpecies;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(libId);
-        parcel.writeValue(libImage);
-        parcel.writeString(libSpecies);
     }
 }

@@ -47,6 +47,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.plantWater.setText(homeInfo.getPlantWater());
         holder.plantPlace.setText(homeInfo.getPlantPlace());
         holder.plantStatus.setText(homeInfo.getPlantStatus());
+        if(homeInfo.getConnected() == 1) holder.connected.setVisibility(View.VISIBLE);
+        else holder.connected.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -60,6 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         ImageView plantImage;
         TextView plantName, plantSpecies, plantWater, plantPlace, plantStatus;
         HomeListener homeListener;
+        View connected;
 
         public HomeViewHolder(@NonNull View itemView, HomeListener homeListener) {
             super(itemView);
@@ -70,6 +73,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             plantWater = itemView.findViewById(R.id.dyn_plantWater);
             plantPlace = itemView.findViewById(R.id.dyn_plantPlace);
             plantStatus = itemView.findViewById(R.id.dyn_plantStatus);
+            connected = itemView.findViewById(R.id.connectedCard_icon);
 
             this.homeListener = homeListener;
             itemView.setOnClickListener(view -> homeListener.onCardClick(getAdapterPosition()));

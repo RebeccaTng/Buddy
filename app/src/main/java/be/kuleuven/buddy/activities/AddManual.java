@@ -74,7 +74,7 @@ public class AddManual extends AppCompatActivity {
         errorMessage = findViewById(R.id.error_addManual);
 
         // Set minimum and maximum value
-        fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place , name, species, errorMessage, 2);
+        fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place , name, species, errorMessage, true);
         fieldChecker.setFilters();
 
         // Get image from library and set in preview

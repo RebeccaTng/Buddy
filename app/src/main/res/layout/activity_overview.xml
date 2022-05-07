@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/mulish_semibold"
-        android:text="@string/date"
+        android:text="@null"
         android:textColor="@color/beige"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

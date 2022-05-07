@@ -15,7 +15,7 @@
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:srcCompat="@drawable/plant_image" />
+        app:srcCompat="@null" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -46,11 +46,21 @@
                 android:layout_marginStart="140dp"
                 android:fontFamily="@font/mulish_bold"
                 android:lineSpacingExtra="-11dp"
-                android:text="@string/plantName"
+                android:text="@null"
                 android:textAlignment="viewStart"
                 android:textColor="@color/beige"
                 android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/connectedCard_icon"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/online_inv"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -60,7 +70,7 @@
                 android:layout_marginTop="-3dp"
                 android:fontFamily="@font/mulish_regular"
                 android:lineSpacingExtra="-4dp"
-                android:text="@string/plantSpecies"
+                android:text="@null"
                 android:textAlignment="viewStart"
                 android:textColor="@color/beige"
                 android:textSize="14sp"
@@ -84,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/mulish_regular"
-                android:text="@string/plantWater"
+                android:text="@null"
                 android:textAlignment="viewStart"
                 android:textColor="@color/beige"
                 android:textSize="14sp"
@@ -111,7 +121,7 @@
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/mulish_regular"
                 android:lineSpacingExtra="-4dp"
-                android:text="@string/plantPlace"
+                android:text="@null"
                 android:textAlignment="viewStart"
                 android:textColor="@color/beige"
                 android:textSize="14sp"
@@ -128,7 +138,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/mulish_regular"
                 android:lineSpacingExtra="-4dp"
-                android:text="@string/plantStatus"
+                android:text="@null"
                 android:textAlignment="viewStart"
                 android:textColor="@color/beige"
                 android:textSize="14sp"

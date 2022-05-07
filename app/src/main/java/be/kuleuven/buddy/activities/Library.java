@@ -53,8 +53,6 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
         libraryRecycler = findViewById(R.id.Library_recycler);
 
         loading.setVisibility(View.VISIBLE);
-        userMessage.setVisibility(View.INVISIBLE);
-        libNumber.setVisibility(View.INVISIBLE);
         libraryRecycler.setVisibility(View.INVISIBLE);
 
         libraryRecycler.setHasFixedSize(true);
@@ -167,13 +165,10 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
         loading.setVisibility(View.GONE);
         if(libraryAdapter.getItemCount() != 0) {
             libraryRecycler.setVisibility(View.VISIBLE);
-            userMessage.setVisibility(View.INVISIBLE);
         } else {
             libraryRecycler.setVisibility(View.INVISIBLE);
             userMessage.setText(R.string.noLibPlants);
-            userMessage.setVisibility(View.VISIBLE);
         }
         libNumber.setText(String.valueOf(libraryAdapter.getItemCount()));
-        libNumber.setVisibility(View.VISIBLE);
     }
 }

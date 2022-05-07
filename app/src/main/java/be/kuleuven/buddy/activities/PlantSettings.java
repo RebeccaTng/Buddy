@@ -21,7 +21,7 @@ import be.kuleuven.buddy.other.InputFilterMinMax;
 public class PlantSettings extends AppCompatActivity {
 
     AccountInfo accountInfo;
-    HomeInfo plant;
+    int plantId;
     EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageMonths;
 
     @Override
@@ -48,11 +48,8 @@ public class PlantSettings extends AppCompatActivity {
 
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
 
-        if(getIntent().hasExtra("plant")) {
-            plant = getIntent().getExtras().getParcelable("plant");
-            image.setImageBitmap(plant.getPlantImage());
-            name.setText(plant.getPlantName());
-            species.setText(plant.getPlantSpecies());
+        if(getIntent().hasExtra("plantId")) {
+            plantId = getIntent().getExtras().getInt("plantId");
         }
 
         // Set minimum and maximum value
@@ -109,7 +106,7 @@ public class PlantSettings extends AppCompatActivity {
 
     public void goPlantStatistics(View caller) {
         Intent goToPlantStatistics = new Intent(this, PlantStatistics.class);
-        goToPlantStatistics.putExtra("plant", plant);
+        goToPlantStatistics.putExtra("plantId", plantId);
         goToPlantStatistics.putExtra("accountInfo", accountInfo);
         startActivity(goToPlantStatistics);
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

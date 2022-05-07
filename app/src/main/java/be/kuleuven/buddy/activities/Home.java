@@ -59,8 +59,6 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         homeRecycler = findViewById(R.id.home_recycler);
 
         loading.setVisibility(View.VISIBLE);
-        userMessage.setVisibility(View.INVISIBLE);
-        numOfPlants.setVisibility(View.INVISIBLE);
         homeRecycler.setVisibility(View.INVISIBLE);
 
         homeRecycler.setHasFixedSize(true);
@@ -90,7 +88,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     @Override
     public void onCardClick(int position) {
         Intent goToPlantStatistics  = new Intent(this, PlantStatistics.class);
-        goToPlantStatistics.putExtra("plant", homePlants.get(position));
+        goToPlantStatistics.putExtra("plantId", homePlants.get(position).getPlantId());
         goToPlantStatistics.putExtra("accountInfo", accountInfo);
         startActivity(goToPlantStatistics);
     }
@@ -115,7 +113,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                         //check if login is valid
                         if(Rmessage.equals("HomeLoaded")){
                             JSONObject dataObject;
-                            Integer plantId;
+                            int plantId, connected;
                             String name, species, last_watered, place, status, image;
 
                             for(int i = 0; i < data.length(); i++) {
@@ -127,8 +125,9 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                                 last_watered = dataObject.getString("lastWatered");
                                 place = dataObject.getString("place");
                                 status = dataObject.getString("status");
+                                connected = dataObject.getInt("connected");
 
-                                homePlants.add(new HomeInfo(plantId, image, name, species, last_watered, place, status));
+                                homePlants.add(new HomeInfo(plantId, image, name, species, last_watered, place, status, connected));
                             }
                             loadHomeRecycler();
 
@@ -172,13 +171,10 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         loading.setVisibility(View.GONE);
         if(homeAdapter.getItemCount() != 0) {
             homeRecycler.setVisibility(View.VISIBLE);
-            userMessage.setVisibility(View.INVISIBLE);
         } else {
             homeRecycler.setVisibility(View.INVISIBLE);
             userMessage.setText(R.string.noPlants);
-            userMessage.setVisibility(View.VISIBLE);
         }
         numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));
-        numOfPlants.setVisibility(View.VISIBLE);
     }
 }
