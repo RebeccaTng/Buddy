@@ -52,7 +52,7 @@ public class BlufiConnect extends BaseActivity {
 
     private BluetoothDevice mDevice;
     private BlufiClient mBlufiClient;
-    private volatile boolean mConnected;
+    public volatile boolean mConnected;
 
     private RecyclerView mMsgRecyclerView;
     private List<Message> mMsgList;
@@ -103,7 +103,6 @@ public class BlufiConnect extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         if (mBlufiClient != null) {
             mBlufiClient.close();
             mBlufiClient = null;
@@ -136,6 +135,7 @@ public class BlufiConnect extends BaseActivity {
             mMsgAdapter.notifyItemInserted(mMsgList.size() - 1);
             mMsgRecyclerView.scrollToPosition(mMsgList.size() - 1);
         });
+        System.out.println(mConnected);
     }
 
     /**
@@ -153,6 +153,7 @@ public class BlufiConnect extends BaseActivity {
         mBlufiClient.setGattCallback(new GattCallback());
         mBlufiClient.setBlufiCallback(new BlufiCallbackMain());
         mBlufiClient.connect();
+
     }
 
     /**
@@ -199,11 +200,13 @@ public class BlufiConnect extends BaseActivity {
     private void onGattServiceCharacteristicDiscovered() {
         runOnUiThread(() -> {
             mBlufiConfigureBtn.setEnabled(true);
+
         });
     }
 
     private void onGattDisconnected() {
         mConnected = false;
+
         runOnUiThread(() -> {
             mBlufiConnectBtn.setEnabled(true);
 
