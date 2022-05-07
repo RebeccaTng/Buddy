@@ -39,6 +39,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.EspressifApp:lib-blufi-android:2.3.5@aar'
     implementation 'com.github.EspressifApp:lib-blufi-android:2.3.5'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.4'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'

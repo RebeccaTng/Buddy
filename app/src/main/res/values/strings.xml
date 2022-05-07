@@ -45,6 +45,9 @@
     <string name="edit">Edit</string>
 
     <!-- General -->
+    <string name="howToBlufi">How to connect BluFi</string>
+    <string name="infoBlufiMain">Select the BluFi device you want to connect with.</string>
+    <string name="infoBlufiConnect">Connect with this device and configure the WiFi options.</string>
     <string name="error">An error occurred, please try again.</string>
     <string name="notAllFilled">Please fill in all fields.</string>
     <string name="minMaxError">Please make sure minimum values are lower than maximum values.</string>

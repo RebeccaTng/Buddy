@@ -11,12 +11,14 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import be.kuleuven.buddy.other.InfoFragment;
 import blufi.espressif.BlufiCallback;
 import blufi.espressif.BlufiClient;
 import blufi.espressif.params.BlufiConfigureParams;
@@ -71,6 +74,14 @@ public class BlufiConnect extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setHomeAsUpEnable(true);
+
+        ImageView infoBtn = findViewById(R.id.infoIconBlufiConnect);
+        infoBtn.setOnClickListener(view -> {
+            String title = getResources().getString(R.string.howToBlufi);
+            String body = getResources().getString(R.string.infoBlufiConnect);
+            InfoFragment info = InfoFragment.newInstance(title, body);
+            info.show(getSupportFragmentManager(), "infoFragment");
+        });
 
         mDevice = getIntent().getParcelableExtra(BlufiConstants.KEY_BLE_DEVICE);
         assert mDevice != null;

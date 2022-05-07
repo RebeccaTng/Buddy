@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.bluetooth.app.BlufiLog;
 import be.kuleuven.buddy.bluetooth.constants.BlufiConstants;
+import be.kuleuven.buddy.other.InfoFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,6 +79,14 @@ public class BlufiMain extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ImageView infoBtn = findViewById(R.id.infoIconBlufiMain);
+        infoBtn.setOnClickListener(view -> {
+            String title = getResources().getString(R.string.howToBlufi);
+            String body = getResources().getString(R.string.infoBlufiMain);
+            InfoFragment info = InfoFragment.newInstance(title, body);
+            info.show(getSupportFragmentManager(), "infoFragment");
+        });
 
         mThreadPool = Executors.newSingleThreadExecutor();
 
