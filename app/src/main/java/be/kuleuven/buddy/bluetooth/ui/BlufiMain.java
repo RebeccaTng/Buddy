@@ -227,8 +227,6 @@ public class BlufiMain extends AppCompatActivity {
         runOnUiThread(() -> {
             mBleList.clear();
             mBleList.addAll(devices);
-            System.out.println("****DEVICES*****");
-
 
             mBleAdapter.notifyDataSetChanged();
 
