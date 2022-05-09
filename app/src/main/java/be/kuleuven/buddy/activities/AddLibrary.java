@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -43,6 +44,7 @@ public class AddLibrary extends AppCompatActivity {
     ProgressBar loading;
     AppCompatButton useStandard, delete;
     FieldChecker fieldChecker;
+    Button addPlant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class AddLibrary extends AppCompatActivity {
         loading = findViewById(R.id.loading_addLib);
         useStandard = findViewById(R.id.standardSettings_addLib);
         delete = findViewById(R.id.delete_addLib);
-        Button addPlant = findViewById(R.id.addPlantBtn_addLib);
+        addPlant = findViewById(R.id.addPlantBtn_addLib);
 
         loading.setVisibility(View.VISIBLE);
         useStandard.setEnabled(false);
@@ -91,7 +93,12 @@ public class AddLibrary extends AppCompatActivity {
             tempMax.setText(String.valueOf(tempMaxDB));
         });
 
-        addPlant.setOnClickListener(view -> { if(fieldChecker.addPlant()) sendData(checkStandardOrPersonalized()); });
+        addPlant.setOnClickListener(view -> {
+            if(fieldChecker.addPlant()) {
+                addPlant.setEnabled(false);
+                sendData(checkStandardOrPersonalized());
+            }
+        });
 
         delete.setOnClickListener(view -> {
             AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomAlert));
@@ -220,9 +227,11 @@ public class AddLibrary extends AppCompatActivity {
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
                         } else if(Rmessage.equals("AddPlantFailed")) {
+                            addPlant.setEnabled(false);
                             errorMessage.setText(R.string.plantExists);
                             errorMessage.setVisibility(View.VISIBLE);
                         } else{
+                            addPlant.setEnabled(false);
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
@@ -252,6 +261,10 @@ public class AddLibrary extends AppCompatActivity {
                 return headers;
             }
         };
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(jsonObjectRequest);
     }
 

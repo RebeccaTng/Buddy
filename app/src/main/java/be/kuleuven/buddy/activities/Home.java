@@ -132,6 +132,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                             loadHomeRecycler();
 
                         } else{
+                            loading.setVisibility(View.GONE);
                             userMessage.setText(R.string.error);
                             userMessage.setVisibility(View.VISIBLE);
                         }
@@ -139,6 +140,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
                 error -> {
                     //process an error
+                    loading.setVisibility(View.GONE);
                     userMessage.setText(R.string.error);
                     userMessage.setVisibility(View.VISIBLE);
                 })

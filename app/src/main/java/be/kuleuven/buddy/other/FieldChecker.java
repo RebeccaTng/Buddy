@@ -39,8 +39,8 @@ public class FieldChecker {
         moistMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         lightMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         lightMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        tempMin.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
-        tempMax.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        tempMin.setFilters(new InputFilter[]{ new InputFilterMinMax("-10", "40")});
+        tempMax.setFilters(new InputFilter[]{ new InputFilterMinMax("-10", "40")});
         waterlvl.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         ageMonths.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "12")});
     }

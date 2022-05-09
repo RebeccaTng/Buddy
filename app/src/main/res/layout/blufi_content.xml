@@ -22,14 +22,16 @@
             style="@style/BlufiActivityButtonBarButton"
             android:text="@string/blufi_function_connect"
             app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            tools:ignore="TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/blufi_disconnect"
             style="@style/BlufiActivityButtonBarButton"
             android:text="@string/blufi_function_disconnect"
             app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            tools:ignore="TextContrastCheck" />
 
         <!-- Second Line -->
         <com.google.android.material.button.MaterialButton
@@ -37,7 +39,8 @@
             style="@style/BlufiActivityButtonBarButton"
             android:text="@string/blufi_function_configure"
             app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.gridlayout.widget.GridLayout>
 

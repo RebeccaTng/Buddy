@@ -181,7 +181,7 @@ public class BlufiConnect extends BaseActivity {
      * Go to configure options
      */
     private void configureOptions() {
-        Intent intent = new Intent(BlufiConnect.this, ConfigureOptionsActivity.class);
+        Intent intent = new Intent(BlufiConnect.this, BlufiConfigure.class);
         startActivityForResult(intent, REQUEST_CONFIGURE);
     }
 

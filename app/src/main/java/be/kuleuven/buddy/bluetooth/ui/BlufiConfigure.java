@@ -44,7 +44,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ConfigureOptionsActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSelectedListener {
     private static final int OP_MODE_POS_STA = 0;
     private static final int OP_MODE_POS_SOFTAP = 1;
     private static final int OP_MODE_POS_STASOFTAP = 2;
@@ -150,7 +150,7 @@ public class ConfigureOptionsActivity extends BaseActivity implements AdapterVie
 
         Observable.just(this)
                 .subscribeOn(Schedulers.io())
-                .doOnNext(ConfigureOptionsActivity::updateWifi)
+                .doOnNext(BlufiConfigure::updateWifi)
                 .subscribe();
     }
 

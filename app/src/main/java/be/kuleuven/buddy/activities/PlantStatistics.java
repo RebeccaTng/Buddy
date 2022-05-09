@@ -112,8 +112,12 @@ public class PlantStatistics extends AppCompatActivity {
                     //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        JSONObject plantData = response.getJSONObject("plantData");
-                        JSONObject sensorData = response.getJSONObject("sensorData");
+                        JSONObject plantData, sensorData;
+                        plantData = response.getJSONObject("plantData");
+                        int sensorDataIsNull = response.getInt("sensorIsNull");
+                        if(sensorDataIsNull == 0) {
+                            sensorData = response.getJSONObject("sensorData");
+                        } else sensorData = null;
 
                         //check if login is valid
                         if(Rmessage.equals("StatsLoaded")) {
@@ -123,7 +127,6 @@ public class PlantStatistics extends AppCompatActivity {
                             setAge(plantData.getString("plantDate"));
                             place.setText(plantData.getString("place"));
                             setLastWater(plantData.getString("lastWatered"));
-                            setWaterTankLvl(sensorData.getInt("tankLvl"));
                             if (plantData.getInt("connected") == 1) {
                                 connected.setText(R.string.blufiConnected);
                                 connectedIcon.setBackgroundResource(R.drawable.online);
@@ -132,9 +135,18 @@ public class PlantStatistics extends AppCompatActivity {
                                 connectedIcon.setBackgroundResource(R.drawable.offline);
                             }
                             status.setText(plantData.getString("status"));
-                            moist.setText(sensorData.getString("moistData"));
-                            light.setText(sensorData.getString("lightData"));
-                            temp.setText(sensorData.getString("tempData"));
+
+                            if(sensorDataIsNull == 0) {
+                                setWaterTankLvl(sensorData.getInt("tankLvl"));
+                                moist.setText(sensorData.getString("moistData"));
+                                light.setText(sensorData.getString("lightData"));
+                                temp.setText(sensorData.getString("tempData"));
+                            } else {
+                                waterTank.setText("-");
+                                moist.setText(" -");
+                                light.setText(" -");
+                                temp.setText(" -");
+                            }
 
                             byte[] decodedImage = Base64.decode(plantData.getString("image"), Base64.DEFAULT);
                             Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
@@ -144,7 +156,6 @@ public class PlantStatistics extends AppCompatActivity {
                         } else{
                             loading.setVisibility(View.INVISIBLE);
                             userMessage.setText(R.string.error);
-                            userMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
@@ -152,7 +163,6 @@ public class PlantStatistics extends AppCompatActivity {
                     //process an error
                     loading.setVisibility(View.INVISIBLE);
                     userMessage.setText(R.string.error);
-                    userMessage.setVisibility(View.VISIBLE);
                 });
         requestQueue.add(jsonObjectRequest);
     }

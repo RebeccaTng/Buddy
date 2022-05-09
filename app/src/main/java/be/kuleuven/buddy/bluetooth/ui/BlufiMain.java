@@ -90,7 +90,7 @@ public class BlufiMain extends AppCompatActivity {
         mThreadPool = Executors.newSingleThreadExecutor();
 
         mRefreshLayout = findViewById(R.id.refresh_layout);
-        mRefreshLayout.setColorSchemeResources(R.color.dark_beige);
+        mRefreshLayout.setColorSchemeResources(R.color.orange);
         mRefreshLayout.setOnRefreshListener(this::scan);
 
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);

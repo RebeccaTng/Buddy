@@ -160,12 +160,12 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:scrollbarThumbVertical="@drawable/bg_btn_second"
-        app:layout_constraintBottom_toTopOf="@+id/statBtn"
+        app:layout_constraintBottom_toTopOf="@+id/settingsBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/standardBtn_settings">
@@ -192,6 +192,7 @@
                         android:id="@+id/moistRange_settings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/mulish_regular"
                         android:text="@string/moistureRange"
                         android:textColor="@color/black"
@@ -396,7 +397,7 @@
                         android:fontFamily="@font/mulish_regular"
                         android:hint="@string/min"
                         android:importantForAutofill="no"
-                        android:inputType="number"
+                        android:inputType="numberDecimal|numberSigned"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
                         android:textColor="@color/black"
@@ -443,7 +444,7 @@
                         android:fontFamily="@font/mulish_regular"
                         android:hint="@string/max"
                         android:importantForAutofill="no"
-                        android:inputType="number"
+                        android:inputType="numberDecimal|numberSigned"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
                         android:textColor="@color/black"
@@ -837,7 +838,7 @@
     </ScrollView>
 
     <View
-        android:id="@+id/statBtn"
+        android:id="@+id/settingsBtn"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:background="@drawable/bg_btn_green"
@@ -862,7 +863,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/settingsText"
-        app:layout_constraintEnd_toStartOf="@+id/statBtn"
+        app:layout_constraintEnd_toStartOf="@+id/settingsBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/settingsText" />
 
@@ -878,10 +879,25 @@
         android:textAllCaps="true"
         android:textColor="@color/beige"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/statBtn"
-        app:layout_constraintEnd_toEndOf="@+id/statBtn"
-        app:layout_constraintStart_toStartOf="@+id/statBtn"
-        app:layout_constraintTop_toTopOf="@+id/statBtn" />
+        app:layout_constraintBottom_toBottomOf="@+id/settingsBtn"
+        app:layout_constraintEnd_toEndOf="@+id/settingsBtn"
+        app:layout_constraintStart_toStartOf="@+id/settingsBtn"
+        app:layout_constraintTop_toTopOf="@+id/settingsBtn" />
 
+    <TextView
+        android:id="@+id/error_settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@null"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/settingsBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

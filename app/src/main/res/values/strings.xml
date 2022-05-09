@@ -59,7 +59,7 @@
     <string name="delete">Delete</string>
     <string name="welcome">Welcome,</string>
     <string name="myPlants">My Plants</string>
-    <string name="noPlants">You don\'t have any plants yet. Click on the plus sign on the upper right to add your first plant!</string>
+    <string name="noPlants">You don\'t have any plants yet.\nClick on the plus sign on the upper right to add your first plant!</string>
 
     <string name="plantNameText">Plant name</string>
     <string name="place">Place</string>

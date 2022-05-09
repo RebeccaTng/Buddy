@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -85,7 +86,12 @@ public class AddManual extends AppCompatActivity {
 
         addPic.setOnClickListener(view -> getImage.launch("image/*"));
 
-        addPlant.setOnClickListener(view -> { if(fieldChecker.addPlant()) sendDatabase(); });
+        addPlant.setOnClickListener(view -> {
+            if(fieldChecker.addPlant()) {
+                addPlant.setEnabled(false);
+                sendDatabase();
+            }
+        });
     }
 
     @Override
@@ -155,9 +161,12 @@ public class AddManual extends AppCompatActivity {
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
                         } else if(Rmessage.equals("AddSpeciesFailed")) {
+                            System.out.println(Rcomment);
+                            addPlant.setEnabled(true);
                             errorMessage.setText(R.string.speciesExists);
                             errorMessage.setVisibility(View.VISIBLE);
                         } else{
+                            addPlant.setEnabled(true);
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
@@ -165,6 +174,7 @@ public class AddManual extends AppCompatActivity {
 
                 error -> {
                     //process an error
+                    addPlant.setEnabled(true);
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
                 })
@@ -187,6 +197,10 @@ public class AddManual extends AppCompatActivity {
                 return headers;
             }
         };
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(jsonObjectRequest);
     }
 }
