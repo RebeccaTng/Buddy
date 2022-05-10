@@ -47,11 +47,11 @@ public class PlantSettings extends AppCompatActivity {
 
     AccountInfo accountInfo;
     int plantId, moistMinDB, moistMaxDB, lightMinDB, lightMaxDB, tempMinDB, tempMaxDB;
-    EditText name, moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, customTextFill;
+    EditText name, moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place;
     ImageView image;
     TextView species, errorMessage;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    Switch moistSwitch, lightSwitch, tempSwitch, powerSwitch, dispSwitch;
+    Switch moistSwitch, lightSwitch, tempSwitch;
     FieldChecker fieldChecker;
     ProgressBar loading;
     Button useStandard, delete, save;
@@ -88,11 +88,7 @@ public class PlantSettings extends AppCompatActivity {
         moistSwitch = findViewById(R.id.moistSwitch);
         lightSwitch = findViewById(R.id.lightSwitch);
         tempSwitch = findViewById(R.id.tempSwitch);
-        powerSwitch = findViewById(R.id.powerSwitch);
-        dispSwitch = findViewById(R.id.dispSwitch);
         loading = findViewById(R.id.loading_settings);
-        ImageView selectIcon = findViewById(R.id.selectIcon);
-        customTextFill = findViewById(R.id.customTextFill);
         ImageView editIcon = findViewById(R.id.editIcon);
         useStandard = findViewById(R.id.standardBtn_settings);
         delete = findViewById(R.id.deleteBtn_settings);
@@ -119,15 +115,10 @@ public class PlantSettings extends AppCompatActivity {
 
         save.setOnClickListener(view ->{
             if(fieldChecker.checkFields()) {
-                if(customTextFill.getText().toString().isEmpty()) {
-                    errorMessage.setText(R.string.noCustomText);
-                    errorMessage.setVisibility(View.VISIBLE);
-                } else {
-                    useStandard.setEnabled(false);
-                    delete.setEnabled(false);
-                    save.setEnabled(false);
-                    sendData(checkStandardOrPersonalized());
-                }
+                useStandard.setEnabled(false);
+                delete.setEnabled(false);
+                save.setEnabled(false);
+                sendData(checkStandardOrPersonalized());
             }
         });
 
@@ -136,28 +127,6 @@ public class PlantSettings extends AppCompatActivity {
             name.setSelection(name.getText().length());
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT);
-        });
-
-        dispSwitch.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if(isChecked) {
-                selectIcon.setRotation(90);
-                customTextFill.setVisibility(View.VISIBLE);
-            } else {
-                selectIcon.setRotation(0);
-                customTextFill.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        selectIcon.setOnClickListener(view -> {
-            if(dispSwitch.isChecked()) {
-                selectIcon.setRotation(0);
-                customTextFill.setVisibility(View.INVISIBLE);
-                dispSwitch.setChecked(false);
-            } else {
-                selectIcon.setRotation(90);
-                customTextFill.setVisibility(View.VISIBLE);
-                dispSwitch.setChecked(true);
-            }
         });
     }
 
@@ -224,13 +193,6 @@ public class PlantSettings extends AppCompatActivity {
         moistSwitch.setChecked(plantData.getInt("moistAlert") == 1);
         lightSwitch.setChecked(plantData.getInt("lightAlert") == 1);
         tempSwitch.setChecked(plantData.getInt("tempAlert") == 1);
-        powerSwitch.setChecked(plantData.getInt("displayPower") == 1);
-        String customDispay = plantData.getString("customDisplayText");
-        if(customDispay.equals("null")) dispSwitch.setChecked(false);
-        else {
-            dispSwitch.setChecked(true);
-            customTextFill.setText(customDispay);
-        }
 
         moistMinDB = speciesData.getInt("minMoist");
         moistMaxDB = speciesData.getInt("maxMoist");
@@ -343,9 +305,6 @@ public class PlantSettings extends AppCompatActivity {
             data.put("moistAlert", moistSwitch.isChecked()? 1 : 0);
             data.put("lightAlert", lightSwitch.isChecked()? 1 : 0);
             data.put("tempAlert", tempSwitch.isChecked()? 1 : 0);
-            data.put("displayPower", powerSwitch.isChecked()? 1 : 0);
-            if(dispSwitch.isChecked()) data.put("customDisplayText", customTextFill.getText().toString());
-            else data.put("customDisplayText", null);
             data.put("prevPersonalized", prevPersonalized);
             if(personalized) {
                 data.put("personalized", 1);
@@ -356,6 +315,11 @@ public class PlantSettings extends AppCompatActivity {
                 data.put("minTemp", tempMin.getText().toString());
                 data.put("maxTemp", tempMax.getText().toString());
             } else data.put("personalized", 0);
+        } catch (JSONException e) { e.printStackTrace(); }
+
+        JSONObject editSettings = new JSONObject();
+        try {
+            editSettings.put("data", data);
         } catch (JSONException e) { e.printStackTrace(); }
 
         // Connect to database
@@ -412,7 +376,7 @@ public class PlantSettings extends AppCompatActivity {
             @Override
             public byte[] getBody() {
                 // Request body goes here
-                return data.toString().getBytes(StandardCharsets.UTF_8);
+                return editSettings.toString().getBytes(StandardCharsets.UTF_8);
             }
         };
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
