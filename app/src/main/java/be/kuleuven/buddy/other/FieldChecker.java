@@ -45,7 +45,7 @@ public class FieldChecker {
         ageMonths.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "12")});
     }
 
-    public boolean addPlant() {
+    public boolean checkFields() {
         clearAll();
 
         // Check all fields are filled in
@@ -87,7 +87,7 @@ public class FieldChecker {
                 waterlvl.getText().toString().isEmpty() || ageYears.getText().toString().isEmpty() ||
                 ageMonths.getText().toString().isEmpty() || place.getText().toString().isEmpty() ||
                 name.getText().toString().isEmpty();
-        if(fields == true ) empty = empty || name.getText().toString().isEmpty() || species.getText().toString().isEmpty();
+        if(fields) empty = empty || name.getText().toString().isEmpty() || species.getText().toString().isEmpty();
         return empty;
     }
 

@@ -1,7 +1,6 @@
 package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -42,9 +41,8 @@ public class AddLibrary extends AppCompatActivity {
     TextView species, errorMessage;
     AccountInfo accountInfo;
     ProgressBar loading;
-    AppCompatButton useStandard, delete;
+    Button useStandard, delete, addPlant;
     FieldChecker fieldChecker;
-    Button addPlant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +75,6 @@ public class AddLibrary extends AppCompatActivity {
         delete = findViewById(R.id.delete_addLib);
         addPlant = findViewById(R.id.addPlantBtn_addLib);
 
-        loading.setVisibility(View.VISIBLE);
-        useStandard.setEnabled(false);
-        delete.setEnabled(false);
-
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);
         fieldChecker.setFilters();
 
@@ -94,7 +88,9 @@ public class AddLibrary extends AppCompatActivity {
         });
 
         addPlant.setOnClickListener(view -> {
-            if(fieldChecker.addPlant()) {
+            if(fieldChecker.checkFields()) {
+                useStandard.setEnabled(false);
+                delete.setEnabled(false);
                 addPlant.setEnabled(false);
                 sendData(checkStandardOrPersonalized());
             }
@@ -148,6 +144,7 @@ public class AddLibrary extends AppCompatActivity {
                             loading.setVisibility(View.INVISIBLE);
                             useStandard.setEnabled(true);
                             delete.setEnabled(true);
+                            addPlant.setEnabled(true);
 
                         } else{
                             loading.setVisibility(View.INVISIBLE);
@@ -227,11 +224,15 @@ public class AddLibrary extends AppCompatActivity {
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
                         } else if(Rmessage.equals("AddPlantFailed")) {
-                            addPlant.setEnabled(false);
+                            useStandard.setEnabled(true);
+                            delete.setEnabled(true);
+                            addPlant.setEnabled(true);
                             errorMessage.setText(R.string.plantExists);
                             errorMessage.setVisibility(View.VISIBLE);
                         } else{
-                            addPlant.setEnabled(false);
+                            useStandard.setEnabled(true);
+                            delete.setEnabled(true);
+                            addPlant.setEnabled(true);
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
@@ -239,6 +240,9 @@ public class AddLibrary extends AppCompatActivity {
 
                 error -> {
                     //process an error
+                    useStandard.setEnabled(true);
+                    delete.setEnabled(true);
+                    addPlant.setEnabled(true);
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
                 })
@@ -281,7 +285,7 @@ public class AddLibrary extends AppCompatActivity {
                         //check if login is valid
                         if(Rmessage.equals("SpeciesDeleted")){
                             // Toast
-                            String comment = "Species \"" + species.getText().toString() + "\" and all of its instances successfully deleted";
+                            String comment = "Species \"" + species.getText().toString() + "\" and all of its instances were successfully deleted";
                             Toast toast = Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_LONG);
                             toast.show();
                             // Go to back to library

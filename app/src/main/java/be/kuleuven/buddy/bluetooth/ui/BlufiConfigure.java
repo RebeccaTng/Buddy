@@ -11,6 +11,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -91,6 +93,8 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.configure_option_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -99,19 +103,6 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
         mWifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
 
         mApPref = getSharedPreferences(PREF_AP, MODE_PRIVATE);
-
-        mDeviceModeSp = findViewById(R.id.device_mode_sp);
-        mDeviceModeSp.setOnItemSelectedListener(this);
-        mDeviceModeSp.setSelection(0);
-
-        mSoftAPForm = findViewById(R.id.softap_security_form);
-        mSoftapSecuritSP = findViewById(R.id.softap_security_sp);
-        mSoftapSecuritSP.setOnItemSelectedListener(this);
-        mSoftAPPasswordForm = findViewById(R.id.softap_password_form);
-        mSoftAPSsidET = findViewById(R.id.softap_ssid);
-        mSoftAPPAsswordET = findViewById(R.id.softap_password);
-        mSoftAPChannelSp = findViewById(R.id.softap_channel);
-        mSoftAPMaxConnectionSp = findViewById(R.id.softap_max_connection);
 
         mApMap = new HashMap<>();
         mAutoCompleteSSIDs = new LinkedList<>();

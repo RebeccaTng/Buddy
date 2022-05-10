@@ -28,10 +28,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import be.kuleuven.buddy.R;
@@ -87,7 +84,7 @@ public class AddManual extends AppCompatActivity {
         addPic.setOnClickListener(view -> getImage.launch("image/*"));
 
         addPlant.setOnClickListener(view -> {
-            if(fieldChecker.addPlant()) {
+            if(fieldChecker.checkFields()) {
                 addPlant.setEnabled(false);
                 sendDatabase();
             }

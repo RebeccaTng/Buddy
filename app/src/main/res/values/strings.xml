@@ -71,6 +71,7 @@
     <string name="temperature">Temperature</string>
     <string name="percentage">%</string>
     <string name="degrees">°C</string>
+    <string name="noCustomText">Please fill in a custom text or uncheck the custom display option.</string>
 
     <string name="noLibPlants">There are no plants in your library yet.\nClick below to manually add your first plant!</string>
     <string name="addPlant">Add Plant</string>

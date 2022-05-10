@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/station_wifi_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
-    android:orientation="vertical"
     android:background="@color/beige"
-    android:visibility="gone">
+    android:orientation="vertical"
+    android:visibility="visible">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/configure_station_sel_wifi" />
+        android:layout_height="50dp"
+        android:fontFamily="@font/mulish_bold"
+        android:gravity="center"
+        android:text="@string/configure_station_sel_wifi"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
 
     <LinearLayout
         android:id="@+id/station_wifi_ssid_form"
@@ -24,26 +29,40 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dip"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:passwordToggleEnabled="true">
+            app:boxCornerRadiusBottomEnd="31.5dp"
+            app:boxCornerRadiusBottomStart="31.5dp"
+            app:boxCornerRadiusTopEnd="31.5dp"
+            app:boxCornerRadiusTopStart="31.5dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/dark_grey">
 
             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/station_ssid"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_fill"
+                android:fontFamily="@font/mulish_regular"
                 android:hint="@string/configure_station_ssid"
-                android:singleLine="true" />
+                android:includeFontPadding="false"
+                android:paddingStart="21dp"
+                android:paddingEnd="21dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_grey"
+                android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/station_wifi_scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/configure_refresh_icon" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:paddingLeft="8dp"
+            app:srcCompat="@drawable/icon_refresh"
+            tools:ignore="ImageContrastCheck" />
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -52,15 +71,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        app:passwordToggleEnabled="true">
+        app:boxCornerRadiusBottomEnd="31.5dp"
+        app:boxCornerRadiusBottomStart="31.5dp"
+        app:boxCornerRadiusTopEnd="31.5dp"
+        app:boxCornerRadiusTopStart="31.5dp"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/dark_grey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/station_wifi_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_fill"
+            android:fontFamily="@font/mulish_regular"
             android:hint="@string/configure_station_password"
             android:inputType="textPassword"
-            android:singleLine="true" />
+            android:paddingStart="21dp"
+            android:paddingEnd="21dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
