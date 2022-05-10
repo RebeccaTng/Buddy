@@ -32,6 +32,7 @@ import java.util.Map;
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.FieldChecker;
+import be.kuleuven.buddy.other.InfoFragment;
 
 public class AddLibrary extends AppCompatActivity {
 
@@ -77,6 +78,13 @@ public class AddLibrary extends AppCompatActivity {
 
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);
         fieldChecker.setFilters();
+
+        findViewById(R.id.infoIconAddLibrary).setOnClickListener(view -> {
+            String title = getResources().getString(R.string.howToValues);
+            String body = getResources().getString(R.string.valuesTips);
+            InfoFragment info = InfoFragment.newInstance(title, body);
+            info.show(getSupportFragmentManager(), "infoFragment");
+        });
 
         useStandard.setOnClickListener(view -> {
             moistMin.setText(String.valueOf(moistMinDB));

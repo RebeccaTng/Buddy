@@ -76,6 +76,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
+    <ImageView
+        android:id="@+id/infoIconAddManual"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:contentDescription="@string/descriptionIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/addNewPlantTitle"
+        app:layout_constraintStart_toEndOf="@+id/addNewPlantTitle"
+        app:layout_constraintTop_toTopOf="@+id/addNewPlantTitle"
+        app:srcCompat="@drawable/icon_info_beige"
+        tools:ignore="TouchTargetSizeCheck" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/set1"
         android:layout_width="wrap_content"

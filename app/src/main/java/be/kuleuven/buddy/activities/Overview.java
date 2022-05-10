@@ -45,7 +45,7 @@ public class Overview extends AppCompatActivity {
     Calendar calendar;
     SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, yearFormat;
     String dayNow, date, dayToday, weekNowBegin, weekNowEnd, weekBegin, weekEnd, monthNow, yearNow;
-    ImageView previous, next, infoBtn;
+    ImageView previous, next;
     AccountInfo accountInfo;
 
     @Override
@@ -64,11 +64,10 @@ public class Overview extends AppCompatActivity {
         week = findViewById(R.id.overviewWeek);
         month = findViewById(R.id.overviewMonth);
         year = findViewById(R.id.overviewYear);
-        infoBtn = findViewById(R.id.infoIconOverview);
 
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
 
-        infoBtn.setOnClickListener(view -> {
+        findViewById(R.id.infoIconOverview).setOnClickListener(view -> {
             String title = getResources().getString(R.string.howTo);
             String body = getResources().getString(R.string.graphUse);
             InfoFragment info = InfoFragment.newInstance(title, body);

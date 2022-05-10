@@ -34,6 +34,7 @@ import java.util.Map;
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.FieldChecker;
+import be.kuleuven.buddy.other.InfoFragment;
 
 public class AddManual extends AppCompatActivity {
 
@@ -74,6 +75,13 @@ public class AddManual extends AppCompatActivity {
         // Set minimum and maximum value
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place , name, species, errorMessage, true);
         fieldChecker.setFilters();
+
+        findViewById(R.id.infoIconAddManual).setOnClickListener(view -> {
+            String title = getResources().getString(R.string.howToValues);
+            String body = getResources().getString(R.string.valuesTips);
+            InfoFragment info = InfoFragment.newInstance(title, body);
+            info.show(getSupportFragmentManager(), "infoFragment");
+        });
 
         // Get image from library and set in preview
         getImage = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {

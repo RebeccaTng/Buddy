@@ -41,6 +41,7 @@ import java.util.Map;
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.FieldChecker;
+import be.kuleuven.buddy.other.InfoFragment;
 
 public class PlantSettings extends AppCompatActivity {
 
@@ -98,6 +99,13 @@ public class PlantSettings extends AppCompatActivity {
         save = findViewById(R.id.saveBtn_settings);
 
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);
+
+        findViewById(R.id.infoIconSettings).setOnClickListener(view -> {
+            String title = getResources().getString(R.string.howToValues);
+            String body = getResources().getString(R.string.valuesTips);
+            InfoFragment info = InfoFragment.newInstance(title, body);
+            info.show(getSupportFragmentManager(), "infoFragment");
+        });
 
         useStandard.setOnClickListener(view -> standardSettings());
 

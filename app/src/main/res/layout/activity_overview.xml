@@ -52,7 +52,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:contentDescription="@string/descriptionIcon"
         app:layout_constraintBottom_toBottomOf="@+id/overviewTitle"
         app:layout_constraintStart_toEndOf="@+id/overviewTitle"

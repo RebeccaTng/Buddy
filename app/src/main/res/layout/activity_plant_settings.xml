@@ -44,6 +44,17 @@
         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
     <ImageView
+        android:id="@+id/infoIconSettings"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="25dp"
+        android:contentDescription="@string/descriptionIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backIcon_settings"
+        app:srcCompat="@drawable/icon_info_beige"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
         android:id="@+id/editIcon"
         android:layout_width="19dp"
         android:layout_height="19dp"
@@ -57,7 +68,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="87dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="15dp"
         android:background="@null"
         android:ems="10"
@@ -118,7 +129,7 @@
         android:id="@+id/saveBtn_settings"
         android:layout_width="131dp"
         android:layout_height="41dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/bg_btn_second"
         android:enabled="false"
         android:fontFamily="@font/mulish_extrabold"

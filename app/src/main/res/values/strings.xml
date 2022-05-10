@@ -100,6 +100,8 @@
     <string name="customDisp">Custom Display</string>
     <string name="customText">Custom Text</string>
     <string name="text">Text</string>
+    <string name="howToValues">How to choose good values.</string>
+    <string name="valuesTips">INSERT TEXT HERE</string>
 
     <string name="overview">Overview</string>
     <string name="day">Day</string>
@@ -154,7 +156,7 @@
     <string name="configure_softap_channel">SoftAP channel</string>
     <string name="configure_softap_max_connection">SoftAP max connection</string>
     <string name="configure_station_sel_wifi">Select Wifi</string>
-    <string name="configure_station_ssid">Wifi ssid</string>
+    <string name="configure_station_ssid">Wifi SSID</string>
     <string name="configure_station_ssid_error">Wifi ssid can\'t be empty</string>
     <string name="configure_station_wifi_5g_error">The device does not support 5G Wifi</string>
     <string name="configure_station_wifi_5g_dialog_message">The device does not support 5G Wifi, continue to configure?</string>
