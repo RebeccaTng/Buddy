@@ -50,8 +50,8 @@
         android:layout_height="540dp"
         android:layout_above="@id/grid_layout"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="29dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:reverseLayout="false" />

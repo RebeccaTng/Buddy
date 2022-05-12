@@ -8,8 +8,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Window;
@@ -85,16 +83,6 @@ public class BlufiConfigure extends BaseActivity {
         mStationPasswordET = findViewById(R.id.station_wifi_password);
         findViewById(R.id.station_wifi_scan).setOnClickListener(v -> scanWifi());
         mAutoCompleteSSIDAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mAutoCompleteSSIDs);
-
-        InputFilter filter = (source, start, end, dest, dstart, dend) -> {
-            for (int i = start; i < end; i++) {
-                if (Character.isWhitespace(source.charAt(i))) {
-                    return "";
-                }
-            }
-            return null;
-        };
-        mStationSsidET.setFilters(new InputFilter[] { filter });
         mStationSsidET.setAdapter(mAutoCompleteSSIDAdapter);
         mStationSsidET.addTextChangedListener(new TextWatcher() {
             @Override
