@@ -40,5 +40,6 @@ unsigned int getMoisture();
 unsigned int getDistance();
 unsigned int getLight();
 
+void display_bad_wifi(void);
 void adc_init(void);
 void adc_result(void);

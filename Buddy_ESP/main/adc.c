@@ -15,14 +15,25 @@ unsigned int getMoisture(void) {
 }
 
 unsigned int getDistance(void) {
-    ESP_LOGI("DIST", "%d mV", dist_out);
-    return dist_out;
+    double distance = -2.46 * dist_out * dist_out / 1000 / 1000 + 3.96 * dist_out / 1000 + 8.12;
+    ESP_LOGI("DIST", "%f cm", distance);
+    return (int) distance;
 }
 
 unsigned int getLight(void) {
     unsigned int light = 100-(light_out >> 4);
     ESP_LOGI("LIGHT", "%d %%", light);
     return light;
+}
+
+void display_bad_wifi(void) {
+    ssd1306_display_text(&dev, 0, "Bad WiFi Creds!!", 16, false);
+    ssd1306_display_text(&dev, 1, "                ", 16, false);
+    ssd1306_display_text(&dev, 2, "Make sure WiFi's", 16, false);
+    ssd1306_display_text(&dev, 3, "correctly workin", 16, false);
+    ssd1306_display_text(&dev, 4, "                ", 16, false);
+    ssd1306_display_text(&dev, 5, "If so, pass the ", 16, false);
+    ssd1306_display_text(&dev, 6, "correct creds :)", 16, false);
 }
 
 static void display_first(void) {
@@ -47,7 +58,7 @@ static void display_values(void) {
     sprintf(screen_text, "Moist: %d %%  ", getMoisture());
     ssd1306_display_text(&dev, 3, screen_text, 16, false);
 
-    sprintf(screen_text, "Dist: %d mV   ", getDistance());
+    sprintf(screen_text, "Dist: %d cm   ", getDistance());
     ssd1306_display_text(&dev, 4, screen_text, 16, false);
 
     sprintf(screen_text, "Light: %d %%  ", getLight());

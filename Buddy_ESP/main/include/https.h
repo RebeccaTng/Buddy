@@ -6,6 +6,13 @@
 #define WEB_PORT    "443"
 #define WEB_URL     "https://a21iot03.studev.groept.be/public/api/esp/insertdata/"
 
+#define VERIFY_CALLBACK_ERR "Verifying Certificate Callback Failed."
+#define FEATURE_NOT_AV_ERR  "Invalid Request."
+#define BAD_INP_PARAMS_ERR  "Bad Request Parameters."
+#define SOCKET_READING_ERR  "Failed to read information from the socket"
+#define BAD_WIFI_CREDS_ERR  "Invalid WiFi Credentials"
+#define WIFI_TURNED_OFF_ERR "Invalid WiFi Credentials"
+
 static const char *HTTPS_TAG = "HTTPS";
 static char request[200];
 
