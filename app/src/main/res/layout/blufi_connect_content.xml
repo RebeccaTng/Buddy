@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".bluetooth.ui.BlufiConnect"
-    tools:showIn="@layout/blufi_activity">
+    tools:showIn="@layout/blufi_connect_activity">
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/grid_layout"

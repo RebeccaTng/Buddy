@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".bluetooth.ui.BlufiConfigure"
-    tools:showIn="@layout/configure_option_content">
+    tools:showIn="@layout/blufi_configure_option_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp">
 
-        <include layout="@layout/configure_option_station_form" />
+        <include layout="@layout/blufi_configure_option_station_form" />
 
         <Button
             android:id="@+id/confirm"

@@ -48,7 +48,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
-        layout="@layout/main_content"
+        layout="@layout/blufi_main_content"
         android:layout_height="675dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

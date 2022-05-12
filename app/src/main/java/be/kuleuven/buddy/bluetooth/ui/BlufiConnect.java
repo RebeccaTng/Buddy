@@ -68,7 +68,7 @@ public class BlufiConnect extends BaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.blufi_activity);
+        setContentView(R.layout.blufi_connect_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setHomeAsUpEnable(true);
@@ -460,7 +460,7 @@ public class BlufiConnect extends BaseActivity {
         @NonNull
         @Override
         public MsgHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.blufi_message_item, parent, false);
+            View view = getLayoutInflater().inflate(R.layout.blufi_connect_message_item, parent, false);
             return new MsgHolder(view);
         }
 
@@ -470,7 +470,7 @@ public class BlufiConnect extends BaseActivity {
             holder.text1.setText(msg.text);
             holder.text1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             holder.text1.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.mulish_regular));
-            holder.text1.setTextColor(msg.isNotification ? ContextCompat.getColor(getApplicationContext(), R.color.red) : ContextCompat.getColor(getApplicationContext(), R.color.black));
+            holder.text1.setTextColor(msg.isNotification ? ContextCompat.getColor(getApplicationContext(), R.color.green) : ContextCompat.getColor(getApplicationContext(), R.color.black));
         }
 
         @Override

@@ -8,16 +8,15 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -46,41 +45,15 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSelectedListener {
-    private static final int OP_MODE_POS_STA = 0;
-    private static final int OP_MODE_POS_SOFTAP = 1;
-    private static final int OP_MODE_POS_STASOFTAP = 2;
-
-    private static final int[] OP_MODE_VALUES = {
-            BlufiParameter.OP_MODE_STA,
-            BlufiParameter.OP_MODE_SOFTAP,
-            BlufiParameter.OP_MODE_STASOFTAP
-    };
-    private static final int[] SOFTAP_SECURITY_VALUES = {
-            BlufiParameter.SOFTAP_SECURITY_OPEN,
-            BlufiParameter.SOFTAP_SECURITY_WPA,
-            BlufiParameter.SOFTAP_SECURITY_WPA2,
-            BlufiParameter.SOFTAP_SECURITY_WPA_WPA2
-    };
+public class BlufiConfigure extends BaseActivity {
 
     private static final String PREF_AP = "blufi_conf_aps";
 
     private BlufiLog mLog = new BlufiLog(getClass());
 
-    private Spinner mDeviceModeSp;
-
-    private View mSoftAPForm;
-    private Spinner mSoftapSecuritSP;
-    private View mSoftAPPasswordForm;
-    private EditText mSoftAPSsidET;
-    private EditText mSoftAPPAsswordET;
-    private Spinner mSoftAPChannelSp;
-    private Spinner mSoftAPMaxConnectionSp;
-
     private WifiManager mWifiManager;
     private List<ScanResult> mWifiList;
     private boolean mScanning = false;
-    private View mStationForm;
     private AutoCompleteTextView mStationSsidET;
     private EditText mStationPasswordET;
 
@@ -95,7 +68,7 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.configure_option_activity);
+        setContentView(R.layout.blufi_configure_option_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setHomeAsUpEnable(true);
@@ -108,11 +81,20 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
         mAutoCompleteSSIDs = new LinkedList<>();
         loadAPs();
         mWifiList = new ArrayList<>();
-        mStationForm = findViewById(R.id.station_wifi_form);
         mStationSsidET = findViewById(R.id.station_ssid);
         mStationPasswordET = findViewById(R.id.station_wifi_password);
         findViewById(R.id.station_wifi_scan).setOnClickListener(v -> scanWifi());
         mAutoCompleteSSIDAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mAutoCompleteSSIDs);
+
+        InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+            for (int i = start; i < end; i++) {
+                if (Character.isWhitespace(source.charAt(i))) {
+                    return "";
+                }
+            }
+            return null;
+        };
+        mStationSsidET.setFilters(new InputFilter[] { filter });
         mStationSsidET.setAdapter(mAutoCompleteSSIDAdapter);
         mStationSsidET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -202,7 +184,7 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
         return ssid;
     }
 
-    private int getConnectionFrequncy() {
+    private int getConnectionFrequency() {
         if (!mWifiManager.isWifiEnabled()) {
             return -1;
         }
@@ -221,37 +203,6 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
             mApMap.put(entry.getKey(), entry.getValue().toString());
             mAutoCompleteSSIDs.add(entry.getKey());
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent == mDeviceModeSp) {
-            switch (position) {
-                case OP_MODE_POS_STA:
-                    mSoftAPForm.setVisibility(View.GONE);
-                    mStationForm.setVisibility(View.VISIBLE);
-                    break;
-                case OP_MODE_POS_SOFTAP:
-                    mSoftAPForm.setVisibility(View.VISIBLE);
-                    mStationForm.setVisibility(View.GONE);
-                    break;
-                case OP_MODE_POS_STASOFTAP:
-                    mSoftAPForm.setVisibility(View.VISIBLE);
-                    mStationForm.setVisibility(View.VISIBLE);
-                    break;
-            }
-        } else if (parent == mSoftapSecuritSP) {
-            if (position == 0) {
-                // OPEN
-                mSoftAPPasswordForm.setVisibility(View.GONE);
-            } else {
-                mSoftAPPasswordForm.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     private void scanWifi() {
@@ -357,32 +308,9 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
 
     private BlufiConfigureParams checkInfo() {
         BlufiConfigureParams params = new BlufiConfigureParams();
-        int deviceMode = OP_MODE_VALUES[mDeviceModeSp.getSelectedItemPosition()];
-        params.setOpMode(deviceMode);
-        switch (deviceMode) {
-            case BlufiParameter.OP_MODE_NULL:
-                return params;
-            case BlufiParameter.OP_MODE_STA:
-                if (checkSta(params)) {
-                    return params;
-                } else {
-                    return null;
-                }
-            case BlufiParameter.OP_MODE_SOFTAP:
-                if (checkSoftAP(params)) {
-                    return params;
-                } else {
-                    return null;
-                }
-            case BlufiParameter.OP_MODE_STASOFTAP:
-                if (checkSoftAP(params) && checkSta(params)) {
-                    return params;
-                } else {
-                    return null;
-                }
-        }
-
-        return null;
+        params.setOpMode(BlufiParameter.OP_MODE_STA);
+        if (checkSta(params)) return params;
+        else return null;
     }
 
     private boolean checkSta(BlufiConfigureParams params) {
@@ -398,7 +326,7 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
 
         int freq = -1;
         if (ssid.equals(getConnectionSSID())) {
-            freq = getConnectionFrequncy();
+            freq = getConnectionFrequency();
         }
         if (freq == -1) {
             for (ScanResult sr : mWifiList) {
@@ -423,39 +351,7 @@ public class BlufiConfigure extends BaseActivity implements AdapterView.OnItemSe
         return true;
     }
 
-    public boolean checkSoftAP(BlufiConfigureParams params) {
-        String ssid = mSoftAPSsidET.getText().toString();
-        params.setSoftAPSSID(ssid);
-        String password = mSoftAPPAsswordET.getText().toString();
-        params.setSoftAPPAssword(password);
-        int channel = mSoftAPChannelSp.getSelectedItemPosition();
-        params.setSoftAPChannel(channel);
-        int maxConnection = mSoftAPMaxConnectionSp.getSelectedItemPosition();
-        params.setSoftAPMaxConnection(maxConnection);
-
-        int security = SOFTAP_SECURITY_VALUES[mSoftapSecuritSP.getSelectedItemPosition()];
-        params.setSoftAPSecurity(security);
-        switch (security) {
-            case BlufiParameter.SOFTAP_SECURITY_OPEN:
-                return true;
-            case BlufiParameter.SOFTAP_SECURITY_WEP:
-            case BlufiParameter.SOFTAP_SECURITY_WPA:
-            case BlufiParameter.SOFTAP_SECURITY_WPA2:
-            case BlufiParameter.SOFTAP_SECURITY_WPA_WPA2:
-                if (TextUtils.isEmpty(password) || password.length() < 8) {
-                    mSoftAPPAsswordET.setError(getString(R.string.configure_softap_password_error));
-                    return false;
-                }
-
-                return true;
-        }
-
-        return false;
-    }
-
     private void configure() {
-        mSoftAPSsidET.setError(null);
-        mSoftAPPAsswordET.setError(null);
         mStationSsidET.setError(null);
 
         final BlufiConfigureParams params = checkInfo();

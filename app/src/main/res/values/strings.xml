@@ -125,7 +125,7 @@
     <string name="string_unknown">Unknown</string>
 
     <string name="main_title">EspBluFi</string>
-    <string name="main_bt_disable_msg">Bluetooth is disable</string>
+    <string name="main_bt_disable_msg">Bluetooth is disabled</string>
     <string name="main_location_disable_msg">Location is disable</string>
     <string name="main_menu_settings">Settings</string>
 

@@ -38,6 +38,6 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/blufi_content" />
+        layout="@layout/blufi_connect_content" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

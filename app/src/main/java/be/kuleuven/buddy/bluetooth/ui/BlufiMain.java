@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -70,12 +71,13 @@ public class BlufiMain extends AppCompatActivity {
     private ExecutorService mThreadPool;
     private Future mUpdateFuture;
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.blufi_main_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -295,7 +297,7 @@ public class BlufiMain extends AppCompatActivity {
         @NonNull
         @Override
         public BleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.main_ble_item, parent, false);
+            View view = getLayoutInflater().inflate(R.layout.blufi_main_ble_item, parent, false);
             return new BleHolder(view);
         }
 
