@@ -63,7 +63,13 @@ _Noreturn void app_main(void)
     ESP_LOGI("BLUFI", "Starting Blufi.");
     display_tutorial();
     blufi_btn();
-    ssd1306_display_text(&dev, 0, "  Connected!   ", 16, false);
+    ssd1306_display_text(&dev, 0, " Connecting...  ", 16, false);
+    ssd1306_display_text(&dev, 2, "     _____      ", 16, false);
+    ssd1306_display_text(&dev, 3, "    /  |  \\    ", 16, false);
+    ssd1306_display_text(&dev, 4, "   |   |   |    ", 16, false);
+    ssd1306_display_text(&dev, 5, "   |    \\  |   ", 16, false);
+    ssd1306_display_text(&dev, 6, "    \\     /    ", 16, false);
+    ssd1306_display_text(&dev, 7, "     -----      ", 16, false);
     audio_init(1);
 
     ESP_LOGI("TASKS", "Starting Pump...");

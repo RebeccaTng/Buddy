@@ -34,9 +34,9 @@ _Noreturn void gpio_pump(void) {
     while(1) {
         ESP_LOGW("PUMP:", "Working...");
         gpio_set_level(PUMP_OUT, 1);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        vTaskDelay(3000 / portTICK_PERIOD_MS);
         gpio_set_level(PUMP_OUT, 0);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        vTaskDelay(20000 / portTICK_PERIOD_MS);
     }
 }
 

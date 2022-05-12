@@ -35,15 +35,15 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_6d941 && [1/2] Building C object CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_cc574 && [1/2] Building C object CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj
 Using built-in specs.
 COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe
 Target: xtensa-esp32-elf
 Configured with: /builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-host_w64-mingw32 --target=xtensa-esp32-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r2-patch2' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpfr=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpc=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-isl=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes --with-gnu-ld
 Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r2-patch2) 
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj' '-c'
- c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mlongcalls -auxbase-strip CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\cc7bIm3j.s
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj' '-c'
+ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mlongcalls -auxbase-strip CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\ccETJMiG.s
 GNU C17 (crosstool-NG esp-2021r2-patch2) version 8.4.0 (xtensa-esp32-elf)
 	compiled by GNU C version 6.3.0 20170516, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
 
@@ -64,12 +64,12 @@ GNU C17 (crosstool-NG esp-2021r2-patch2) version 8.4.0 (xtensa-esp32-elf)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: e829357cc0de0e2a6d18e9e695a45712
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj' '-c'
- c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj C:\Users\filip\AppData\Local\Temp\cc7bIm3j.s
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj' '-c'
+ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj C:\Users\filip\AppData\Local\Temp\ccETJMiG.s
 COMPILER_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/
 LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj' '-c'
-[2/2] Linking C executable cmTC_6d941
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj' '-c'
+[2/2] Linking C executable cmTC_cc574
 Using built-in specs.
 COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe
 COLLECT_LTO_WRAPPER=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe
@@ -79,9 +79,9 @@ Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r2-patch2) 
 COMPILER_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/
 LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_6d941'
- c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\ccZFEror.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_6d941 c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_6d941'
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_cc574'
+ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\ccktbsfM.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_cc574 c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_cc574'
 
 
 
@@ -104,15 +104,15 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(xtensa-esp32-elf-ld\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_6d941 && [1/2] Building C object CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_cc574 && [1/2] Building C object CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe]
   ignore line: [Target: xtensa-esp32-elf]
   ignore line: [Configured with: /builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-host_w64-mingw32 --target=xtensa-esp32-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r2-patch2' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpfr=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpc=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-isl=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes --with-gnu-ld]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.4.0 (crosstool-NG esp-2021r2-patch2) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj' '-c']
-  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mlongcalls -auxbase-strip CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\cc7bIm3j.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj' '-c']
+  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mlongcalls -auxbase-strip CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\ccETJMiG.s]
   ignore line: [GNU C17 (crosstool-NG esp-2021r2-patch2) version 8.4.0 (xtensa-esp32-elf)]
   ignore line: [	compiled by GNU C version 6.3.0 20170516  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.19-GMP]
   ignore line: []
@@ -133,16 +133,16 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: e829357cc0de0e2a6d18e9e695a45712]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj' '-c']
-  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj C:\Users\filip\AppData\Local\Temp\cc7bIm3j.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj' '-c']
+  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj C:\Users\filip\AppData\Local\Temp\ccETJMiG.s]
   ignore line: [COMPILER_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/]
   ignore line: [LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj' '-c']
-  ignore line: [[2/2] Linking C executable cmTC_6d941]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj' '-c']
+  ignore line: [[2/2] Linking C executable cmTC_cc574]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe]
   ignore line: [COLLECT_LTO_WRAPPER=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe]
@@ -156,27 +156,27 @@ Parsed C implicit link information from above output:
   ignore line: [LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_6d941']
-  link line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\ccZFEror.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_6d941 c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_cc574']
+  link line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\ccktbsfM.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_cc574 c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o]
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe] ==> ignore
     arg [-plugin] ==> ignore
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll] ==> ignore
     arg [-plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe] ==> ignore
-    arg [-plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\ccZFEror.res] ==> ignore
+    arg [-plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\ccktbsfM.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lnosys] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_6d941] ==> ignore
+    arg [cmTC_cc574] ==> ignore
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o] ==> obj [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o]
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o] ==> obj [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o]
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o] ==> obj [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o]
     arg [-Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0] ==> dir [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0]
     arg [-Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc] ==> dir [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc]
     arg [-Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib] ==> dir [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib]
-    arg [CMakeFiles/cmTC_6d941.dir/CMakeCCompilerABI.c.obj] ==> ignore
+    arg [CMakeFiles/cmTC_cc574.dir/CMakeCCompilerABI.c.obj] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [-lc] ==> lib [c]
     arg [-lnosys] ==> lib [nosys]
@@ -201,15 +201,15 @@ Parsed C implicit link information from above output:
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_5a8b8 && [1/2] Building CXX object CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_1392e && [1/2] Building CXX object CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj
 Using built-in specs.
 COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe
 Target: xtensa-esp32-elf
 Configured with: /builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-host_w64-mingw32 --target=xtensa-esp32-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r2-patch2' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpfr=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpc=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-isl=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes --with-gnu-ld
 Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r2-patch2) 
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
- c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1plus.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlongcalls -auxbase-strip CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\ccnCsjgL.s
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
+ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1plus.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlongcalls -auxbase-strip CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\ccY5uv98.s
 GNU C++14 (crosstool-NG esp-2021r2-patch2) version 8.4.0 (xtensa-esp32-elf)
 	compiled by GNU C version 6.3.0 20170516, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
 
@@ -236,12 +236,12 @@ GNU C++14 (crosstool-NG esp-2021r2-patch2) version 8.4.0 (xtensa-esp32-elf)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: b40273e6197f023f206fd9f2261c9b39
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
- c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\filip\AppData\Local\Temp\ccnCsjgL.s
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
+ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\filip\AppData\Local\Temp\ccY5uv98.s
 COMPILER_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/
 LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
-[2/2] Linking CXX executable cmTC_5a8b8
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
+[2/2] Linking CXX executable cmTC_1392e
 Using built-in specs.
 COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe
 COLLECT_LTO_WRAPPER=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe
@@ -251,9 +251,9 @@ Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r2-patch2) 
 COMPILER_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/
 LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/;c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_5a8b8'
- c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\cc1aAB0O.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_5a8b8 c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o
-COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_5a8b8'
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_1392e'
+ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\cc2Z5wvg.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_1392e c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_1392e'
 
 
 
@@ -282,15 +282,15 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(xtensa-esp32-elf-ld\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_5a8b8 && [1/2] Building CXX object CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_1392e && [1/2] Building CXX object CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe]
   ignore line: [Target: xtensa-esp32-elf]
   ignore line: [Configured with: /builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-host_w64-mingw32 --target=xtensa-esp32-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r2-patch2' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpfr=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpc=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-isl=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes --with-gnu-ld]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.4.0 (crosstool-NG esp-2021r2-patch2) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
-  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1plus.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlongcalls -auxbase-strip CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\ccnCsjgL.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
+  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1plus.exe -quiet -v -iprefix c:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlongcalls -auxbase-strip CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj -Wno-frame-address -version -o C:\Users\filip\AppData\Local\Temp\ccY5uv98.s]
   ignore line: [GNU C++14 (crosstool-NG esp-2021r2-patch2) version 8.4.0 (xtensa-esp32-elf)]
   ignore line: [	compiled by GNU C version 6.3.0 20170516  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.19-GMP]
   ignore line: []
@@ -317,16 +317,16 @@ Parsed CXX implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: b40273e6197f023f206fd9f2261c9b39]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
-  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\filip\AppData\Local\Temp\ccnCsjgL.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
+  ignore line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\filip\AppData\Local\Temp\ccY5uv98.s]
   ignore line: [COMPILER_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/]
   ignore line: [LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
-  ignore line: [[2/2] Linking CXX executable cmTC_5a8b8]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
+  ignore line: [[2/2] Linking CXX executable cmTC_1392e]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch2-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe]
   ignore line: [COLLECT_LTO_WRAPPER=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe]
@@ -340,27 +340,27 @@ Parsed CXX implicit link information from above output:
   ignore line: [LIBRARY_PATH=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/]
   ignore line: [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_5a8b8']
-  link line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\cc1aAB0O.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_5a8b8 c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'cmTC_1392e']
+  link line: [ c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe -plugin c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll -plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\cc2Z5wvg.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_1392e c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0 -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc -Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc -lc -lnosys -lc -lgcc c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtend.o c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtn.o]
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/collect2.exe] ==> ignore
     arg [-plugin] ==> ignore
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/liblto_plugin-0.dll] ==> ignore
     arg [-plugin-opt=c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/lto-wrapper.exe] ==> ignore
-    arg [-plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\cc1aAB0O.res] ==> ignore
+    arg [-plugin-opt=-fresolution=C:\Users\filip\AppData\Local\Temp\cc2Z5wvg.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lnosys] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_5a8b8] ==> ignore
+    arg [cmTC_1392e] ==> ignore
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o] ==> obj [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/crt0.o]
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o] ==> obj [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crti.o]
     arg [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o] ==> obj [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/crtbegin.o]
     arg [-Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0] ==> dir [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0]
     arg [-Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc] ==> dir [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc]
     arg [-Lc:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib] ==> dir [c:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib]
-    arg [CMakeFiles/cmTC_5a8b8.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+    arg [CMakeFiles/cmTC_1392e.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc] ==> lib [gcc]
@@ -387,40 +387,40 @@ Parsed CXX implicit link information from above output:
 Determining if the include file sys/types.h exists passed with the following output:
 Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_e8d6d && [1/2] Building C object CMakeFiles/cmTC_e8d6d.dir/CheckIncludeFile.c.obj
-[2/2] Linking C executable cmTC_e8d6d
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_995da && [1/2] Building C object CMakeFiles/cmTC_995da.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_995da
 
 
 
 Determining if the include file stdint.h exists passed with the following output:
 Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_f3521 && [1/2] Building C object CMakeFiles/cmTC_f3521.dir/CheckIncludeFile.c.obj
-[2/2] Linking C executable cmTC_f3521
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_7fcc3 && [1/2] Building C object CMakeFiles/cmTC_7fcc3.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_7fcc3
 
 
 
 Determining if the include file stddef.h exists passed with the following output:
 Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_35fdf && [1/2] Building C object CMakeFiles/cmTC_35fdf.dir/CheckIncludeFile.c.obj
-[2/2] Linking C executable cmTC_35fdf
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_380cf && [1/2] Building C object CMakeFiles/cmTC_380cf.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_380cf
 
 
 
 Determining size of time_t passed with the following output:
 Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_bacac && [1/2] Building C object CMakeFiles/cmTC_bacac.dir/TIME_T_SIZE.c.obj
-[2/2] Linking C executable cmTC_bacac
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_b1883 && [1/2] Building C object CMakeFiles/cmTC_b1883.dir/TIME_T_SIZE.c.obj
+[2/2] Linking C executable cmTC_b1883
 
 
 
 Performing C SOURCE FILE Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS succeeded with the following output:
 Change Dir: C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_1155f && [1/2] Building C object CMakeFiles/cmTC_1155f.dir/src.c.obj
-[2/2] Linking C executable cmTC_1155f
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe cmTC_f9de3 && [1/2] Building C object CMakeFiles/cmTC_f9de3.dir/src.c.obj
+[2/2] Linking C executable cmTC_f9de3
 
 
 Source file was:

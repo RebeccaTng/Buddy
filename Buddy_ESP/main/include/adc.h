@@ -6,6 +6,8 @@
 #define MAX_CHANNELS    5
 #define SAMPLES         3
 
+#define NTC_CONSTANT    10000.0
+
 static const adc1_channel_t channels[MAX_CHANNELS] = {
         ADC1_CHANNEL_6, //Pin A2 //Temperature1
         ADC1_CHANNEL_3, //Pin A3 //Temperature2
@@ -22,16 +24,16 @@ static const char *tags[16] = {
         "LDR-3"
 };
 
-static unsigned int temperature;
-static unsigned int moisture;
-static unsigned int distance;
-static unsigned int light;
+static int temp_out;
+static int moist_out;
+static int dist_out;
+static int light_out;
 
 static bool cali_enable;
 static esp_adc_cal_characteristics_t adc1_chars;
 
 static int adc_raw[MAX_CHANNELS];
-static uint32_t voltage[MAX_CHANNELS];
+static int voltage[MAX_CHANNELS];
 
 unsigned int getTemperature();
 unsigned int getMoisture();

@@ -1,14 +1,42 @@
 "C:\Program Files\JetBrains\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2021.3.3/bin/ninja/win/ninja.exe" -G Ninja C:\Users\filip\Documents\Kulen\EE5\esp32\Buddy_ESP
+-- IDF_TARGET not set, using default target: esp32
+-- Found Git: C:/Program Files/Git/cmd/git.exe (found version "2.35.1.windows.2") 
+-- The C compiler identification is GNU 8.4.0
+-- The CXX compiler identification is GNU 8.4.0
+-- The ASM compiler identification is GNU
+-- Found assembler: C:/Espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc.exe
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 -- Project is not inside a git repository, or git repository has no commits; will not use 'git describe' to determine PROJECT_VER.
 -- Building ESP-IDF components for target esp32
 -- Checking Python dependencies...
+Downloading espidf.constraints.v5.0.txt to C:\Users\filip\.espressif\espidf.constraints.v5.0.txt.tmp
+Done
 Python requirements are satisfied.
-Skipping the download of C:\Users\filip\.espressif\espidf.constraints.v5.0.txt because it was downloaded recently. If you believe that this is causing you trouble then remove it manually and re-run your install script.
 Constraint file: C:\Users\filip\.espressif\espidf.constraints.v5.0.txt
 Requirement files:
  - C:\Users\filip\Documents\Kulen\EE5\esp32\esp-idf\tools\requirements\requirements.core.txt
 Python being checked: C:\Espressif\python_env\idf5.0_py3.10_env\Scripts\python.exe
 -- Project sdkconfig file C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/sdkconfig
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of time_t
+-- Check size of time_t - done
+-- Found Python3: C:/Users/filip/AppData/Local/Programs/Python/Python310/python.exe (found version "3.10.4") found components: Interpreter 
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS - Success
 -- App "Buddy_IoT3" version: 1
 -- Adding linker script C:/Users/filip/Documents/Kulen/EE5/esp32/Buddy_ESP/cmake-build-debug/esp-idf/esp_system/ld/memory.ld
 -- Adding linker script C:/Users/filip/Documents/Kulen/EE5/esp32/esp-idf/components/esp_system/ld/esp32/sections.ld.in
