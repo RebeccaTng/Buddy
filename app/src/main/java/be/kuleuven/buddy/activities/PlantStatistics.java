@@ -42,6 +42,7 @@ public class PlantStatistics extends AppCompatActivity {
     TextView name, species, age, place, lastWater, waterTank, connected, status, moist, light, temp, userMessage;
     View waterlvl, connectedIcon;
     ProgressBar loading;
+    String plantDate;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -98,6 +99,8 @@ public class PlantStatistics extends AppCompatActivity {
     public void goOverview(View caller) {
         Intent goToOverview = new Intent(this, Overview.class);
         goToOverview.putExtra("accountInfo", accountInfo);
+        goToOverview.putExtra("plantDate", plantDate);
+        goToOverview.putExtra("plantId", plantId);
         startActivity(goToOverview);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
@@ -141,7 +144,8 @@ public class PlantStatistics extends AppCompatActivity {
 
         name.setText(plantData.getString("name"));
         species.setText(plantData.getString("species"));
-        setAge(plantData.getString("plantDate"));
+        plantDate = plantData.getString("plantDate");
+        setAge(plantDate);
         place.setText(plantData.getString("place"));
         setLastWater(plantData.getString("lastWatered"));
         if (plantData.getInt("connected") == 1) {

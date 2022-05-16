@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.BoringLayout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -42,11 +45,14 @@ public class Overview extends AppCompatActivity {
     LineDataSet moistDataSet, lightDataSet, tempDataSet;
     LineChart moistChart, lightChart, tempChart;
     TextView dateView, day, week, month, year;
-    Calendar calendar;
+    Calendar calendar, calendarMin, calendarMinWeek;
     SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, yearFormat;
     String dayNow, date, dayToday, weekNowBegin, weekNowEnd, weekBegin, weekEnd, monthNow, yearNow;
     ImageView previous, next;
     AccountInfo accountInfo;
+    ProgressBar loading;
+    ScrollView scrollView;
+    int plantId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +70,26 @@ public class Overview extends AppCompatActivity {
         week = findViewById(R.id.overviewWeek);
         month = findViewById(R.id.overviewMonth);
         year = findViewById(R.id.overviewYear);
-
+        loading = findViewById(R.id.loading_overview);
+        scrollView = findViewById(R.id.scroll);
+        
+        String plantDate = null;
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
+        if(getIntent().hasExtra("plantId")) { plantId = getIntent().getExtras().getInt("plantId"); }
+        if(getIntent().hasExtra("plantDate")) { plantDate = getIntent().getExtras().getString("plantDate"); }
+        System.out.println(plantDate);
+        SimpleDateFormat dateDBformat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        calendarMin = Calendar.getInstance();
+        calendarMinWeek = Calendar.getInstance();
+        try {
+            assert plantDate != null;
+            calendarMin.setTime(Objects.requireNonNull(dateDBformat.parse(plantDate)));
+            calendarMinWeek.setTime(Objects.requireNonNull(dateDBformat.parse(plantDate)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendarMinWeek.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        calendarMinWeek.add(Calendar.DAY_OF_MONTH, 7);
 
         findViewById(R.id.infoIconOverview).setOnClickListener(view -> {
             String title = getResources().getString(R.string.howTo);
@@ -88,14 +112,15 @@ public class Overview extends AppCompatActivity {
         dayNow = dayFormat.format(calendar.getTime());
         dayToday = dayNow + " (Today)";
         dateView.setText(dayToday);
+        if(dayNow.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
 
         // Create chart
         updateChart("day");
 
         // Customize chart
-        chartSettings(moistChart, moistDataSet);
-        chartSettings(lightChart, lightDataSet);
-        chartSettings(tempChart, tempDataSet);
+        chartSettings(moistChart, moistDataSet, false);
+        chartSettings(lightChart, lightDataSet, false);
+        chartSettings(tempChart, tempDataSet, true);
 
         day.setOnClickListener(view -> {
             day.setBackground(btnBg);
@@ -109,6 +134,8 @@ public class Overview extends AppCompatActivity {
 
             dateView.setText(dayToday);
             next.setVisibility(View.GONE);
+            if(dayNow.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
+            else previous.setVisibility(View.VISIBLE);
             updateChart("day");
         });
 
@@ -130,6 +157,8 @@ public class Overview extends AppCompatActivity {
             date = weekNowBegin + " - " + weekNowEnd;
             dateView.setText(date);
             next.setVisibility(View.GONE);
+            if(weekNowEnd.equals(weekFormatEnd.format(calendarMinWeek.getTime()))) previous.setVisibility(View.GONE);
+            else previous.setVisibility(View.VISIBLE);
             updateChart("week");
         });
 
@@ -147,6 +176,8 @@ public class Overview extends AppCompatActivity {
             monthNow = monthFormat.format(calendar.getTime());
             dateView.setText(monthNow);
             next.setVisibility(View.GONE);
+            if(monthNow.equals(monthFormat.format(calendarMinWeek.getTime()))) previous.setVisibility(View.GONE);
+            else previous.setVisibility(View.VISIBLE);
             updateChart("month");
         });
 
@@ -164,23 +195,28 @@ public class Overview extends AppCompatActivity {
             yearNow = yearFormat.format(calendar.getTime());
             dateView.setText(yearNow);
             next.setVisibility(View.GONE);
+            if(yearNow.equals(yearFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
+            else previous.setVisibility(View.VISIBLE);
             updateChart("year");
         });
 
         previous.setOnClickListener(view -> {
-            // TODO set that you can't go back to before you added the plant
             changeDate(-1, green);
             next.setVisibility(View.VISIBLE);
         });
 
-        next.setOnClickListener(view -> changeDate(1, green));
+        next.setOnClickListener(view -> {
+            changeDate(1, green);
+            previous.setVisibility(View.VISIBLE);
+        });
     }
 
     @Override
     public void onBackPressed() {
-        Intent goToPlantSettings = new Intent(this, PlantSettings.class);
-        goToPlantSettings.putExtra("accountInfo", accountInfo);
-        startActivity(goToPlantSettings);
+        Intent goToPlantStatistics = new Intent(this, PlantStatistics.class);
+        goToPlantStatistics.putExtra("accountInfo", accountInfo);
+        goToPlantStatistics.putExtra("plantId", plantId);
+        startActivity(goToPlantStatistics);
     }
 
     public void goBack(View caller) {
@@ -205,6 +241,7 @@ public class Overview extends AppCompatActivity {
                 next.setVisibility(View.GONE);
                 date = dayToday;
             }
+            else if(date.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
             updateChart("day");
 
         } else if(week.getCurrentTextColor() == green) {
@@ -214,18 +251,21 @@ public class Overview extends AppCompatActivity {
             weekBegin = weekFormatBegin.format(calendar.getTime());
             date = weekBegin + " - " + weekEnd;
             if(weekEnd.equals(weekNowEnd)) next.setVisibility(View.GONE);
+            else if(weekEnd.equals(weekFormatEnd.format(calendarMinWeek.getTime()))) previous.setVisibility(View.GONE);
             updateChart("week");
 
         } else if(month.getCurrentTextColor() == green) {
             calendar.add(Calendar.MONTH, sign);
             date = monthFormat.format(calendar.getTime());
             if(date.equals(monthNow)) next.setVisibility(View.GONE);
+            else if(date.equals(monthFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
             updateChart("month");
 
         } else if(year.getCurrentTextColor() == green) {
             calendar.add(Calendar.YEAR, sign);
             date = yearFormat.format(calendar.getTime());
             if(date.equals(yearNow)) next.setVisibility(View.GONE);
+            else if(date.equals(yearFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
             updateChart("year");
         }
 
@@ -254,7 +294,7 @@ public class Overview extends AppCompatActivity {
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER); // Smooth line
     }
 
-    private void chartSettings(LineChart chart, LineDataSet dataSet) {
+    private void chartSettings(LineChart chart, LineDataSet dataSet, Boolean isTemp) {
 
         Typeface tf = ResourcesCompat.getFont(this, R.font.mulish_regular);
         int dark_beige = ContextCompat.getColor(this, R.color.dark_beige);
@@ -272,9 +312,15 @@ public class Overview extends AppCompatActivity {
 
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setTypeface(tf);
-        yAxis.setAxisMinimum(0f);
-        yAxis.setAxisMaximum(102f);
-        yAxis.setGranularity(20f); // Intervals
+        if(isTemp){
+            yAxis.setAxisMinimum(-10f);
+            yAxis.setAxisMaximum(45f);
+            yAxis.setGranularity(10f);
+        } else {
+            yAxis.setAxisMinimum(0f);
+            yAxis.setAxisMaximum(102f);
+            yAxis.setGranularity(20f); // Intervals
+        }
         yAxis.setTextColor(brown);
         yAxis.setGridColor(dark_beige);
         yAxis.setDrawAxisLine(false);
