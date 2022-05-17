@@ -1,6 +1,7 @@
 package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -133,16 +134,16 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
                         } else{
                             loading.setVisibility(View.GONE);
+                            userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                             userMessage.setText(R.string.error);
-                            userMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
                     //process an error
                     loading.setVisibility(View.GONE);
+                    userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                     userMessage.setText(R.string.error);
-                    userMessage.setVisibility(View.VISIBLE);
                 })
         {
             @Override
@@ -175,6 +176,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
             homeRecycler.setVisibility(View.VISIBLE);
         } else {
             homeRecycler.setVisibility(View.INVISIBLE);
+            userMessage.setTextColor(ContextCompat.getColor(this, R.color.dark_green));
             userMessage.setText(R.string.noPlants);
         }
         numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));

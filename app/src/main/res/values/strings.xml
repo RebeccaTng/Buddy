@@ -118,7 +118,7 @@
     <string name="addSpecies">Add species to library</string>
 
     <string name="howTo">How to use the charts</string>
-    <string name="graphUse">Tap on the chart to highlight a datapoint, tap again to remove.\n-\nDouble tap to see the values of all data points, double tap again to remove them.\n-\nPinch to zoom.</string>
+    <string name="graphUse">Tap on the chart to highlight a datapoint, tap again to remove.\n-\nDouble tap to see the values of all data points, double tap again to remove them.\n-\nIf there is only one value on the chart, the data point value will be shown automatically without double tapping\n-\nPinch to zoom.</string>
 
 
     <!--BLUETOOTH -->

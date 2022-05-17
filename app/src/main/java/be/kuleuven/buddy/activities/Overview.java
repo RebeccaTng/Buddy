@@ -16,6 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -27,26 +31,34 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
+import be.kuleuven.buddy.cards.HomeInfo;
 import be.kuleuven.buddy.other.InfoFragment;
 
 public class Overview extends AppCompatActivity {
 
     LineDataSet moistDataSet, lightDataSet, tempDataSet;
     LineChart moistChart, lightChart, tempChart;
-    TextView dateView, day, week, month, year;
+    TextView dateView, day, week, month, year, userMessage;
     Calendar calendar, calendarMin, calendarMinWeek;
-    SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, yearFormat;
+    SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, dbFormat;
     String dayNow, date, dayToday, weekNowBegin, weekNowEnd, weekBegin, weekEnd, monthNow, yearNow;
     ImageView previous, next;
     AccountInfo accountInfo;
@@ -72,19 +84,19 @@ public class Overview extends AppCompatActivity {
         year = findViewById(R.id.overviewYear);
         loading = findViewById(R.id.loading_overview);
         scrollView = findViewById(R.id.scroll);
-        
+        userMessage = findViewById(R.id.userMessage_overview);
+
+        dbFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String plantDate = null;
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
         if(getIntent().hasExtra("plantId")) { plantId = getIntent().getExtras().getInt("plantId"); }
         if(getIntent().hasExtra("plantDate")) { plantDate = getIntent().getExtras().getString("plantDate"); }
-        System.out.println(plantDate);
-        SimpleDateFormat dateDBformat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         calendarMin = Calendar.getInstance();
         calendarMinWeek = Calendar.getInstance();
         try {
             assert plantDate != null;
-            calendarMin.setTime(Objects.requireNonNull(dateDBformat.parse(plantDate)));
-            calendarMinWeek.setTime(Objects.requireNonNull(dateDBformat.parse(plantDate)));
+            calendarMin.setTime(Objects.requireNonNull(dbFormat.parse(plantDate)));
+            calendarMinWeek.setTime(Objects.requireNonNull(dbFormat.parse(plantDate)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -107,15 +119,15 @@ public class Overview extends AppCompatActivity {
         weekFormatBegin = new SimpleDateFormat("MMM d", Locale.getDefault());
         weekFormatEnd = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
         monthFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
-        yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
 
         dayNow = dayFormat.format(calendar.getTime());
+        String dayDb = dbFormat.format(calendar.getTime());
         dayToday = dayNow + " (Today)";
         dateView.setText(dayToday);
         if(dayNow.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
 
         // Create chart
-        updateChart("day");
+        getChartData("day", dayDb, null);
 
         // Customize chart
         chartSettings(moistChart, moistDataSet, false);
@@ -136,7 +148,7 @@ public class Overview extends AppCompatActivity {
             next.setVisibility(View.GONE);
             if(dayNow.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
             else previous.setVisibility(View.VISIBLE);
-            updateChart("day");
+            getChartData("day", dayDb, null);
         });
 
         week.setOnClickListener(view -> {
@@ -152,6 +164,7 @@ public class Overview extends AppCompatActivity {
             calendar = Calendar.getInstance();
             calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
             weekNowBegin = weekFormatBegin.format(calendar.getTime());
+            String weekBeginDb = dbFormat.format(calendar.getTime());
             calendar.add(Calendar.DAY_OF_WEEK, 6);
             weekNowEnd = weekFormatEnd.format(calendar.getTime());
             date = weekNowBegin + " - " + weekNowEnd;
@@ -159,7 +172,7 @@ public class Overview extends AppCompatActivity {
             next.setVisibility(View.GONE);
             if(weekNowEnd.equals(weekFormatEnd.format(calendarMinWeek.getTime()))) previous.setVisibility(View.GONE);
             else previous.setVisibility(View.VISIBLE);
-            updateChart("week");
+            getChartData("week", weekBeginDb, dbFormat.format(calendar.getTime()));
         });
 
         month.setOnClickListener(view -> {
@@ -178,7 +191,7 @@ public class Overview extends AppCompatActivity {
             next.setVisibility(View.GONE);
             if(monthNow.equals(monthFormat.format(calendarMinWeek.getTime()))) previous.setVisibility(View.GONE);
             else previous.setVisibility(View.VISIBLE);
-            updateChart("month");
+            getChartData("month", String.valueOf(calendar.get(Calendar.YEAR)), String.valueOf(calendar.get(Calendar.MONTH)+1));
         });
 
         year.setOnClickListener(view -> {
@@ -192,12 +205,12 @@ public class Overview extends AppCompatActivity {
             year.setTextColor(green);
 
             calendar = Calendar.getInstance();
-            yearNow = yearFormat.format(calendar.getTime());
+            yearNow = String.valueOf(calendar.get(Calendar.YEAR));
             dateView.setText(yearNow);
             next.setVisibility(View.GONE);
-            if(yearNow.equals(yearFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
+            if(yearNow.equals(String.valueOf(calendarMin.get(Calendar.YEAR)))) previous.setVisibility(View.GONE);
             else previous.setVisibility(View.VISIBLE);
-            updateChart("year");
+            getChartData("year", yearNow, null);
         });
 
         previous.setOnClickListener(view -> {
@@ -242,31 +255,32 @@ public class Overview extends AppCompatActivity {
                 date = dayToday;
             }
             else if(date.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
-            updateChart("day");
+            getChartData("day", dbFormat.format(calendar.getTime()), null);
 
         } else if(week.getCurrentTextColor() == green) {
             calendar.add(Calendar.WEEK_OF_YEAR, sign);
             weekEnd = weekFormatEnd.format(calendar.getTime());
+            String weekEndDb = dbFormat.format(calendar.getTime());
             calendar.add(Calendar.DAY_OF_WEEK, -6);
             weekBegin = weekFormatBegin.format(calendar.getTime());
             date = weekBegin + " - " + weekEnd;
             if(weekEnd.equals(weekNowEnd)) next.setVisibility(View.GONE);
             else if(weekEnd.equals(weekFormatEnd.format(calendarMinWeek.getTime()))) previous.setVisibility(View.GONE);
-            updateChart("week");
+            getChartData("week", dbFormat.format(calendar.getTime()), weekEndDb);
 
         } else if(month.getCurrentTextColor() == green) {
             calendar.add(Calendar.MONTH, sign);
             date = monthFormat.format(calendar.getTime());
             if(date.equals(monthNow)) next.setVisibility(View.GONE);
             else if(date.equals(monthFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
-            updateChart("month");
+            getChartData("month", String.valueOf(calendar.get(Calendar.YEAR)), String.valueOf(calendar.get(Calendar.MONTH)+1));
 
         } else if(year.getCurrentTextColor() == green) {
             calendar.add(Calendar.YEAR, sign);
-            date = yearFormat.format(calendar.getTime());
+            date = String.valueOf(calendar.get(Calendar.YEAR));
             if(date.equals(yearNow)) next.setVisibility(View.GONE);
-            else if(date.equals(yearFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
-            updateChart("year");
+            else if(date.equals(String.valueOf(calendarMin.get(Calendar.YEAR)))) previous.setVisibility(View.GONE);
+            getChartData("year", date, null);
         }
 
         dateView.setText(date);
@@ -367,7 +381,7 @@ public class Overview extends AppCompatActivity {
         chart.invalidate();
     }
 
-    private void axisSettings(String type, LineChart chart, LineDataSet dataSet) {
+    private void axisSettings(String type, LineChart chart, LineDataSet dataSet, int size) {
         XAxis xAxis = chart.getXAxis();
 
         switch(type) {
@@ -436,15 +450,19 @@ public class Overview extends AppCompatActivity {
             @Override
             public void onChartTranslate(MotionEvent me, float dX, float dY) {}
         });
+        if(size == 1) {
+            dataSet.setDrawCircles(true);
+            dataSet.setDrawValues(true);
+        }
         chart.invalidate();
     }
 
-    private void updateChart(String type){
+    private void updateChart(String type, List<Entry> moistEntries, List<Entry> lightEntries, List<Entry> tempEntries){
 
         // Create new dataSet from values
-        moistDataSet = new LineDataSet(getMoistDataSet(type), "moisture");
-        lightDataSet = new LineDataSet(getLightDataSet(type), "light");
-        tempDataSet = new LineDataSet(getTempDataSet(type), "temperature");
+        moistDataSet = new LineDataSet(moistEntries, "moisture");
+        lightDataSet = new LineDataSet(lightEntries, "light");
+        tempDataSet = new LineDataSet(tempEntries, "temperature");
 
         // Customize dataSet settings
         dataSetSettings(moistDataSet);
@@ -462,299 +480,65 @@ public class Overview extends AppCompatActivity {
         tempChart.setData(tempLineData);
 
         // Axis settings
-        axisSettings(type, moistChart, moistDataSet);
-        axisSettings(type, lightChart, lightDataSet);
-        axisSettings(type, tempChart, tempDataSet);
+        axisSettings(type, moistChart, moistDataSet, moistEntries.size());
+        axisSettings(type, lightChart, lightDataSet, moistEntries.size());
+        axisSettings(type, tempChart, tempDataSet, moistEntries.size());
     }
 
-    private List<Entry> getMoistDataSet(String type) {
-        // TODO insert values from database
-        List<Entry> moistEntries = new ArrayList<>();
+    private void getChartData(String type, String date1, String date2){
+        // Connect to database
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String url = "https://a21iot03.studev.groept.be/public/api/home/plantStatistics/overview/" + plantId + "/" + type + "/" + date1 + "/" + date2;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
+                response -> {
+                    //process the response
+                    try {
+                        String Rmessage = response.getString("message");
+                        String Rcomment = response.getString("comment");
+                        JSONArray data = response.getJSONArray("data");
 
-        switch(type) {
-            case "day": {
-                moistEntries.add(new Entry(0, 0));
-                moistEntries.add(new Entry(1, 21));
-                moistEntries.add(new Entry(2, 28));
-                moistEntries.add(new Entry(3, 35));
-                moistEntries.add(new Entry(4, 42));
-                moistEntries.add(new Entry(5, 94));
-                moistEntries.add(new Entry(6, 90));
-                moistEntries.add(new Entry(7, 88));
-                moistEntries.add(new Entry(8, 78));
-                moistEntries.add(new Entry(9, 71));
-                moistEntries.add(new Entry(10, 67));
-                moistEntries.add(new Entry(11, 61));
-                moistEntries.add(new Entry(12, 56));
-                moistEntries.add(new Entry(13, 52));
-                moistEntries.add(new Entry(14, 40));
-                moistEntries.add(new Entry(15, 36));
-                moistEntries.add(new Entry(16, 22));
-                moistEntries.add(new Entry(17, 4));
-                moistEntries.add(new Entry(18, 84));
-                moistEntries.add(new Entry(19, 83));
-                moistEntries.add(new Entry(20, 78));
-                moistEntries.add(new Entry(21, 70));
-                moistEntries.add(new Entry(22, 65));
-                moistEntries.add(new Entry(23, 60));
-                moistEntries.add(new Entry(24, 52));
-                break;
-            }
-            case "week": {
-                moistEntries.add(new Entry(0, 12));
-                moistEntries.add(new Entry(1, 21));
-                moistEntries.add(new Entry(2, 28));
-                moistEntries.add(new Entry(3, 100));
-                moistEntries.add(new Entry(4, 42));
-                moistEntries.add(new Entry(5, 94));
-                moistEntries.add(new Entry(6, 90));
-                break;
-            }
+                        //check if login is valid
+                        if(Rmessage.equals("OverviewLoaded")) {
+                            JSONObject dataObject;
+                            int moist, light, temp, timestamp;
+                            List<Entry> moistEntries = new ArrayList<>();
+                            List<Entry> lightEntries = new ArrayList<>();
+                            List<Entry> tempEntries = new ArrayList<>();
 
-            case "month": {
-                moistEntries.add(new Entry(1, 100));
-                moistEntries.add(new Entry(2, 28));
-                moistEntries.add(new Entry(3, 35));
-                moistEntries.add(new Entry(4, 42));
-                moistEntries.add(new Entry(5, 94));
-                moistEntries.add(new Entry(6, 90));
-                moistEntries.add(new Entry(7, 88));
-                moistEntries.add(new Entry(8, 78));
-                moistEntries.add(new Entry(9, 71));
-                moistEntries.add(new Entry(10, 67));
-                moistEntries.add(new Entry(11, 61));
-                moistEntries.add(new Entry(12, 56));
-                moistEntries.add(new Entry(13, 52));
-                moistEntries.add(new Entry(14, 40));
-                moistEntries.add(new Entry(15, 36));
-                moistEntries.add(new Entry(16, 22));
-                moistEntries.add(new Entry(17, 4));
-                moistEntries.add(new Entry(18, 84));
-                moistEntries.add(new Entry(19, 83));
-                moistEntries.add(new Entry(20, 78));
-                moistEntries.add(new Entry(21, 70));
-                moistEntries.add(new Entry(22, 65));
-                moistEntries.add(new Entry(23, 60));
-                moistEntries.add(new Entry(24, 52));
-                moistEntries.add(new Entry(25, 48));
-                moistEntries.add(new Entry(26, 42));
-                moistEntries.add(new Entry(27, 36));
-                moistEntries.add(new Entry(28, 35));
-                moistEntries.add(new Entry(29, 31));
-                moistEntries.add(new Entry(30, 20));
-                moistEntries.add(new Entry(31, 100));
-                break;
-            }
-            case "year": {
-                moistEntries.add(new Entry(1, 21));
-                moistEntries.add(new Entry(2, 28));
-                moistEntries.add(new Entry(3, 35));
-                moistEntries.add(new Entry(4, 42));
-                moistEntries.add(new Entry(5, 94));
-                moistEntries.add(new Entry(6, 90));
-                moistEntries.add(new Entry(7, 88));
-                moistEntries.add(new Entry(8, 78));
-                moistEntries.add(new Entry(9, 71));
-                moistEntries.add(new Entry(10, 67));
-                moistEntries.add(new Entry(11, 61));
-                moistEntries.add(new Entry(12, 12));
-                break;
-            }
-        }
-        return moistEntries;
-    }
+                            for(int i = 0; i < data.length(); i++) {
+                                dataObject = data.getJSONObject(i);
+                                moist = dataObject.getInt("moistData");
+                                light = dataObject.getInt("lightData");
+                                temp = dataObject.getInt("tempData");
+                                timestamp = dataObject.getInt("timestamp");
 
-    private List<Entry> getLightDataSet(String type) {
-        // TODO insert values from database
-        List<Entry> lightEntries = new ArrayList<>();
+                                moistEntries.add(new Entry(timestamp, moist));
+                                lightEntries.add(new Entry(timestamp, light));
+                                tempEntries.add(new Entry(timestamp, temp));
+                            }
 
-        switch(type) {
-            case "day": {
-                lightEntries.add(new Entry(0, 12));
-                lightEntries.add(new Entry(1, 21));
-                lightEntries.add(new Entry(2, 28));
-                lightEntries.add(new Entry(3, 35));
-                lightEntries.add(new Entry(4, 42));
-                lightEntries.add(new Entry(5, 94));
-                lightEntries.add(new Entry(6, 90));
-                lightEntries.add(new Entry(7, 88));
-                lightEntries.add(new Entry(8, 78));
-                lightEntries.add(new Entry(9, 71));
-                lightEntries.add(new Entry(10, 67));
-                lightEntries.add(new Entry(11, 61));
-                lightEntries.add(new Entry(12, 56));
-                lightEntries.add(new Entry(13, 52));
-                lightEntries.add(new Entry(14, 40));
-                lightEntries.add(new Entry(15, 36));
-                lightEntries.add(new Entry(16, 22));
-                lightEntries.add(new Entry(17, 4));
-                lightEntries.add(new Entry(18, 84));
-                lightEntries.add(new Entry(19, 83));
-                lightEntries.add(new Entry(20, 78));
-                lightEntries.add(new Entry(21, 70));
-                lightEntries.add(new Entry(22, 65));
-                lightEntries.add(new Entry(23, 60));
-                lightEntries.add(new Entry(24, 52));
-                break;
-            }
-            case "week": {
+                            updateChart(type, moistEntries, lightEntries, tempEntries);
+                            loading.setVisibility(View.INVISIBLE);
+                            scrollView.setVisibility(View.VISIBLE);
 
-                lightEntries.add(new Entry(0, 12));
-                lightEntries.add(new Entry(1, 21));
-                lightEntries.add(new Entry(2, 28));
-                lightEntries.add(new Entry(3, 35));
-                lightEntries.add(new Entry(4, 42));
-                lightEntries.add(new Entry(5, 94));
-                lightEntries.add(new Entry(6, 90));
-                break;
-            }
+                        }else if(Rmessage.equals("OverviewLoadedNoData")) {
+                            loading.setVisibility(View.GONE);
+                            userMessage.setText(Rcomment);
+                            userMessage.setTextColor(ContextCompat.getColor(this, R.color.beige));
 
-            case "month": {
-                lightEntries.add(new Entry(1, 21));
-                lightEntries.add(new Entry(2, 28));
-                lightEntries.add(new Entry(3, 35));
-                lightEntries.add(new Entry(4, 42));
-                lightEntries.add(new Entry(5, 94));
-                lightEntries.add(new Entry(6, 90));
-                lightEntries.add(new Entry(7, 88));
-                lightEntries.add(new Entry(8, 78));
-                lightEntries.add(new Entry(9, 71));
-                lightEntries.add(new Entry(10, 67));
-                lightEntries.add(new Entry(11, 61));
-                lightEntries.add(new Entry(12, 56));
-                lightEntries.add(new Entry(13, 52));
-                lightEntries.add(new Entry(14, 40));
-                lightEntries.add(new Entry(15, 36));
-                lightEntries.add(new Entry(16, 22));
-                lightEntries.add(new Entry(17, 4));
-                lightEntries.add(new Entry(18, 84));
-                lightEntries.add(new Entry(19, 83));
-                lightEntries.add(new Entry(20, 78));
-                lightEntries.add(new Entry(21, 70));
-                lightEntries.add(new Entry(22, 65));
-                lightEntries.add(new Entry(23, 60));
-                lightEntries.add(new Entry(24, 52));
-                lightEntries.add(new Entry(25, 48));
-                lightEntries.add(new Entry(26, 42));
-                lightEntries.add(new Entry(27, 36));
-                lightEntries.add(new Entry(28, 35));
-                lightEntries.add(new Entry(29, 31));
-                lightEntries.add(new Entry(30, 20));
-                lightEntries.add(new Entry(31, 12));
-                break;
-            }
-            case "year": {
-                lightEntries.add(new Entry(1, 21));
-                lightEntries.add(new Entry(2, 28));
-                lightEntries.add(new Entry(3, 35));
-                lightEntries.add(new Entry(4, 42));
-                lightEntries.add(new Entry(5, 94));
-                lightEntries.add(new Entry(6, 90));
-                lightEntries.add(new Entry(7, 88));
-                lightEntries.add(new Entry(8, 78));
-                lightEntries.add(new Entry(9, 71));
-                lightEntries.add(new Entry(10, 67));
-                lightEntries.add(new Entry(11, 61));
-                lightEntries.add(new Entry(12, 12));
-                break;
-            }
-        }
-        return lightEntries;
-    }
+                        } else{
+                            loading.setVisibility(View.GONE);
+                            userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
+                            userMessage.setText(R.string.error);
+                        }
+                    } catch (JSONException e){ e.printStackTrace(); }},
 
-    private List<Entry> getTempDataSet(String type) {
-        // TODO insert values from database
-        List<Entry> tempEntries = new ArrayList<>();
-        switch(type) {
-            case "day": {
-                tempEntries.add(new Entry(0, 12));
-                tempEntries.add(new Entry(1, 21));
-                tempEntries.add(new Entry(2, 28));
-                tempEntries.add(new Entry(3, 35));
-                tempEntries.add(new Entry(4, 42));
-                tempEntries.add(new Entry(5, 94));
-                tempEntries.add(new Entry(6, 90));
-                tempEntries.add(new Entry(7, 88));
-                tempEntries.add(new Entry(8, 78));
-                tempEntries.add(new Entry(9, 71));
-                tempEntries.add(new Entry(10, 67));
-                tempEntries.add(new Entry(11, 61));
-                tempEntries.add(new Entry(12, 56));
-                tempEntries.add(new Entry(13, 52));
-                tempEntries.add(new Entry(14, 40));
-                tempEntries.add(new Entry(15, 36));
-                tempEntries.add(new Entry(16, 22));
-                tempEntries.add(new Entry(17, 4));
-                tempEntries.add(new Entry(18, 84));
-                tempEntries.add(new Entry(19, 83));
-                tempEntries.add(new Entry(20, 78));
-                tempEntries.add(new Entry(21, 70));
-                tempEntries.add(new Entry(22, 65));
-                tempEntries.add(new Entry(23, 60));
-                tempEntries.add(new Entry(24, 52));
-                break;
-            }
-            case "week": {
-                tempEntries.add(new Entry(0, 12));
-                tempEntries.add(new Entry(1, 21));
-                tempEntries.add(new Entry(2, 28));
-                tempEntries.add(new Entry(3, 35));
-                tempEntries.add(new Entry(4, 42));
-                tempEntries.add(new Entry(5, 94));
-                tempEntries.add(new Entry(6, 90));
-                break;
-            }
-
-            case "month": {
-                tempEntries.add(new Entry(1, 21));
-                tempEntries.add(new Entry(2, 28));
-                tempEntries.add(new Entry(3, 35));
-                tempEntries.add(new Entry(4, 42));
-                tempEntries.add(new Entry(5, 94));
-                tempEntries.add(new Entry(6, 90));
-                tempEntries.add(new Entry(7, 88));
-                tempEntries.add(new Entry(8, 78));
-                tempEntries.add(new Entry(9, 71));
-                tempEntries.add(new Entry(10, 67));
-                tempEntries.add(new Entry(11, 61));
-                tempEntries.add(new Entry(12, 56));
-                tempEntries.add(new Entry(13, 52));
-                tempEntries.add(new Entry(14, 40));
-                tempEntries.add(new Entry(15, 36));
-                tempEntries.add(new Entry(16, 22));
-                tempEntries.add(new Entry(17, 4));
-                tempEntries.add(new Entry(18, 84));
-                tempEntries.add(new Entry(19, 83));
-                tempEntries.add(new Entry(20, 78));
-                tempEntries.add(new Entry(21, 70));
-                tempEntries.add(new Entry(22, 65));
-                tempEntries.add(new Entry(23, 60));
-                tempEntries.add(new Entry(24, 52));
-                tempEntries.add(new Entry(25, 48));
-                tempEntries.add(new Entry(26, 42));
-                tempEntries.add(new Entry(27, 36));
-                tempEntries.add(new Entry(28, 35));
-                tempEntries.add(new Entry(29, 31));
-                tempEntries.add(new Entry(30, 20));
-                tempEntries.add(new Entry(31, 21));
-                break;
-            }
-            case "year": {
-                tempEntries.add(new Entry(1, 21));
-                tempEntries.add(new Entry(2, 28));
-                tempEntries.add(new Entry(3, 35));
-                tempEntries.add(new Entry(4, 42));
-                tempEntries.add(new Entry(5, 94));
-                tempEntries.add(new Entry(6, 90));
-                tempEntries.add(new Entry(7, 88));
-                tempEntries.add(new Entry(8, 78));
-                tempEntries.add(new Entry(9, 71));
-                tempEntries.add(new Entry(10, 67));
-                tempEntries.add(new Entry(11, 61));
-                tempEntries.add(new Entry(12, 21));
-                break;
-            }
-        }
-        return tempEntries;
+                error -> {
+                    //process an error
+                    loading.setVisibility(View.GONE);
+                    userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
+                    userMessage.setText(R.string.error);
+                });
+        requestQueue.add(jsonObjectRequest);
     }
 }

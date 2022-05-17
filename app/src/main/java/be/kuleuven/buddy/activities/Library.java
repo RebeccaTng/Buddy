@@ -1,6 +1,7 @@
 package be.kuleuven.buddy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -126,15 +127,15 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
                             loadLibraryRecycler();
 
                         } else{
+                            userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                             userMessage.setText(R.string.error);
-                            userMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
                     //process an error
+                    userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                     userMessage.setText(R.string.error);
-                    userMessage.setVisibility(View.VISIBLE);
                 })
         {
             @Override
@@ -167,6 +168,7 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
             libraryRecycler.setVisibility(View.VISIBLE);
         } else {
             libraryRecycler.setVisibility(View.INVISIBLE);
+            userMessage.setTextColor(ContextCompat.getColor(this, R.color.dark_green));
             userMessage.setText(R.string.noLibPlants);
         }
         libNumber.setText(String.valueOf(libraryAdapter.getItemCount()));
