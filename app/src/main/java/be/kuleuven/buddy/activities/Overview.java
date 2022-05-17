@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.BoringLayout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,21 +34,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
-import be.kuleuven.buddy.cards.HomeInfo;
 import be.kuleuven.buddy.other.InfoFragment;
 
 public class Overview extends AppCompatActivity {
@@ -239,15 +234,12 @@ public class Overview extends AppCompatActivity {
 
     private void changeDate(int sign, int green) {
         String currentDate = dateView.getText().toString();
-        try {
-            if(week.getCurrentTextColor() == green) {
-                String[] parts = currentDate.split(" - ");
-                calendar.setTime(Objects.requireNonNull(weekFormatEnd.parse(parts[1])));
-            }
-            else calendar.setTime(Objects.requireNonNull(dayFormat.parse(currentDate)));
-        } catch (ParseException e) { e.printStackTrace(); }
 
         if(day.getCurrentTextColor() == green) {
+            try {
+                calendar.setTime(Objects.requireNonNull(dayFormat.parse(currentDate)));
+            } catch (ParseException e) { e.printStackTrace(); }
+
             calendar.add(Calendar.DATE, sign);
             date = dayFormat.format(calendar.getTime());
             if(date.equals(dayNow)) {
@@ -258,6 +250,11 @@ public class Overview extends AppCompatActivity {
             getChartData("day", dbFormat.format(calendar.getTime()), null);
 
         } else if(week.getCurrentTextColor() == green) {
+            try{
+                String[] parts = currentDate.split(" - ");
+                calendar.setTime(Objects.requireNonNull(weekFormatEnd.parse(parts[1])));
+            } catch (ParseException e) { e.printStackTrace(); }
+
             calendar.add(Calendar.WEEK_OF_YEAR, sign);
             weekEnd = weekFormatEnd.format(calendar.getTime());
             String weekEndDb = dbFormat.format(calendar.getTime());
@@ -269,6 +266,10 @@ public class Overview extends AppCompatActivity {
             getChartData("week", dbFormat.format(calendar.getTime()), weekEndDb);
 
         } else if(month.getCurrentTextColor() == green) {
+            try {
+                calendar.setTime(Objects.requireNonNull(monthFormat.parse(currentDate)));
+            } catch (ParseException e) { e.printStackTrace(); }
+
             calendar.add(Calendar.MONTH, sign);
             date = monthFormat.format(calendar.getTime());
             if(date.equals(monthNow)) next.setVisibility(View.GONE);
@@ -276,6 +277,8 @@ public class Overview extends AppCompatActivity {
             getChartData("month", String.valueOf(calendar.get(Calendar.YEAR)), String.valueOf(calendar.get(Calendar.MONTH)+1));
 
         } else if(year.getCurrentTextColor() == green) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(currentDate));
+
             calendar.add(Calendar.YEAR, sign);
             date = String.valueOf(calendar.get(Calendar.YEAR));
             if(date.equals(yearNow)) next.setVisibility(View.GONE);
@@ -486,6 +489,10 @@ public class Overview extends AppCompatActivity {
     }
 
     private void getChartData(String type, String date1, String date2){
+        userMessage.setVisibility(View.INVISIBLE);
+        scrollView.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
+
         // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/home/plantStatistics/overview/" + plantId + "/" + type + "/" + date1 + "/" + date2;
@@ -495,10 +502,10 @@ public class Overview extends AppCompatActivity {
                     try {
                         String Rmessage = response.getString("message");
                         String Rcomment = response.getString("comment");
-                        JSONArray data = response.getJSONArray("data");
 
                         //check if login is valid
                         if(Rmessage.equals("OverviewLoaded")) {
+                            JSONArray data = response.getJSONArray("data");
                             JSONObject dataObject;
                             int moist, light, temp, timestamp;
                             List<Entry> moistEntries = new ArrayList<>();
@@ -525,11 +532,13 @@ public class Overview extends AppCompatActivity {
                             loading.setVisibility(View.GONE);
                             userMessage.setText(Rcomment);
                             userMessage.setTextColor(ContextCompat.getColor(this, R.color.beige));
+                            userMessage.setVisibility(View.VISIBLE);
 
                         } else{
                             loading.setVisibility(View.GONE);
                             userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                             userMessage.setText(R.string.error);
+                            userMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
@@ -538,6 +547,7 @@ public class Overview extends AppCompatActivity {
                     loading.setVisibility(View.GONE);
                     userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                     userMessage.setText(R.string.error);
+                    userMessage.setVisibility(View.VISIBLE);
                 });
         requestQueue.add(jsonObjectRequest);
     }
