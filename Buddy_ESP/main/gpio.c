@@ -1,6 +1,6 @@
 #include <sys/cdefs.h>
-#include "wifi.h"
 #include "gpio.h"
+#include "wifi.h"
 #include "i2c.h"
 
 void blufi_btn(void)
@@ -30,14 +30,16 @@ void blufi_btn(void)
     }
 }
 
-_Noreturn void gpio_pump(void) {
-    while(1) {
-        ESP_LOGW("PUMP:", "Working...");
+bool pump_started(unsigned int moisture) {
+    ESP_LOGW("PUMP:", "Checking moisture...");
+    if(moisture <= 75) {
+        ESP_LOGW("PUMP:", "Watering...");
         gpio_set_level(PUMP_OUT, 1);
         vTaskDelay(3000 / portTICK_PERIOD_MS);
         gpio_set_level(PUMP_OUT, 0);
-        vTaskDelay(20000 / portTICK_PERIOD_MS);
+        return true;
     }
+    return false;
 }
 
 void gpio_init(void) {

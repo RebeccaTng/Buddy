@@ -1,6 +1,11 @@
 #include "adc.h"
 #include "i2c.h"
 
+char* getStatus(void) {
+    ESP_LOGI("STATUS", "%s", status);
+    return status;
+}
+
 unsigned int getTemperature(void) {
     double r_ntc = (-6.8 + sqrt(6.8*6.8 + 4.0*(double)(temp_out)))*0.5;
     double temperature = 298.15*NTC_CONSTANT/(298.15*log(r_ntc/10.0)+NTC_CONSTANT)-273.15;
@@ -24,16 +29,6 @@ unsigned int getLight(void) {
     unsigned int light = 100-(light_out >> 4);
     ESP_LOGI("LIGHT", "%d %%", light);
     return light;
-}
-
-void display_bad_wifi(void) {
-    ssd1306_display_text(&dev, 0, "Bad WiFi Creds!!", 16, false);
-    ssd1306_display_text(&dev, 1, "                ", 16, false);
-    ssd1306_display_text(&dev, 2, "Make sure WiFi's", 16, false);
-    ssd1306_display_text(&dev, 3, "correctly workin", 16, false);
-    ssd1306_display_text(&dev, 4, "                ", 16, false);
-    ssd1306_display_text(&dev, 5, "If so, pass the ", 16, false);
-    ssd1306_display_text(&dev, 6, "correct creds :)", 16, false);
 }
 
 static void display_first(void) {
@@ -114,15 +109,23 @@ static void collect_data() {
 }
 
 void adc_result(void) {
+    status[0] = "\0";
     collect_data();
     ssd1306_clear_screen(&dev, false);
     ssd1306_display_text(&dev, 0, " Plant's Status ", 16, false);
-    if ( getTemperature() > 24 && getTemperature() < 26 && getLight() > 50 && getLight() < 60 )
+    if ( getTemperature() > 24 && getTemperature() < 26 && getLight() > 50 && getLight() < 60 ) {
         ssd1306_display_text(&dev, 4, "       :D       ", 16, false);
-    else if ( getTemperature() > 20 && getTemperature() < 30 && getLight() > 40 && getLight() < 70 )
+        sprintf(status, "I%%20am%%20Happy!");
+    } else if ( getTemperature() > 20 && getTemperature() < 30 ) {
         ssd1306_display_text(&dev, 4, "       :)       ", 16, false);
-    else
+        sprintf(status, "I%%20am%%20OK,%%20but%%20the%%20amount%%20of%%20temperature%%20could%%20be%%20better.");
+    } else if ( getLight() > 40 && getLight() < 70 ) {
+        ssd1306_display_text(&dev, 4, "       :)       ", 16, false);
+        sprintf(status, "I%%20am%%20OK,%%20but%%20the%%20amount%%20of%%20light%%20could%%20be%%20better.");
+    } else {
         ssd1306_display_text(&dev, 4, "       :(       ", 16, false);
+        sprintf(status, "I%%20am%%20sad,%%20I%%20do%%20not%%20have%%20the%%20appropiate%%20amount%%20of%%20light%%20and%%20temperature.");
+    }
 }
 
 void adc_init(void) {

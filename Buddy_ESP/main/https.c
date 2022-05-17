@@ -12,7 +12,6 @@ static void https_error(void) {
             break;
         case -82:
             ESP_LOGE(https_err, BAD_WIFI_CREDS_ERR);
-            display_bad_wifi();
             vTaskDelay(pdMS_TO_TICKS(10000));
             esp_restart();
         case -12288:
@@ -28,6 +27,8 @@ static void https_error(void) {
             ESP_LOGE(https_err, "Unknown Error");
             break;
     }
+    if (err_cnt++ > 3)
+        esp_restart();
 }
 
 static bool read_https(char buf[512]) {
@@ -49,15 +50,11 @@ static bool read_https(char buf[512]) {
         if (ret < 0) {
             ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_read returned -0x%x", -ret);
             https_error();
-            if (err_cnt++ > 3)
-                esp_restart();
             return false;
         }
 
         if (ret == 0) {
             ESP_LOGI(HTTPS_TAG, "connection closed");
-            if (err_cnt++ > 3)
-                esp_restart();
         }
 
         len = ret;
@@ -73,8 +70,6 @@ static bool read_https(char buf[512]) {
         mbedtls_strerror(ret, buf, 100);
         ESP_LOGE(HTTPS_TAG, "Error: -0x%x - %s", -ret, buf);
         https_error();
-        if (err_cnt++ > 3)
-            esp_restart();
         return false;
     }
 
@@ -94,8 +89,6 @@ static bool write_https(void) {
         } else if (ret != MBEDTLS_ERR_SSL_WANT_WRITE && ret != MBEDTLS_ERR_SSL_WANT_READ) {
             ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_write returned -0x%x", -ret);
             https_error();
-            if (err_cnt++ > 3)
-                esp_restart();
             return false;
         }
     } while (written_bytes < strlen(request));
@@ -115,8 +108,6 @@ void https_init() {
     if ((ret = mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy,NULL, 0)) != 0) {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ctr_drbg_seed returned %d", ret);
         https_error();
-        if(err_cnt++ > 3)
-            esp_restart();
     }
     ESP_LOGI(HTTPS_TAG, "Attaching the certificate bundle...");
 
@@ -124,24 +115,18 @@ void https_init() {
     if (ret < 0) {
         ESP_LOGE(HTTPS_TAG, "esp_crt_bundle_attach returned -0x%x\n\n", -ret);
         https_error();
-        if(err_cnt++ > 3)
-            esp_restart();
     }
     ESP_LOGI(HTTPS_TAG, "Setting hostname for TLS session...");
 
     if ((ret = mbedtls_ssl_set_hostname(&ssl, WEB_SERVER)) != 0) {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_set_hostname returned -0x%x", -ret);
         https_error();
-        if(err_cnt++ > 3)
-            esp_restart();
     }
     ESP_LOGI(HTTPS_TAG, "Setting up the SSL/TLS structure...");
 
     if ((ret = mbedtls_ssl_config_defaults(&conf,MBEDTLS_SSL_IS_CLIENT,MBEDTLS_SSL_TRANSPORT_STREAM,MBEDTLS_SSL_PRESET_DEFAULT)) != 0) {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_config_defaults returned %d", ret);
         https_error();
-        if(err_cnt++ > 3)
-            esp_restart();
     }
 
     mbedtls_ssl_conf_authmode(&conf, MBEDTLS_SSL_VERIFY_OPTIONAL);
@@ -151,8 +136,6 @@ void https_init() {
     if ((ret = mbedtls_ssl_setup(&ssl, &conf)) != 0) {
         ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_setup returned -0x%x\n\n", -ret);
         https_error();
-        if(err_cnt++ > 3)
-            esp_restart();
     }
 }
 
@@ -169,8 +152,6 @@ static void verify_cert(mbedtls_net_context server_fd) {
         ESP_LOGE(HTTPS_TAG, "Mbed TLS Error!");
         ESP_LOGE(HTTPS_TAG, "mbedtls_ssl_handshake returned -0x%x", -ret);
         https_error();
-        if (err_cnt++ > 3)
-            esp_restart();
     } else {
         ESP_LOGI(HTTPS_TAG, "Verifying peer X.509 certificate...");
 
@@ -184,24 +165,18 @@ static void verify_cert(mbedtls_net_context server_fd) {
             ESP_LOGI(HTTPS_TAG, "Cipher suite is %s", mbedtls_ssl_get_ciphersuite(&ssl));
         }
 
-        if(write_https()) {
-            if (read_https(buf)) {
-                mbedtls_ssl_session_reset(&ssl);
-                mbedtls_net_free(&server_fd);
-                printf("Available heap size: %dB\n", esp_get_minimum_free_heap_size());
+        if(write_https() && read_https(buf)) {
                 err_cnt = 0;
-            }
         }
+
+        mbedtls_ssl_session_reset(&ssl);
+        mbedtls_net_free(&server_fd);
+        printf("Available heap size: %dB\n", esp_get_minimum_free_heap_size());
     }
 }
 
-void send_data(void) {
+static void send_request(void) {
     mbedtls_net_context server_fd;
-    sprintf(request, "GET " WEB_URL CHIP_ID "/%d/%d/%d/%d HTTP/1.0\r\n"
-                    "Host: " WEB_SERVER "\r\n"
-                    "User-Agent: esp-idf/1.0 esp32\r\n"
-                    "\r\n", getMoisture(), getLight(), getTemperature(), 1);
-
     ESP_LOGW("request", "%s", request);
 
     mbedtls_net_init(&server_fd);
@@ -215,4 +190,20 @@ void send_data(void) {
     } else {
         verify_cert(server_fd);
     }
+}
+
+void insert_sensor_data(unsigned int moisture, unsigned int light, unsigned int temperature, unsigned int distance, char* status) {
+    sprintf(request, "GET " WEB_URL IN_DATA CHIP_ID "/%d/%d/%d/%d/%s HTTP/1.0\r\n"
+                     "Host: " WEB_SERVER "\r\n"
+                     "User-Agent: esp-idf/1.0 esp32\r\n"
+                     "\r\n", moisture, light, temperature, distance, status);
+    send_request();
+}
+
+void insert_water(char* date) {
+    sprintf(request, "GET " WEB_URL IN_WATER CHIP_ID "/%s HTTP/1.0\r\n"
+                     "Host: " WEB_SERVER "\r\n"
+                     "User-Agent: esp-idf/1.0 esp32\r\n"
+                     "\r\n", date);
+    send_request();
 }

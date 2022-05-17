@@ -24,6 +24,7 @@ static const char *tags[16] = {
         "LDR-3"
 };
 
+static char status[128];
 static int temp_out;
 static int moist_out;
 static int dist_out;
@@ -35,6 +36,7 @@ static esp_adc_cal_characteristics_t adc1_chars;
 static int adc_raw[MAX_CHANNELS];
 static int voltage[MAX_CHANNELS];
 
+char* getStatus();
 unsigned int getTemperature();
 unsigned int getMoisture();
 unsigned int getDistance();

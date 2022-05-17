@@ -12,4 +12,4 @@
 
 void gpio_init(void);
 void blufi_btn(void);
-_Noreturn void gpio_pump(void);
+bool pump_started(unsigned int moisture);
