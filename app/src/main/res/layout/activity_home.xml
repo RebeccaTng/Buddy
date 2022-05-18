@@ -1,148 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refreshLayout_home"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/beige"
-    tools:context=".activities.Home">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/logoBluetooth"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="70dp"
-        android:contentDescription="@string/descriptionIcon"
-        android:onClick="goBluetooth"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_bluetooth"
-        tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige"
+        tools:context=".activities.Home">
 
-    <ImageView
-        android:id="@+id/accIcon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="25dp"
-        android:contentDescription="@string/descriptionIcon"
-        android:onClick="goAccount"
-        app:layout_constraintBottom_toBottomOf="@+id/logoBluetooth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/icon_account"
-        tools:ignore="TouchTargetSizeCheck" />
+        <ImageView
+            android:id="@+id/logoBluetooth"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="70dp"
+            android:contentDescription="@string/descriptionIcon"
+            android:onClick="goBluetooth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_bluetooth"
+            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/mulish_bold"
-        android:text="@string/welcome"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="@+id/accIcon"
-        app:layout_constraintTop_toBottomOf="@+id/accIcon" />
+        <ImageView
+            android:id="@+id/accIcon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="25dp"
+            android:contentDescription="@string/descriptionIcon"
+            android:onClick="goAccount"
+            app:layout_constraintBottom_toBottomOf="@+id/logoBluetooth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/icon_account"
+            tools:ignore="TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/dyn_username_home"
-        android:layout_width="335dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/mulish_bold"
-        android:lineSpacingExtra="-12dp"
-        android:onClick="goAccount"
-        android:text="@null"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="@+id/welcome"
-        app:layout_constraintStart_toStartOf="@+id/plantTitle"
-        app:layout_constraintTop_toBottomOf="@+id/welcome"
-        tools:ignore="TouchTargetSizeCheck" />
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/mulish_bold"
+            android:text="@string/welcome"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="@+id/accIcon"
+            app:layout_constraintTop_toBottomOf="@+id/accIcon" />
 
-    <TextView
-        android:id="@+id/plantTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/mulish_bold"
-        android:text="@string/myPlants"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="@+id/logoBluetooth"
-        app:layout_constraintTop_toBottomOf="@+id/dyn_username_home" />
+        <TextView
+            android:id="@+id/dyn_username_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mulish_bold"
+            android:lineSpacingExtra="-12dp"
+            android:onClick="goAccount"
+            android:text="@null"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="@+id/welcome"
+            app:layout_constraintStart_toStartOf="@+id/plantTitle"
+            app:layout_constraintTop_toBottomOf="@+id/welcome"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/dyn_numOfPlants"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/mulish_bold"
-        android:text="@null"
-        android:textAlignment="viewStart"
-        android:textColor="@color/orange"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/plantTitle"
-        app:layout_constraintStart_toEndOf="@+id/plantTitle"
-        tools:ignore="TextContrastCheck" />
+        <TextView
+            android:id="@+id/plantTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/mulish_bold"
+            android:text="@string/myPlants"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            app:layout_constraintStart_toStartOf="@+id/logoBluetooth"
+            app:layout_constraintTop_toBottomOf="@+id/dyn_username_home" />
 
-    <ImageView
-        android:id="@+id/addIcon"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:contentDescription="@string/descriptionIcon"
-        android:onClick="goLibrary"
-        android:src="@drawable/icon_add"
-        app:layout_constraintBottom_toBottomOf="@+id/plantTitle"
-        app:layout_constraintEnd_toEndOf="@+id/dyn_username_home"
-        app:layout_constraintTop_toTopOf="@+id/plantTitle"
-        tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
+        <TextView
+            android:id="@+id/dyn_numOfPlants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/mulish_bold"
+            android:text="@null"
+            android:textAlignment="viewStart"
+            android:textColor="@color/orange"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/plantTitle"
+            app:layout_constraintStart_toEndOf="@+id/plantTitle"
+            tools:ignore="TextContrastCheck" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/home_recycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbarDefaultDelayBeforeFade="300"
-        android:scrollbarFadeDuration="400"
-        android:scrollbarThumbVertical="@drawable/bg_btn_second"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantTitle"
-        tools:visibility="invisible" />
+        <ImageView
+            android:id="@+id/addIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="@string/descriptionIcon"
+            android:onClick="goLibrary"
+            android:src="@drawable/icon_add"
+            app:layout_constraintBottom_toBottomOf="@+id/plantTitle"
+            app:layout_constraintEnd_toEndOf="@+id/dyn_username_home"
+            app:layout_constraintTop_toTopOf="@+id/plantTitle"
+            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/userMessage_home"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:fontFamily="@font/mulish_bold"
-        android:text="@null"
-        android:textAlignment="center"
-        android:textColor="@color/dark_green"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantTitle" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recycler"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarDefaultDelayBeforeFade="300"
+            android:scrollbarFadeDuration="400"
+            android:scrollbarThumbVertical="@drawable/bg_btn_second"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantTitle"
+            tools:visibility="invisible"/>
 
-    <ProgressBar
-        android:id="@+id/loading_home"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/orange"
-        app:layout_constraintBottom_toBottomOf="@+id/userMessage_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userMessage_home" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/userMessage_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:fontFamily="@font/mulish_bold"
+            android:text="@null"
+            android:textAlignment="center"
+            android:textColor="@color/dark_green"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantTitle" />
+
+        <ProgressBar
+            android:id="@+id/loading_home"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@+id/userMessage_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userMessage_home" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

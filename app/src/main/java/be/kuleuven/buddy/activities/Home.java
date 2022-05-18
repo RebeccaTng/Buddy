@@ -1,9 +1,11 @@
 package be.kuleuven.buddy.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,12 +42,15 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     AccountInfo accountInfo;
     ProgressBar loading;
     ArrayList<HomeInfo> homePlants = new ArrayList<>();
+    SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_home);
+
+        swipeRefresh = findViewById(R.id.refreshLayout_home);
 
         username = findViewById(R.id.dyn_username_home);
         if(getIntent().hasExtra("accountInfo")) {
@@ -58,12 +63,30 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         userMessage = findViewById(R.id.userMessage_home);
         numOfPlants = findViewById(R.id.dyn_numOfPlants);
         homeRecycler = findViewById(R.id.home_recycler);
+        swipeRefresh.setColorSchemeResources(R.color.orange);
+        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.beige);
+        swipeRefresh.setEnabled(false);
 
         loading.setVisibility(View.VISIBLE);
         homeRecycler.setVisibility(View.INVISIBLE);
 
         homeRecycler.setHasFixedSize(true);
         homeRecycler.setLayoutManager(new LinearLayoutManager(this)); // Vertical layout by default
+        homeRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                swipeRefresh.setEnabled(newState == RecyclerView.SCROLL_STATE_IDLE);
+            }
+        });
+
+        swipeRefresh.setOnRefreshListener(() -> {
+            homePlants.clear();
+            loading.setVisibility(View.VISIBLE);
+            homeRecycler.setVisibility(View.INVISIBLE);
+            getData();
+            swipeRefresh.setRefreshing(false); // explicitly refreshes only once. If "true" it implicitly refreshes forever
+        });
     }
 
     public void goBluetooth(View caller) {
@@ -180,5 +203,6 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
             userMessage.setText(R.string.noPlants);
         }
         numOfPlants.setText(String.valueOf(homeAdapter.getItemCount()));
+        swipeRefresh.setEnabled(true);
     }
 }

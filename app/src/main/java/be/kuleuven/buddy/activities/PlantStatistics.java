@@ -2,6 +2,7 @@ package be.kuleuven.buddy.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -43,6 +44,7 @@ public class PlantStatistics extends AppCompatActivity {
     View waterlvl, connectedIcon;
     ProgressBar loading;
     String plantDate;
+    SwipeRefreshLayout swipeRefresh;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -74,6 +76,18 @@ public class PlantStatistics extends AppCompatActivity {
         temp = findViewById(R.id.dyn_plantTemp_stat);
         userMessage = findViewById(R.id.error_stat);
         loading = findViewById(R.id.loading_stat);
+
+        swipeRefresh = findViewById(R.id.refreshLayout_stat);
+        swipeRefresh.setColorSchemeResources(R.color.orange);
+        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.beige);
+        swipeRefresh.setEnabled(false);
+
+        swipeRefresh.setOnRefreshListener(() -> {
+            image.setImageBitmap(null);
+            loading.setVisibility(View.VISIBLE);
+            getPlantData();
+            swipeRefresh.setRefreshing(false); // explicitly refreshes only once. If "true" it implicitly refreshes forever
+        });
     }
 
     @Override
@@ -174,6 +188,7 @@ public class PlantStatistics extends AppCompatActivity {
         Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
         image.setImageBitmap(imageBitmap);
         loading.setVisibility(View.INVISIBLE);
+        swipeRefresh.setEnabled(true);
     }
 
     private void setLastWater(String plantWater) {

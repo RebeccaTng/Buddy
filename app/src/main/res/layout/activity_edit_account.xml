@@ -150,6 +150,7 @@
         android:fontFamily="@font/mulish_regular"
         android:hint="@string/username"
         android:inputType="textEmailAddress"
+        android:maxLength="15"
         android:paddingStart="21dp"
         android:paddingEnd="21dp"
         android:textColor="@color/black"
