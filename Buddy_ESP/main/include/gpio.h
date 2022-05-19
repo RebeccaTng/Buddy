@@ -12,4 +12,4 @@
 
 void gpio_init(void);
 void blufi_btn(void);
-bool pump_started(unsigned int moisture);
+bool pump_started(unsigned int moisture, char* day);

@@ -1,4 +1,3 @@
-#include <sys/cdefs.h>
 #include "gpio.h"
 #include "wifi.h"
 #include "i2c.h"
@@ -30,9 +29,9 @@ void blufi_btn(void)
     }
 }
 
-bool pump_started(unsigned int moisture) {
+bool pump_started(unsigned int moisture, char* day) {
     ESP_LOGW("PUMP:", "Checking moisture...");
-    if(moisture <= 75) {
+    if(moisture <= 25 && (strcmp(day, "19") == 0)) {
         ESP_LOGW("PUMP:", "Watering...");
         gpio_set_level(PUMP_OUT, 1);
         vTaskDelay(3000 / portTICK_PERIOD_MS);

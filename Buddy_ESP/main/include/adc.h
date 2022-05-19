@@ -30,18 +30,21 @@ static int moist_out;
 static int dist_out;
 static int light_out;
 
+static int tank_min;
+static int tank_max;
+
 static bool cali_enable;
 static esp_adc_cal_characteristics_t adc1_chars;
 
 static int adc_raw[MAX_CHANNELS];
 static int voltage[MAX_CHANNELS];
 
-char* getStatus();
-unsigned int getTemperature();
-unsigned int getMoisture();
-unsigned int getDistance();
-unsigned int getLight();
+char* get_status();
+unsigned int get_temperature();
+unsigned int get_moisture();
+unsigned int get_distance();
+unsigned int get_light();
 
 void display_bad_wifi(void);
-void adc_init(void);
+void adc_init(char* tank_levels);
 void adc_result(void);

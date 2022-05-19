@@ -2,7 +2,9 @@
 
 #define CHIP_ID     "61"
 #define IN_DATA     "insertdata/"
-#define IN_WATER    "insertLastWater/"
+#define IN_WATER    "updateLastWater/"
+#define GET_TIME    "getTime"
+#define GET_TANK    "getTankMinMax/"
 
 #define WEB_SERVER  "a21iot03.studev.groept.be"
 #define WEB_PORT    "443"
@@ -17,6 +19,7 @@
 
 static const char *HTTPS_TAG = "HTTPS";
 static char request[256];
+static char response[512];
 
 static int ret;
 static int err_cnt;
@@ -28,5 +31,9 @@ static mbedtls_x509_crt cacert;
 static mbedtls_ssl_config conf;
 
 void https_init(void);
+void insert_water(void);
 void insert_sensor_data(unsigned int moisture, unsigned int light, unsigned int temperature, unsigned int distance, char* status);
-void insert_water(char* date);
+
+char* get_day(void);
+char* get_tank(void);
+

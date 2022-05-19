@@ -1,31 +1,31 @@
 #include "adc.h"
 #include "i2c.h"
 
-char* getStatus(void) {
+char* get_status(void) {
     ESP_LOGI("STATUS", "%s", status);
     return status;
 }
 
-unsigned int getTemperature(void) {
+unsigned int get_temperature(void) {
     double r_ntc = (-6.8 + sqrt(6.8*6.8 + 4.0*(double)(temp_out)))*0.5;
     double temperature = 298.15*NTC_CONSTANT/(298.15*log(r_ntc/10.0)+NTC_CONSTANT)-273.15;
     ESP_LOGI("TEMP", "%f C (NTC = %f kOhm)", temperature, r_ntc);
     return (int) temperature;
 }
 
-unsigned int getMoisture(void) {
-    unsigned int moisture = moist_out >> 5;
+unsigned int get_moisture(void) {
+    unsigned int moisture = 100 - (moist_out >> 5);
     ESP_LOGI("MOIST", "%d %%", moisture);
     return moisture ;
 }
 
-unsigned int getDistance(void) {
+unsigned int get_distance(void) {
     double distance = -2.46 * dist_out * dist_out / 1000 / 1000 + 3.96 * dist_out / 1000 + 8.12;
     ESP_LOGI("DIST", "%f cm", distance);
     return (int) distance;
 }
 
-unsigned int getLight(void) {
+unsigned int get_light(void) {
     unsigned int light = 100-(light_out >> 4);
     ESP_LOGI("LIGHT", "%d %%", light);
     return light;
@@ -47,16 +47,16 @@ static void display_values(void) {
     ssd1306_clear_screen(&dev, false);
     ssd1306_display_text(&dev, 0, "Plant's Ambient", 16, false);
 
-    sprintf(screen_text, "Temp: %d C    ", getTemperature());
+    sprintf(screen_text, "Temp: %d C     ", get_temperature());
     ssd1306_display_text(&dev, 2, screen_text, 16, false);
 
-    sprintf(screen_text, "Moist: %d %%  ", getMoisture());
+    sprintf(screen_text, "Moist: %d %%   ", get_moisture());
     ssd1306_display_text(&dev, 3, screen_text, 16, false);
 
-    sprintf(screen_text, "Dist: %d cm   ", getDistance());
+    sprintf(screen_text, "Dist: %d cm    ", get_distance());
     ssd1306_display_text(&dev, 4, screen_text, 16, false);
 
-    sprintf(screen_text, "Light: %d %%  ", getLight());
+    sprintf(screen_text, "Light: %d %%   ", get_light());
     ssd1306_display_text(&dev, 5, screen_text, 16, false);
 }
 
@@ -113,26 +113,34 @@ void adc_result(void) {
     collect_data();
     ssd1306_clear_screen(&dev, false);
     ssd1306_display_text(&dev, 0, " Plant's Status ", 16, false);
-    if ( getTemperature() > 24 && getTemperature() < 26 && getLight() > 50 && getLight() < 60 ) {
+    if (get_temperature() >= 24 && get_temperature() <= 26 && get_light() >= 50 && get_light() <= 60 ) {
         ssd1306_display_text(&dev, 4, "       :D       ", 16, false);
         sprintf(status, "I%%20am%%20Happy!");
-    } else if ( getTemperature() > 20 && getTemperature() < 30 ) {
+    } else if (get_temperature() > 20 && get_temperature() < 24 ) {
         ssd1306_display_text(&dev, 4, "       :)       ", 16, false);
-        sprintf(status, "I%%20am%%20OK,%%20but%%20the%%20amount%%20of%%20temperature%%20could%%20be%%20better.");
-    } else if ( getLight() > 40 && getLight() < 70 ) {
+        sprintf(status, "I%%20am%%20OK,%%20but%%20the%%20temperature%%20could%%20be%%20higher.");
+    } else if (get_temperature() > 26 && get_temperature() < 30 ) {
         ssd1306_display_text(&dev, 4, "       :)       ", 16, false);
-        sprintf(status, "I%%20am%%20OK,%%20but%%20the%%20amount%%20of%%20light%%20could%%20be%%20better.");
+        sprintf(status, "I%%20am%%20OK,%%20but%%20the%%20temperature%%20could%%20be%%20lower.");
+    } else if (get_light() > 40 && get_light() < 70 ) {
+        ssd1306_display_text(&dev, 4, "       :)       ", 16, false);
+        sprintf(status, "I%%20am%%20OK,%%20but%%20the%%20intensity%%20of%%20light%%20could%%20be%%20better.");
     } else {
         ssd1306_display_text(&dev, 4, "       :(       ", 16, false);
         sprintf(status, "I%%20am%%20sad,%%20I%%20do%%20not%%20have%%20the%%20appropiate%%20amount%%20of%%20light%%20and%%20temperature.");
     }
 }
 
-void adc_init(void) {
+void adc_init(char* tank_levels) {
     temp_out = 0;
     moist_out = 0;
     dist_out = 0;
     light_out = 0;
+
+    tank_levels[0] = ' ';
+    tank_min = atoi(strtok(tank_levels, " "));
+    tank_max = atoi(strtok(NULL, " "));
+
     cali_enable = adc_calibration_init();
     ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
     for (int i = 0; i < MAX_CHANNELS; i++)
