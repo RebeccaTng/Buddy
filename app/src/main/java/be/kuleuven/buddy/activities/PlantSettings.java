@@ -49,7 +49,7 @@ public class PlantSettings extends AppCompatActivity {
     ImageView image;
     TextView species, errorMessage;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    Switch moistSwitch, lightSwitch, tempSwitch;
+    Switch tankSwitch, lightSwitch, tempSwitch;
     FieldChecker fieldChecker;
     ProgressBar loading;
     Button useStandard, delete, save;
@@ -83,7 +83,7 @@ public class PlantSettings extends AppCompatActivity {
         ageMonths = findViewById(R.id.ageMonth_settings);
         place = findViewById(R.id.placeName_settings);
         errorMessage = findViewById(R.id.error_settings);
-        moistSwitch = findViewById(R.id.moistSwitch);
+        tankSwitch = findViewById(R.id.tankSwitch);
         lightSwitch = findViewById(R.id.lightSwitch);
         tempSwitch = findViewById(R.id.tempSwitch);
         loading = findViewById(R.id.loading_settings);
@@ -188,7 +188,7 @@ public class PlantSettings extends AppCompatActivity {
         setAge(plantData.getString("plantDate"));
         place.setText(plantData.getString("place"));
         waterlvl.setText(plantData.getString("minWaterLvl"));
-        moistSwitch.setChecked(plantData.getInt("moistAlert") == 1);
+        tankSwitch.setChecked(plantData.getInt("tankAlert") == 1);
         lightSwitch.setChecked(plantData.getInt("lightAlert") == 1);
         tempSwitch.setChecked(plantData.getInt("tempAlert") == 1);
 
@@ -300,7 +300,7 @@ public class PlantSettings extends AppCompatActivity {
             data.put("plantDate", fieldChecker.calculatePlantDate());
             data.put("place", place.getText().toString());
             data.put("waterlvl", waterlvl.getText().toString());
-            data.put("moistAlert", moistSwitch.isChecked()? 1 : 0);
+            data.put("tankAlert", tankSwitch.isChecked()? 1 : 0);
             data.put("lightAlert", lightSwitch.isChecked()? 1 : 0);
             data.put("tempAlert", tempSwitch.isChecked()? 1 : 0);
             data.put("prevPersonalized", prevPersonalized);

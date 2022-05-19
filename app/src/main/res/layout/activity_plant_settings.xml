@@ -655,20 +655,20 @@
                     app:layout_constraintTop_toBottomOf="@+id/set2" />
 
                 <TextView
-                    android:id="@+id/moistAlert"
+                    android:id="@+id/tankAlert"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/mulish_regular"
-                    android:text="@string/moisture"
+                    android:text="@string/waterTank"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/alertText" />
 
                 <Switch
-                    android:id="@+id/moistSwitch"
+                    android:id="@+id/tankSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
@@ -676,9 +676,9 @@
                     android:text="@null"
                     android:thumb="@drawable/switch_thumb"
                     android:track="@drawable/switch_track"
-                    app:layout_constraintBottom_toBottomOf="@+id/moistAlert"
+                    app:layout_constraintBottom_toBottomOf="@+id/tankAlert"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/moistAlert"
+                    app:layout_constraintTop_toTopOf="@+id/tankAlert"
                     tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                 <TextView
@@ -690,8 +690,8 @@
                     android:text="@string/light"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="@+id/moistAlert"
-                    app:layout_constraintTop_toBottomOf="@id/moistAlert" />
+                    app:layout_constraintStart_toStartOf="@+id/tankAlert"
+                    app:layout_constraintTop_toBottomOf="@id/tankAlert" />
 
                 <Switch
                     android:id="@+id/lightSwitch"

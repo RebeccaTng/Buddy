@@ -32,6 +32,9 @@
     <string name="passwRequire">Password Requirements</string>
     <string name="passwReqText">At least 8 characters,\n a number and an uppercase.</string>
     <string name="request">Request Reset</string>
+    <string name="sendMail">Send Email</string>
+    <string name="mailSucces">An email has been successfully sent. Please check your inbox.</string>
+    <string name="forgotPass">Forgot your password? Reset it.</string>
     <string name="reset">Reset Password</string>
     <string name="changePassw">Change Password</string>
     <string name="incorrectPassw">Password or email is incorrect!</string>

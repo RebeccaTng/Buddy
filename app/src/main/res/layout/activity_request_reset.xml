@@ -38,10 +38,11 @@
         android:id="@+id/requestBtn"
         android:layout_width="319dp"
         android:layout_height="52dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/bg_btn_main"
         android:fontFamily="@font/mulish_extrabold"
-        android:text="@string/request"
+        android:onClick="sendmail"
+        android:text="@string/sendMail"
         android:textColor="@color/beige"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,5 +112,21 @@
         app:layout_constraintBottom_toBottomOf="@+id/logoMain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/errorMessage_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@null"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/requestBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

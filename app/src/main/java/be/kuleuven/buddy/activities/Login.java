@@ -66,6 +66,13 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
+    public void goRequestReset(View caller) {
+        Intent goToRequestReset = new Intent(this, RequestReset.class);
+        startActivity(goToRequestReset);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+
     public AccountInfo getAccount(){ return accountInfo; }
 
     public void checkLogin(View caller){
