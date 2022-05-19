@@ -43,6 +43,7 @@
     <string name="account">My Account</string>
     <string name="editAcc">Edit Account</string>
     <string name="edit">Edit</string>
+    <string name="deleteAcc">Delete Account</string>
 
     <!-- General -->
     <string name="howToBlufi">How to connect BluFi</string>
