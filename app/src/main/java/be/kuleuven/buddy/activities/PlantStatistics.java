@@ -2,8 +2,13 @@ package be.kuleuven.buddy.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -88,6 +93,12 @@ public class PlantStatistics extends AppCompatActivity {
             getPlantData();
             swipeRefresh.setRefreshing(false); // explicitly refreshes only once. If "true" it implicitly refreshes forever
         });
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
     }
 
     @Override
@@ -129,16 +140,20 @@ public class PlantStatistics extends AppCompatActivity {
                     //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        JSONObject plantData, sensorData;
+                        JSONObject plantData, sensorData, alertPlant, minmax;
                         plantData = response.getJSONObject("plantData");
                         int sensorDataIsNull = response.getInt("sensorIsNull");
                         if(sensorDataIsNull == 0) sensorData = response.getJSONObject("sensorData");
                         else sensorData = null;
+                        alertPlant = response.getJSONObject("alertPlant");
+                        minmax = response.getJSONObject("minmax");
 
                         //check if login is valid
                         if(Rmessage.equals("StatsLoaded")) {
                             processData(plantData, sensorData, sensorDataIsNull);
-
+                            checkAlerts(alertPlant, minmax, sensorDataIsNull);
+                            loading.setVisibility(View.INVISIBLE);
+                            swipeRefresh.setEnabled(true);
                         } else{
                             loading.setVisibility(View.INVISIBLE);
                             userMessage.setText(R.string.error);
@@ -151,6 +166,92 @@ public class PlantStatistics extends AppCompatActivity {
                     userMessage.setText(R.string.error);
                 });
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private void checkAlerts(JSONObject alertPlant, JSONObject minmax, int sensorDataIsNull) throws JSONException {
+        String title;
+        String smallText = null;
+        String largeText = null;
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        if(sensorDataIsNull == 0) {
+            if(alertPlant.getInt("tankAlert") == 1 && Integer.parseInt(waterTank.getText().toString()) < alertPlant.getInt("minWaterLvl")) {
+                title = "Water Tank Alert";
+                smallText = "Water tank level is too low";
+                largeText = "The water tank level is under your given minimum. Please refill the tank.";
+                inboxStyle.addLine(title + " " + smallText);
+                notification(title, smallText, largeText, 1);
+            }
+
+            if(alertPlant.getInt("lightAlert") == 1) {
+                title = "Light Alert";
+                int lightPercent = Integer.parseInt(light.getText().toString());
+                if(lightPercent < minmax.getInt("minLight")) {
+                    smallText = "Too little light";
+                    largeText = "There is less light here than your given minimum. Please move the plant to a place with more light";
+                    inboxStyle.addLine(title + " " + smallText);
+                } else if(lightPercent > minmax.getInt(("maxLight"))) {
+                    smallText = "Too much light";
+                    largeText = "There is more light here than your given maximum. Please move the plant to a place with less light";
+                    inboxStyle.addLine(title + " " + smallText);
+                }
+                notification(title, smallText, largeText, 2);
+            }
+
+            if(alertPlant.getInt("tempAlert") == 1) {
+                title = "Temperature Alert";
+                int tempPercent = Integer.parseInt(temp.getText().toString());
+                if(tempPercent < minmax.getInt("minTemp")) {
+                    smallText = "Too cold";
+                    largeText = "It is colder here than your given minimum. Please move the plant to a warmer place";
+                    inboxStyle.addLine(title + " " + smallText);
+                } else if(tempPercent > minmax.getInt(("maxTemp"))) {
+                    smallText = "Too warm";
+                    largeText = "It is warmer here than your given maximum. Please move the plant to a cooler place";
+                    inboxStyle.addLine(title + " " + smallText);
+                }
+                notification(title, smallText, largeText, 3);
+            }
+        }
+
+        NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "My Notification")
+                .setContentTitle(name.getText().toString() + "needs you")
+                .setContentText("Give your plant some attention")
+                .setSmallIcon(R.drawable.logo_small)
+                .setStyle(inboxStyle
+                        .setBigContentTitle("new messages")
+                        .setSummaryText(name.getText().toString()))
+                .setContentIntent(notificationIntent())
+                .setGroup("notificationGroup")
+                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setGroupSummary(true);
+
+        NotificationManagerCompat.from(this).notify(4, summaryNotification.build());
+    }
+
+    private PendingIntent notificationIntent() {
+        Intent intent = new Intent(this, PlantStatistics.class);
+        intent.putExtra("accountInfo", accountInfo);
+        intent.putExtra("plantId", plantId);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        return pendingIntent;
+    }
+
+    private void notification(String title, String smallText, String largeText, int id) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
+            .setContentTitle(title)
+            .setContentText(smallText)
+            .setSmallIcon(R.drawable.logo_small)
+            .setStyle(new NotificationCompat.BigTextStyle()
+                .bigText(largeText))
+            .setContentIntent(notificationIntent())
+            .setGroup("notificationGroup")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(id, builder.build());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -187,8 +288,6 @@ public class PlantStatistics extends AppCompatActivity {
         byte[] decodedImage = Base64.decode(plantData.getString("image"), Base64.DEFAULT);
         Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
         image.setImageBitmap(imageBitmap);
-        loading.setVisibility(View.INVISIBLE);
-        swipeRefresh.setEnabled(true);
     }
 
     private void setLastWater(String plantWater) {
