@@ -38,7 +38,8 @@
     <string name="reset">Reset Password</string>
     <string name="changePassw">Change Password</string>
     <string name="incorrectPassw">Password or email is incorrect!</string>
-    <string name="incorrectEmail">Incorrect credentials!</string>
+    <string name="incorrectEmail">Incorrect email!</string>
+
     <string name="emailAlreadyUsed">Email is already in use, try a different email!</string>
 
     <string name="email">Email</string>
