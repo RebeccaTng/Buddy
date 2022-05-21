@@ -108,10 +108,10 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
                     //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        JSONArray data = response.getJSONArray("data");
 
                         //check if login is valid
                         if(Rmessage.equals("LibraryLoaded")){
+                            JSONArray data = response.getJSONArray("data");
                             JSONObject dataObject;
                             int speciesId;
                             String species, image;
@@ -127,6 +127,7 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
                             loadLibraryRecycler();
 
                         } else{
+                            loading.setVisibility(View.GONE);
                             userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                             userMessage.setText(R.string.error);
                         }
@@ -134,6 +135,7 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
 
                 error -> {
                     //process an error
+                    loading.setVisibility(View.GONE);
                     userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                     userMessage.setText(R.string.error);
                 })

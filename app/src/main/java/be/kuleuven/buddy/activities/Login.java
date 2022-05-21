@@ -26,7 +26,7 @@ import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 
 public class Login extends AppCompatActivity {
-    //instantiate variables
+
     TextView email, password, errorMessage;
     ProgressBar loading;
     AccountInfo accountInfo;
@@ -107,12 +107,13 @@ public class Login extends AppCompatActivity {
                     //process the response
                         try {
                             String Rmessage = response.getString("message");
-                            String Rusername = response.getJSONObject("data").getString("username");
-                            String Rmail = response.getJSONObject("data").getString("email");
-                            String Rtoken = response.getJSONObject("data").getString("token");
 
                             //check if login is valid
                             if (Rmessage.equals("LoginSuccess")){
+                                String Rusername = response.getJSONObject("data").getString("username");
+                                String Rmail = response.getJSONObject("data").getString("email");
+                                String Rtoken = response.getJSONObject("data").getString("token");
+
                                 errorMessage.setVisibility(View.INVISIBLE);
                                 email.setBackgroundResource(R.drawable.bg_fill);
                                 password.setBackgroundResource(R.drawable.bg_fill);
@@ -122,7 +123,7 @@ public class Login extends AppCompatActivity {
                                 goHome(caller);
 
                             } else {
-                                errorMessage.setText(R.string.incorrectEmail);
+                                errorMessage.setText(R.string.incorrectCreds);
                                 errorMessage.setVisibility(View.VISIBLE);
                                 email.setBackgroundResource(R.drawable.bg_fill_red);
                                 password.setBackgroundResource((R.drawable.bg_fill_red));

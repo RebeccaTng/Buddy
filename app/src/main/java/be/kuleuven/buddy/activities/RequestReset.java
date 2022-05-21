@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,16 +18,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import be.kuleuven.buddy.R;
-import be.kuleuven.buddy.account.AccountInfo;
 
 public class RequestReset extends AppCompatActivity {
 
     TextView errorMessage;
     TextView email;
+    ProgressBar loading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public class RequestReset extends AppCompatActivity {
 
         email = findViewById(R.id.emailFill_request);
         errorMessage = findViewById(R.id.errorMessage_reset);
+        loading = findViewById(R.id.loading_reset);
     }
 
     public void goInfo(View caller) {
@@ -49,9 +50,7 @@ public class RequestReset extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    //TODO when click on request, send mail
     public void sendmail(View caller) {
-        System.out.println("button clicked");
         //process the error
         errorMessage.setVisibility(View.INVISIBLE);
         email.setBackgroundResource(R.drawable.bg_fill);
@@ -62,8 +61,6 @@ public class RequestReset extends AppCompatActivity {
             emailBody.put("email", email.getText().toString());
         } catch (JSONException e) { e.printStackTrace(); }
 
-        System.out.println("body made for email:  " + email.getText().toString());
-
         // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/forgotPassword";
@@ -72,7 +69,6 @@ public class RequestReset extends AppCompatActivity {
                     //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        System.out.println("response: " + Rmessage);
 
                         if (Rmessage.equals("NoAccount")){
                             errorMessage.setText(R.string.incorrectEmail);
@@ -82,18 +78,18 @@ public class RequestReset extends AppCompatActivity {
                         else{
                             Toast toast = Toast.makeText(getApplicationContext(), R.string.mailSucces, Toast.LENGTH_LONG);
                             toast.show();
+                            loading.setVisibility(View.VISIBLE);
                             goLogin(caller);
                         }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    } catch (JSONException e) { e.printStackTrace(); }
                 },
 
                 error -> {
-                    //process the error
+                    System.out.println(error.toString());
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.mailSucces, Toast.LENGTH_LONG);
                     toast.show();
+                    loading.setVisibility(View.VISIBLE);
                     goLogin(caller);
                 })
         {
@@ -108,8 +104,6 @@ public class RequestReset extends AppCompatActivity {
                 return emailBody.toString().getBytes(StandardCharsets.UTF_8);
             }
         };
-
         requestQueue.add(jsonObjectRequest);
     }
-
 }

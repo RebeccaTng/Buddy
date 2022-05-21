@@ -6,6 +6,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -62,7 +63,7 @@ public class PlantStatistics extends AppCompatActivity {
 
         if(getIntent().hasExtra("plantId")) {
             plantId = getIntent().getExtras().getInt("plantId");
-            getPlantData();
+            getPlantData(false);
         }
 
         image = findViewById(R.id.dyn_plantImage_stat);
@@ -90,7 +91,7 @@ public class PlantStatistics extends AppCompatActivity {
         swipeRefresh.setOnRefreshListener(() -> {
             image.setImageBitmap(null);
             loading.setVisibility(View.VISIBLE);
-            getPlantData();
+            getPlantData(true);
             swipeRefresh.setRefreshing(false); // explicitly refreshes only once. If "true" it implicitly refreshes forever
         });
 
@@ -131,7 +132,7 @@ public class PlantStatistics extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void getPlantData() {
+    private void getPlantData(Boolean notification) {
         // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/home/plantStatistics/" + plantId;
@@ -151,7 +152,7 @@ public class PlantStatistics extends AppCompatActivity {
                         //check if login is valid
                         if(Rmessage.equals("StatsLoaded")) {
                             processData(plantData, sensorData, sensorDataIsNull);
-                            checkAlerts(alertPlant, minmax, sensorDataIsNull);
+                            if(notification) checkAlerts(alertPlant, minmax, sensorDataIsNull);
                             loading.setVisibility(View.INVISIBLE);
                             swipeRefresh.setEnabled(true);
                         } else{
@@ -169,9 +170,7 @@ public class PlantStatistics extends AppCompatActivity {
     }
 
     private void checkAlerts(JSONObject alertPlant, JSONObject minmax, int sensorDataIsNull) throws JSONException {
-        String title;
-        String smallText = null;
-        String largeText = null;
+        String title, smallText, largeText;
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         if(sensorDataIsNull == 0) {
             if(alertPlant.getInt("tankAlert") == 1 && Integer.parseInt(waterTank.getText().toString()) < alertPlant.getInt("minWaterLvl")) {
@@ -189,12 +188,13 @@ public class PlantStatistics extends AppCompatActivity {
                     smallText = "Too little light";
                     largeText = "There is less light here than your given minimum. Please move the plant to a place with more light";
                     inboxStyle.addLine(title + " " + smallText);
+                    notification(title, smallText, largeText, 2);
                 } else if(lightPercent > minmax.getInt(("maxLight"))) {
                     smallText = "Too much light";
                     largeText = "There is more light here than your given maximum. Please move the plant to a place with less light";
                     inboxStyle.addLine(title + " " + smallText);
+                    notification(title, smallText, largeText, 2);
                 }
-                notification(title, smallText, largeText, 2);
             }
 
             if(alertPlant.getInt("tempAlert") == 1) {
@@ -204,43 +204,45 @@ public class PlantStatistics extends AppCompatActivity {
                     smallText = "Too cold";
                     largeText = "It is colder here than your given minimum. Please move the plant to a warmer place";
                     inboxStyle.addLine(title + " " + smallText);
+                    notification(title, smallText, largeText, 3);
                 } else if(tempPercent > minmax.getInt(("maxTemp"))) {
                     smallText = "Too warm";
                     largeText = "It is warmer here than your given maximum. Please move the plant to a cooler place";
                     inboxStyle.addLine(title + " " + smallText);
+                    notification(title, smallText, largeText, 3);
                 }
-                notification(title, smallText, largeText, 3);
             }
+
+            NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "My Notification")
+                    .setContentTitle(name.getText().toString() + " needs you")
+                    .setContentText("Give your plant some attention")
+                    .setSmallIcon(R.drawable.logo_small)
+                    .setStyle(inboxStyle
+                            .setBigContentTitle("New Messages")
+                            .setSummaryText(name.getText().toString()))
+                    .setContentIntent(notificationIntent())
+                    .setGroup("notificationGroup")
+                    .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setGroupSummary(true)
+                    .setAutoCancel(true);
+
+            NotificationManagerCompat.from(this).notify(4, summaryNotification.build());
         }
-
-        NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "My Notification")
-                .setContentTitle(name.getText().toString() + "needs you")
-                .setContentText("Give your plant some attention")
-                .setSmallIcon(R.drawable.logo_small)
-                .setStyle(inboxStyle
-                        .setBigContentTitle("new messages")
-                        .setSummaryText(name.getText().toString()))
-                .setContentIntent(notificationIntent())
-                .setGroup("notificationGroup")
-                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setGroupSummary(true);
-
-        NotificationManagerCompat.from(this).notify(4, summaryNotification.build());
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private PendingIntent notificationIntent() {
         Intent intent = new Intent(this, PlantStatistics.class);
         intent.putExtra("accountInfo", accountInfo);
         intent.putExtra("plantId", plantId);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        return pendingIntent;
+        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private void notification(String title, String smallText, String largeText, int id) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
-            .setContentTitle(title)
+            .setContentTitle(name.getText().toString() + ": " + title)
             .setContentText(smallText)
             .setSmallIcon(R.drawable.logo_small)
             .setStyle(new NotificationCompat.BigTextStyle()
