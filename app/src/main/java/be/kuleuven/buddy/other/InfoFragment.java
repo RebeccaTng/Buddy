@@ -17,7 +17,6 @@ import be.kuleuven.buddy.R;
 public class InfoFragment extends DialogFragment {
 
     private static String titleText, bodyText;
-    TextView title, body;
 
     public static InfoFragment newInstance(String tText, String bText) {
         titleText = tText;
@@ -34,8 +33,8 @@ public class InfoFragment extends DialogFragment {
             getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         }
 
-        title = view.findViewById(R.id.titleFragment);
-        body = view.findViewById(R.id.bodyFragment);
+        TextView title = view.findViewById(R.id.titleFragment);
+        TextView body = view.findViewById(R.id.bodyFragment);
         title.setText(titleText);
         body.setText(bodyText);
         return view;

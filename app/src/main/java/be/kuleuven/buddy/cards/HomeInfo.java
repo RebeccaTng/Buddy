@@ -2,8 +2,6 @@ package be.kuleuven.buddy.cards;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Base64;
 
 import java.text.ParseException;
@@ -14,9 +12,9 @@ import java.util.Objects;
 
 public class HomeInfo {
 
-    int plantId, connected;
-    Bitmap plantImage;
-    String plantName, plantSpecies, plantWater, plantPlace, plantStatus;
+    private final int plantId, connected;
+    private final Bitmap plantImage;
+    private final String plantName, plantSpecies, plantWater, plantPlace, plantStatus;
 
     public HomeInfo(int plantId, String plantImage, String plantName, String plantSpecies, String plantWater, String plantPlace, String plantStatus, int connected) {
 

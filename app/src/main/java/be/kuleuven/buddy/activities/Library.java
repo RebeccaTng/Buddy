@@ -32,12 +32,11 @@ import be.kuleuven.buddy.cards.LibraryInfo;
 
 public class Library extends AppCompatActivity implements LibraryAdapter.LibraryListener {
 
-    RecyclerView libraryRecycler;
-    RecyclerView.Adapter libraryAdapter;
-    AccountInfo accountInfo;
-    TextView userMessage, libNumber;
-    ProgressBar loading;
-    ArrayList<LibraryInfo> libPlants = new ArrayList<>();
+    private RecyclerView libraryRecycler;
+    private AccountInfo accountInfo;
+    private TextView userMessage, libNumber;
+    private ProgressBar loading;
+    private final ArrayList<LibraryInfo> libPlants = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,36 +93,20 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
     }
 
     private void getData() {
-        // Make the json object for the body of the get request
         JSONObject library = new JSONObject();
-        try {
-            library.put("type", "UsersInfo");
+        try { library.put("type", "UsersInfo");
         } catch (JSONException e) { e.printStackTrace(); }
 
-        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/library";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
 
-                        //check if login is valid
-                        if(Rmessage.equals("LibraryLoaded")){
+                        if(Rmessage.equals("LibraryLoaded")) {
                             JSONArray data = response.getJSONArray("data");
-                            JSONObject dataObject;
-                            int speciesId;
-                            String species, image;
-
-                            for(int i = 0; i < data.length(); i++) {
-                                dataObject = data.getJSONObject(i);
-                                speciesId = dataObject.getInt("speciesId");
-                                image = dataObject.getString("image");
-                                species = dataObject.getString("species");
-
-                                libPlants.add(new LibraryInfo(speciesId, image, species));
-                            }
+                            loadArray(data);
                             loadLibraryRecycler();
 
                         } else{
@@ -134,7 +117,6 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     loading.setVisibility(View.GONE);
                     userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                     userMessage.setText(R.string.error);
@@ -146,10 +128,7 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
             }
 
             @Override
-            public byte[] getBody() {
-                // Request body goes here
-                return library.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return library.toString().getBytes(StandardCharsets.UTF_8); }
 
             @Override
             public Map<String, String> getHeaders() {
@@ -158,11 +137,27 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
                 return headers;
             }
         };
+
         requestQueue.add(jsonObjectRequest);
     }
 
+    private void loadArray(JSONArray data) throws JSONException {
+        JSONObject dataObject;
+        int speciesId;
+        String species, image;
+
+        for(int i = 0; i < data.length(); i++) {
+            dataObject = data.getJSONObject(i);
+            speciesId = dataObject.getInt("speciesId");
+            image = dataObject.getString("image");
+            species = dataObject.getString("species");
+
+            libPlants.add(new LibraryInfo(speciesId, image, species));
+        }
+    }
+
     private void loadLibraryRecycler() {
-        libraryAdapter = new LibraryAdapter(libPlants, this);
+        RecyclerView.Adapter libraryAdapter = new LibraryAdapter(libPlants, this);
         libraryRecycler.setAdapter(libraryAdapter);
 
         loading.setVisibility(View.GONE);

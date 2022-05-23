@@ -23,9 +23,9 @@ import be.kuleuven.buddy.R;
 
 public class RequestReset extends AppCompatActivity {
 
-    TextView errorMessage;
-    TextView email;
-    ProgressBar loading;
+    private TextView errorMessage;
+    private TextView email;
+    private ProgressBar loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,31 +51,27 @@ public class RequestReset extends AppCompatActivity {
     }
 
     public void sendmail(View caller) {
-        //process the error
         errorMessage.setVisibility(View.INVISIBLE);
         email.setBackgroundResource(R.drawable.bg_fill);
 
-        // Make the json object for the body of the post request
         JSONObject emailBody = new JSONObject();
         try {
             emailBody.put("email", email.getText().toString());
         } catch (JSONException e) { e.printStackTrace(); }
 
-        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/forgotPassword";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.POST, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
 
-                        if (Rmessage.equals("NoAccount")){
+                        if (Rmessage.equals("NoAccount")) {
                             errorMessage.setText(R.string.incorrectEmail);
                             errorMessage.setVisibility(View.VISIBLE);
                             email.setBackgroundResource(R.drawable.bg_fill_red);
-                        }
-                        else{
+
+                        } else {
                             Toast toast = Toast.makeText(getApplicationContext(), R.string.mailSucces, Toast.LENGTH_LONG);
                             toast.show();
                             loading.setVisibility(View.VISIBLE);
@@ -99,11 +95,9 @@ public class RequestReset extends AppCompatActivity {
             }
 
             @Override
-            public byte[] getBody() {
-                // request body goes here
-                return emailBody.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return emailBody.toString().getBytes(StandardCharsets.UTF_8); }
         };
+
         requestQueue.add(jsonObjectRequest);
     }
 }

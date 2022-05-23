@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -40,13 +43,12 @@ import be.kuleuven.buddy.bluetooth.ui.BlufiMain;
 
 public class Home extends AppCompatActivity implements HomeAdapter.HomeListener {
 
-    RecyclerView homeRecycler;
-    RecyclerView.Adapter homeAdapter;
-    TextView username, numOfPlants, userMessage;
-    AccountInfo accountInfo;
-    ProgressBar loading;
-    ArrayList<HomeInfo> homePlants = new ArrayList<>();
-    SwipeRefreshLayout swipeRefresh;
+    private RecyclerView homeRecycler;
+    private TextView numOfPlants, userMessage;
+    private AccountInfo accountInfo;
+    private ProgressBar loading;
+    private final ArrayList<HomeInfo> homePlants = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +57,8 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         setContentView(R.layout.activity_home);
 
         swipeRefresh = findViewById(R.id.refreshLayout_home);
+        TextView username = findViewById(R.id.dyn_username_home);
 
-        username = findViewById(R.id.dyn_username_home);
         if(getIntent().hasExtra("accountInfo")) {
             accountInfo = getIntent().getExtras().getParcelable("accountInfo");
             username.setText(accountInfo.getUsername());
@@ -67,6 +69,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
         userMessage = findViewById(R.id.userMessage_home);
         numOfPlants = findViewById(R.id.dyn_numOfPlants);
         homeRecycler = findViewById(R.id.home_recycler);
+
         swipeRefresh.setColorSchemeResources(R.color.orange);
         swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.beige);
         swipeRefresh.setEnabled(false);
@@ -89,8 +92,14 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
             loading.setVisibility(View.VISIBLE);
             homeRecycler.setVisibility(View.INVISIBLE);
             getData();
-            swipeRefresh.setRefreshing(false); // explicitly refreshes only once. If "true" it implicitly refreshes forever
+            swipeRefresh.setRefreshing(false); // Explicitly refreshes only once. If "true" it implicitly refreshes forever
         });
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
     }
 
     public void goBluetooth(View caller) {
@@ -122,26 +131,19 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     }
 
     private void getData() {
-        // Make the json object for the body of the put request
         JSONObject library = new JSONObject();
-        try {
-            library.put("type", "UsersInfo");
+        try { library.put("type", "UsersInfo");
         } catch (JSONException e) { e.printStackTrace(); }
 
-        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/home";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
 
                         //check if login is valid
                         if(Rmessage.equals("HomeLoaded")){
-                            JSONObject dataObject;
-                            int plantId, connected;
-                            String name, species, last_watered, place, status, image;
                             JSONArray data, alertPlant, minmax, sensorData;
 
                             data = response.getJSONArray("data");
@@ -149,23 +151,12 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                             minmax = response.getJSONArray("minmax");
                             sensorData = response.getJSONArray("sensorData");
 
-                            for(int i = 0; i < data.length(); i++) {
-                                dataObject = data.getJSONObject(i);
-                                plantId = dataObject.getInt("plantId");
-                                image = dataObject.getString("image");
-                                name = dataObject.getString("name");
-                                species = dataObject.getString("species");
-                                last_watered = dataObject.getString("lastWatered");
-                                place = dataObject.getString("place");
-                                status = dataObject.getString("status");
-                                connected = dataObject.getInt("connected");
-
-                                homePlants.add(new HomeInfo(plantId, image, name, species, last_watered, place, status, connected));
-                            }
+                            loadArray(data);
+                            // Notifications
                             checkAlerts(alertPlant, minmax, sensorData);
                             loadHomeRecycler();
 
-                        } else{
+                        } else {
                             loading.setVisibility(View.GONE);
                             userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                             userMessage.setText(R.string.error);
@@ -173,7 +164,6 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     loading.setVisibility(View.GONE);
                     userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                     userMessage.setText(R.string.error);
@@ -185,10 +175,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
             }
 
             @Override
-            public byte[] getBody() {
-                // Request body goes here
-                return library.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return library.toString().getBytes(StandardCharsets.UTF_8); }
 
             @Override
             public Map<String, String> getHeaders() {
@@ -197,7 +184,29 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                 return headers;
             }
         };
+
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private void loadArray(JSONArray data) throws JSONException {
+        int plantId, connected;
+        String image, species, last_watered, name, status, place;
+        JSONObject dataObject;
+
+        // Load Array with plant information
+        for(int i = 0; i < data.length(); i++) {
+            dataObject = data.getJSONObject(i);
+            plantId = dataObject.getInt("plantId");
+            image = dataObject.getString("image");
+            name = dataObject.getString("name");
+            species = dataObject.getString("species");
+            last_watered = dataObject.getString("lastWatered");
+            place = dataObject.getString("place");
+            status = dataObject.getString("status");
+            connected = dataObject.getInt("connected");
+
+            homePlants.add(new HomeInfo(plantId, image, name, species, last_watered, place, status, connected));
+        }
     }
 
     private void checkAlerts(JSONArray alertPlant, JSONArray minmax, JSONArray sensorData) throws JSONException {
@@ -253,6 +262,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                     notification(title, smallText, largeText, plantId, (i*4) + 3);
                 }
             }
+
             summaryNotification(plantId, name, inboxStyle, (i*4) + 4);
         }
     }
@@ -301,7 +311,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     }
 
     private void loadHomeRecycler() {
-        homeAdapter = new HomeAdapter(homePlants, this);
+        RecyclerView.Adapter homeAdapter = new HomeAdapter(homePlants, this);
         homeRecycler.setAdapter(homeAdapter);
 
         loading.setVisibility(View.GONE);

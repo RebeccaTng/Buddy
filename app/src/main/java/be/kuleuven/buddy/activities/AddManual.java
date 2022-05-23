@@ -38,14 +38,13 @@ import be.kuleuven.buddy.other.InfoFragment;
 
 public class AddManual extends AppCompatActivity {
 
-    AppCompatButton addPic;
-    Button addPlant;
-    ImageView picPreview;
-    ActivityResultLauncher<String> getImage;
-    EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, species;
-    TextView errorMessage;
-    AccountInfo accountInfo;
-    FieldChecker fieldChecker;
+    private Button addPlant;
+    private ImageView picPreview;
+    private ActivityResultLauncher<String> getImage;
+    private EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, place, name, species;
+    private TextView errorMessage;
+    private AccountInfo accountInfo;
+    private FieldChecker fieldChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,6 @@ public class AddManual extends AppCompatActivity {
 
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
-        addPic = findViewById(R.id.addPicBtn);
         picPreview = findViewById(R.id.picturePreview);
         addPlant = findViewById(R.id.addNewPlantBtn);
         moistMin = findViewById(R.id.moistMin_addManual);
@@ -65,18 +63,22 @@ public class AddManual extends AppCompatActivity {
         tempMin = findViewById(R.id.tempMin_addManual);
         tempMax = findViewById(R.id.tempMax_addManual);
         waterlvl = findViewById(R.id.waterMin_addManual);
-        ageYears = findViewById(R.id.ageYear_addManual);
-        ageMonths = findViewById(R.id.ageMonth_addManual);
+        EditText ageYears = findViewById(R.id.ageYear_addManual);
+        EditText ageMonths = findViewById(R.id.ageMonth_addManual);
         place = findViewById(R.id.placeName_addManual);
         name = findViewById(R.id.nameName_addManual);
         species = findViewById(R.id.speciesName_addManual);
         errorMessage = findViewById(R.id.error_addManual);
+        AppCompatButton addPic = findViewById(R.id.addPicBtn);
+        ImageView infoBtn = findViewById(R.id.infoIconAddManual);
 
         // Set minimum and maximum value
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place , name, species, errorMessage, true);
         fieldChecker.setFilters();
 
-        findViewById(R.id.infoIconAddManual).setOnClickListener(view -> {
+        addPic.setOnClickListener(view -> getImage.launch("image/*"));
+
+        infoBtn.setOnClickListener(view -> {
             String title = getResources().getString(R.string.howToValues);
             String body = getResources().getString(R.string.valuesTips);
             InfoFragment info = InfoFragment.newInstance(title, body);
@@ -88,8 +90,6 @@ public class AddManual extends AppCompatActivity {
             picPreview.setImageURI(result);
             picPreview.setVisibility(View.VISIBLE);
         });
-
-        addPic.setOnClickListener(view -> getImage.launch("image/*"));
 
         addPlant.setOnClickListener(view -> {
             if(fieldChecker.checkFields()) {
@@ -111,16 +111,17 @@ public class AddManual extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    private void sendDatabase() {
+    private String getImageString() {
         // Image to bitmap
         BitmapDrawable image = (BitmapDrawable) picPreview.getDrawable();
         Bitmap bitmap = image.getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream); //compress to which format you want.
         byte [] byte_arr = stream.toByteArray();
-        String image_str = Base64.encodeToString(byte_arr, Base64.DEFAULT);
+        return Base64.encodeToString(byte_arr, Base64.DEFAULT);
+    }
 
-        // Make the json object for the body of the put request
+    private JSONObject sendDatabaseBody() {
         JSONObject data = new JSONObject();
         try {
             data.put("minMoist", moistMin.getText().toString());
@@ -134,7 +135,7 @@ public class AddManual extends AppCompatActivity {
             data.put("place", place.getText().toString());
             data.put("name", name.getText().toString());
             data.put("species", species.getText().toString());
-            data.put("image", image_str);
+            data.put("image", getImageString());
         } catch (JSONException e) { e.printStackTrace(); }
 
         JSONObject addPlantManual = new JSONObject();
@@ -143,34 +144,33 @@ public class AddManual extends AppCompatActivity {
             addPlantManual.put("data", data);
         } catch (JSONException e) { e.printStackTrace(); }
 
-        // Connect to database
+        return addPlantManual;
+    }
+
+    private void sendDatabase() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/library/addManual";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        String Rcomment = response.getString("comment");
 
-                        //check if login is valid
-                        if(Rmessage.equals("PlantManualAddSucces")){
-                            // Toast
+                        if(Rmessage.equals("PlantManualAddSucces")) {
+                            String Rcomment = response.getString("comment");
                             Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
                             toast.show();
 
-                            // Go to back to library
                             Intent goToHome = new Intent(this, Home.class);
                             goToHome.putExtra("accountInfo", accountInfo);
                             startActivity(goToHome);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
                         } else if(Rmessage.equals("AddSpeciesFailed")) {
-                            System.out.println(Rcomment);
                             addPlant.setEnabled(true);
                             errorMessage.setText(R.string.speciesExists);
                             errorMessage.setVisibility(View.VISIBLE);
-                        } else{
+
+                        } else {
                             addPlant.setEnabled(true);
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
@@ -178,7 +178,6 @@ public class AddManual extends AppCompatActivity {
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     addPlant.setEnabled(true);
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
@@ -190,10 +189,7 @@ public class AddManual extends AppCompatActivity {
             }
 
             @Override
-            public byte[] getBody() {
-                // Request body goes here
-                return addPlantManual.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return sendDatabaseBody().toString().getBytes(StandardCharsets.UTF_8); }
 
             @Override
             public Map<String, String> getHeaders() {
@@ -202,10 +198,12 @@ public class AddManual extends AppCompatActivity {
                 return headers;
             }
         };
+
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         requestQueue.add(jsonObjectRequest);
     }
 }

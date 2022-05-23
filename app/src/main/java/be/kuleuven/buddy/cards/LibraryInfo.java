@@ -8,9 +8,9 @@ import android.util.Base64;
 
 public class LibraryInfo {
 
-    int libId;
-    String libSpecies;
-    Bitmap libImage;
+    private final int libId;
+    private final String libSpecies;
+    private final Bitmap libImage;
 
     public LibraryInfo(int libId, String libImage, String libSpecies) {
 

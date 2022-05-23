@@ -19,7 +19,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,8 +26,9 @@ import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 
 public class Account extends AppCompatActivity {
-    AccountInfo accountInfo;
-    TextView username, email;
+
+    private AccountInfo accountInfo;
+    private TextView username, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,15 @@ public class Account extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_account);
 
-        username = findViewById(R.id.dyn_username_acc);
-        email = findViewById(R.id.dyn_email_acc);
-        AppCompatButton delete = findViewById(R.id.deleteAcc_btn);
-
         if(getIntent().hasExtra("accountInfo")) {
             accountInfo = getIntent().getExtras().getParcelable("accountInfo");
             username.setText(accountInfo.getUsername());
             email.setText(accountInfo.getEmail());
         }
+
+        username = findViewById(R.id.dyn_username_acc);
+        email = findViewById(R.id.dyn_email_acc);
+        AppCompatButton delete = findViewById(R.id.deleteAcc_btn);
 
         delete.setOnClickListener(view -> {
             AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomAlert));
@@ -75,43 +75,37 @@ public class Account extends AppCompatActivity {
     }
 
     public void goStart(View caller) {
-        // Logout
         Intent goToStart = new Intent(this, Start.class);
         startActivity(goToStart);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
     private void deleteFromDatabase() {
-        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/user/deleteAcc";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.DELETE, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        String Rcomment = response.getString("comment");
 
-                        //check if login is valid
-                        if(Rmessage.equals("AccountDeleted")){
-                            // Toast
+                        if(Rmessage.equals("AccountDeleted")) {
+                            String Rcomment = response.getString("comment");
                             Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
                             toast.show();
-                            // Go to back to library
+
                             Intent goToStart = new Intent(this, Start.class);
                             goToStart.putExtra("accountInfo", accountInfo);
                             startActivity(goToStart);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                             finish();
 
-                        } else{
+                        } else {
                             Toast toast = Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG);
                             toast.show();
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG);
                     toast.show();
                 })
@@ -123,10 +117,12 @@ public class Account extends AppCompatActivity {
                 return headers;
             }
         };
+
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         requestQueue.add(jsonObjectRequest);
     }
 }

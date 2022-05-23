@@ -119,7 +119,6 @@ public class Login extends AppCompatActivity {
                                 password.setBackgroundResource(R.drawable.bg_fill);
                                 loading.setVisibility(View.VISIBLE);
                                 accountInfo = new AccountInfo(Rusername, Rmail, Rtoken);
-                                accountInfo.printAccount();
                                 goHome(caller);
 
                             } else {

@@ -15,8 +15,8 @@ import be.kuleuven.buddy.R;
 
 public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryViewHolder> {
 
-    ArrayList<LibraryInfo> libPlants; // Contains the info/text
-    LibraryAdapter.LibraryListener libraryListener;
+    private final ArrayList<LibraryInfo> libPlants; // Contains the info/text
+    private final LibraryAdapter.LibraryListener libraryListener;
 
     public LibraryAdapter(ArrayList<LibraryInfo> libPlants, LibraryAdapter.LibraryListener libraryListener) {
         this.libPlants = libPlants;

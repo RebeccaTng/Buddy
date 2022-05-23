@@ -43,17 +43,18 @@ import be.kuleuven.buddy.other.InfoFragment;
 
 public class PlantSettings extends AppCompatActivity {
 
-    AccountInfo accountInfo;
-    int plantId, moistMinDB, moistMaxDB, lightMinDB, lightMaxDB, tempMinDB, tempMaxDB;
-    EditText name, moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place;
-    ImageView image;
-    TextView species, errorMessage;
+    private AccountInfo accountInfo;
+    private int plantId, moistMinDB, moistMaxDB, lightMinDB, lightMaxDB, tempMinDB, tempMaxDB;
+    private EditText name, moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place;
+    private ImageView image;
+    private TextView species, errorMessage;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    Switch tankSwitch, lightSwitch, tempSwitch;
-    FieldChecker fieldChecker;
-    ProgressBar loading;
-    Button useStandard, delete, save;
-    Boolean prevPersonalized;
+    private Switch tankSwitch, lightSwitch, tempSwitch;
+    private FieldChecker fieldChecker;
+    private ProgressBar loading;
+    private Button useStandard, delete, save;
+    private Boolean prevPersonalized;
+    private RequestQueue requestQueue;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -63,7 +64,6 @@ public class PlantSettings extends AppCompatActivity {
         setContentView(R.layout.activity_plant_settings);
 
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
-
         if(getIntent().hasExtra("plantId")) {
             plantId = getIntent().getExtras().getInt("plantId");
             getPlantData();
@@ -91,33 +91,16 @@ public class PlantSettings extends AppCompatActivity {
         useStandard = findViewById(R.id.standardBtn_settings);
         delete = findViewById(R.id.deleteBtn_settings);
         save = findViewById(R.id.saveBtn_settings);
+        ImageView infoBtn = findViewById(R.id.infoIconSettings);
+        requestQueue = Volley.newRequestQueue(this);
 
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);
 
-        findViewById(R.id.infoIconSettings).setOnClickListener(view -> {
+        infoBtn.setOnClickListener(view -> {
             String title = getResources().getString(R.string.howToValues);
             String body = getResources().getString(R.string.valuesTips);
             InfoFragment info = InfoFragment.newInstance(title, body);
             info.show(getSupportFragmentManager(), "infoFragment");
-        });
-
-        useStandard.setOnClickListener(view -> standardSettings());
-
-        delete.setOnClickListener(view -> {
-            AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomAlert));
-            deleteBuilder.setMessage("Are you sure you want to delete \"" + name.getText().toString() + "\" from your home?")
-                    .setPositiveButton("Yes", (dialogInterface, i) -> deleteFromDatabase())
-                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel())
-                    .show();
-        });
-
-        save.setOnClickListener(view ->{
-            if(fieldChecker.checkFields()) {
-                useStandard.setEnabled(false);
-                delete.setEnabled(false);
-                save.setEnabled(false);
-                sendData(checkStandardOrPersonalized());
-            }
         });
 
         editIcon.setOnClickListener(view -> {
@@ -126,6 +109,8 @@ public class PlantSettings extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT);
         });
+
+        setBtnListeners();
     }
 
     @Override
@@ -148,37 +133,55 @@ public class PlantSettings extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
+    private void setBtnListeners() {
+        useStandard.setOnClickListener(view -> standardSettings());
+
+        delete.setOnClickListener(view -> {
+            AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomAlert));
+            deleteBuilder.setMessage("Are you sure you want to delete \"" + name.getText().toString() + "\" from your home?")
+                    .setPositiveButton("Yes", (dialogInterface, i) -> deleteFromDatabase())
+                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel())
+                    .show();
+        });
+
+        save.setOnClickListener(view ->{
+            if(fieldChecker.checkFields()) {
+                useStandard.setEnabled(false);
+                delete.setEnabled(false);
+                save.setEnabled(false);
+                sendData(checkStandardOrPersonalized());
+            }
+        });
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getPlantData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/home/plantSettings/getPlant/" + plantId;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        JSONObject plantData, speciesData, sensorPersonalized;
-                        plantData = response.getJSONObject("plantData");
-                        speciesData = response.getJSONObject("speciesData");
-                        int personalized = plantData.getInt("personalized");
-                        if(personalized == 1) sensorPersonalized = response.getJSONObject("sensorPersonalized");
-                        else sensorPersonalized = null;
 
-                        //check if login is valid
                         if(Rmessage.equals("SettingsLoaded")) {
+                            JSONObject plantData, speciesData, sensorPersonalized;
+                            plantData = response.getJSONObject("plantData");
+                            speciesData = response.getJSONObject("speciesData");
+                            int personalized = plantData.getInt("personalized");
+                            if(personalized == 1) sensorPersonalized = response.getJSONObject("sensorPersonalized");
+                            else sensorPersonalized = null;
                             processData(plantData, speciesData, sensorPersonalized, personalized);
 
-                        } else{
+                        } else {
                             loading.setVisibility(View.INVISIBLE);
                             errorMessage.setText(R.string.error);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     loading.setVisibility(View.INVISIBLE);
                     errorMessage.setText(R.string.error);
                 });
+
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -226,7 +229,6 @@ public class PlantSettings extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setAge(String plantDate) {
-
         int year = 0;
         int month = 0;
         LocalDate dob = LocalDate.parse(plantDate);
@@ -239,7 +241,7 @@ public class PlantSettings extends AppCompatActivity {
         ageMonths.setText(String.valueOf(month));
     }
 
-    private void standardSettings(){
+    private void standardSettings() {
         moistMin.setText(String.valueOf(moistMinDB));
         moistMax.setText(String.valueOf(moistMaxDB));
         lightMin.setText(String.valueOf(lightMinDB));
@@ -249,39 +251,34 @@ public class PlantSettings extends AppCompatActivity {
     }
 
     private void deleteFromDatabase() {
-        // Connect to database
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/home/plantSettings/deletePlant/" + plantId;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.DELETE, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
 
-                        //check if login is valid
-                        if(Rmessage.equals("PlantDeleted")){
-                            // Toast
+                        if(Rmessage.equals("PlantDeleted")) {
                             String comment = "\"" + name.getText().toString() + "\" was successfully deleted";
                             Toast toast = Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_LONG);
                             toast.show();
-                            // Go to back to home
+
                             Intent goToHome = new Intent(this, Home.class);
                             goToHome.putExtra("accountInfo", accountInfo);
                             startActivity(goToHome);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                             finish();
 
-                        } else{
+                        } else {
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
                 });
+
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -291,8 +288,7 @@ public class PlantSettings extends AppCompatActivity {
                 || !tempMin.getText().toString().equals(String.valueOf(tempMinDB)) || !tempMax.getText().toString().equals(String.valueOf(tempMaxDB));
     }
 
-    private void sendData(Boolean personalized) {
-        // Make the json object for the body of the put request
+    private JSONObject sendDataBody(Boolean personalized) {
         JSONObject data = new JSONObject();
         try {
             data.put("plantId", plantId);
@@ -320,22 +316,27 @@ public class PlantSettings extends AppCompatActivity {
             editSettings.put("data", data);
         } catch (JSONException e) { e.printStackTrace(); }
 
-        // Connect to database
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        return editSettings;
+    }
+
+    private void enableBtns() {
+        useStandard.setEnabled(true);
+        delete.setEnabled(true);
+        save.setEnabled(true);
+    }
+
+    private void sendData(Boolean personalized) {
         String url = "https://a21iot03.studev.groept.be/public/api/home/plantSettings/updatePlant";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        String Rcomment = response.getString("comment");
 
-                        //check if login is valid
-                        if(Rmessage.equals("UpdatePlantSucces")){
-                            // Toast
+                        if(Rmessage.equals("UpdatePlantSucces")) {
+                            String Rcomment = response.getString("comment");
                             Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
                             toast.show();
-                            // Go to back to statistics
+
                             Intent goToPlantStatistics = new Intent(this, PlantStatistics.class);
                             goToPlantStatistics.putExtra("plantId", plantId);
                             goToPlantStatistics.putExtra("accountInfo", accountInfo);
@@ -343,25 +344,19 @@ public class PlantSettings extends AppCompatActivity {
                             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
                         } else if(Rmessage.equals("AddPlantFailed")) {
-                            useStandard.setEnabled(true);
-                            delete.setEnabled(true);
-                            save.setEnabled(true);
+                            enableBtns();
                             errorMessage.setText(R.string.plantExists);
                             errorMessage.setVisibility(View.VISIBLE);
-                        } else{
-                            useStandard.setEnabled(true);
-                            delete.setEnabled(true);
-                            save.setEnabled(true);
+
+                        } else {
+                            enableBtns();
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
-                    useStandard.setEnabled(true);
-                    delete.setEnabled(true);
-                    save.setEnabled(true);
+                    enableBtns();
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
                 })
@@ -372,15 +367,14 @@ public class PlantSettings extends AppCompatActivity {
             }
 
             @Override
-            public byte[] getBody() {
-                // Request body goes here
-                return editSettings.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return sendDataBody(personalized).toString().getBytes(StandardCharsets.UTF_8); }
         };
+
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         requestQueue.add(jsonObjectRequest);
     }
 }

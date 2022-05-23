@@ -36,14 +36,15 @@ import be.kuleuven.buddy.other.InfoFragment;
 
 public class AddLibrary extends AppCompatActivity {
 
-    EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name;
-    int moistMinDB, moistMaxDB, lightMinDB, lightMaxDB, tempMinDB, tempMaxDB, speciesId;
-    ImageView image;
-    TextView species, errorMessage;
-    AccountInfo accountInfo;
-    ProgressBar loading;
-    Button useStandard, delete, addPlant;
-    FieldChecker fieldChecker;
+    private EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, place, name;
+    private int moistMinDB, moistMaxDB, lightMinDB, lightMaxDB, tempMinDB, tempMaxDB, speciesId;
+    private ImageView image;
+    private TextView species, errorMessage;
+    private AccountInfo accountInfo;
+    private ProgressBar loading;
+    private Button useStandard, delete, addPlant;
+    private FieldChecker fieldChecker;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +67,8 @@ public class AddLibrary extends AppCompatActivity {
         tempMin = findViewById(R.id.tempMin_addLib);
         tempMax = findViewById(R.id.tempMax_addLib);
         waterlvl = findViewById(R.id.waterMin_addLib);
-        ageYears = findViewById(R.id.ageYear_addLib);
-        ageMonths = findViewById(R.id.ageMonth_addLib);
+        EditText ageYears = findViewById(R.id.ageYear_addLib);
+        EditText ageMonths = findViewById(R.id.ageMonth_addLib);
         place = findViewById(R.id.placeName_addLib);
         name = findViewById(R.id.nameName_addLib);
         errorMessage = findViewById(R.id.error_addLib);
@@ -75,17 +76,36 @@ public class AddLibrary extends AppCompatActivity {
         useStandard = findViewById(R.id.standardSettings_addLib);
         delete = findViewById(R.id.delete_addLib);
         addPlant = findViewById(R.id.addPlantBtn_addLib);
+        ImageView infoBtn = findViewById(R.id.infoIconAddLibrary);
+        requestQueue = Volley.newRequestQueue(this);
 
+        // Set minimum and maximum value
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);
         fieldChecker.setFilters();
 
-        findViewById(R.id.infoIconAddLibrary).setOnClickListener(view -> {
+        infoBtn.setOnClickListener(view -> {
             String title = getResources().getString(R.string.howToValues);
             String body = getResources().getString(R.string.valuesTips);
             InfoFragment info = InfoFragment.newInstance(title, body);
             info.show(getSupportFragmentManager(), "infoFragment");
         });
 
+        initBtnListeners();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent goToLibrary = new Intent(this, Library.class);
+        goToLibrary.putExtra("accountInfo", accountInfo);
+        startActivity(goToLibrary);
+    }
+
+    public void goBack(View caller) {
+        onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+    }
+
+    private void initBtnListeners() {
         useStandard.setOnClickListener(view -> {
             moistMin.setText(String.valueOf(moistMinDB));
             moistMax.setText(String.valueOf(moistMaxDB));
@@ -113,35 +133,21 @@ public class AddLibrary extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent goToLibrary = new Intent(this, Library.class);
-        goToLibrary.putExtra("accountInfo", accountInfo);
-        startActivity(goToLibrary);
-    }
-
-    public void goBack(View caller) {
-        onBackPressed();
-        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-    }
-
     private void getSpeciesData() {
-        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/library/addLibrary/getSpecies/" + speciesId;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        JSONObject data = response.getJSONObject("data");
 
-                        //check if login is valid
-                        if(Rmessage.equals("SpeciesLoaded")){
+                        if(Rmessage.equals("SpeciesLoaded")) {
+                            JSONObject data = response.getJSONObject("data");
 
                             species.setText(data.getString("species"));
                             byte[] decodedImage = Base64.decode(data.getString("image"), Base64.DEFAULT);
                             image.setImageBitmap(BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length));
+
                             moistMinDB = data.getInt("minMoist");
                             moistMaxDB = data.getInt("maxMoist");
                             lightMinDB = data.getInt("minLight");
@@ -154,7 +160,7 @@ public class AddLibrary extends AppCompatActivity {
                             delete.setEnabled(true);
                             addPlant.setEnabled(true);
 
-                        } else{
+                        } else {
                             loading.setVisibility(View.INVISIBLE);
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
@@ -162,7 +168,6 @@ public class AddLibrary extends AppCompatActivity {
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     loading.setVisibility(View.INVISIBLE);
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
@@ -175,6 +180,7 @@ public class AddLibrary extends AppCompatActivity {
                 return headers;
             }
         };
+
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -184,8 +190,13 @@ public class AddLibrary extends AppCompatActivity {
                 || !tempMin.getText().toString().equals(String.valueOf(tempMinDB)) || !tempMax.getText().toString().equals(String.valueOf(tempMaxDB));
     }
 
-    private void sendData(Boolean personalized) {
-        // Make the json object for the body of the put request
+    private void enableBtns() {
+        useStandard.setEnabled(true);
+        delete.setEnabled(true);
+        addPlant.setEnabled(true);
+    }
+
+    private JSONObject sendDataBody(Boolean personalized) {
         JSONObject data = new JSONObject();
         try {
             data.put("speciesId", speciesId);
@@ -210,47 +221,40 @@ public class AddLibrary extends AppCompatActivity {
             addPlantLibrary.put("data", data);
         } catch (JSONException e) { e.printStackTrace(); }
 
-        // Connect to database
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        return addPlantLibrary;
+    }
+
+    private void sendData(Boolean personalized) {
         String url = "https://a21iot03.studev.groept.be/public/api/library/addLibrary";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        String Rcomment = response.getString("comment");
 
-                        //check if login is valid
-                        if(Rmessage.equals("PlantLibraryAddSucces")){
-                            // Toast
+                        if(Rmessage.equals("PlantLibraryAddSucces")) {
+                            String Rcomment = response.getString("comment");
                             Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
                             toast.show();
-                            // Go to back to library
+
                             Intent goToHome = new Intent(this, Home.class);
                             goToHome.putExtra("accountInfo", accountInfo);
                             startActivity(goToHome);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
 
                         } else if(Rmessage.equals("AddPlantFailed")) {
-                            useStandard.setEnabled(true);
-                            delete.setEnabled(true);
-                            addPlant.setEnabled(true);
+                            enableBtns();
                             errorMessage.setText(R.string.plantExists);
                             errorMessage.setVisibility(View.VISIBLE);
-                        } else{
-                            useStandard.setEnabled(true);
-                            delete.setEnabled(true);
-                            addPlant.setEnabled(true);
+
+                        } else {
+                            enableBtns();
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
-                    useStandard.setEnabled(true);
-                    delete.setEnabled(true);
-                    addPlant.setEnabled(true);
+                    enableBtns();
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
                 })
@@ -261,10 +265,7 @@ public class AddLibrary extends AppCompatActivity {
             }
 
             @Override
-            public byte[] getBody() {
-                // Request body goes here
-                return addPlantLibrary.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return sendDataBody(personalized).toString().getBytes(StandardCharsets.UTF_8); }
 
             @Override
             public Map<String, String> getHeaders() {
@@ -273,47 +274,44 @@ public class AddLibrary extends AppCompatActivity {
                 return headers;
             }
         };
+
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         requestQueue.add(jsonObjectRequest);
     }
 
     private void deleteFromDatabase() {
-        // Connect to database
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/library/addLibrary/deleteSpecies/" + speciesId;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.DELETE, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
 
-                        //check if login is valid
-                        if(Rmessage.equals("SpeciesDeleted")){
-                            // Toast
+                        if(Rmessage.equals("SpeciesDeleted")) {
                             String comment = "Species \"" + species.getText().toString() + "\" and all of its instances were successfully deleted";
                             Toast toast = Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_LONG);
                             toast.show();
-                            // Go to back to library
+
                             Intent goToLibrary = new Intent(this, Library.class);
                             goToLibrary.putExtra("accountInfo", accountInfo);
                             startActivity(goToLibrary);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                             finish();
 
-                        } else{
+                        } else {
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
                 });
+
         requestQueue.add(jsonObjectRequest);
     }
 }

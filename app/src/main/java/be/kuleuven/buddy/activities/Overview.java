@@ -49,17 +49,17 @@ import be.kuleuven.buddy.other.InfoFragment;
 
 public class Overview extends AppCompatActivity {
 
-    LineDataSet moistDataSet, lightDataSet, tempDataSet;
-    LineChart moistChart, lightChart, tempChart;
-    TextView dateView, day, week, month, year, userMessage;
-    Calendar calendar, calendarMin, calendarMinWeek;
-    SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, dbFormat;
-    String dayNow, date, dayToday, weekNowBegin, weekNowEnd, weekBegin, weekEnd, monthNow, yearNow;
-    ImageView previous, next;
-    AccountInfo accountInfo;
-    ProgressBar loading;
-    ScrollView scrollView;
-    int plantId;
+    private LineDataSet moistDataSet, lightDataSet, tempDataSet;
+    private LineChart moistChart, lightChart, tempChart;
+    private TextView dateView, day, week, month, year, userMessage;
+    private Calendar calendar, calendarMin, calendarMinWeek;
+    private SimpleDateFormat dayFormat, weekFormatBegin, weekFormatEnd, monthFormat, dbFormat;
+    private String dayNow, date, dayToday, weekNowBegin, weekNowEnd, monthNow, yearNow;
+    private ImageView previous, next;
+    private AccountInfo accountInfo;
+    private ProgressBar loading;
+    private ScrollView scrollView;
+    private int plantId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,43 @@ public class Overview extends AppCompatActivity {
         scrollView = findViewById(R.id.scroll);
         userMessage = findViewById(R.id.userMessage_overview);
 
+        initIntents();
+
+        findViewById(R.id.infoIconOverview).setOnClickListener(view -> {
+            String title = getResources().getString(R.string.howTo);
+            String body = getResources().getString(R.string.graphUse);
+            InfoFragment info = InfoFragment.newInstance(title, body);
+            info.show(getSupportFragmentManager(), "infoFragment");
+        });
+
+        int green = ContextCompat.getColor(this, R.color.dark_green);
+        int beige = ContextCompat.getColor(this, R.color.beige);
+        Drawable btnBg = ContextCompat.getDrawable(this, R.drawable.bg_beige_second);
+
+        dayFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.getDefault());
+        weekFormatBegin = new SimpleDateFormat("MMM d", Locale.getDefault());
+        weekFormatEnd = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
+        monthFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+
+        calendar = Calendar.getInstance();
+        dayNow = dayFormat.format(calendar.getTime());
+        String dayDb = dbFormat.format(calendar.getTime());
+        dayToday = dayNow + " (Today)";
+        dateView.setText(dayToday);
+        if(dayNow.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
+
+        // Create chart
+        getChartData("day", dayDb, null);
+
+        // Customize chart
+        chartSettings(moistChart, moistDataSet, false);
+        chartSettings(lightChart, lightDataSet, false);
+        chartSettings(tempChart, tempDataSet, true);
+
+        setBtnListeners(green, beige, btnBg, dayDb);
+    }
+
+    private void initIntents() {
         dbFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String plantDate = null;
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
@@ -97,38 +134,9 @@ public class Overview extends AppCompatActivity {
         }
         calendarMinWeek.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         calendarMinWeek.add(Calendar.DAY_OF_MONTH, 7);
+    }
 
-        findViewById(R.id.infoIconOverview).setOnClickListener(view -> {
-            String title = getResources().getString(R.string.howTo);
-            String body = getResources().getString(R.string.graphUse);
-            InfoFragment info = InfoFragment.newInstance(title, body);
-            info.show(getSupportFragmentManager(), "infoFragment");
-        });
-
-        int green = ContextCompat.getColor(this, R.color.dark_green);
-        int beige = ContextCompat.getColor(this, R.color.beige);
-        Drawable btnBg = ContextCompat.getDrawable(this, R.drawable.bg_beige_second);
-
-        calendar = Calendar.getInstance();
-        dayFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.getDefault());
-        weekFormatBegin = new SimpleDateFormat("MMM d", Locale.getDefault());
-        weekFormatEnd = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
-        monthFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
-
-        dayNow = dayFormat.format(calendar.getTime());
-        String dayDb = dbFormat.format(calendar.getTime());
-        dayToday = dayNow + " (Today)";
-        dateView.setText(dayToday);
-        if(dayNow.equals(dayFormat.format(calendarMin.getTime()))) previous.setVisibility(View.GONE);
-
-        // Create chart
-        getChartData("day", dayDb, null);
-
-        // Customize chart
-        chartSettings(moistChart, moistDataSet, false);
-        chartSettings(lightChart, lightDataSet, false);
-        chartSettings(tempChart, tempDataSet, true);
-
+    private void setBtnListeners(int green, int beige, Drawable btnBg, String dayDb) {
         day.setOnClickListener(view -> {
             day.setBackground(btnBg);
             week.setBackgroundResource(0);
@@ -256,10 +264,10 @@ public class Overview extends AppCompatActivity {
             } catch (ParseException e) { e.printStackTrace(); }
 
             calendar.add(Calendar.WEEK_OF_YEAR, sign);
-            weekEnd = weekFormatEnd.format(calendar.getTime());
+            String weekEnd = weekFormatEnd.format(calendar.getTime());
             String weekEndDb = dbFormat.format(calendar.getTime());
             calendar.add(Calendar.DAY_OF_WEEK, -6);
-            weekBegin = weekFormatBegin.format(calendar.getTime());
+            String weekBegin = weekFormatBegin.format(calendar.getTime());
             date = weekBegin + " - " + weekEnd;
             if(weekEnd.equals(weekNowEnd)) next.setVisibility(View.GONE);
             else if(weekEnd.equals(weekFormatEnd.format(calendarMinWeek.getTime()))) previous.setVisibility(View.GONE);
@@ -453,10 +461,12 @@ public class Overview extends AppCompatActivity {
             @Override
             public void onChartTranslate(MotionEvent me, float dX, float dY) {}
         });
+
         if(size == 1) {
             dataSet.setDrawCircles(true);
             dataSet.setDrawValues(true);
         }
+
         chart.invalidate();
     }
 
@@ -493,38 +503,17 @@ public class Overview extends AppCompatActivity {
         scrollView.setVisibility(View.INVISIBLE);
         loading.setVisibility(View.VISIBLE);
 
-        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/home/plantStatistics/overview/" + plantId + "/" + type + "/" + date1 + "/" + date2;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
                         String Rcomment = response.getString("comment");
 
-                        //check if login is valid
                         if(Rmessage.equals("OverviewLoaded")) {
                             JSONArray data = response.getJSONArray("data");
-                            JSONObject dataObject;
-                            int moist, light, temp, timestamp;
-                            List<Entry> moistEntries = new ArrayList<>();
-                            List<Entry> lightEntries = new ArrayList<>();
-                            List<Entry> tempEntries = new ArrayList<>();
-
-                            for(int i = 0; i < data.length(); i++) {
-                                dataObject = data.getJSONObject(i);
-                                moist = dataObject.getInt("moistData");
-                                light = dataObject.getInt("lightData");
-                                temp = dataObject.getInt("tempData");
-                                timestamp = dataObject.getInt("timestamp");
-
-                                moistEntries.add(new Entry(timestamp, moist));
-                                lightEntries.add(new Entry(timestamp, light));
-                                tempEntries.add(new Entry(timestamp, temp));
-                            }
-
-                            updateChart(type, moistEntries, lightEntries, tempEntries);
+                            fillLists(type, data);
                             loading.setVisibility(View.INVISIBLE);
                             scrollView.setVisibility(View.VISIBLE);
 
@@ -534,7 +523,7 @@ public class Overview extends AppCompatActivity {
                             userMessage.setTextColor(ContextCompat.getColor(this, R.color.beige));
                             userMessage.setVisibility(View.VISIBLE);
 
-                        } else{
+                        } else {
                             loading.setVisibility(View.GONE);
                             userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                             userMessage.setText(R.string.error);
@@ -543,12 +532,33 @@ public class Overview extends AppCompatActivity {
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     loading.setVisibility(View.GONE);
                     userMessage.setTextColor(ContextCompat.getColor(this, R.color.red));
                     userMessage.setText(R.string.error);
                     userMessage.setVisibility(View.VISIBLE);
                 });
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private void fillLists(String type, JSONArray data) throws JSONException {
+        JSONObject dataObject;
+        int moist, light, temp, timestamp;
+        List<Entry> moistEntries = new ArrayList<>();
+        List<Entry> lightEntries = new ArrayList<>();
+        List<Entry> tempEntries = new ArrayList<>();
+
+        for(int i = 0; i < data.length(); i++) {
+            dataObject = data.getJSONObject(i);
+            moist = dataObject.getInt("moistData");
+            light = dataObject.getInt("lightData");
+            temp = dataObject.getInt("tempData");
+            timestamp = dataObject.getInt("timestamp");
+
+            moistEntries.add(new Entry(timestamp, moist));
+            lightEntries.add(new Entry(timestamp, light));
+            tempEntries.add(new Entry(timestamp, temp));
+        }
+
+        updateChart(type, moistEntries, lightEntries, tempEntries);
     }
 }

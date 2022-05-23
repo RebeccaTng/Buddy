@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class AccountInfo implements Parcelable {
-    String username, email, token;
+
+    private String username, email, token;
+
     public AccountInfo(String username, String email, String token) {
         this.username = username;
         this.email = email;
@@ -43,14 +45,6 @@ public class AccountInfo implements Parcelable {
 
     public String getToken() {
         return token;
-    }
-
-    public void printAccount(){
-        System.out.println("****************INFO*********************");
-        System.out.println("username:\t" + username);
-        System.out.println("email:\t\t" + email);
-        System.out.println("token:\t\t" + token);
-        System.out.println("******************************************");
     }
 
     @Override

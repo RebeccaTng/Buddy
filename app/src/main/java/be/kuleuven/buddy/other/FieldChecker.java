@@ -13,9 +13,9 @@ import be.kuleuven.buddy.R;
 
 public class FieldChecker {
 
-    EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, species;
-    TextView errorMessage;
-    Boolean fields;
+    private final EditText moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, species;
+    private final TextView errorMessage;
+    private final Boolean fields;
 
     public FieldChecker(EditText moistMin, EditText moistMax, EditText lightMin, EditText lightMax, EditText tempMin, EditText tempMax, EditText waterlvl, EditText ageYears, EditText ageMonths, EditText place, EditText name, EditText species, TextView errorMessage, Boolean fields) {
         this.moistMin = moistMin;

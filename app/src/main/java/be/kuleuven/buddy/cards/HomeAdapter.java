@@ -20,8 +20,8 @@ import be.kuleuven.buddy.R;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
-    ArrayList<HomeInfo> homePlants; // Contains the info/text
-    HomeListener homeListener;
+    private final ArrayList<HomeInfo> homePlants; // Contains the info/text
+    private final HomeListener homeListener;
 
     public HomeAdapter(ArrayList<HomeInfo> homePlants, HomeListener homeListener) {
         this.homePlants = homePlants;

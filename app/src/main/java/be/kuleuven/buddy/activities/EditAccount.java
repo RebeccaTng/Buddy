@@ -31,12 +31,10 @@ import be.kuleuven.buddy.other.InfoFragment;
 
 public class EditAccount extends AppCompatActivity {
 
-    AccountInfo accountInfo;
-    TextView email, errorMessage;
-    EditText username, current_password, new_password, confirm_password;
-    ImageView infoBtn;
-
-    boolean correctNewPassword, correctConfirmPassword;
+    private AccountInfo accountInfo;
+    private TextView errorMessage;
+    private EditText username, current_password, new_password, confirm_password;
+    private boolean correctNewPassword, correctConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +44,18 @@ public class EditAccount extends AppCompatActivity {
 
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
 
-        email = findViewById(R.id.dyn_email_edit);
+        TextView email = findViewById(R.id.dyn_email_edit);
         username = findViewById(R.id.dyn_emailFill_edit);
         current_password = findViewById(R.id.currPasswFill_edit);
         new_password = findViewById(R.id.newPasswFill_edit);
         confirm_password = findViewById(R.id.confPasswFill_edit);
         errorMessage = findViewById(R.id.errorMessage_editAccount);
-        infoBtn = findViewById(R.id.infoIcon_edit);
+        ImageView infoBtn = findViewById(R.id.infoIcon_edit);
 
         // Initial values
         email.setText(accountInfo.getEmail());
         username.setHint(accountInfo.getUsername());
 
-        // Display password requirements
         infoBtn.setOnClickListener(view -> {
             String title = getResources().getString(R.string.passwRequire);
             String body = getResources().getString(R.string.passwReqText);
@@ -81,7 +78,7 @@ public class EditAccount extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    public void processChanges(View caller){
+    public void processChanges(View caller) {
         String name = username.getText().toString();
         String currentPassword = current_password.getText().toString();
         String newPassword = new_password.getText().toString();
@@ -89,13 +86,12 @@ public class EditAccount extends AppCompatActivity {
 
         clearBorders();
 
-        //if only name is changed
+        // If only name is changed
         if (currentPassword.length() == 0 && newPassword.length() == 0 && confirmPassword.length() == 0){
             updateDatabase(caller, name, "", "");
         }
-
-        //if password is changed
-        else if (correctConfirmPassword && correctNewPassword){
+        // If password is changed
+        else if (correctConfirmPassword && correctNewPassword) {
             try {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] encodedhashOldPassword = digest.digest(currentPassword.getBytes(StandardCharsets.UTF_8));
@@ -106,24 +102,23 @@ public class EditAccount extends AppCompatActivity {
 
             updateDatabase(caller, name, currentPassword, newPassword);
         }
-
-        //give an error message
-        else{
+        // Give an error message
+        else {
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
         }
     }
 
     private void setName(){
-        //check if username is changed
+        // Check if username is changed
         if (username.getText().toString().equals("")){
             username.setText(accountInfo.getUsername());
         }
         accountInfo.setUsername(username.getText().toString());
     }
 
-    private void textWatchers(){
-        //new password textwatcher
+    private void textWatchers() {
+        // New password textwatcher
         new_password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -133,12 +128,11 @@ public class EditAccount extends AppCompatActivity {
                 errorMessage.setVisibility(View.INVISIBLE);
                 String newPassword = new_password.getText().toString();
                 confirm_password.setText("");
-                //if longer than 8, contains a number and upper case
-                if (newPassword.length() >= 8 && newPassword.matches("(.*[0-9].*)") && newPassword.matches("(.*[A-Z].*)") ){
+                // If longer than 8, contains a number and upper case
+                if (newPassword.length() >= 8 && newPassword.matches("(.*[0-9].*)") && newPassword.matches("(.*[A-Z].*)") ) {
                     correctNewPassword = true;
                     new_password.setBackgroundResource(R.drawable.bg_fill_green);
-                }
-                else{
+                } else {
                     correctNewPassword = false;
                     new_password.setBackgroundResource(R.drawable.bg_fill_red);
                 }
@@ -148,7 +142,7 @@ public class EditAccount extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {}
         });
 
-        //confirm password textwatcher
+        // Confirm password textwatcher
         confirm_password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -156,14 +150,14 @@ public class EditAccount extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 errorMessage.setVisibility(View.INVISIBLE);
-                if (confirm_password.getText().toString().equals(new_password.getText().toString()) && confirm_password.getText().length() !=0 ){
+                if (confirm_password.getText().toString().equals(new_password.getText().toString()) && confirm_password.getText().length() !=0 ) {
                     correctConfirmPassword = true;
                     confirm_password.setBackgroundResource(R.drawable.bg_fill_green);
-                }
-                else if (confirm_password.getText().toString().equals("")){
+
+                } else if (confirm_password.getText().toString().equals("")){
                     new_password.setBackgroundResource(R.drawable.bg_fill);
-                }
-                else {
+
+                } else {
                     correctConfirmPassword = false;
                     confirm_password.setBackgroundResource(R.drawable.bg_fill_red);
                 }
@@ -178,9 +172,7 @@ public class EditAccount extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                errorMessage.setVisibility(View.INVISIBLE);
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { errorMessage.setVisibility(View.INVISIBLE); }
 
             @Override
             public void afterTextChanged(Editable editable) {}
@@ -201,8 +193,7 @@ public class EditAccount extends AppCompatActivity {
         });
     }
 
-    private void updateDatabase(View caller, String username, String oldPassword, String newPassword){
-        // Make the json object for the body of the post request
+    private JSONObject updateDatabaseBody(String username, String oldPassword, String newPassword) {
         JSONObject login = new JSONObject();
         try {
             //hash password
@@ -212,7 +203,10 @@ public class EditAccount extends AppCompatActivity {
 
         } catch (JSONException e) { e.printStackTrace(); }
 
-        // Connect to database
+        return login;
+    }
+
+    private void updateDatabase(View caller, String username, String oldPassword, String newPassword) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/user/account";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.PUT, url, null,
@@ -221,16 +215,16 @@ public class EditAccount extends AppCompatActivity {
                     try {
                         String Rmessage = response.getString("message");
 
-                        if (Rmessage.equals("UserUpdateSuccess")){
+                        if (Rmessage.equals("UserUpdateSuccess")) {
                             setName();
                             goBack(caller);
-                        }
-                        else if (Rmessage.equals("PasswordMatchFailed")){
+
+                        } else if (Rmessage.equals("PasswordMatchFailed")) {
                             errorMessage.setText(R.string.wrongPassword);
                             errorMessage.setVisibility(View.VISIBLE);
                             current_password.setBackgroundResource(R.drawable.bg_fill_red);
-                        }
-                        else{
+
+                        } else {
                             errorMessage.setText(R.string.error);
                             errorMessage.setVisibility(View.VISIBLE);
                         }
@@ -248,10 +242,7 @@ public class EditAccount extends AppCompatActivity {
             }
 
             @Override
-            public byte[] getBody() {
-                // request body goes here
-                return login.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return updateDatabaseBody(username, oldPassword, newPassword).toString().getBytes(StandardCharsets.UTF_8); }
 
             @Override
             public Map<String, String> getHeaders() {
@@ -264,7 +255,7 @@ public class EditAccount extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void clearBorders(){
+    private void clearBorders() {
         errorMessage.setVisibility(View.INVISIBLE);
         username.setBackgroundResource(R.drawable.bg_fill);
         new_password.setBackgroundResource(R.drawable.bg_fill);

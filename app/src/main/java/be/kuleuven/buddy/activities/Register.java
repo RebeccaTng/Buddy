@@ -25,15 +25,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import be.kuleuven.buddy.R;
-import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.InfoFragment;
 
 public class Register extends AppCompatActivity {
-    TextView username, email, password, confirmPassword, errorMessage;
-    boolean correctPassword, correctConfirmPassword;
-    ImageView infoBtn;
-    ProgressBar loading;
-    AccountInfo accountInfo;
+
+    private TextView username, email, password, confirmPassword, errorMessage;
+    private boolean correctPassword, correctConfirmPassword;
+    private ProgressBar loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +43,10 @@ public class Register extends AppCompatActivity {
         email = findViewById(R.id.emailFill_register);
         password = findViewById(R.id.passwFill_register);
         confirmPassword = findViewById(R.id.confPasswFill_register);
-        infoBtn = findViewById(R.id.infoIcon);
+        ImageView infoBtn = findViewById(R.id.infoIcon);
         errorMessage = findViewById(R.id.errorMessage_register);
         loading = findViewById(R.id.loading_register);
 
-        // Display password requirements
         infoBtn.setOnClickListener(view -> {
             String title = getResources().getString(R.string.passwRequire);
             String body = getResources().getString(R.string.passwReqText);
@@ -75,21 +72,20 @@ public class Register extends AppCompatActivity {
     public void goHome(View caller) {
         // Error message when some fields are not filled in
         if (username.getText().toString().isEmpty() || email.getText().toString().isEmpty() || password.getText().toString().isEmpty() ||
-                confirmPassword.getText().toString().isEmpty() || username.getText().toString().isEmpty()){
+                confirmPassword.getText().toString().isEmpty() || username.getText().toString().isEmpty()) {
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
 
         } else if (correctPassword && correctConfirmPassword){
             register();
 
-        } else{
+        } else {
             errorMessage.setText(R.string.fillFields);
             errorMessage.setVisibility(View.VISIBLE);
         }
     }
 
-    private void register(){
-        // Make the json object for the body of the post request
+    private JSONObject registerBody() {
         JSONObject register = new JSONObject();
         try {
             register.put("email", email.getText().toString());
@@ -103,26 +99,24 @@ public class Register extends AppCompatActivity {
 
         } catch (JSONException e) { e.printStackTrace();}
 
-        // Connect to database
+        return register;
+    }
+
+    private void register(){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/register";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.POST, url, null,
                 response -> {
                     try {
                         String Rmessage = response.getString("message");
-                        String Rcomment = response.getString("comment");
 
-                        // Check if login is valid
                         if (Rmessage.equals("UserRegisterSuccess")){
-                            accountInfo = new AccountInfo(username.getText().toString(), email.getText().toString(), null);
-                            accountInfo.printAccount();
                             loading.setVisibility(View.VISIBLE);
 
-                            // Toast
+                            String Rcomment = response.getString("comment");
                             Toast toast = Toast.makeText(getApplicationContext(), Rcomment, Toast.LENGTH_LONG);
                             toast.show();
 
-                            // Intent
                             Intent goToLogin = new Intent(this, Login.class);
                             startActivity(goToLogin);
                             this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -136,7 +130,6 @@ public class Register extends AppCompatActivity {
                     } catch (Exception e){ e.printStackTrace();}},
 
                 error -> {
-                    // Process an error
                     clearBorders();
                     errorMessage.setText(R.string.error);
                     errorMessage.setVisibility(View.VISIBLE);
@@ -149,44 +142,35 @@ public class Register extends AppCompatActivity {
             }
 
             @Override
-            public byte[] getBody() {
-                // Request body goes here
-                return register.toString().getBytes(StandardCharsets.UTF_8);
-            }
+            public byte[] getBody() { return registerBody().toString().getBytes(StandardCharsets.UTF_8); }
         };
+
         requestQueue.add(jsonObjectRequest);
     }
 
     private void textWatchers(){
-        // Textwatcher username
         username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                clearBorders();
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { clearBorders(); }
 
             @Override
             public void afterTextChanged(Editable editable) {}
         });
 
-        // Textwatcher email
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                clearBorders();
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { clearBorders(); }
 
             @Override
             public void afterTextChanged(Editable editable) {}
         });
 
-        // Textwatcher password
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -210,7 +194,6 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        // Textwatcher confirmPassword
         confirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}

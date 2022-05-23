@@ -43,14 +43,14 @@ import be.kuleuven.buddy.account.AccountInfo;
 
 public class PlantStatistics extends AppCompatActivity {
 
-    AccountInfo accountInfo;
-    int plantId;
-    ImageView image;
-    TextView name, species, age, place, lastWater, waterTank, connected, status, moist, light, temp, userMessage;
-    View waterlvl, connectedIcon;
-    ProgressBar loading;
-    String plantDate;
-    SwipeRefreshLayout swipeRefresh;
+    private AccountInfo accountInfo;
+    private int plantId;
+    private ImageView image;
+    private TextView name, species, age, place, lastWater, waterTank, connected, status, moist, light, temp, userMessage;
+    private View waterlvl, connectedIcon;
+    private ProgressBar loading;
+    private String plantDate;
+    private SwipeRefreshLayout swipeRefresh;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -60,7 +60,6 @@ public class PlantStatistics extends AppCompatActivity {
         setContentView(R.layout.activity_plant_statistics);
 
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
-
         if(getIntent().hasExtra("plantId")) {
             plantId = getIntent().getExtras().getInt("plantId");
             getPlantData(false);
@@ -133,29 +132,28 @@ public class PlantStatistics extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getPlantData(Boolean notification) {
-        // Connect to database
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://a21iot03.studev.groept.be/public/api/home/plantStatistics/" + plantId;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest (Request.Method.GET, url, null,
                 response -> {
-                    //process the response
                     try {
                         String Rmessage = response.getString("message");
-                        JSONObject plantData, sensorData, alertPlant, minmax;
-                        plantData = response.getJSONObject("plantData");
-                        int sensorDataIsNull = response.getInt("sensorIsNull");
-                        if(sensorDataIsNull == 0) sensorData = response.getJSONObject("sensorData");
-                        else sensorData = null;
-                        alertPlant = response.getJSONObject("alertPlant");
-                        minmax = response.getJSONObject("minmax");
 
-                        //check if login is valid
                         if(Rmessage.equals("StatsLoaded")) {
+                            JSONObject plantData, sensorData, alertPlant, minmax;
+                            plantData = response.getJSONObject("plantData");
+                            int sensorDataIsNull = response.getInt("sensorIsNull");
+                            if(sensorDataIsNull == 0) sensorData = response.getJSONObject("sensorData");
+                            else sensorData = null;
+                            alertPlant = response.getJSONObject("alertPlant");
+                            minmax = response.getJSONObject("minmax");
+
                             processData(plantData, sensorData, sensorDataIsNull);
                             if(notification) checkAlerts(alertPlant, minmax, sensorDataIsNull);
                             loading.setVisibility(View.INVISIBLE);
                             swipeRefresh.setEnabled(true);
-                        } else{
+
+                        } else {
                             loading.setVisibility(View.INVISIBLE);
                             userMessage.setText(R.string.error);
                         }
