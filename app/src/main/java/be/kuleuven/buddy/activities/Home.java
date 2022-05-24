@@ -94,12 +94,6 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
             getData();
             swipeRefresh.setRefreshing(false); // Explicitly refreshes only once. If "true" it implicitly refreshes forever
         });
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
     }
 
     public void goBluetooth(View caller) {
@@ -228,7 +222,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                 smallText = "Water tank level is too low";
                 largeText = "The water tank level is under your given minimum. Please refill the tank.";
                 inboxStyle.addLine(title + " " + smallText);
-                notification(title, smallText, largeText, plantId, (i*4) + 1);
+                notification(title, smallText, largeText, plantId, (i*4) + 5);
             }
 
             if(alertObject.getInt("lightAlert") == 1) {
@@ -238,12 +232,12 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                     smallText = "Too little light";
                     largeText = "There is less light here than your given minimum. Please move the plant to a place with more light";
                     inboxStyle.addLine(title + " " + smallText);
-                    notification(title, smallText, largeText, plantId, (i*4) + 2);
+                    notification(title, smallText, largeText, plantId, (i*4) + 6);
                 } else if(lightPercent > minmaxObject.getInt(("maxLight"))) {
                     smallText = "Too much light";
                     largeText = "There is more light here than your given maximum. Please move the plant to a place with less light";
                     inboxStyle.addLine(title + " " + smallText);
-                    notification(title, smallText, largeText, plantId, (i*4) + 2);
+                    notification(title, smallText, largeText, plantId, (i*4) + 6);
                 }
             }
 
@@ -254,21 +248,21 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                     smallText = "Too cold";
                     largeText = "It is colder here than your given minimum. Please move the plant to a warmer place";
                     inboxStyle.addLine(title + " " + smallText);
-                    notification(title, smallText, largeText, plantId, (i*4) + 3);
+                    notification(title, smallText, largeText, plantId, (i*4) + 7);
                 } else if(tempPercent > minmaxObject.getInt(("maxTemp"))) {
                     smallText = "Too warm";
                     largeText = "It is warmer here than your given maximum. Please move the plant to a cooler place";
                     inboxStyle.addLine(title + " " + smallText);
-                    notification(title, smallText, largeText, plantId, (i*4) + 3);
+                    notification(title, smallText, largeText, plantId, (i*4) + 7);
                 }
             }
 
-            summaryNotification(plantId, name, inboxStyle, (i*4) + 4);
+            summaryNotification(plantId, name, inboxStyle, (i*4) + 8);
         }
     }
 
     private void summaryNotification(int plantId, String name, NotificationCompat.InboxStyle inboxStyle, int id) {
-        NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "My Notification")
+        NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "home")
                 .setContentTitle(name + " needs you")
                 .setContentText("Give your plant some attention")
                 .setSmallIcon(R.drawable.logo_small)
@@ -295,7 +289,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
     }
 
     private void notification(String title, String smallText, String largeText, int plantId, int notificationId) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "home")
                 .setContentTitle(title)
                 .setContentText(smallText)
                 .setSmallIcon(R.drawable.logo_small)

@@ -36,15 +36,15 @@ public class Account extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_account);
 
+        username = findViewById(R.id.dyn_username_acc);
+        email = findViewById(R.id.dyn_email_acc);
+        AppCompatButton delete = findViewById(R.id.deleteAcc_btn);
+
         if(getIntent().hasExtra("accountInfo")) {
             accountInfo = getIntent().getExtras().getParcelable("accountInfo");
             username.setText(accountInfo.getUsername());
             email.setText(accountInfo.getEmail());
         }
-
-        username = findViewById(R.id.dyn_username_acc);
-        email = findViewById(R.id.dyn_email_acc);
-        AppCompatButton delete = findViewById(R.id.deleteAcc_btn);
 
         delete.setOnClickListener(view -> {
             AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomAlert));

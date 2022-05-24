@@ -122,6 +122,7 @@ public class Login extends AppCompatActivity {
                                 goHome(caller);
 
                             } else {
+                                System.out.println(response.getString("comment"));
                                 errorMessage.setText(R.string.incorrectCreds);
                                 errorMessage.setVisibility(View.VISIBLE);
                                 email.setBackgroundResource(R.drawable.bg_fill_red);
@@ -131,7 +132,7 @@ public class Login extends AppCompatActivity {
                         } catch (JSONException e){ e.printStackTrace(); }},
 
                     error -> {
-                    //process an error
+                        System.out.println(error.toString());
                         errorMessage.setText(R.string.error);
                         errorMessage.setVisibility(View.VISIBLE);
                         email.setBackgroundResource(R.drawable.bg_fill_red);
@@ -144,11 +145,9 @@ public class Login extends AppCompatActivity {
                 }
 
                 @Override
-                public byte[] getBody() {
-                    // request body goes here
-                    return login.toString().getBytes(StandardCharsets.UTF_8);
-                }
+                public byte[] getBody() { return login.toString().getBytes(StandardCharsets.UTF_8); }
             };
+
             requestQueue.add(jsonObjectRequest);
         }
     }

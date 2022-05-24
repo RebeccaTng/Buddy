@@ -72,9 +72,9 @@ public class RequestReset extends AppCompatActivity {
                             email.setBackgroundResource(R.drawable.bg_fill_red);
 
                         } else {
+                            loading.setVisibility(View.VISIBLE);
                             Toast toast = Toast.makeText(getApplicationContext(), R.string.mailSucces, Toast.LENGTH_LONG);
                             toast.show();
-                            loading.setVisibility(View.VISIBLE);
                             goLogin(caller);
                         }
 

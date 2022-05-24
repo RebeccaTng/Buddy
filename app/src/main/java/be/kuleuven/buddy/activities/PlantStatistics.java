@@ -93,12 +93,6 @@ public class PlantStatistics extends AppCompatActivity {
             getPlantData(true);
             swipeRefresh.setRefreshing(false); // explicitly refreshes only once. If "true" it implicitly refreshes forever
         });
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
     }
 
     @Override
@@ -160,7 +154,6 @@ public class PlantStatistics extends AppCompatActivity {
                     } catch (JSONException e){ e.printStackTrace(); }},
 
                 error -> {
-                    //process an error
                     loading.setVisibility(View.INVISIBLE);
                     userMessage.setText(R.string.error);
                 });
@@ -211,7 +204,7 @@ public class PlantStatistics extends AppCompatActivity {
                 }
             }
 
-            NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "My Notification")
+            NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "statistics")
                     .setContentTitle(name.getText().toString() + " needs you")
                     .setContentText("Give your plant some attention")
                     .setSmallIcon(R.drawable.logo_small)
@@ -239,7 +232,7 @@ public class PlantStatistics extends AppCompatActivity {
     }
 
     private void notification(String title, String smallText, String largeText, int id) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "statistics")
             .setContentTitle(name.getText().toString() + ": " + title)
             .setContentText(smallText)
             .setSmallIcon(R.drawable.logo_small)

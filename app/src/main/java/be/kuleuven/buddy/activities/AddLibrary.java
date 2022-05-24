@@ -52,6 +52,7 @@ public class AddLibrary extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_add_library);
 
+        requestQueue = Volley.newRequestQueue(this);
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
         if(getIntent().hasExtra("libId")) {
             speciesId = getIntent().getExtras().getInt("libId");
@@ -77,7 +78,6 @@ public class AddLibrary extends AppCompatActivity {
         delete = findViewById(R.id.delete_addLib);
         addPlant = findViewById(R.id.addPlantBtn_addLib);
         ImageView infoBtn = findViewById(R.id.infoIconAddLibrary);
-        requestQueue = Volley.newRequestQueue(this);
 
         // Set minimum and maximum value
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);

@@ -63,6 +63,7 @@ public class PlantSettings extends AppCompatActivity {
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_plant_settings);
 
+        requestQueue = Volley.newRequestQueue(this);
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
         if(getIntent().hasExtra("plantId")) {
             plantId = getIntent().getExtras().getInt("plantId");
@@ -92,7 +93,6 @@ public class PlantSettings extends AppCompatActivity {
         delete = findViewById(R.id.deleteBtn_settings);
         save = findViewById(R.id.saveBtn_settings);
         ImageView infoBtn = findViewById(R.id.infoIconSettings);
-        requestQueue = Volley.newRequestQueue(this);
 
         fieldChecker = new FieldChecker(moistMin, moistMax, lightMin, lightMax, tempMin, tempMax, waterlvl, ageYears, ageMonths, place, name, null, errorMessage, false);
 
