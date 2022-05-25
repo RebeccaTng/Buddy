@@ -29,6 +29,7 @@ import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.cards.LibraryAdapter;
 import be.kuleuven.buddy.cards.LibraryInfo;
+import be.kuleuven.buddy.other.TokenCheck;
 
 public class Library extends AppCompatActivity implements LibraryAdapter.LibraryListener {
 
@@ -45,6 +46,8 @@ public class Library extends AppCompatActivity implements LibraryAdapter.Library
         setContentView(R.layout.activity_library);
 
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+        TokenCheck tokenCheck = new TokenCheck(accountInfo.getEmail(), this);
+        tokenCheck.checkExpired();
         getData();
 
         loading = findViewById(R.id.loading_library);

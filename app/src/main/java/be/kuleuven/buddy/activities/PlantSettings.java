@@ -40,6 +40,7 @@ import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.FieldChecker;
 import be.kuleuven.buddy.other.InfoFragment;
+import be.kuleuven.buddy.other.TokenCheck;
 
 public class PlantSettings extends AppCompatActivity {
 
@@ -65,6 +66,8 @@ public class PlantSettings extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
+        TokenCheck tokenCheck = new TokenCheck(accountInfo.getEmail(), this);
+        tokenCheck.checkExpired();
         if(getIntent().hasExtra("plantId")) {
             plantId = getIntent().getExtras().getInt("plantId");
             getPlantData();

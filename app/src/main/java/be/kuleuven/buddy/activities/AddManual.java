@@ -35,6 +35,7 @@ import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.FieldChecker;
 import be.kuleuven.buddy.other.InfoFragment;
+import be.kuleuven.buddy.other.TokenCheck;
 
 public class AddManual extends AppCompatActivity {
 
@@ -53,6 +54,8 @@ public class AddManual extends AppCompatActivity {
         setContentView(R.layout.activity_add_manual);
 
         if(getIntent().hasExtra("accountInfo")) accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+        TokenCheck tokenCheck = new TokenCheck(accountInfo.getEmail(), this);
+        tokenCheck.checkExpired();
 
         picPreview = findViewById(R.id.picturePreview);
         addPlant = findViewById(R.id.addNewPlantBtn);

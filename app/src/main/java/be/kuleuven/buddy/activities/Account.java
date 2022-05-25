@@ -24,6 +24,7 @@ import java.util.Map;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
+import be.kuleuven.buddy.other.TokenCheck;
 
 public class Account extends AppCompatActivity {
 
@@ -42,6 +43,8 @@ public class Account extends AppCompatActivity {
 
         if(getIntent().hasExtra("accountInfo")) {
             accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+            TokenCheck tokenCheck = new TokenCheck(accountInfo.getEmail(), this);
+            tokenCheck.checkExpired();
             username.setText(accountInfo.getUsername());
             email.setText(accountInfo.getEmail());
         }

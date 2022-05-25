@@ -10,15 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,6 +38,7 @@ import be.kuleuven.buddy.cards.HomeAdapter;
 import be.kuleuven.buddy.cards.HomeInfo;
 
 import be.kuleuven.buddy.bluetooth.ui.BlufiMain;
+import be.kuleuven.buddy.other.TokenCheck;
 
 public class Home extends AppCompatActivity implements HomeAdapter.HomeListener {
 
@@ -61,8 +60,11 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
 
         if(getIntent().hasExtra("accountInfo")) {
             accountInfo = getIntent().getExtras().getParcelable("accountInfo");
+            TokenCheck tokenCheck = new TokenCheck(accountInfo.getEmail(), this);
+            tokenCheck.checkExpired();
             username.setText(accountInfo.getUsername());
         }
+
         getData();
 
         loading = findViewById(R.id.loading_home);
@@ -136,7 +138,6 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                     try {
                         String Rmessage = response.getString("message");
 
-                        //check if login is valid
                         if(Rmessage.equals("HomeLoaded")){
                             JSONArray data, alertPlant, minmax, sensorData;
 

@@ -46,6 +46,7 @@ import java.util.Objects;
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
 import be.kuleuven.buddy.other.InfoFragment;
+import be.kuleuven.buddy.other.TokenCheck;
 
 public class Overview extends AppCompatActivity {
 
@@ -121,6 +122,8 @@ public class Overview extends AppCompatActivity {
         dbFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String plantDate = null;
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
+        TokenCheck tokenCheck = new TokenCheck(accountInfo.getEmail(), this);
+        tokenCheck.checkExpired();
         if(getIntent().hasExtra("plantId")) { plantId = getIntent().getExtras().getInt("plantId"); }
         if(getIntent().hasExtra("plantDate")) { plantDate = getIntent().getExtras().getString("plantDate"); }
         calendarMin = Calendar.getInstance();
@@ -397,10 +400,10 @@ public class Overview extends AppCompatActivity {
 
         switch(type) {
             case "day": {
-                List<String> xAxisValues = new ArrayList<>(Arrays.asList("0h", "1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h", "0h"));
+                List<String> xAxisValues = new ArrayList<>(Arrays.asList("0h", "1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h"));
                 chart.animateX(1200, Easing.Linear);
                 xAxis.setAxisMinimum(0f);
-                xAxis.setAxisMaximum(24f);
+                xAxis.setAxisMaximum(23f);
                 xAxis.setGranularity(1f);
                 xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisValues));
                 break;

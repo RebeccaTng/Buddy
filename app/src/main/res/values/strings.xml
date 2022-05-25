@@ -49,6 +49,8 @@
     <string name="edit">Edit</string>
     <string name="deleteAcc">Delete Account</string>
 
+    <string name="expired">Session expired. Please login again.</string>
+
     <!-- General -->
     <string name="howToBlufi">How to connect BluFi</string>
     <string name="infoBlufiMain">Select the BluFi device you want to connect with.</string>
@@ -123,7 +125,7 @@
     <string name="addSpecies">Add species to library</string>
 
     <string name="howTo">How to use the charts</string>
-    <string name="graphUse">Tap on the chart to highlight a datapoint, tap again to remove them.\n-\nDouble tap to see the values of all data points, double tap again to remove them.\n-\nIf there is only one value on the chart, the data point value will be shown automatically without double tapping.\n-\nPinch to zoom.</string>
+    <string name="graphUse">The earliest date you can go back to is the date your first planted your plant that is calculated with the age of the plant you filled in.\n-\nTap on the chart to highlight a datapoint, tap again to remove it.\n-\nDouble tap to see the values of all data points, double tap again to remove them.\n-\nIf there is only one value on the chart, the data point value will be shown automatically without double tapping.\n-\nPinch to zoom.</string>
 
 
     <!--BLUETOOTH -->

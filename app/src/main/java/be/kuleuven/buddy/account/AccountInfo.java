@@ -5,7 +5,9 @@ import android.os.Parcelable;
 
 public class AccountInfo implements Parcelable {
 
-    private String username, email, token;
+    private String username;
+    private final String email;
+    private final String token;
 
     public AccountInfo(String username, String email, String token) {
         this.username = username;

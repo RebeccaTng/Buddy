@@ -7,8 +7,6 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -40,6 +38,7 @@ import java.util.Objects;
 
 import be.kuleuven.buddy.R;
 import be.kuleuven.buddy.account.AccountInfo;
+import be.kuleuven.buddy.other.TokenCheck;
 
 public class PlantStatistics extends AppCompatActivity {
 
@@ -60,6 +59,8 @@ public class PlantStatistics extends AppCompatActivity {
         setContentView(R.layout.activity_plant_statistics);
 
         if(getIntent().hasExtra("accountInfo")) { accountInfo = getIntent().getExtras().getParcelable("accountInfo"); }
+        TokenCheck tokenCheck = new TokenCheck(accountInfo.getEmail(), this);
+        tokenCheck.checkExpired();
         if(getIntent().hasExtra("plantId")) {
             plantId = getIntent().getExtras().getInt("plantId");
             getPlantData(false);
