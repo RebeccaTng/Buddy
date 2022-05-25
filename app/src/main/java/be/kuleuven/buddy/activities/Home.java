@@ -217,8 +217,11 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
             plantId = alertObject.getInt("plantId");
             name = alertObject.getString("name");
             inboxStyle = new NotificationCompat.InboxStyle();
+            boolean tankAlert = alertObject.getInt("tankAlert") == 1;
+            boolean lightAlert = alertObject.getInt("lightAlert") == 1;
+            boolean tempAlert = alertObject.getInt("tempAlert") == 1;
 
-            if(alertObject.getInt("tankAlert") == 1 && sensorObject.getInt("tankLvl") < alertObject.getInt("minWaterLvl")) {
+            if(tankAlert && sensorObject.getInt("tankLvl") < alertObject.getInt("minWaterLvl")) {
                 title = name + ": Water Tank Alert";
                 smallText = "Water tank level is too low";
                 largeText = "The water tank level is under your given minimum. Please refill the tank.";
@@ -226,7 +229,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                 notification(title, smallText, largeText, plantId, (i*4) + 5);
             }
 
-            if(alertObject.getInt("lightAlert") == 1) {
+            if(lightAlert) {
                 title = name + ": Light Alert";
                 int lightPercent = sensorObject.getInt("lightData");
                 if(lightPercent < minmaxObject.getInt("minLight")) {
@@ -242,7 +245,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                 }
             }
 
-            if(alertObject.getInt("tempAlert") == 1) {
+            if(tempAlert) {
                 title = name + ": Temperature Alert";
                 int tempPercent = sensorObject.getInt("tempData");
                 if(tempPercent < minmaxObject.getInt("minTemp")) {
@@ -258,7 +261,7 @@ public class Home extends AppCompatActivity implements HomeAdapter.HomeListener 
                 }
             }
 
-            summaryNotification(plantId, name, inboxStyle, (i*4) + 8);
+            if(tankAlert || lightAlert || tempAlert) summaryNotification(plantId, name, inboxStyle, (i*4) + 8);
         }
     }
 

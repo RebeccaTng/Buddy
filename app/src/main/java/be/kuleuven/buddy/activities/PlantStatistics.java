@@ -164,8 +164,12 @@ public class PlantStatistics extends AppCompatActivity {
     private void checkAlerts(JSONObject alertPlant, JSONObject minmax, int sensorDataIsNull) throws JSONException {
         String title, smallText, largeText;
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        boolean tankAlert = alertPlant.getInt("tankAlert") == 1;
+        boolean lightAlert = alertPlant.getInt("lightAlert") == 1;
+        boolean tempAlert = alertPlant.getInt("tempAlert") == 1;
+
         if(sensorDataIsNull == 0) {
-            if(alertPlant.getInt("tankAlert") == 1 && Integer.parseInt(waterTank.getText().toString()) < alertPlant.getInt("minWaterLvl")) {
+            if(tankAlert && Integer.parseInt(waterTank.getText().toString()) < alertPlant.getInt("minWaterLvl")) {
                 title = "Water Tank Alert";
                 smallText = "Water tank level is too low";
                 largeText = "The water tank level is under your given minimum. Please refill the tank.";
@@ -173,7 +177,7 @@ public class PlantStatistics extends AppCompatActivity {
                 notification(title, smallText, largeText, 1);
             }
 
-            if(alertPlant.getInt("lightAlert") == 1) {
+            if(lightAlert) {
                 title = "Light Alert";
                 int lightPercent = Integer.parseInt(light.getText().toString());
                 if(lightPercent < minmax.getInt("minLight")) {
@@ -189,7 +193,7 @@ public class PlantStatistics extends AppCompatActivity {
                 }
             }
 
-            if(alertPlant.getInt("tempAlert") == 1) {
+            if(tempAlert) {
                 title = "Temperature Alert";
                 int tempPercent = Integer.parseInt(temp.getText().toString());
                 if(tempPercent < minmax.getInt("minTemp")) {
@@ -205,21 +209,23 @@ public class PlantStatistics extends AppCompatActivity {
                 }
             }
 
-            NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "statistics")
-                    .setContentTitle(name.getText().toString() + " needs you")
-                    .setContentText("Give your plant some attention")
-                    .setSmallIcon(R.drawable.logo_small)
-                    .setStyle(inboxStyle
-                            .setBigContentTitle("New Messages")
-                            .setSummaryText(name.getText().toString()))
-                    .setContentIntent(notificationIntent())
-                    .setGroup("notificationGroup")
-                    .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setGroupSummary(true)
-                    .setAutoCancel(true);
+            if(tankAlert || lightAlert || tempAlert) {
+                NotificationCompat.Builder summaryNotification = new NotificationCompat.Builder(this, "statistics")
+                        .setContentTitle(name.getText().toString() + " needs you")
+                        .setContentText("Give your plant some attention")
+                        .setSmallIcon(R.drawable.logo_small)
+                        .setStyle(inboxStyle
+                                .setBigContentTitle("New Messages")
+                                .setSummaryText(name.getText().toString()))
+                        .setContentIntent(notificationIntent())
+                        .setGroup("notificationGroup")
+                        .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setGroupSummary(true)
+                        .setAutoCancel(true);
 
-            NotificationManagerCompat.from(this).notify(4, summaryNotification.build());
+                NotificationManagerCompat.from(this).notify(4, summaryNotification.build());
+            }
         }
     }
 
