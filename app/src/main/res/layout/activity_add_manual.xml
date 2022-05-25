@@ -87,7 +87,7 @@
         app:layout_constraintStart_toEndOf="@+id/addNewPlantTitle"
         app:layout_constraintTop_toTopOf="@+id/addNewPlantTitle"
         app:srcCompat="@drawable/icon_info_beige"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/set1"
@@ -456,7 +456,6 @@
             android:hint="@string/years"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:maxLength="2"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             android:textColor="@color/black"

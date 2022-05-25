@@ -108,7 +108,7 @@
     <string name="customText">Custom Text</string>
     <string name="text">Text</string>
     <string name="howToValues">How to choose good values</string>
-    <string name="valuesTips">Moisture\nIn water, the moisture would be 80%, dry ground would be 20%. On average 55% in soil with some water.\n-\nLight\n10% would be total darkness, 80% would be like shining a light directly on the plant. On average, you would be around 60% in a normally lit room.\n-\nTemperature\nAverage room temperature is around 25°C. You can only enter values from -10°C to 40°C\n-\nMin. Water lvl\nAt what water level do you want a notification to refill the tank? Choosing 30% means there is 3cm water left (in height) in the tank.\n-\nAge\nHow long has your plant been alive? Years can only be a positive number with 2 numbers max. and months is a number from 1 to 12.\n-\nOther Fields\nAll other field only allow 20 characters.</string>
+    <string name="valuesTips">Moisture\nIn water, the moisture would be 80%, dry ground would be 20%. On average 55% in soil with some water.\n-\nLight\n10% would be total darkness, 80% would be like shining a light directly on the plant. On average, you would be around 60% in a normally lit room.\n-\nTemperature\nAverage room temperature is around 25°C. You can only enter values from -10°C to 40°C\n-\nMin. Water lvl\nAt what water level do you want a notification to refill the tank? Choosing 30% means there is 3cm water left (in height) in the tank.\n-\nAge\nHow long has your plant been alive? Years can only be a number from 0 to 90 and months is a number from 0 to 12.\n-\nOther Fields\nAll other field only allow 20 characters.</string>
 
     <string name="overview">Overview</string>
     <string name="day">Day</string>

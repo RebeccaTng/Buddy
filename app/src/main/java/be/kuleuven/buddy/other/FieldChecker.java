@@ -42,6 +42,7 @@ public class FieldChecker {
         tempMin.setFilters(new InputFilter[]{ new InputFilterMinMax("-10", "40")});
         tempMax.setFilters(new InputFilter[]{ new InputFilterMinMax("-10", "40")});
         waterlvl.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        ageYears.setFilters(new InputFilter[] { new InputFilterMinMax("0", "90")});
         ageMonths.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "12")});
     }
 

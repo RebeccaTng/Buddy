@@ -561,7 +561,6 @@
                         android:hint="@string/years"
                         android:importantForAutofill="no"
                         android:inputType="number"
-                        android:maxLength="2"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
                         android:textColor="@color/black"
