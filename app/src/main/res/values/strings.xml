@@ -37,7 +37,7 @@
     <string name="forgotPass">Forgot your password? Reset it.</string>
     <string name="reset">Reset Password</string>
     <string name="changePassw">Change Password</string>
-    <string name="incorrectCreds">Password or email is incorrect!</string>
+    <string name="incorrectCreds">Wrong login details or account doesn\'t exist!</string>
     <string name="incorrectEmail">Mail does not belong to existing user.</string>
 
     <string name="emailAlreadyUsed">Email is already in use, try a different email!</string>
