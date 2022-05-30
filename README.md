@@ -17,7 +17,7 @@
     + [Info](#info)
   * [Notifications](#notifications)
 - [Insight to the finished project](#insight-to-the-finished-project)
-
+___
 ## Context
 This app was written for the course Engineering Experiences 5 at Group T KU Leuven. This application is only a small part of the full project.
 
