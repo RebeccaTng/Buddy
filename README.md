@@ -1,5 +1,5 @@
 # Buddy
-## Table of contents
+## Table of Contents
 - [Context](#context)
 - [Project Description](#project-description)
 - [Application Description](#application-description)
