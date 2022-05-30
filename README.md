@@ -79,4 +79,3 @@ Both notification channel groups can be seperately configurated in the settings 
 ## Insight to the finished project
 ![flyer-front](https://user-images.githubusercontent.com/90101184/171038974-a27512e0-6c5a-4efc-af75-4e8f2acbb64c.png)
 ![flyer-back](https://user-images.githubusercontent.com/90101184/171038993-43cb9345-93a0-4d04-b4b8-50f7894353b2.png)
-___
