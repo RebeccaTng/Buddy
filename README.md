@@ -26,7 +26,7 @@ From ordinary people to plant fanatics, everyone has already killed a plant once
 
 Our plant buddy is mainly software focused. Data is collected through sensors throughout the plant. Our application can distinguish different plant species and calculate the optimal environmental factors for that specific species. With temperature, pollution, light and moisture measurements of the plant, the app can send warnings to the user to change the placement of the plant to prevent it from dying. The data is all stored in our database over time so that you can be informed of which spots in your house are optimal for your specific plant and which you should stay away from. When the soil lacks moisture, a pump connecting to a water reservoir will water it. A water level sensor in the water reservoir also sends a reminder to the user to refill the reservoir when the water is almost used up. The amount of water administered to the plant is based on the moisture levels.
 
-Our plant has its own display. It can show you how it feels like a happy face when it is feeling good. Also the sensor measurements are displayed here.
+Our plant has its own display. It can show you how it feels, such as making a happy face when it is feeling good. Also, the sensor measurements are displayed here.
 ***
 ## Application Description
 ### Activity Connections
