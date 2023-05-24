@@ -19,7 +19,7 @@
 - [Insight to the finished project](#insight-to-the-finished-project)
 ___
 ## Context
-This app was written for the Engineering Experiences 5 course at Group T KU Leuven. This application is only a small part of the full project, which also included hardware.
+This app was written for the Engineering Experience 5 course at Group T KU Leuven. This application is only a small part of the full project, which also included hardware.
 
 ## Project Description
 From ordinary people to plant fanatics, everyone has already killed a plant once in their lifetime. Though they bring a pop of color in any room, plants are often very difficult to take care of. Giving them too much water or too little, both can be fatal. Furthermore, there is a whole array of indoor and outdoor plant species, each with their own care plan. Taking care of a plant just requires a lot of time, dedication and knowledge. To alleviate the pressure of taking care of your plant and to keep it alive and well, we designed a plant buddy Buddy™. This handy plant pot regulates and takes care of any plant.
